@@ -104,3 +104,12 @@ private:
 private:
 	std::vector<Entry> entries;
 };
+
+class Codx
+{
+public:
+	static const Surface* Load( const std::string& src,const Vei2& expandAmount )
+	{
+		return( Codex<Surface>::RetrieveSurf( src,expandAmount ) );
+	}
+};

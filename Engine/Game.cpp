@@ -31,7 +31,7 @@ Game::Game( MainWindow& wnd )
 	map( "Maps/Map1.lvl" ),
 	guy( { 150.0f,150.0f },map,playerBullets )
 {
-	enemies.emplace_back( Beetle{ Vec2{ 50,50 },map,enemyBullets } );
+	enemies.emplace_back( new BeetleBig{ Vec2{ 50,50 },map,enemyBullets } );
 }
 
 void Game::Go()
@@ -49,10 +49,11 @@ void Game::UpdateModel()
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
-	for( auto& e : enemies ) e.Update( guy.GetPos(),dt );
+	for( auto& e : enemies ) e->Update( guy.GetPos(),dt );
 
 	for( auto& b : playerBullets ) b.Update( dt );
 	for( auto& eb : enemyBullets ) eb.Update( dt );
+
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsDead ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
 }
@@ -60,7 +61,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	map.Draw( gfx );
-	for( const auto& e : enemies ) e.Draw( gfx );
+	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& b : playerBullets ) b.Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb.Draw( gfx );
 	guy.Draw( gfx );

@@ -146,6 +146,7 @@
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="E_Beetle.h" />
+    <ClInclude Include="E_BeetleBig.h" />
     <ClInclude Include="E_EnemyBase.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Font.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="E_Beetle.cpp" />
+    <ClCompile Include="E_BeetleBig.cpp" />
     <ClCompile Include="E_EnemyBase.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameTimer.cpp" />

@@ -28,6 +28,8 @@
 #include "E_Beetle.h"
 #include <vector>
 #include "Bullet.h"
+#include "E_BeetleBig.h"
+#include <memory>
 
 class Game
 {
@@ -51,6 +53,6 @@ private:
 	Player guy;
 	std::vector<Bullet> playerBullets;
 	std::vector<Bullet> enemyBullets;
-	std::vector<Beetle> enemies;
+	std::vector<std::unique_ptr<EnemyBase>> enemies;
 	/********************************/
 };

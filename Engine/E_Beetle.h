@@ -38,10 +38,11 @@ private:
 	Anim firing; // second row of anim
 	Anim windDown; // third row
 	State myAction = State::Moving;
-	Timer shotTimer = { 2.4f };
+	Timer shotTimer = 2.4f;
 	Collider coll;
 	static constexpr float moveTolerance = 145.0f;
 	Vec2 target;
+	Vec2 lastTarget = pos;
 	Vec2 vel;
 	static constexpr float speed = 85.1f;
 	Vec2 shotTarget;

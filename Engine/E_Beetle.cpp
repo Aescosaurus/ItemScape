@@ -82,22 +82,33 @@ void Beetle::Draw( Graphics& gfx ) const
 		windDown.Draw( pos,gfx,shotTarget.x < GetCenter().x );
 		break;
 	}
-	gfx.DrawHitbox( coll.GetRect() );
+	// gfx.DrawHitbox( coll.GetRect(),Colors::Green );
 }
 
 void Beetle::ResetTargeting()
 {
 	target = FindTarget();
+	lastTarget = target;
 	vel = ( target - pos ).GetNormalized() * speed;
 }
 
 Vec2 Beetle::FindTarget() const
 {
 	auto test = Vec2( pos );
+	const int nTries = 5;
+	int curTries = 0;
 	do
 	{
+		test = Vec2( pos );
 		test.x += Random::RangeF( -moveTolerance,moveTolerance );
 		test.y += Random::RangeF( -moveTolerance,moveTolerance );
+
+		++curTries;
+		if( curTries >= nTries ) // No infinite loops here!
+		{
+			test = lastTarget;
+			break;
+		}
 	}
 	while( !Graphics::GetScreenRect()
 		.ContainsPoint( Vei2( Vec2{ test.x,test.y } ) ) );

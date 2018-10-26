@@ -11,8 +11,9 @@ class Bullet
 public:
 	enum class Team
 	{
-		Player,
-		Beetle
+		Player = 0,
+		Beetle,
+		BeetleBig
 	};
 public:
 	Bullet( const Vec2& pos,const Vec2& target,
@@ -27,7 +28,7 @@ private:
 	static constexpr Vei2 size = { 16,16 };
 	Vec2 vel;
 	Team myTeam;
-	const Surface* pSprSheet = Codex<Surface>::RetrieveSurf( "Images/BulletAnims.bmp",{ 4,4 } );
+	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );
 	Anim myAnim;
 	const TileMap* map;
 	bool dead = false;
