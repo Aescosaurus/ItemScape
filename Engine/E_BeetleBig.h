@@ -32,7 +32,6 @@ private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 10;
 	std::vector<Bullet>* pBulletVec;
-	// TODO: Make the big beetle enemy jump up and land and shoot a circle of bullets when it lands.
 	const Surface* sprSheet = Codx::Load( "Images/BeetleBigAnim.bmp",{ 4,4 } );
 	Anim walking;
 	Anim jumping;
@@ -43,4 +42,5 @@ private:
 	Timer retarget = 0.7f;
 	static constexpr float speed = 79.24f;
 	static constexpr float bullSpeed = 186.2f;
+	// TODO: Make this one use bigger bullets, use/make BigBullet class.
 };

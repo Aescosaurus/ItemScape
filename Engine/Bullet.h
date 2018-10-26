@@ -23,9 +23,9 @@ public:
 	void Draw( Graphics& gfx ) const;
 
 	bool IsDead() const;
-private:
+protected:
 	Vec2 GetCenter() const;
-private:
+protected:
 	Vec2 pos;
 	static constexpr Vei2 size = { 16,16 };
 	Vec2 vel;
@@ -36,5 +36,14 @@ private:
 	bool dead = false;
 };
 
-// TODO: BigBullet class that has bigger hitbox and sprite.
-//  Possibly inherits from regular bullet?
+class BigBullet
+	:
+	public Bullet
+{
+public:
+	BigBullet( const Vec2& pos,const Vec2& target,
+		const TileMap& map,Team myTeam,float mySpeed );
+private:
+	const Surface* pBigSprSheet = Codx::Load( "Images/BulletBigAnims.bmp",{ 4,4 } );
+	static constexpr Vei2 bigSize = { 32,32 };
+};

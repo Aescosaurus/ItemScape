@@ -36,3 +36,12 @@ Vec2 Bullet::GetCenter() const
 {
 	return( pos + Vec2( size ) / 2.0f );
 }
+
+BigBullet::BigBullet( const Vec2& pos,const Vec2& target,
+	const TileMap& map,Team myTeam,float mySpeed )
+	:
+	Bullet( pos,target,map,myTeam,mySpeed )
+{
+	myAnim = Anim{ 0,int( myTeam ) * size.y,size.x,size.y,
+		4,*pBigSprSheet,0.2f };
+}
