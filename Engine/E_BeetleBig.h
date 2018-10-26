@@ -26,6 +26,8 @@ public:
 	void Draw( Graphics& gfx ) const override;
 private:
 	void Retarget( const Vec2& theTarget );
+
+	Vec2 GetCenter() const;
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 10;
@@ -40,4 +42,5 @@ private:
 	Timer moveReset = 3.54f;
 	Timer retarget = 0.7f;
 	static constexpr float speed = 79.24f;
+	static constexpr float bullSpeed = 186.2f;
 };

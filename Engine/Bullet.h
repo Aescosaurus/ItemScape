@@ -24,6 +24,8 @@ public:
 
 	bool IsDead() const;
 private:
+	Vec2 GetCenter() const;
+private:
 	Vec2 pos;
 	static constexpr Vei2 size = { 16,16 };
 	Vec2 vel;
@@ -33,3 +35,6 @@ private:
 	const TileMap* map;
 	bool dead = false;
 };
+
+// TODO: BigBullet class that has bigger hitbox and sprite.
+//  Possibly inherits from regular bullet?

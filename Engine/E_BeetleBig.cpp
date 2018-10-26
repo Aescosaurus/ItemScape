@@ -44,7 +44,33 @@ void BeetleBig::Update( const Vec2& playerPos,float dt )
 		if( landing.IsFinished() )
 		{
 			landing.Reset();
-			// TODO: Spawn bullets going in every direction.
+			// Spawn a ring of bullets going out every dir.
+			const auto sPos = GetCenter();
+			static constexpr auto bTeam = Bullet::Team::BeetleBig;
+			static constexpr auto bSpd = bullSpeed;
+
+			// Don't need to normalize since it is telling target.
+			// up,up-right,right,right-down,down,down-left,
+			//  left,left-up
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ 0,-1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ 1,-1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ 1,0 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ 1,1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ 0,1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ -1,1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ -1,0 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( Bullet{ sPos,
+				sPos + Vec2{ -1,-1 },*map,bTeam,bSpd } );
+			// Whew that was gross let's hope I find a
+			//  better way to do this soon.
+
 			Retarget( playerPos );
 			curState = State::Moving;
 		}
@@ -70,4 +96,9 @@ void BeetleBig::Draw( Graphics& gfx ) const
 void BeetleBig::Retarget( const Vec2& theTarget )
 {
 	vel = ( theTarget - pos ).GetNormalized() * speed;
+}
+
+Vec2 BeetleBig::GetCenter() const
+{
+	return( pos + Vec2( size ) / 2.0f );
 }

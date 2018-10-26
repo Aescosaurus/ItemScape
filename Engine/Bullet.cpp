@@ -31,3 +31,8 @@ bool Bullet::IsDead() const
 {
 	return( dead );
 }
+
+Vec2 Bullet::GetCenter() const
+{
+	return( pos + Vec2( size ) / 2.0f );
+}
