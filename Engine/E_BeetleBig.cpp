@@ -48,26 +48,27 @@ void BeetleBig::Update( const Vec2& playerPos,float dt )
 			const auto sPos = GetCenter();
 			static constexpr auto bTeam = Bullet::Team::BeetleBig;
 			static constexpr auto bSpd = bullSpeed;
+			static constexpr auto bSize = Bullet::Size::Medium;
 
 			// Don't need to normalize since it is telling target.
 			// up,up-right,right,right-down,down,down-left,
 			//  left,left-up
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ 0,-1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ 1,-1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ 1,0 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ 1,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ 0,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ -1,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ -1,0 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( new BulletS{ sPos,
-				sPos + Vec2{ -1,-1 },*map,bTeam,bSpd } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ 0,-1 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ 1,-1 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ 1,0 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ 1,1 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ 0,1 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ -1,1 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ -1,0 },*map,bTeam,bSpd,bSize } );
+			pBulletVec->emplace_back( new Bullet{ sPos,
+				sPos + Vec2{ -1,-1 },*map,bTeam,bSpd,bSize } );
 			// Whew that was gross let's hope I find a
 			//  better way to do this soon.
 

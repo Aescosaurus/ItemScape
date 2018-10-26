@@ -50,8 +50,9 @@ void Beetle::Update( const Vec2& playerPos,float dt )
 		shotTarget = playerPos;
 		if( firing.IsFinished() )
 		{
-			pBulletVec->emplace_back( new BulletS{ pos,playerPos,
-				*map,Bullet::Team::Beetle,myBulletSpeed } );
+			pBulletVec->emplace_back( new Bullet{ pos,playerPos,
+				*map,Bullet::Team::Beetle,myBulletSpeed,
+				Bullet::Size::Small } );
 
 			firing.Reset();
 			myAction = State::WindingDown;
