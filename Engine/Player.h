@@ -8,6 +8,7 @@
 #include "Bullet.h"
 #include "Mouse.h"
 #include "Timer.h"
+#include <memory>
 
 // Works like top down now, but can be modified
 //  to use platformer controls.
@@ -15,7 +16,7 @@ class Player
 {
 public:
 	Player( const Vec2& pos,const TileMap& map,
-		std::vector<Bullet>& bullets );
+		std::vector<std::unique_ptr<Bullet>>& bullets );
 
 	void Update( const Keyboard& kbd,const Mouse& ms,
 		float dt );
@@ -28,7 +29,7 @@ private:
 	static constexpr Vei2 size = { 32,32 };
 	static constexpr float speed = 171.4f;
 	Collider coll;
-	std::vector<Bullet>& myBullets;
+	std::vector<std::unique_ptr<Bullet>>& myBullets;
 	Timer shotTimer = { 0.23f };
 	const TileMap& map;
 	static constexpr float bulletSpeed = 324.2f;

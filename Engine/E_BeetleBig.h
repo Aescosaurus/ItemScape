@@ -6,6 +6,7 @@
 #include "Codex.h"
 #include "Anim.h"
 #include "Timer.h"
+#include <memory>
 
 class BeetleBig
 	:
@@ -20,7 +21,7 @@ private:
 	};
 public:
 	BeetleBig( const Vec2& pos,const TileMap& map,
-		std::vector<Bullet>& bulletVec );
+		std::vector<std::unique_ptr<Bullet>>& bulletVec );
 
 	void Update( const Vec2& playerPos,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
@@ -31,7 +32,7 @@ private:
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 10;
-	std::vector<Bullet>* pBulletVec;
+	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const Surface* sprSheet = Codx::Load( "Images/BeetleBigAnim.bmp",{ 4,4 } );
 	Anim walking;
 	Anim jumping;
@@ -42,5 +43,5 @@ private:
 	Timer retarget = 0.7f;
 	static constexpr float speed = 79.24f;
 	static constexpr float bullSpeed = 186.2f;
-	// TODO: Make this one use bigger bullets, use/make BigBullet class.
+	// TODO: Make this one use bigger bullets.
 };

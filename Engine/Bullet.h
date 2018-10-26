@@ -16,34 +16,49 @@ public:
 		BeetleBig
 	};
 public:
-	Bullet( const Vec2& pos,const Vec2& target,
-		const TileMap& map,Team myTeam,float mySpeed );
-
-	void Update( float dt );
-	void Draw( Graphics& gfx ) const;
+	virtual void Update( float dt );
+	virtual void Draw( Graphics& gfx ) const = 0;
 
 	bool IsDead() const;
 protected:
-	Vec2 GetCenter() const;
+	Bullet( const Vec2& pos,const Vec2& target,
+		const TileMap& map,Team myTeam,float speed );
 protected:
 	Vec2 pos;
-	static constexpr Vei2 size = { 16,16 };
 	Vec2 vel;
 	Team myTeam;
-	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );
-	Anim myAnim;
 	const TileMap* map;
 	bool dead = false;
 };
 
-class BigBullet
+class BulletS
 	:
 	public Bullet
 {
 public:
-	BigBullet( const Vec2& pos,const Vec2& target,
-		const TileMap& map,Team myTeam,float mySpeed );
+	BulletS( const Vec2& pos,const Vec2& target,
+		const TileMap& map,Team myTeam,float speed );
+
+	void Update( float dt ) override;
+	void Draw( Graphics& gfx ) const override;
 private:
-	const Surface* pBigSprSheet = Codx::Load( "Images/BulletBigAnims.bmp",{ 4,4 } );
-	static constexpr Vei2 bigSize = { 32,32 };
+	static constexpr Vei2 size = { 16,16 };
+	const Surface* pSprSheet = Codx::Load( "Images/BulletAnimsSmall.bmp",{ 4,4 } );
+	Anim myAnim;
+};
+
+class BulletM
+	:
+	public Bullet
+{
+public:
+	BulletM( const Vec2& pos,const Vec2& target,
+		const TileMap& map,Team myTeam,float speed );
+
+	void Update( float dt ) override;
+	void Draw( Graphics& gfx ) const override;
+private:
+	static constexpr Vei2 size = { 32,32 };
+	const Surface* pSprSheet = Codx::Load( "Images/BulletAnimsMedium.bmp",{ 4,4 } );
+	Anim myAnim;
 };

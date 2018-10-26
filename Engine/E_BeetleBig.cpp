@@ -1,7 +1,7 @@
 #include "E_BeetleBig.h"
 
 BeetleBig::BeetleBig( const Vec2& pos,const TileMap& map,
-	std::vector<Bullet>& bulletVec )
+	std::vector<std::unique_ptr<Bullet>>& bulletVec )
 	:
 	EnemyBase( pos,size,myHP,map ),
 	pBulletVec( &bulletVec ),
@@ -52,21 +52,21 @@ void BeetleBig::Update( const Vec2& playerPos,float dt )
 			// Don't need to normalize since it is telling target.
 			// up,up-right,right,right-down,down,down-left,
 			//  left,left-up
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ 0,-1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ 1,-1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ 1,0 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ 1,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ 0,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ -1,1 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ -1,0 },*map,bTeam,bSpd } );
-			pBulletVec->emplace_back( Bullet{ sPos,
+			pBulletVec->emplace_back( new BulletS{ sPos,
 				sPos + Vec2{ -1,-1 },*map,bTeam,bSpd } );
 			// Whew that was gross let's hope I find a
 			//  better way to do this soon.

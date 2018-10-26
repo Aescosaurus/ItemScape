@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player( const Vec2& pos,const TileMap& map,
-	std::vector<Bullet>& bullets )
+	std::vector<std::unique_ptr<Bullet>>& bullets )
 	:
 	pos( pos ),
 	coll( map,{ pos,float( size.x ),float( size.y ) } ),
@@ -29,7 +29,7 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	if( ms.LeftIsPressed() && shotTimer.IsDone() )
 	{
 		shotTimer.Reset();
-		myBullets.emplace_back( Bullet{ pos,
+		myBullets.emplace_back( new BulletS{ pos,
 			Vec2( ms.GetPos() ),map,Bullet::Team::Player,
 			bulletSpeed } );
 	}

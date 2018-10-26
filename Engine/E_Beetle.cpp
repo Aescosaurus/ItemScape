@@ -2,7 +2,7 @@
 #include "Random.h"
 
 Beetle::Beetle( const Vec2& pos,const TileMap& map,
-	std::vector<Bullet>& myBullets )
+	std::vector<std::unique_ptr<Bullet>>& myBullets )
 	:
 	EnemyBase( pos,size,maxHP,map ),
 	walking( 0,0,size.x,size.y,4,*pSprSheet,0.2f ),
@@ -50,7 +50,7 @@ void Beetle::Update( const Vec2& playerPos,float dt )
 		shotTarget = playerPos;
 		if( firing.IsFinished() )
 		{
-			pBulletVec->emplace_back( Bullet{ pos,playerPos,
+			pBulletVec->emplace_back( new BulletS{ pos,playerPos,
 				*map,Bullet::Team::Beetle,myBulletSpeed } );
 
 			firing.Reset();

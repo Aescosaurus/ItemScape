@@ -51,8 +51,8 @@ private:
 	/*  User Variables              */
 	TileMap map;
 	Player guy;
-	std::vector<Bullet> playerBullets;
-	std::vector<Bullet> enemyBullets;
+	std::vector<std::unique_ptr<Bullet>> playerBullets;
+	std::vector<std::unique_ptr<Bullet>> enemyBullets;
 	std::vector<std::unique_ptr<EnemyBase>> enemies;
 	/********************************/
 };

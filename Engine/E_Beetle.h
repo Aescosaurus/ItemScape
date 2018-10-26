@@ -7,6 +7,7 @@
 #include "Collider.h"
 #include <vector>
 #include "Bullet.h"
+#include <memory>
 
 class Beetle
 	:
@@ -21,7 +22,7 @@ private:
 	};
 public:
 	Beetle( const Vec2& pos,const TileMap& map,
-		std::vector<Bullet>& bulletVec );
+		std::vector<std::unique_ptr<Bullet>>& bulletVec );
 
 	void Update( const Vec2& playerPos,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
@@ -46,7 +47,7 @@ private:
 	Vec2 vel;
 	static constexpr float speed = 85.1f;
 	Vec2 shotTarget;
-	std::vector<Bullet>* pBulletVec;
+	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const TileMap* map;
 	static constexpr float myBulletSpeed = 215.5f;
 };

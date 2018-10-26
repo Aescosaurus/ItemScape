@@ -51,8 +51,8 @@ void Game::UpdateModel()
 
 	for( auto& e : enemies ) e->Update( guy.GetPos(),dt );
 
-	for( auto& b : playerBullets ) b.Update( dt );
-	for( auto& eb : enemyBullets ) eb.Update( dt );
+	for( auto& b : playerBullets ) b->Update( dt );
+	for( auto& eb : enemyBullets ) eb->Update( dt );
 
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsDead ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
@@ -62,7 +62,7 @@ void Game::ComposeFrame()
 {
 	map.Draw( gfx );
 	for( const auto& e : enemies ) e->Draw( gfx );
-	for( const auto& b : playerBullets ) b.Draw( gfx );
-	for( const auto& eb : enemyBullets ) eb.Draw( gfx );
+	for( const auto& b : playerBullets ) b->Draw( gfx );
+	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	guy.Draw( gfx );
 }
