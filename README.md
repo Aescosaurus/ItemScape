@@ -16,3 +16,4 @@
 	refire speed, animation speed, etc, some might not even shoot.
 - Try to reduce randomness as much as possible, at least in gameplay.
 - Make a worm king boss that has a crown on its head and the sprite is HUGE.
+- Add more variety of (basic?) enemies which are introduced slowly in the first few levels.

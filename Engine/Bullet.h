@@ -7,6 +7,7 @@
 #include "TileMap.h"
 #include "Collider.h"
 
+// Moves straight in one direction.
 class Bullet
 {
 public:
@@ -45,3 +46,9 @@ private:
 	bool dead = false;
 	Collider coll;
 };
+
+// Ideas:
+//  -Boomerang that goes in a direction for a while then comes back.
+//  -Boomerang2 goes in a circle-like motion to hit target then come back.
+//  -Slither/soidal "slithers" back and forth towards target.
+//  -Bubble bullet "floats" sort of randomly but slowly makes its way to the target/player.
