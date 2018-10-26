@@ -8,12 +8,13 @@ Beetle::Beetle( const Vec2& pos,const TileMap& map,
 	walking( 0,0,size.x,size.y,4,*pSprSheet,0.2f ),
 	firing( 0,size.y,size.x,size.y,4,*pSprSheet,0.2f ),
 	windDown( 0,size.y * 2,size.x,size.y,4,*pSprSheet,0.2f ),
-	coll( map,{ pos,float( size.x ),float( size.y ) } ),
+	explAnim( 0,size.y * 3,size.x,size.y,4,*pSprSheet,0.2f ),
 	shotTarget( 0.0f,0.0f ),
 	pBulletVec( &myBullets ),
 	map( &map )
 {
 	ResetTargeting();
+	ResetTimer();
 }
 
 void Beetle::Update( const Vec2& playerPos,float dt )
@@ -39,7 +40,7 @@ void Beetle::Update( const Vec2& playerPos,float dt )
 		shotTimer.Update( dt );
 		if( walking.IsFinished() && shotTimer.IsDone() )
 		{
-			shotTimer.Reset();
+			ResetTimer();
 			walking.Reset();
 			myAction = State::Firing;
 		}
@@ -66,6 +67,19 @@ void Beetle::Update( const Vec2& playerPos,float dt )
 			myAction = State::Moving;
 		}
 		break;
+	case State::Exploding:
+		// Play explode anim and stop at last frame.
+		if( !explAnim.IsFinished() ) explAnim.Update( dt );
+		if( explAnim.IsFinished() )
+		{
+			explAnim.SetFrame( 3 );
+			if( !deadDead )
+			{
+				deadDead = true;
+				explDrawDir = ( Random::RangeI( 0,10 ) > 5 );
+			}
+		}
+		break;
 	}
 }
 
@@ -82,8 +96,24 @@ void Beetle::Draw( Graphics& gfx ) const
 	case State::WindingDown:
 		windDown.Draw( pos,gfx,shotTarget.x < GetCenter().x );
 		break;
+	case State::Exploding:
+		explAnim.Draw( pos,gfx,explDrawDir );
+		break;
 	}
 	// gfx.DrawHitbox( coll.GetRect(),Colors::Green );
+}
+
+void Beetle::Attack( int damage,const Vec2& loc )
+{
+	EnemyBase::Attack( damage,loc );
+
+	// TODO: Make it get pushed away from bullet.
+
+	if( IsDead() )
+	{
+		myAction = State::Exploding;
+		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
+	}
 }
 
 void Beetle::ResetTargeting()
@@ -91,6 +121,11 @@ void Beetle::ResetTargeting()
 	target = FindTarget();
 	lastTarget = target;
 	vel = ( target - pos ).GetNormalized() * speed;
+}
+
+void Beetle::ResetTimer()
+{
+	shotTimer.Reset( Random::RangeF( timerMinMax.x,timerMinMax.y ) );
 }
 
 Vec2 Beetle::FindTarget() const

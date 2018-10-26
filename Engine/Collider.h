@@ -12,6 +12,6 @@ public:
 	Vec3b GetValidMove( const Vec2& startPos,const Vec2& moveTest ) const;
 	const Rect& GetRect() const;
 private:
-	const TileMap& map;
+	const TileMap* map;
 	Rect hitbox;
 };

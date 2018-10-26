@@ -2,7 +2,7 @@
 
 Collider::Collider( const TileMap& map,const Rect& hitbox )
 	:
-	map( map ),
+	map( &map ),
 	hitbox( hitbox )
 {}
 
@@ -26,13 +26,13 @@ Vec3b Collider::GetValidMove( const Vec2& startPos,const Vec2& moveTest ) const
 	for( const auto& pos : positions )
 	{
 		// If tile at one corner is not empty, don't go that way.
-		if( map.GetTileAt( pos + Vec2{ moveTest.x,0.0f } ) !=
+		if( map->GetTileAt( pos + Vec2{ moveTest.x,0.0f } ) !=
 			TileMap::TileType::Empty )
 		{
 			isGood.x = false;
 		}
 
-		if( map.GetTileAt( pos + Vec2{ 0.0f,moveTest.y } ) !=
+		if( map->GetTileAt( pos + Vec2{ 0.0f,moveTest.y } ) !=
 			TileMap::TileType::Empty )
 		{
 			isGood.y = false;

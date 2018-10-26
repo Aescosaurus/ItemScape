@@ -17,11 +17,16 @@ public:
 	{
 		curTime = 0.0f;
 	}
+	void Reset( float newMaxTime )
+	{
+		Reset();
+		maxTime = newMaxTime;
+	}
 	bool IsDone() const
 	{
 		return( curTime >= maxTime );
 	}
 private:
 	float curTime;
-	const float maxTime;
+	float maxTime;
 };

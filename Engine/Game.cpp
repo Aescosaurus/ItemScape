@@ -31,7 +31,8 @@ Game::Game( MainWindow& wnd )
 	map( "Maps/Map1.lvl" ),
 	guy( { 150.0f,150.0f },map,playerBullets )
 {
-	enemies.emplace_back( new BeetleBig{ Vec2{ 50,50 },map,enemyBullets } );
+	enemies.emplace_back( new BeetleBig{ Vec2{ 50,50 },
+		map,enemyBullets,enemies } );
 }
 
 void Game::Go()
@@ -49,11 +50,29 @@ void Game::UpdateModel()
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
-	for( auto& e : enemies ) e->Update( guy.GetPos(),dt );
-
 	for( auto& b : playerBullets ) b->Update( dt );
 	for( auto& eb : enemyBullets ) eb->Update( dt );
 
+	// Update all enemies, separating this and collision
+	//  checking solves all sorts of problems.
+	for( auto& e : enemies )
+	{
+		e->Update( guy.GetPos(),dt );
+	}
+	for( auto& e : enemies )
+	{
+		const auto enemyRect = e->GetRect();
+		for( auto& b : playerBullets )
+		{
+			if( b->GetRect().IsOverlappingWith( enemyRect ) )
+			{
+				e->Attack( 1,b->GetRect().GetCenter() );
+				b->Attack( 1 );
+			}
+		}
+	}
+
+	// chili::remove_erase_if( enemies,std::mem_fn( &EnemyBase::IsDead ) );
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsDead ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
 }

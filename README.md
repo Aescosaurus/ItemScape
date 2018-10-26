@@ -10,8 +10,9 @@
 - Animations: Line 1 walk/idle anim (varies based on enemy),
 	line 2 attack wind up anim,
 	line 4 attack wind down anim,
-	line 4 death anim?
-- Maybe a player/other idle anim?
+	line 4 death anim.
 - Enemies have varying phases, damage, bullet patterns,
 	aim patterns(where you are vs where you're going to be),
 	refire speed, animation speed, etc, some might not even shoot.
+- Try to reduce randomness as much as possible, at least in gameplay.
+- Make a worm king boss that has a crown on its head and the sprite is HUGE.

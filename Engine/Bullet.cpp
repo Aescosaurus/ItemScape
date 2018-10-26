@@ -9,7 +9,8 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 	mySize( mySize ),
 	map( &map ),
 	// This is useless, make it for real in the body.
-	myAnim( 0,0,0,0,0,*pSprSheet,0.2f )
+	myAnim( 0,0,0,0,0,*pSprSheet,0.2f ),
+	coll( map,{ { 0,0 },0,0 } )
 {
 	Vei2 animStart = { 0,0 };
 	Vei2 frameSize = { 0,0 };
@@ -30,6 +31,8 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 		break;
 	}
 
+	coll = Collider{ map,{ pos,float( frameSize.x ),float( frameSize.y ) } };
+
 	myAnim = Anim{ animStart.x,animStart.y,
 		frameSize.x,frameSize.y,nFrames,*pSprSheet,
 		animSpeed };
@@ -37,22 +40,35 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 
 void Bullet::Update( float dt )
 {
-	pos += vel * dt;
+	const auto testMove = vel * dt;
+	const auto validMove = coll.GetValidMove( pos,testMove );
+
+	pos += Vec2( validMove );
+	coll.MoveTo( pos );
+
+	if( validMove.z ) dead = true;
 
 	myAnim.Update( dt );
-
-	if( map->GetTileAt( pos ) == TileMap::TileType::Wall )
-	{
-		dead = true;
-	}
 }
 
 void Bullet::Draw( Graphics& gfx ) const
 {
 	myAnim.Draw( Vei2( pos ),gfx,false );
+	
+	// gfx.DrawHitbox( coll.GetRect() );
+}
+
+void Bullet::Attack( int damage )
+{
+	dead = true;
 }
 
 bool Bullet::IsDead() const
 {
 	return( dead );
+}
+
+const Rect& Bullet::GetRect() const
+{
+	return( coll.GetRect() );
 }

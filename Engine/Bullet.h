@@ -5,6 +5,7 @@
 #include "Codex.h"
 #include "Anim.h"
 #include "TileMap.h"
+#include "Collider.h"
 
 class Bullet
 {
@@ -28,7 +29,10 @@ public:
 	void Update( float dt );
 	void Draw( Graphics& gfx ) const;
 
+	void Attack( int damage );
+
 	bool IsDead() const;
+	const Rect& GetRect() const;
 private:
 	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );
 	static constexpr Vei2 size = { 16,16 };
@@ -39,4 +43,5 @@ private:
 	const TileMap* map;
 	Anim myAnim;
 	bool dead = false;
+	Collider coll;
 };

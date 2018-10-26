@@ -18,7 +18,8 @@ private:
 	{
 		Moving,
 		Firing,
-		WindingDown
+		WindingDown,
+		Exploding
 	};
 public:
 	Beetle( const Vec2& pos,const TileMap& map,
@@ -26,8 +27,11 @@ public:
 
 	void Update( const Vec2& playerPos,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
+
+	void Attack( int damage,const Vec2& loc ) override;
 private:
 	void ResetTargeting();
+	void ResetTimer();
 
 	Vec2 FindTarget() const;
 	Vec2 GetCenter() const;
@@ -38,9 +42,10 @@ private:
 	Anim walking; // first row of anim
 	Anim firing; // second row of anim
 	Anim windDown; // third row
+	Anim explAnim; // 4th row.
 	State myAction = State::Moving;
+	static constexpr Vec2 timerMinMax = { 1.8f,3.4f };
 	Timer shotTimer = 2.4f;
-	Collider coll;
 	static constexpr float moveTolerance = 145.0f;
 	Vec2 target;
 	Vec2 lastTarget = pos;
@@ -50,4 +55,6 @@ private:
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const TileMap* map;
 	static constexpr float myBulletSpeed = 215.5f;
+	bool deadDead = false;
+	bool explDrawDir;
 };

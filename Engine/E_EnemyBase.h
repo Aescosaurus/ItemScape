@@ -13,7 +13,10 @@ public:
 	virtual void Update( const Vec2& playerPos,float dt ) = 0;
 	virtual void Draw( Graphics& gfx ) const = 0;
 
-	virtual void Attack( int damage,const Vec2& sourcePos );
+	virtual void Attack( int damage,const Vec2& loc );
+
+	bool IsDead() const;
+	const Rect& GetRect() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );
