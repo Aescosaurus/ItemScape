@@ -23,16 +23,15 @@
 #include "FrameTimer.h"
 #include "Utils.h"
 #include <functional>
+#include "EnemyType.h"
 
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	map( "Maps/Map1.lvl" ),
 	guy( { 150.0f,150.0f },map,playerBullets )
 {
-	enemies.emplace_back( new BeetleBig{ Vec2{ 50,50 },
-		map,enemyBullets,enemies } );
+	LoadNextLevel();
 }
 
 void Game::Go()
@@ -57,6 +56,8 @@ void Game::UpdateModel()
 	//  checking solves all sorts of problems.
 	for( auto& e : enemies )
 	{
+		// If this explodes and spawns beetles it
+		//  invalidates the iterator.
 		e->Update( guy.GetPos(),dt );
 	}
 	for( auto& e : enemies )
@@ -75,6 +76,32 @@ void Game::UpdateModel()
 	// chili::remove_erase_if( enemies,std::mem_fn( &EnemyBase::IsDead ) );
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsDead ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
+}
+
+void Game::LoadNextLevel()
+{
+	static constexpr auto first = "Levels/Level";
+	static constexpr auto second = ".lvl";
+	const std::string nextLevelName = first +
+		std::to_string( curLevel++ ) + second;
+
+	map.LoadFile( nextLevelName );
+
+	const auto terms = map.FindSpecialTerms( nextLevelName );
+
+	// Load big beetles into vec.
+	for( const auto& t : terms )
+	{
+		switch( t.type )
+		{
+		case char( EnemyType::BigBeetle ):
+			enemies.emplace_back( std::make_unique<BeetleBig>(
+				t.pos,map,enemyBullets,enemies ) );
+			break;
+		// case char( EnemyType::Bop ):
+		// 	break;
+		}
+	}
 }
 
 void Game::ComposeFrame()

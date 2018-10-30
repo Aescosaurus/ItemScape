@@ -43,12 +43,14 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void LoadNextLevel();
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	int curLevel = 0;
 	TileMap map;
 	Player guy;
 	std::vector<std::unique_ptr<Bullet>> playerBullets;

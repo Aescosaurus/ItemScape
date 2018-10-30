@@ -145,9 +145,10 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="EnemyType.h" />
     <ClInclude Include="E_Beetle.h" />
     <ClInclude Include="E_BeetleBig.h" />
-    <ClInclude Include="E_EnemyBase.h" />
+    <ClInclude Include="E__EnemyBase.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
@@ -179,7 +180,7 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="E_Beetle.cpp" />
     <ClCompile Include="E_BeetleBig.cpp" />
-    <ClCompile Include="E_EnemyBase.cpp" />
+    <ClCompile Include="E__EnemyBase.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />

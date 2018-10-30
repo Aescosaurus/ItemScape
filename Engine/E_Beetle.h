@@ -1,6 +1,6 @@
 #pragma once
 
-#include "E_EnemyBase.h"
+#include "E__EnemyBase.h"
 #include "Anim.h"
 #include "Codex.h"
 #include "Timer.h"
@@ -37,7 +37,7 @@ private:
 	Vec2 GetCenter() const;
 private:
 	static constexpr Vei2 size = { 32,32 };
-	static constexpr int maxHP = 10;
+	static constexpr int maxHP = 7;
 	const Surface* pSprSheet = Codex<Surface>::RetrieveSurf( "Images/BeetleAnim.bmp",{ 4,4 } );
 	Anim walking; // first row of anim
 	Anim firing; // second row of anim

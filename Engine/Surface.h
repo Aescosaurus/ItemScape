@@ -19,15 +19,6 @@ public:
 	// Create a new surface that is other but flipped over y or x axis.
 	Surface( const Surface& other,bool xFlipped,bool yFlipped );
 public:
-	// Surface( const std::string& filename );
-	// Surface( const std::wstring& fileName );
-	// Surface( const Surface& other,const RectI& clip );
-	// Surface( const std::string& fileName,const RectI& clip );
-	// Surface( int width,int height );
-	// // Gives a surface loaded from filename expanded to xAmount and yAmount.
-	// Surface( const std::string& filename,int xAmount,int yAmount );
-	// Surface( const Surface& other,int width,int height );
-	// Surface( const Surface& other,bool xFlipped );
 
 	Surface( const Surface& ) = default;
 	Surface& operator=( const Surface& ) = default;

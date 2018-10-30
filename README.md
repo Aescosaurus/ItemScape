@@ -17,3 +17,4 @@
 - Try to reduce randomness as much as possible, at least in gameplay.
 - Make a worm king boss that has a crown on its head and the sprite is HUGE.
 - Add more variety of (basic?) enemies which are introduced slowly in the first few levels.
+- Bosses have phases that change, but some change to a different phase or set of phases if enough health is lost.

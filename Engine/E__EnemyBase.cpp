@@ -1,4 +1,4 @@
-#include "E_EnemyBase.h"
+#include "E__EnemyBase.h"
 
 void EnemyBase::Attack( int damage,const Vec2& loc )
 {

@@ -105,9 +105,6 @@
     <ClInclude Include="E_Beetle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="E_EnemyBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -118,6 +115,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="E_BeetleBig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E__EnemyBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -176,9 +179,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E_EnemyBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="E_Beetle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="E_BeetleBig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E__EnemyBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

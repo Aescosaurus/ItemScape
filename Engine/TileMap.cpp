@@ -1,11 +1,7 @@
 #include "TileMap.h"
 #include <fstream>
 #include <cassert>
-
-TileMap::TileMap( const std::string& fileName )
-{
-	LoadFile( fileName );
-}
+#include "EnemyType.h"
 
 void TileMap::Draw( Graphics& gfx ) const
 {
@@ -57,7 +53,20 @@ void TileMap::LoadFile( const std::string& fileName )
 		}
 		else if( c != ',' )
 		{
-			tiles.emplace_back( TileType( int( c - '0' ) ) );
+			TileType toAdd;
+			switch( c )
+			{
+			case int( TileType::Wall ):
+				toAdd = TileType::Wall;
+				break;
+			case int( TileType::Empty ):
+				toAdd = TileType::Empty;
+				break;
+			default:
+				// assert( false );
+				break;
+			}
+			tiles.emplace_back( toAdd );
 			if( !done ) ++tempWidth;
 		}
 	}
@@ -67,6 +76,36 @@ void TileMap::LoadFile( const std::string& fileName )
 
 	tileDim.x = Graphics::ScreenWidth / width;
 	tileDim.y = Graphics::ScreenHeight / height;
+}
+
+std::vector<Vec2> TileMap::FindAllInstances( char searchTerm,
+	const std::string& fileName )
+{
+	std::vector<Vec2> results;
+	std::ifstream in( fileName );
+	assert( in.good() );
+
+	int x = 0;
+	int y = 0;
+	for( char c = in.get(); in.good(); c = in.get() )
+	{
+		if( c == ',' ) continue;
+
+		if( c == searchTerm )
+		{
+			results.emplace_back( Vei2( x * tileDim.x - tileDim.x,
+				y * tileDim.y ) );
+		}
+		if( c == '\n' )
+		{
+			x = 0;
+			++y;
+		}
+
+		++x;
+	}
+
+	return( results );
 }
 
 TileMap::TileType TileMap::GetTile( int x,int y ) const
@@ -88,4 +127,34 @@ TileMap::TileType TileMap::GetTileAt( const Vec2& screenPos ) const
 {
 	const auto pos = GetTilePos( screenPos );
 	return( GetTile( pos.x,pos.y ) );
+}
+
+std::vector<DataPoint> TileMap::FindSpecialTerms( const std::string& fileName ) const
+{
+	std::vector<DataPoint> results;
+	std::ifstream in( fileName );
+
+	Vei2 pos = { 0,0 };
+	for( char c = in.get(); in.good(); c = in.get() )
+	{
+		switch( c )
+		{
+		case '\n':
+			++pos.y;
+			pos.x = 0;
+			break;
+		case ',':
+			++pos.x;
+			break;
+		case '0':
+		case '1':
+			break;
+		default:
+			results.emplace_back( DataPoint{ Vei2{ pos.x *
+				tileDim.x,pos.y * tileDim.y },c } );
+			break;
+		}
+	}
+
+	return( results );
 }
