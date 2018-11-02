@@ -11,6 +11,7 @@ class Firebug
 private:
 	enum class State
 	{
+		GotoPlayer,
 		Wander,
 		Charge,
 		AttackLeft,
@@ -28,8 +29,10 @@ public:
 private:
 	// Angle is in radians.
 	void ShootBullet( float angle );
+	void ResetTargeting();
 
 	Vec2 GetCenter() const;
+	Vec2 FindTarget() const;
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 13;
@@ -39,7 +42,7 @@ private:
 	Anim charging;
 	Anim attacking;
 	Anim exploding;
-	State curAction = State::Wander;
+	State curAction = State::GotoPlayer;
 	Timer moveStop = 1.6f;
 	Timer shotTimer = 0.1f;
 	static constexpr int nShotsASide = 8;
@@ -49,4 +52,7 @@ private:
 	Timer moveRetarget = 0.4f;
 	static constexpr float speed = 105.24f;
 	static constexpr float bulletSpeed = 200.0f;
+	Vec2 target;
+	Vec2 lastTarget = pos;
+	static constexpr float moveTolerance = 163.4f;
 };

@@ -9,6 +9,7 @@ class Collider
 public:
 	Collider( const TileMap& map,const Rect& hitbox );
 	void MoveTo( const Vec2& updatedPos );
+	// z is true if there was a hit, false if no hit.
 	Vec3b GetValidMove( const Vec2& startPos,const Vec2& moveTest ) const;
 	const Rect& GetRect() const;
 private:

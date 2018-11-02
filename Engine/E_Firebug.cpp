@@ -1,4 +1,5 @@
 #include "E_Firebug.h"
+#include "Random.h"
 
 Firebug::Firebug( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bulletVec )
@@ -17,7 +18,7 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 {
 	switch( curAction )
 	{
-	case State::Wander:
+	case State::GotoPlayer:
 		walking.Update( dt );
 		moveStop.Update( dt );
 
@@ -34,8 +35,38 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 			const auto validMove = coll.GetValidMove( pos,testMove );
 			pos += validMove;
 			coll.MoveTo( pos );
+
+			if( validMove.z ) // If you hit the wall.
+			{
+				ResetTargeting();
+				curAction = State::Wander;
+			}
 		}
 
+		if( moveStop.IsDone() && walking.IsFinished() )
+		{
+			moveStop.Reset();
+			walking.Reset();
+			curAction = State::Charge;
+		}
+		break;
+	case State::Wander:
+	{
+		const auto testMove = vel * dt;
+		const auto validMove = coll.GetValidMove( pos,testMove );
+		pos += validMove;
+		coll.MoveTo( pos );
+
+		if( map->GetTilePos( target ) ==
+			map->GetTilePos( pos ) ||
+			validMove.z )
+		{
+			ResetTargeting();
+		}
+	}
+
+		moveStop.Update( dt );
+		walking.Update( dt );
 		if( moveStop.IsDone() && walking.IsFinished() )
 		{
 			moveStop.Reset();
@@ -92,7 +123,7 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 		if( curShot > nShotsASide )
 		{
 			curShot = 0;
-			curAction = State::Wander;
+			curAction = State::GotoPlayer;
 		}
 		break;
 	}
@@ -106,6 +137,7 @@ void Firebug::Draw( Graphics& gfx ) const
 {
 	switch( curAction )
 	{
+	case State::GotoPlayer:
 	case State::Wander:
 		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
@@ -142,7 +174,37 @@ void Firebug::ShootBullet( float angle )
 		bulletSpeed,Bullet::Size::Small ) );
 }
 
+void Firebug::ResetTargeting()
+{
+	target = FindTarget();
+	lastTarget = target;
+	vel = ( target - pos ).GetNormalized() * speed;
+}
+
 Vec2 Firebug::GetCenter() const
 {
 	return( pos + Vec2( size ) / 2.0f );
+}
+
+Vec2 Firebug::FindTarget() const
+{
+	auto test = Vec2( pos );
+	const int nTries = 5;
+	int curTries = 0;
+	do
+	{
+		test = Vec2( pos );
+		test.x += Random::RangeF( -moveTolerance,moveTolerance );
+		test.y += Random::RangeF( -moveTolerance,moveTolerance );
+
+		++curTries;
+		if( curTries >= nTries ) // No infinite loops here!
+		{
+			test = lastTarget;
+			break;
+		}
+	} while( !Graphics::GetScreenRect()
+		.ContainsPoint( Vei2( Vec2{ test.x,test.y } ) ) );
+
+	return( test );
 }
