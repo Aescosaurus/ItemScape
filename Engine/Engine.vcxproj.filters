@@ -123,6 +123,9 @@
     <ClInclude Include="E__EnemyBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="E_Firebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -189,6 +192,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="E__EnemyBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Firebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

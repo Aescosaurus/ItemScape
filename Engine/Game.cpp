@@ -52,16 +52,17 @@ void Game::UpdateModel()
 	for( auto& b : playerBullets ) b->Update( dt );
 	for( auto& eb : enemyBullets ) eb->Update( dt );
 
-	// Update all enemies, separating this and collision
-	//  checking solves all sorts of problems.
-	for( auto& e : enemies )
+	// Update all enemies with a regular for loop because
+	//  Enemy::Update might invalidate the iterator.
+	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
-		// If this explodes and spawns beetles it
-		//  invalidates the iterator.
-		e->Update( guy.GetPos(),dt );
-	}
-	for( auto& e : enemies )
-	{
+		const EnemyUpdateInfo euInfo = { guy.GetPos(),guy.GetVel() };
+		enemies[i]->Update( euInfo,dt );
+
+		// Update might add new enemies and invalidate the
+		//  reference, so just init it here.
+		const auto& e = enemies[i];
+
 		const auto enemyRect = e->GetRect();
 		for( auto& b : playerBullets )
 		{
@@ -78,32 +79,6 @@ void Game::UpdateModel()
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
 }
 
-void Game::LoadNextLevel()
-{
-	static constexpr auto first = "Levels/Level";
-	static constexpr auto second = ".lvl";
-	const std::string nextLevelName = first +
-		std::to_string( curLevel++ ) + second;
-
-	map.LoadFile( nextLevelName );
-
-	const auto terms = map.FindSpecialTerms( nextLevelName );
-
-	// Load big beetles into vec.
-	for( const auto& t : terms )
-	{
-		switch( t.type )
-		{
-		case char( EnemyType::BigBeetle ):
-			enemies.emplace_back( std::make_unique<BeetleBig>(
-				t.pos,map,enemyBullets,enemies ) );
-			break;
-		// case char( EnemyType::Bop ):
-		// 	break;
-		}
-	}
-}
-
 void Game::ComposeFrame()
 {
 	map.Draw( gfx );
@@ -111,4 +86,39 @@ void Game::ComposeFrame()
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	guy.Draw( gfx );
+}
+
+void Game::LoadNextLevel()
+{
+	// Get rid of exploded enemies and existing bullets.
+	enemies.clear();
+	playerBullets.clear();
+	enemyBullets.clear();
+
+	// Make up name for the level after this one.
+	static constexpr auto first = "Levels/Level";
+	static constexpr auto second = ".lvl";
+	const std::string nextLevelName = first +
+		std::to_string( curLevel++ ) + second;
+
+	map.LoadFile( nextLevelName );
+
+	// Get everything in the map that isn't a wall or floor.
+	const auto terms = map.FindSpecialTerms( nextLevelName );
+
+	// Load big beetles into vec.
+	for( const auto& t : terms )
+	{
+		switch( t.type )
+		{
+		case char( EnemyType::BigBeetle ) :
+			enemies.emplace_back( std::make_unique<BeetleBig>(
+				t.pos,map,enemyBullets,enemies ) );
+			break;
+		case char( EnemyType::Firebug ) :
+			enemies.emplace_back( std::make_unique<Firebug>(
+				t.pos,map,enemyBullets ) );
+			break;
+		}
+	}
 }

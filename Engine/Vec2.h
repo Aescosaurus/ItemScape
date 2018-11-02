@@ -88,19 +88,19 @@ public:
 		return x * x + y * y;
 	}
 	// Gives radians.
-	constexpr T GetAngle() const
+	T GetAngle() const
 	{
 		return T( atan2( y,x ) );
 	}
 	// Takes radians.
-	constexpr Vec2_& Deviate( float angle )
+	Vec2_& Deviate( float angle )
 	{
 		const float tempAngle = GetAngle() + angle;
 		const auto tempVec = FromAngle( tempAngle );
 		*this = tempVec;
 	}
 	// Takes radians.
-	constexpr Vec2_ GetDeviated( float angle )
+	Vec2_ GetDeviated( float angle )
 	{
 		return( Vec2{ x,y }.Deviate( angle ) );
 	}

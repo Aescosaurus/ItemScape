@@ -15,6 +15,7 @@ public:
 	{
 		Player = 0,
 		Beetle,
+		Firebug,
 		LastOfSmall,
 		BeetleBig
 	};

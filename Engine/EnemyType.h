@@ -2,5 +2,6 @@
 
 enum class EnemyType
 {
-	BigBeetle = int( 'b' )
+	BigBeetle = int( 'b' ),
+	Firebug = int( 'f' )
 };

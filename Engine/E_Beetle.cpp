@@ -17,7 +17,7 @@ Beetle::Beetle( const Vec2& pos,const TileMap& map,
 	ResetTimer();
 }
 
-void Beetle::Update( const Vec2& playerPos,float dt )
+void Beetle::Update( const EnemyUpdateInfo& info,float dt )
 {
 	switch( myAction )
 	{
@@ -48,10 +48,10 @@ void Beetle::Update( const Vec2& playerPos,float dt )
 	}
 	case State::Firing:
 		firing.Update( dt );
-		shotTarget = playerPos;
+		shotTarget = info.playerPos;
 		if( firing.IsFinished() )
 		{
-			pBulletVec->emplace_back( std::make_unique<Bullet>( pos,playerPos,
+			pBulletVec->emplace_back( std::make_unique<Bullet>( pos,info.playerPos,
 				*map,Bullet::Team::Beetle,myBulletSpeed,
 				Bullet::Size::Small ) );
 

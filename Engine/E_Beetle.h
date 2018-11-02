@@ -25,7 +25,7 @@ public:
 	Beetle( const Vec2& pos,const TileMap& map,
 		std::vector<std::unique_ptr<Bullet>>& bulletVec );
 
-	void Update( const Vec2& playerPos,float dt ) override;
+	void Update( const EnemyUpdateInfo& info,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
 
 	void Attack( int damage,const Vec2& loc ) override;

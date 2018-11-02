@@ -13,7 +13,7 @@ BeetleBig::BeetleBig( const Vec2& pos,const TileMap& map,
 	explode( 0,size.y * 3,size.x,size.y,4,*sprSheet,0.2f )
 {}
 
-void BeetleBig::Update( const Vec2& playerPos,float dt )
+void BeetleBig::Update( const EnemyUpdateInfo& info,float dt )
 {
 	switch( curState )
 	{
@@ -29,7 +29,7 @@ void BeetleBig::Update( const Vec2& playerPos,float dt )
 		if( retarget.IsDone() )
 		{
 			retarget.Reset();
-			Retarget( playerPos );
+			Retarget( info.playerPos );
 		}
 		moveReset.Update( dt );
 		if( moveReset.IsDone() && walking.IsFinished() )
@@ -56,7 +56,7 @@ void BeetleBig::Update( const Vec2& playerPos,float dt )
 
 			SpawnBulletCircle();
 
-			Retarget( playerPos );
+			Retarget( info.playerPos );
 			curState = State::Moving;
 		}
 		break;

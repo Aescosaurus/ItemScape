@@ -1,12 +1,8 @@
 #pragma once
 
 #include "E__EnemyBase.h"
-#include <vector>
 #include "Bullet.h"
-#include "Codex.h"
-#include "Anim.h"
 #include "Timer.h"
-#include <memory>
 #include "E_Beetle.h"
 
 class BeetleBig
@@ -26,7 +22,7 @@ public:
 		std::vector<std::unique_ptr<Bullet>>& bulletVec,
 		std::vector<std::unique_ptr<EnemyBase>>& enemies );
 
-	void Update( const Vec2& playerPos,float dt ) override;
+	void Update( const EnemyUpdateInfo& info,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
 
 	void Attack( int damage,const Vec2& loc ) override;

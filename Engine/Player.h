@@ -23,6 +23,7 @@ public:
 	void Draw( Graphics& gfx ) const;
 
 	const Vec2& GetPos() const;
+	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
 private:
 	Vec2 pos;
@@ -33,4 +34,5 @@ private:
 	Timer shotTimer = { 0.23f };
 	const TileMap& map;
 	static constexpr float bulletSpeed = 324.2f;
+	Vec2 moveDir = { 0.0f,0.0f };
 };

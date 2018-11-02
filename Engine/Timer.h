@@ -4,7 +4,7 @@ class Timer
 {
 public:
 	Timer() = delete;
-	Timer( float time )
+	Timer( float time)
 		:
 		maxTime( time ),
 		curTime( 0.0f )

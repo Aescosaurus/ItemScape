@@ -29,6 +29,7 @@
 #include <vector>
 #include "Bullet.h"
 #include "E_BeetleBig.h"
+#include "E_Firebug.h"
 #include <memory>
 
 class Game

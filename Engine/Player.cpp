@@ -14,7 +14,7 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	float dt )
 {
 	// Change moveDir based on key hits.
-	Vec2 moveDir = { 0.0f,0.0f };
+	moveDir = { 0.0f,0.0f };
 	if( kbd.KeyIsPressed( 'W' ) ) --moveDir.y;
 	if( kbd.KeyIsPressed( 'S' ) ) ++moveDir.y;
 	if( kbd.KeyIsPressed( 'A' ) ) --moveDir.x;
@@ -46,6 +46,11 @@ void Player::Draw( Graphics& gfx ) const
 const Vec2& Player::GetPos() const
 {
 	return( pos );
+}
+
+const Vec2& Player::GetVel() const
+{
+	return( moveDir );
 }
 
 Vec2 Player::GetCenter() const
