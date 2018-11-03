@@ -45,7 +45,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	auto dt = FrameTimer::Mark();
-	if( dt > 0.5f ) dt = 0.0f;
+	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 

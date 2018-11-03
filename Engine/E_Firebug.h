@@ -45,7 +45,7 @@ private:
 	State curAction = State::GotoPlayer;
 	Timer moveStop = 1.6f;
 	Timer shotTimer = 0.1f;
-	static constexpr int nShotsASide = 8;
+	static constexpr int nShotsASide = 5;
 	int curShot = 0;
 	float shotAngle = 0.0f;
 	Vec2 vel = { 0.0f,0.0f };
