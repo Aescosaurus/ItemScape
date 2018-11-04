@@ -19,6 +19,13 @@ Vec3b Collider::GetValidMove( const Vec2& startPos,const Vec2& moveTest ) const
 	positions.emplace_back( Vec2{ hitbox.right,hitbox.top } );
 	positions.emplace_back( Vec2{ hitbox.left,hitbox.bottom } );
 	positions.emplace_back( Vec2{ hitbox.right,hitbox.bottom } );
+	// These next ones make it way more accurate but computationally slower.
+	const auto center = hitbox.GetCenter();
+	positions.emplace_back( center );
+	positions.emplace_back( Vec2{ hitbox.left,center.y } );
+	positions.emplace_back( Vec2{ center.x,hitbox.top } );
+	positions.emplace_back( Vec2{ hitbox.right,center.y } );
+	positions.emplace_back( Vec2{ center.x,hitbox.bottom } );
 
 	// Start true, if any point cannot move then none can.
 	Vec2_<bool> isGood = { true,true };

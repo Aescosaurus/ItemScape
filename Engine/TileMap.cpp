@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cassert>
 #include "EnemyType.h"
+#include "SpriteEffect.h"
 
 void TileMap::Draw( Graphics& gfx ) const
 {
@@ -10,11 +11,16 @@ void TileMap::Draw( Graphics& gfx ) const
 		for( int x = 0; x < width; ++x )
 		{
 			const auto tile = GetTile( x,y );
+			const auto tileBelow = GetTile( x,y + 1 );
+			const Surface* pDrawSpr = &wallSpr;
 			if( tile == TileType::Wall )
 			{
-				gfx.DrawRect( x * tileDim.x,y * tileDim.y,
-					tileDim.x,tileDim.y,
-					Colors::Gray );
+				if( tileBelow == TileType::Empty )
+				{
+					pDrawSpr = &wallTopSpr;
+				}
+				gfx.DrawSprite( x * tileDim.x,y * tileDim.y,
+					*pDrawSpr,SpriteEffect::Copy{} );
 			}
 		}
 	}
@@ -110,6 +116,11 @@ std::vector<Vec2> TileMap::FindAllInstances( char searchTerm,
 
 TileMap::TileType TileMap::GetTile( int x,int y ) const
 {
+	if( x < 0 || x >= width || y < 0 || y >= height )
+	{ // Outside map is all walls.
+		return( TileType::Wall );
+	}
+
 	return( tiles[y * width + x] );
 }
 

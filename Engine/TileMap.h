@@ -47,4 +47,6 @@ private:
 	int height; // Number of tiles up-down.
 	Vei2 tileDim; // Size of each tile on screen.
 	std::vector<TileType> tiles;
+	const Surface wallSpr = Surface{ { "Images/Wall.bmp" },Vei2{ 4,4 } };
+	const Surface wallTopSpr = Surface{ { "Images/WallTop.bmp" },Vei2{ 4,4 } };
 };

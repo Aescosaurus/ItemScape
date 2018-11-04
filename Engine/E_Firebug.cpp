@@ -154,6 +154,7 @@ void Firebug::Draw( Graphics& gfx ) const
 
 		break;
 	}
+	gfx.DrawHitbox( coll.GetRect() );
 }
 
 void Firebug::Attack( int damage,const Vec2& loc )
