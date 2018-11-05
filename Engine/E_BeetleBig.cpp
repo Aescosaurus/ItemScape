@@ -100,7 +100,7 @@ void BeetleBig::Draw( Graphics& gfx ) const
 		explode.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	}
-	gfx.DrawHitbox( coll.GetRect() );
+	// gfx.DrawHitbox( coll.GetRect() );
 }
 
 void BeetleBig::Attack( int damage,const Vec2& loc )

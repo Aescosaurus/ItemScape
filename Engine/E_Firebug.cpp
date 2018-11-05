@@ -128,7 +128,8 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 		break;
 	}
 	case State::Explode:
-
+		if( !exploding.IsFinished() ) exploding.Update( dt );
+		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
 }
@@ -151,17 +152,21 @@ void Firebug::Draw( Graphics& gfx ) const
 		attacking.Draw( Vei2( pos ),gfx,false );
 		break;
 	case State::Explode:
-
+		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	}
-	gfx.DrawHitbox( coll.GetRect() );
+	// gfx.DrawHitbox( coll.GetRect() );
 }
 
 void Firebug::Attack( int damage,const Vec2& loc )
 {
 	EnemyBase::Attack( damage,loc );
 
-
+	if( IsDead() )
+	{
+		curAction = State::Explode;
+		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
+	}
 }
 
 void Firebug::ShootBullet( float angle )

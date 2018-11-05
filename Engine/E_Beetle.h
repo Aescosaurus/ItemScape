@@ -37,7 +37,7 @@ private:
 	Vec2 GetCenter() const;
 private:
 	static constexpr Vei2 size = { 32,32 };
-	static constexpr int maxHP = 7;
+	static constexpr int maxHP = 4;
 	const Surface* pSprSheet = Codex<Surface>::RetrieveSurf( "Images/BeetleAnim.bmp",{ 4,4 } );
 	Anim walking; // first row of anim
 	Anim firing; // second row of anim

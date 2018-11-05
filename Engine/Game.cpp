@@ -70,6 +70,13 @@ void Game::UpdateModel()
 			{
 				e->Attack( 1,b->GetRect().GetCenter() );
 				b->Attack( 1 );
+
+				std::sort( enemies.begin(),enemies.end(),
+					[]( const std::unique_ptr<EnemyBase>& first,
+						const std::unique_ptr<EnemyBase>& second )
+				{
+					return( first->IsDead() && !second->IsDead() );
+				} );
 			}
 		}
 	}
