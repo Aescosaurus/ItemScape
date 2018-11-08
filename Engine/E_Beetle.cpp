@@ -109,7 +109,7 @@ void Beetle::Attack( int damage,const Vec2& loc )
 
 	// TODO: Make it get pushed away from bullet.
 
-	if( IsDead() )
+	if( IsExpl() )
 	{
 		myAction = State::Exploding;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );

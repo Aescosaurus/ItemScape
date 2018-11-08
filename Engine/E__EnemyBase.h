@@ -23,13 +23,12 @@ class EnemyBase
 public:
 	EnemyBase() = delete;
 
-	// TODO: Replace playerPos with an EnemyUpdateInfo
 	virtual void Update( const EnemyUpdateInfo& info,float dt ) = 0;
 	virtual void Draw( Graphics& gfx ) const = 0;
 
 	virtual void Attack( int damage,const Vec2& loc );
 
-	bool IsDead() const;
+	bool IsExpl() const;
 	const Rect& GetRect() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,

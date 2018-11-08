@@ -70,7 +70,6 @@ void BeetleBig::Update( const EnemyUpdateInfo& info,float dt )
 				deadDead = true;
 				SpawnBulletCircle();
 				// Spawn minis.
-				static constexpr int nMinis = 7;
 				for( int i = 0; i < nMinis; ++i )
 				{
 					pEnemyVec->emplace_back( std
@@ -107,7 +106,7 @@ void BeetleBig::Attack( int damage,const Vec2& loc )
 {
 	EnemyBase::Attack( damage,loc );
 
-	if( IsDead() )
+	if( IsExpl() )
 	{
 		curState = State::Exploding;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );

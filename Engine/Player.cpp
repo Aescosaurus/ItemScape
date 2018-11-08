@@ -29,9 +29,10 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	if( ms.LeftIsPressed() && shotTimer.IsDone() )
 	{
 		shotTimer.Reset();
-		myBullets.emplace_back( new Bullet{ pos,
-			Vec2( ms.GetPos() ),map,Bullet::Team::Player,
-			bulletSpeed,Bullet::Size::Small } );
+		myBullets.emplace_back( std::make_unique<Bullet>(
+			pos,Vec2( ms.GetPos() ),map,
+			Bullet::Team::Player,bulletSpeed,
+			Bullet::Size::Small ) );
 	}
 }
 

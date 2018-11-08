@@ -5,7 +5,7 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 	hp -= damage;
 }
 
-bool EnemyBase::IsDead() const
+bool EnemyBase::IsExpl() const
 {
 	return( hp < 1 );
 }

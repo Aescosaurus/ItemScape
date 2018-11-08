@@ -44,7 +44,7 @@ void Bullet::Update( float dt )
 	const auto validMove = coll.GetValidMove( pos,testMove );
 
 	pos += Vec2( validMove );
-	coll.MoveTo( pos );
+	coll.MoveTo( pos - Vec2( size ) / 2.0f );
 
 	if( validMove.z ) dead = true;
 
@@ -53,9 +53,9 @@ void Bullet::Update( float dt )
 
 void Bullet::Draw( Graphics& gfx ) const
 {
-	myAnim.Draw( Vei2( pos ),gfx,false );
+	myAnim.Draw( Vei2( pos - Vec2( size ) / 2.0f ),gfx,false );
 	
-	// gfx.DrawHitbox( coll.GetRect() );
+	gfx.DrawHitbox( coll.GetRect() );
 }
 
 void Bullet::Attack( int damage )

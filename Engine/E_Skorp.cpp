@@ -89,6 +89,8 @@ void Skorp::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::Explode:
+		if( !exploding.IsFinished() ) exploding.Update( dt );
+		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
 }
@@ -117,7 +119,7 @@ void Skorp::Attack( int damage,const Vec2& loc )
 {
 	EnemyBase::Attack( damage,loc );
 
-	if( IsDead() )
+	if( IsExpl() )
 	{
 		action = State::Explode;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );

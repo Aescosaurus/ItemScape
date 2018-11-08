@@ -54,6 +54,7 @@ void Game::UpdateModel()
 
 	// Update all enemies with a regular for loop because
 	//  Enemy::Update might invalidate the iterator.
+	bool enemyExploded = false;
 	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
 		const EnemyUpdateInfo euInfo = { guy.GetPos(),guy.GetVel() };
@@ -71,14 +72,21 @@ void Game::UpdateModel()
 				e->Attack( 1,b->GetRect().GetCenter() );
 				b->Attack( 1 );
 
-				std::sort( enemies.begin(),enemies.end(),
-					[]( const std::unique_ptr<EnemyBase>& first,
-						const std::unique_ptr<EnemyBase>& second )
-				{
-					return( first->IsDead() && !second->IsDead() );
-				} );
+				if( e->IsExpl() ) enemyExploded = true;
 			}
 		}
+	}
+
+	// Sort the list so enemies that have exploded get
+	//  drawn behind ones that haven't.
+	if( enemyExploded )
+	{
+		std::sort( enemies.begin(),enemies.end(),
+			[]( const std::unique_ptr<EnemyBase>& first,
+				const std::unique_ptr<EnemyBase>& second )
+		{
+			return( first->IsExpl() && !second->IsExpl() );
+		} );
 	}
 
 	// chili::remove_erase_if( enemies,std::mem_fn( &EnemyBase::IsDead ) );

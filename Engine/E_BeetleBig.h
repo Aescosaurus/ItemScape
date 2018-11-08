@@ -48,4 +48,5 @@ private:
 	static constexpr float speed = 79.24f;
 	static constexpr float bullSpeed = 186.2f;
 	bool deadDead = false;
+	static constexpr int nMinis = 6;
 };

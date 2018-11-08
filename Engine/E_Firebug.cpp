@@ -172,7 +172,7 @@ void Firebug::Attack( int damage,const Vec2& loc )
 {
 	EnemyBase::Attack( damage,loc );
 
-	if( IsDead() )
+	if( IsExpl() )
 	{
 		curAction = State::Explode;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
