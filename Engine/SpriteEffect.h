@@ -102,4 +102,26 @@ namespace SpriteEffect
 		static constexpr int height_mask = height - 1;
 		int filled;
 	};
+	class SubstituteFade
+	{
+	public:
+		SubstituteFade( Color chroma,Color sub,float fadeAmount )
+			:
+			chroma( chroma ),
+			substitution( sub ),
+			fadeAmount( fadeAmount )
+		{}
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx )
+		{
+			if( cSrc != chroma )
+			{
+				gfx.PutPixel( xDest,yDest,cSrc );
+				gfx.PutPixelAlpha( xDest,yDest,substitution,fadeAmount );
+			}
+		}
+	private:
+		Color chroma;
+		Color substitution;
+		float fadeAmount;
+	};
 }

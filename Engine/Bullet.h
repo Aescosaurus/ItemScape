@@ -16,6 +16,7 @@ public:
 		Player = 0,
 		Beetle,
 		Firebug,
+		Skorp,
 		LastOfSmall,
 		BeetleBig
 	};

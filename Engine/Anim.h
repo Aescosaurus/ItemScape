@@ -12,6 +12,13 @@ public:
 	Anim& operator=( const Anim& other );
 
 	void Update( float dt );
+	template<typename Effect>
+	void Draw( const Vei2& pos,Graphics& gfx,Effect e,bool flipped = false ) const
+	{
+		gfx.DrawSprite( int( pos.x ),int( pos.y ),
+			frames[iCurFrame],Graphics::GetScreenRect(),
+			sprite,e,flipped );
+	}
 	void Draw( const Vei2& pos,Graphics& gfx,bool flipped = false ) const;
 	void Draw( const Vei2& pos,Graphics& gfx,const RectI& clip,bool flipped = false ) const;
 
@@ -21,6 +28,7 @@ public:
 
 	bool IsFinished() const;
 	int GetCurFrame() const;
+	float GetPercent() const;
 private:
 	void Advance();
 private:

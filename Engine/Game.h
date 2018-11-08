@@ -31,6 +31,7 @@
 #include "E_BeetleBig.h"
 #include "E_Firebug.h"
 #include <memory>
+#include "E_Skorp.h"
 
 class Game
 {

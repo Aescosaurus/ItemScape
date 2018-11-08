@@ -98,9 +98,11 @@ public:
 		const float tempAngle = GetAngle() + angle;
 		const auto tempVec = FromAngle( tempAngle );
 		*this = tempVec;
+
+		return( *this );
 	}
 	// Takes radians.
-	Vec2_ GetDeviated( float angle )
+	Vec2_ GetDeviated( float angle ) const
 	{
 		return( Vec2{ x,y }.Deviate( angle ) );
 	}

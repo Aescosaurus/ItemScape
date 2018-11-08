@@ -54,5 +54,4 @@ private:
 	static constexpr float bulletSpeed = 200.0f;
 	Vec2 target;
 	Vec2 lastTarget = pos;
-	static constexpr float moveTolerance = 163.4f;
 };

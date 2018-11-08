@@ -126,6 +126,9 @@ void Game::LoadNextLevel()
 			enemies.emplace_back( std::make_unique<Firebug>(
 				t.pos,map,enemyBullets ) );
 			break;
+		case char( EnemyType::Skorp ) :
+			enemies.emplace_back( std::make_unique<Skorp>(
+				t.pos,map,enemyBullets ) );
 		}
 	}
 }

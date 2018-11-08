@@ -3,5 +3,6 @@
 enum class EnemyType
 {
 	BigBeetle = int( 'b' ),
-	Firebug = int( 'f' )
+	Firebug = int( 'f' ),
+	Skorp = int( 's' )
 };

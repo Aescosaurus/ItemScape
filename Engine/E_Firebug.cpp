@@ -1,5 +1,6 @@
 #include "E_Firebug.h"
 #include "Random.h"
+#include "SpriteEffect.h"
 
 Firebug::Firebug( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bulletVec )
@@ -143,7 +144,16 @@ void Firebug::Draw( Graphics& gfx ) const
 		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	case State::Charge:
-		charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( int( charging.GetPercent() ) % 2 == 0 )
+		{
+			charging.Draw( Vei2( pos ),gfx,SpriteEffect
+				::SubstituteFade{ Colors::Magenta,Colors::Yellow,0.5f },
+				vel.x < 0.0f );
+		}
+		else
+		{
+			charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		}
 		break;
 	case State::AttackLeft:
 		attacking.Draw( Vei2( pos ),gfx,true );
@@ -197,6 +207,8 @@ Vec2 Firebug::FindTarget() const
 	auto test = Vec2( pos );
 	const int nTries = 5;
 	int curTries = 0;
+
+	static constexpr float moveTolerance = 163.4f;
 	do
 	{
 		test = Vec2( pos );

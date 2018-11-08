@@ -133,6 +133,8 @@ Vec2 Beetle::FindTarget() const
 	auto test = Vec2( pos );
 	const int nTries = 5;
 	int curTries = 0;
+
+	static constexpr float moveTolerance = 145.1f;
 	do
 	{
 		test = Vec2( pos );

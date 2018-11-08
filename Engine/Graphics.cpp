@@ -341,6 +341,20 @@ void Graphics::PutPixel( int x,int y,Color c,float alpha )
 	PutPixel( x,y,c,unsigned char( alpha * 255 ) );
 }
 
+void Graphics::PutPixelAlpha( int x,int y,Color c,float alpha )
+{
+	const Color c2 = c;
+	const Color c1 = GetPixel( x,y );
+
+	typedef unsigned char uchar;
+	const Color blend = Colors
+		::MakeRGB( uchar( float( c2.GetR() - c1.GetR() ) * alpha ) + c1.GetR(),
+		uchar( float( c2.GetG() - c1.GetG() ) * alpha ) + c1.GetG(),
+		uchar( float( c2.GetB() - c1.GetB() ) * alpha ) + c1.GetB() );
+
+	PutPixel( x,y,blend );
+}
+
 Color& Graphics::GetPixel( int x,int y ) const
 {
 	return pSysBuffer[y * ScreenWidth + x];

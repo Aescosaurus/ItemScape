@@ -126,6 +126,9 @@
     <ClInclude Include="E_Firebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="E_Skorp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -195,6 +198,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="E_Firebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Skorp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

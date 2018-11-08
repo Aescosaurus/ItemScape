@@ -80,6 +80,11 @@ int Anim::GetCurFrame() const
 	return( iCurFrame );
 }
 
+float Anim::GetPercent() const
+{
+	return( ( float( iCurFrame ) / float( frames.size() ) ) * 100.0f );
+}
+
 void Anim::Advance()
 {
 	++iCurFrame;

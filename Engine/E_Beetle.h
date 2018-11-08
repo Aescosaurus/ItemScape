@@ -46,7 +46,6 @@ private:
 	State myAction = State::Moving;
 	static constexpr Vec2 timerMinMax = { 1.8f,3.4f };
 	Timer shotTimer = 2.4f;
-	static constexpr float moveTolerance = 145.0f;
 	Vec2 target;
 	Vec2 lastTarget = pos;
 	Vec2 vel;
