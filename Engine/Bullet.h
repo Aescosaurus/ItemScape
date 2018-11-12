@@ -34,7 +34,7 @@ public:
 
 	void Attack( int damage );
 
-	bool IsDead() const;
+	bool IsExpl() const;
 	const Rect& GetRect() const;
 private:
 	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );

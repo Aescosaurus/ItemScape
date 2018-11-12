@@ -144,6 +144,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="EnemyType.h" />
     <ClInclude Include="E_Beetle.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="E__EnemyBase.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="E_Firebug.h" />
+    <ClInclude Include="FloorLevel.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
@@ -179,12 +181,14 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="E_Beetle.cpp" />
     <ClCompile Include="E_BeetleBig.cpp" />
     <ClCompile Include="E_Skorp.cpp" />
     <ClCompile Include="E__EnemyBase.cpp" />
     <ClCompile Include="E_Firebug.cpp" />
+    <ClCompile Include="FloorLevel.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />

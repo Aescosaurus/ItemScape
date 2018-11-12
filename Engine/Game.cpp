@@ -32,6 +32,10 @@ Game::Game( MainWindow& wnd )
 	guy( { 150.0f,150.0f },map,playerBullets )
 {
 	LoadNextLevel();
+	doors.emplace_back( Door{ Door::Side::Top,floor } );
+	doors.emplace_back( Door{ Door::Side::Bot,floor } );
+	doors.emplace_back( Door{ Door::Side::Left,floor } );
+	doors.emplace_back( Door{ Door::Side::Right,floor } );
 }
 
 void Game::Go()
@@ -55,9 +59,10 @@ void Game::UpdateModel()
 	// Update all enemies with a regular for loop because
 	//  Enemy::Update might invalidate the iterator.
 	bool enemyExploded = false;
+	const EnemyUpdateInfo euInfo = { guy.GetPos(),
+		guy.GetVel() };
 	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
-		const EnemyUpdateInfo euInfo = { guy.GetPos(),guy.GetVel() };
 		enemies[i]->Update( euInfo,dt );
 
 		// Update might add new enemies and invalidate the
@@ -89,9 +94,8 @@ void Game::UpdateModel()
 		} );
 	}
 
-	// chili::remove_erase_if( enemies,std::mem_fn( &EnemyBase::IsDead ) );
-	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsDead ) );
-	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsDead ) );
+	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsExpl ) );
+	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
 }
 
 void Game::ComposeFrame()
@@ -105,23 +109,17 @@ void Game::ComposeFrame()
 
 void Game::LoadNextLevel()
 {
-	// Get rid of exploded enemies and existing bullets.
+	// Get rid of exploded enemies and any leftover bullets.
 	enemies.clear();
 	playerBullets.clear();
 	enemyBullets.clear();
 
-	// Make up name for the level after this one.
-	static constexpr auto first = "Levels/Level";
-	static constexpr auto second = ".lvl";
-	const std::string nextLevelName = first +
-		std::to_string( curLevel++ ) + second;
-
-	map.LoadFile( nextLevelName );
+	map.LoadFile( floor.GetLevelName() );
 
 	// Get everything in the map that isn't a wall or floor.
-	const auto terms = map.FindSpecialTerms( nextLevelName );
+	const auto terms = map.FindSpecialTerms( floor.GetLevelName() );
 
-	// Load big beetles into vec.
+	// Load enemies into vec.
 	for( const auto& t : terms )
 	{
 		switch( t.type )

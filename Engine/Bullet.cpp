@@ -55,7 +55,7 @@ void Bullet::Draw( Graphics& gfx ) const
 {
 	myAnim.Draw( Vei2( pos - Vec2( size ) / 2.0f ),gfx,false );
 	
-	gfx.DrawHitbox( coll.GetRect() );
+	// gfx.DrawHitbox( coll.GetRect() );
 }
 
 void Bullet::Attack( int damage )
@@ -63,7 +63,7 @@ void Bullet::Attack( int damage )
 	dead = true;
 }
 
-bool Bullet::IsDead() const
+bool Bullet::IsExpl() const
 {
 	return( dead );
 }

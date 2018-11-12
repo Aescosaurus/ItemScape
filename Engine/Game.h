@@ -32,6 +32,8 @@
 #include "E_Firebug.h"
 #include <memory>
 #include "E_Skorp.h"
+#include "FloorLevel.h"
+#include "Door.h"
 
 class Game
 {
@@ -52,11 +54,12 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	int curLevel = 0;
 	TileMap map;
 	Player guy;
 	std::vector<std::unique_ptr<Bullet>> playerBullets;
 	std::vector<std::unique_ptr<Bullet>> enemyBullets;
 	std::vector<std::unique_ptr<EnemyBase>> enemies;
+	FloorLevel floor;
+	std::vector<Door> doors;
 	/********************************/
 };
