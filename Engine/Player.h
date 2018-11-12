@@ -22,9 +22,12 @@ public:
 		float dt );
 	void Draw( Graphics& gfx ) const;
 
+	void MoveTo( const Vec2& updatedPos );
+
 	const Vec2& GetPos() const;
 	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
+	const Rect& GetRect() const;
 private:
 	Vec2 pos;
 	static constexpr Vei2 size = { 16,16 };

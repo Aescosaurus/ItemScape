@@ -48,6 +48,15 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+#if !NDEBUG
+	if( wnd.kbd.KeyIsPressed( VK_SPACE ) )
+	{
+		for( const auto& e : enemies )
+		{
+			e->Attack( 9999,{ 0.0f,0.0f } );
+		}
+	}
+#endif
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
@@ -96,11 +105,44 @@ void Game::UpdateModel()
 
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsExpl ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
+
+	// Check if ou're touching a door.
+	if( IsLevelOver() )
+	{
+		const auto& guyRect = guy.GetRect();
+		for( const auto& d : doors )
+		{
+			if( guyRect.IsOverlappingWith( d.GetRect() ) &&
+				d.IsActivated() )
+			{
+				switch( d.GetSide() )
+				{
+				case Door::Side::Top:
+					guy.MoveTo( { guy.GetPos().x,float( Graphics::ScreenHeight - 64 ) } );
+					break;
+				case Door::Side::Bot:
+					guy.MoveTo( { guy.GetPos().x,float( 0 + 64 ) } );
+					break;
+				case Door::Side::Left:
+					guy.MoveTo( { float( Graphics::ScreenWidth - 64 ),guy.GetPos().y } );
+					break;
+				case Door::Side::Right:
+					guy.MoveTo( { float( 0 + 64 ),guy.GetPos().y } );
+					break;
+				}
+				floor.MoveRoom( FloorLevel::Dir( d.GetSide() ) );
+				LoadNextLevel();
+				for( auto& d1 : doors ) d1.UpdateActivated( floor );
+				break;
+			}
+		}
+	}
 }
 
 void Game::ComposeFrame()
 {
 	map.Draw( gfx );
+	for( const auto& d : doors ) d.Draw( gfx );
 	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
@@ -137,4 +179,13 @@ void Game::LoadNextLevel()
 				t.pos,map,enemyBullets ) );
 		}
 	}
+}
+
+bool Game::IsLevelOver() const
+{
+	for( const auto& e : enemies )
+	{
+		if( !e->IsExpl() ) return( false );
+	}
+	return( true );
 }

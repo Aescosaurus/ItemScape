@@ -44,6 +44,11 @@ void Player::Draw( Graphics& gfx ) const
 	gfx.DrawHitbox( coll.GetRect() );
 }
 
+void Player::MoveTo( const Vec2& updatedPos )
+{
+	pos = updatedPos;
+}
+
 const Vec2& Player::GetPos() const
 {
 	return( pos );
@@ -57,4 +62,9 @@ const Vec2& Player::GetVel() const
 Vec2 Player::GetCenter() const
 {
 	return( pos - Vec2( size ) / 2.0f );
+}
+
+const Rect& Player::GetRect() const
+{
+	return( coll.GetRect() );
 }

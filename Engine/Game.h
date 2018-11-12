@@ -48,6 +48,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	void LoadNextLevel();
+	bool IsLevelOver() const;
 	/********************************/
 private:
 	MainWindow& wnd;

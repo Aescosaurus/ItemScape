@@ -32,10 +32,10 @@ void Door::Draw( Graphics& gfx ) const
 			gfx.DrawSprite( pos.x,pos.y,botSurf,chroma );
 			break;
 		case Side::Left:
-			gfx.DrawSprite( pos.x,pos.y,sideSurf,chroma,true );
+			gfx.DrawSprite( pos.x,pos.y,sideSurf,chroma,false );
 			break;
 		case Side::Right:
-			gfx.DrawSprite( pos.x,pos.y,sideSurf,chroma,false );
+			gfx.DrawSprite( pos.x,pos.y,sideSurf,chroma,true );
 			break;
 		}
 	}
@@ -72,21 +72,26 @@ const RectI& Door::GetRect() const
 	return( hitbox );
 }
 
+Door::Side Door::GetSide() const
+{
+	return( mySide );
+}
+
 Vei2 Door::GetPosFromSide( Side s ) const
 {
 	switch( s )
 	{
 	case Side::Top:
 		return( Vei2{ Graphics::ScreenWidth / 2 - dim.x / 2,
-			0 + 32 + dim.y / 2 } );
+			0 + 32 } );
 	case Side::Bot:
 		return( Vei2{ Graphics::ScreenWidth / 2 - dim.x / 2,
-			Graphics::ScreenHeight - 32 - dim.y / 2 } );
+			Graphics::ScreenHeight - 32 - dim.y } );
 	case Side::Left:
-		return( Vei2{ 0 + 32 + dim.y / 2,
+		return( Vei2{ 0 + 32,
 			Graphics::ScreenHeight / 2 - dim.y / 2 } );
 	case Side::Right:
-		return( Vei2{ Graphics::ScreenWidth - 32 - dim.y / 2,
+		return( Vei2{ Graphics::ScreenWidth - 32 - dim.y,
 			Graphics::ScreenHeight / 2 - dim.y / 2 } );
 	default:
 		assert( false );

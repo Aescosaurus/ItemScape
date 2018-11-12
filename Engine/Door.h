@@ -25,6 +25,7 @@ public:
 
 	bool IsActivated() const;
 	const RectI& GetRect() const;
+	Side GetSide() const;
 private:
 	Vei2 GetPosFromSide( Side s ) const;
 	RectI GetRectFromSide( Side s ) const;
