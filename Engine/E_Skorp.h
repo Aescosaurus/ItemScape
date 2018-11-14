@@ -3,6 +3,7 @@
 #include "E__EnemyBase.h"
 #include "Bullet.h"
 #include "Timer.h"
+#include "Random.h"
 
 class Skorp
 	:
@@ -45,6 +46,6 @@ private:
 	Vec2 lastTarget = target;
 	Timer moveStateChange = 0.97f;
 	static constexpr float speed = 126.4f;
-	Timer wanderDuration = 1.14f;
+	Timer wanderDuration = { 1.14f,true };
 	static constexpr float bulletSpeed = 215.4f;
 };
