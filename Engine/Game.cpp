@@ -29,7 +29,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	guy( { 150.0f,150.0f },map,playerBullets )
+	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,playerBullets )
 {
 	LoadNextLevel();
 	doors.emplace_back( Door{ Door::Side::Top,floor } );
