@@ -141,12 +141,15 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	map.Draw( gfx );
+	// Bottom of drawing order.
+	map.DrawFloor( gfx );
 	for( const auto& d : doors ) d.Draw( gfx );
 	for( const auto& e : enemies ) e->Draw( gfx );
-	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
+	for( const auto& b : playerBullets ) b->Draw( gfx );
 	guy.Draw( gfx );
+	map.Draw( gfx );
+	// Top of drawing order.
 }
 
 void Game::LoadNextLevel()

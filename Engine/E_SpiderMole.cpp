@@ -1,5 +1,6 @@
 #include "E_SpiderMole.h"
 #include "Random.h"
+#include "SpriteEffect.h"
 
 SpiderMole::SpiderMole( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bullets )
@@ -84,17 +85,26 @@ void SpiderMole::Draw( Graphics& gfx ) const
 	{
 	case State::Wander:
 	case State::Charge:
-		walking.Draw( Vei2( pos ),gfx,false );
+		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	case State::Rise:
 		// Flash blue here.
-		rising.Draw( Vei2( pos ),gfx );
+		if( int( rising.GetPercent() ) % 2 == 0 )
+		{
+			rising.Draw( Vei2( pos ),gfx,SpriteEffect
+				::SubstituteFade{ Colors::Magenta,Colors::Blue,0.5f },
+				vel.x < 0.0f );
+		}
+		else
+		{
+			rising.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		}
 		break;
 	case State::Sink:
-		sinking.Draw( Vei2( pos ),gfx );
+		sinking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	case State::Explode:
-		exploding.Draw( Vei2( pos ),gfx );
+		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	}
 }

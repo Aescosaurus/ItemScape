@@ -31,6 +31,9 @@ public:
 	TileMap() = default;
 
 	void Draw( Graphics& gfx ) const;
+	// If you ever end up adding a background or floor
+	//  tiles, make sure to draw them here.
+	void DrawFloor( Graphics& gfx ) const;
 	void DrawTileAt( int x,int y,Color c,Graphics& gfx ) const;
 
 	void SetTile( int x,int y,TileType type );

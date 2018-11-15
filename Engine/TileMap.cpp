@@ -26,6 +26,9 @@ void TileMap::Draw( Graphics& gfx ) const
 	}
 }
 
+void TileMap::DrawFloor( Graphics& gfx ) const
+{}
+
 void TileMap::DrawTileAt( int x,int y,Color c,Graphics& gfx ) const
 {
 	// gfx.DrawRect( x * tileDim.x,y * tileDim.y,
