@@ -21,6 +21,10 @@ public:
 	{
 		curTime = 0.0f;
 	}
+	void ResetRng()
+	{
+		curTime = Random::RangeF( -maxTime,0.0f );
+	}
 	void Reset( float newMaxTime )
 	{
 		Reset();

@@ -18,7 +18,8 @@ public:
 		Firebug,
 		Skorp,
 		LastOfSmall,
-		BeetleBig
+		BeetleBig,
+		SpiderMole
 	};
 	enum class Size
 	{

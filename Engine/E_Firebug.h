@@ -36,7 +36,7 @@ private:
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 13;
-	std::vector<std::unique_ptr<Bullet>>& bulletVec;
+	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const Surface* sprSheet = Codx::Load( "Images/Firebug.bmp",{ 4,4 } );
 	Anim walking;
 	Anim charging;

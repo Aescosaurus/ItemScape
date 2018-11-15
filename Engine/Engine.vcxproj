@@ -150,6 +150,7 @@
     <ClInclude Include="E_Beetle.h" />
     <ClInclude Include="E_BeetleBig.h" />
     <ClInclude Include="E_Skorp.h" />
+    <ClInclude Include="E_SpiderMole.h" />
     <ClInclude Include="E__EnemyBase.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="E_Firebug.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="E_Beetle.cpp" />
     <ClCompile Include="E_BeetleBig.cpp" />
     <ClCompile Include="E_Skorp.cpp" />
+    <ClCompile Include="E_SpiderMole.cpp" />
     <ClCompile Include="E__EnemyBase.cpp" />
     <ClCompile Include="E_Firebug.cpp" />
     <ClCompile Include="FloorLevel.cpp" />

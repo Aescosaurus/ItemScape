@@ -34,6 +34,7 @@
 #include "E_Skorp.h"
 #include "FloorLevel.h"
 #include "Door.h"
+#include "E_SpiderMole.h"
 
 class Game
 {

@@ -26,7 +26,7 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 		break;
 	case Size::Medium:
 		animStart.x = size.x * 4;
-		animStart.y = size.y * ( int( myTeam ) - int( Team::LastOfSmall ) - 1 );
+		animStart.y = 2 * size.y * ( int( myTeam ) - int( Team::LastOfSmall ) - 1 );
 		frameSize = size * int( Size::Medium );
 		break;
 	}

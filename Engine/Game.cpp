@@ -177,6 +177,11 @@ void Game::LoadNextLevel()
 		case char( EnemyType::Skorp ) :
 			enemies.emplace_back( std::make_unique<Skorp>(
 				t.pos,map,enemyBullets ) );
+			break;
+		case char( EnemyType::SpiderMole ) :
+			enemies.emplace_back( std::make_unique<SpiderMole>(
+				t.pos,map,enemyBullets ) );
+			break;
 		}
 	}
 }
