@@ -26,6 +26,7 @@ public:
 	bool IsActivated() const;
 	const RectI& GetRect() const;
 	Side GetSide() const;
+	Vec2 GetPlayerSpawnPos( const Vec2& guyPos ) const;
 private:
 	Vei2 GetPosFromSide( Side s ) const;
 	RectI GetRectFromSide( Side s ) const;

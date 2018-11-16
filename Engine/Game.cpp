@@ -106,7 +106,7 @@ void Game::UpdateModel()
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsExpl ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
 
-	// Check if ou're touching a door.
+	// Check if you're touching a door.
 	if( IsLevelOver() )
 	{
 		const auto& guyRect = guy.GetRect();
@@ -115,21 +115,7 @@ void Game::UpdateModel()
 			if( guyRect.IsOverlappingWith( d.GetRect() ) &&
 				d.IsActivated() )
 			{
-				switch( d.GetSide() )
-				{
-				case Door::Side::Top:
-					guy.MoveTo( { guy.GetPos().x,float( Graphics::ScreenHeight - 64 ) } );
-					break;
-				case Door::Side::Bot:
-					guy.MoveTo( { guy.GetPos().x,float( 0 + 64 ) } );
-					break;
-				case Door::Side::Left:
-					guy.MoveTo( { float( Graphics::ScreenWidth - 64 ),guy.GetPos().y } );
-					break;
-				case Door::Side::Right:
-					guy.MoveTo( { float( 0 + 64 ),guy.GetPos().y } );
-					break;
-				}
+				guy.MoveTo( d.GetPlayerSpawnPos( guy.GetPos() ) );
 				floor.MoveRoom( FloorLevel::Dir( d.GetSide() ) );
 				LoadNextLevel();
 				for( auto& d1 : doors ) d1.UpdateActivated( floor );

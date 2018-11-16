@@ -4,6 +4,7 @@
 #include <string>
 #include "Graphics.h"
 #include <memory>
+#include "Surface.h"
 
 class DataPoint
 {
@@ -40,6 +41,7 @@ public:
 	void LoadFile( const std::string& fileName );
 	std::vector<Vec2> FindAllInstances( char searchTerm,
 		const std::string& fileName );
+	void AdvanceFloor();
 
 	TileType GetTile( int x,int y ) const;
 	Vei2 GetTilePos( const Vec2& screenPos ) const;
@@ -50,6 +52,17 @@ private:
 	int height; // Number of tiles up-down.
 	Vei2 tileDim; // Size of each tile on screen.
 	std::vector<TileType> tiles;
-	const Surface wallSpr = Surface{ { "Images/Wall.bmp" },Vei2{ 4,4 } };
-	const Surface wallTopSpr = Surface{ { "Images/WallTop.bmp" },Vei2{ 4,4 } };
+
+	static constexpr int nWallTypes = 2;
+	Surface wallSprs[nWallTypes] =
+	{
+		Surface{ { "Images/Wall1.bmp" },Vei2{ 4,4 } },
+		Surface{ { "Images/Wall2.bmp" },Vei2{ 4,4 } }
+	};
+	Surface wallTops[nWallTypes] =
+	{
+		Surface{ { "Images/Wall1Top.bmp" },Vei2{ 4,4 } },
+		Surface{ { "Images/Wall2Top.bmp" },Vei2{ 4,4 } }
+	};
+	int curWallIndex = 0;
 };

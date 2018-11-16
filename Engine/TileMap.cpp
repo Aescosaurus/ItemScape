@@ -12,12 +12,12 @@ void TileMap::Draw( Graphics& gfx ) const
 		{
 			const auto tile = GetTile( x,y );
 			const auto tileBelow = GetTile( x,y + 1 );
-			const Surface* pDrawSpr = &wallSpr;
+			const Surface* pDrawSpr = &wallSprs[curWallIndex];
 			if( tile == TileType::Wall )
 			{
 				if( tileBelow == TileType::Empty )
 				{
-					pDrawSpr = &wallTopSpr;
+					pDrawSpr = &wallTops[curWallIndex];
 				}
 				gfx.DrawSprite( x * tileDim.x,y * tileDim.y,
 					*pDrawSpr,SpriteEffect::Copy{} );
@@ -115,6 +115,11 @@ std::vector<Vec2> TileMap::FindAllInstances( char searchTerm,
 	}
 
 	return( results );
+}
+
+void TileMap::AdvanceFloor()
+{
+	++curWallIndex;
 }
 
 TileMap::TileType TileMap::GetTile( int x,int y ) const
