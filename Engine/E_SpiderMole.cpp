@@ -13,6 +13,7 @@ SpiderMole::SpiderMole( const Vec2& pos,const TileMap& map,
 	exploding( 0,size.y * 3,size.x,size.y,4,*sprSheet,0.2f )
 {
 	ResetTargeting();
+	coll.MoveTo( { -9999.0f,-9999.0f } );
 }
 
 void SpiderMole::Update( const EnemyUpdateInfo& info,float dt )
@@ -41,7 +42,6 @@ void SpiderMole::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::Charge:
-
 		walking.Update( dt );
 
 		pos += vel * dt;
@@ -49,6 +49,7 @@ void SpiderMole::Update( const EnemyUpdateInfo& info,float dt )
 			map->GetTilePos( pos ) )
 		{
 			walking.Reset();
+			coll.MoveTo( pos );
 			action = State::Rise;
 		}
 		break;
@@ -71,10 +72,13 @@ void SpiderMole::Update( const EnemyUpdateInfo& info,float dt )
 		{
 			sinking.Reset();
 			ResetTargeting();
+			coll.MoveTo( { -9999.0f,-9999.0f } );
 			action = State::Wander;
 		}
 		break;
 	case State::Explode:
+		if( !exploding.IsFinished() ) exploding.Update( dt );
+		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
 }
@@ -107,13 +111,30 @@ void SpiderMole::Draw( Graphics& gfx ) const
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
 	}
+
+	// if( coll.GetRect().IsContainedBy( Rect( Graphics
+	// 	::GetScreenRect() ) ) )
+	// {
+	// 	gfx.DrawHitbox( coll.GetRect() );
+	// }
 }
 
 void SpiderMole::Attack( int damage,const Vec2& loc )
 {
-	EnemyBase::Attack( damage,loc );
+	// Spider Mole cannot be hit by bullets when underground.
+	//  This shouldn't matter since the hitbox is far away anyway.
+	switch( action )
+	{
+	case State::Rise:
+	case State::Sink:
+		EnemyBase::Attack( damage,loc );
 
-	// TODO: Explode when out of health.
+		if( IsExpl() )
+		{
+			coll.MoveTo( { -9999.0f,-9999.0f } );
+			action = State::Explode;
+		}
+	}
 }
 
 void SpiderMole::ResetTargeting()
