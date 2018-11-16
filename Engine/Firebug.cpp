@@ -1,4 +1,4 @@
-#include "E_Firebug.h"
+#include "Firebug.h"
 #include "Random.h"
 #include "SpriteEffect.h"
 

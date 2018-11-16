@@ -1,4 +1,4 @@
-#include "E_BeetleBig.h"
+#include "BeetleBig.h"
 
 BeetleBig::BeetleBig( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bulletVec,

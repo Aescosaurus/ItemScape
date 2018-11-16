@@ -1,4 +1,4 @@
-#include "E_Skorp.h"
+#include "Skorp.h"
 #include "Random.h"
 
 Skorp::Skorp( const Vec2& pos,const TileMap& map,

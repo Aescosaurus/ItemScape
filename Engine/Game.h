@@ -25,16 +25,16 @@
 #include "Graphics.h"
 #include "TileMap.h"
 #include "Player.h"
-#include "E_Beetle.h"
+#include "Beetle.h"
 #include <vector>
 #include "Bullet.h"
-#include "E_BeetleBig.h"
-#include "E_Firebug.h"
+#include "BeetleBig.h"
+#include "Firebug.h"
 #include <memory>
-#include "E_Skorp.h"
+#include "Skorp.h"
 #include "FloorLevel.h"
 #include "Door.h"
-#include "E_SpiderMole.h"
+#include "SpiderMole.h"
 
 class Game
 {

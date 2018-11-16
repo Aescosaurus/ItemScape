@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BugEnemies">
+      <UniqueIdentifier>{df5e0013-1134-4f01-88e1-14809ffcdae9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -102,9 +105,6 @@
     <ClInclude Include="Collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="E_Beetle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -114,19 +114,7 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="E_BeetleBig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E__EnemyBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Firebug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="E_Skorp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FloorLevel.h">
@@ -135,8 +123,23 @@
     <ClInclude Include="Door.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="E_SpiderMole.h">
+    <ClInclude Include="EnemyBase.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Beetle.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BeetleBig.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Firebug.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Skorp.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiderMole.h">
+      <Filter>Header Files\BugEnemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,22 +197,7 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E_Beetle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_BeetleBig.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E__EnemyBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Firebug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="E_Skorp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FloorLevel.cpp">
@@ -218,7 +206,22 @@
     <ClCompile Include="Door.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E_SpiderMole.cpp">
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Beetle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BeetleBig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Firebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skorp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiderMole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

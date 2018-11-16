@@ -1,6 +1,6 @@
 #pragma once
 
-#include "E__EnemyBase.h"
+#include "EnemyBase.h"
 #include "Anim.h"
 #include "Codex.h"
 #include "Timer.h"

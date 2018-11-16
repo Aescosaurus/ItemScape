@@ -1,4 +1,4 @@
-#include "E_Beetle.h"
+#include "Beetle.h"
 #include "Random.h"
 
 Beetle::Beetle( const Vec2& pos,const TileMap& map,
