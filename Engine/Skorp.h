@@ -38,11 +38,9 @@ private:
 	Anim attacking;
 	Anim exploding;
 	State action = State::Wander; // Not walk.
-	Vec2 vel = { 0.0f,0.0f };
-	Vec2 target = pos;
-	Vec2 lastTarget = target;
 	Timer moveStateChange = 0.97f;
 	static constexpr float speed = 126.4f;
 	Timer wanderDuration = { 1.14f,true };
 	static constexpr float bulletSpeed = 215.4f;
+	static constexpr float moveTolerance = 115.4f;
 };

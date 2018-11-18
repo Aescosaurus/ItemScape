@@ -93,6 +93,10 @@ Vec2 Door::GetPlayerSpawnPos( const Vec2& guyPos ) const
 	case Door::Side::Right:
 		return( Vec2{ float( 0 + 64 ),guyPos.y } );
 		break;
+	default:
+		assert( false );
+		return( Vei2{ -1,-1 } );
+		break;
 	}
 }
 
@@ -108,10 +112,10 @@ Vei2 Door::GetPosFromSide( Side s ) const
 			Graphics::ScreenHeight - 32 - dim.y } );
 	case Side::Left:
 		return( Vei2{ 0 + 32,
-			Graphics::ScreenHeight / 2 - dim.y / 2 } );
+			Graphics::ScreenHeight / 2 - dim.y } );
 	case Side::Right:
 		return( Vei2{ Graphics::ScreenWidth - 32 - dim.y,
-			Graphics::ScreenHeight / 2 - dim.y / 2 } );
+			Graphics::ScreenHeight / 2 - dim.y } );
 	default:
 		assert( false );
 		return( Vei2{ -1,-1 } );

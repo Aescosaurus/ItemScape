@@ -25,8 +25,7 @@ EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,
 	map( &map )
 {}
 
-void EnemyBase::Wander( Vec2& target,Vec2& lastTarget,
-	Vec2& vel,float moveTolerance,float speed,float dt )
+void EnemyBase::Wander( float moveTolerance,float speed,float dt )
 {
 	const auto testMove = vel * dt;
 	const auto validMove = coll.GetValidMove( pos,testMove );
@@ -37,13 +36,11 @@ void EnemyBase::Wander( Vec2& target,Vec2& lastTarget,
 		map->GetTilePos( pos ) ||
 		validMove.z )
 	{
-		ResetTargeting( target,lastTarget,vel,
-			moveTolerance,speed );
+		ResetTargeting( moveTolerance,speed );
 	}
 }
 
-void EnemyBase::ResetTargeting( Vec2& target,Vec2& lastTarget,
-	Vec2& vel,float moveTolerance,float speed )
+void EnemyBase::ResetTargeting( float moveTolerance,float speed )
 {
 	Vec2 newTarget;
 	{

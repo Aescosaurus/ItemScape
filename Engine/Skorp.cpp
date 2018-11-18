@@ -10,7 +10,9 @@ Skorp::Skorp( const Vec2& pos,const TileMap& map,
 	winding( 0,size.y,size.x,size.y,4,*sprSheet,0.2f ),
 	attacking( 0,size.y * 2,size.x,size.y,4,*sprSheet,0.2f ),
 	exploding( 0,size.y * 3,size.x,size.y,4,*sprSheet,0.2f )
-{}
+{
+	ResetTargeting( moveTolerance,speed );
+}
 
 void Skorp::Update( const EnemyUpdateInfo& info,float dt )
 {
@@ -29,22 +31,21 @@ void Skorp::Update( const EnemyUpdateInfo& info,float dt )
 		if( moveStateChange.IsDone() || validMove.z )
 		{
 			walking.Reset();
-			moveStateChange.Reset();
+			moveStateChange.ResetRng();
 			action = State::Wander;
 		}
 	}
 		break;
 	case State::Wander:
 	{
-		EnemyBase::Wander( target,lastTarget,
-			vel,115.4f,speed,dt );
+		EnemyBase::Wander( moveTolerance,speed,dt );
 
 		walking.Update( dt );
 		wanderDuration.Update( dt );
 		if( wanderDuration.IsDone() )
 		{
 			walking.Reset();
-			wanderDuration.Reset();
+			wanderDuration.ResetRng();
 			action = State::WindUp;
 		}
 	}

@@ -26,7 +26,7 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 		moveRetarget.Update( dt );
 		if( moveRetarget.IsDone() )
 		{
-			moveRetarget.Reset();
+			moveRetarget.ResetRng();
 			vel = ( ( info.playerPos + info.playerVel * 2.0f ) -
 				GetCenter() ).GetNormalized() * speed;
 		}
@@ -39,7 +39,7 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 
 			if( validMove.z ) // If you hit the wall.
 			{
-				ResetTargeting();
+				ResetTargeting( moveTolerance,speed );
 				curAction = State::Wander;
 			}
 		}
@@ -52,15 +52,13 @@ void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::Wander:
-	{
-		EnemyBase::Wander( target,lastTarget,vel,163.4f,speed,dt );
-	}
+		EnemyBase::Wander( moveTolerance,speed,dt );
 
 		moveStop.Update( dt );
 		walking.Update( dt );
 		if( moveStop.IsDone() && walking.IsFinished() )
 		{
-			moveStop.Reset();
+			moveStop.ResetRng();
 			walking.Reset();
 			curAction = State::Charge;
 		}

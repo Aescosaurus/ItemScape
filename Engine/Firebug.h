@@ -29,10 +29,8 @@ public:
 private:
 	// Angle is in radians.
 	void ShootBullet( float angle );
-	void ResetTargeting();
 
 	Vec2 GetCenter() const;
-	Vec2 FindTarget() const;
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 13;
@@ -43,15 +41,13 @@ private:
 	Anim attacking;
 	Anim exploding;
 	State curAction = State::GotoPlayer;
-	Timer moveStop = 1.6f;
+	Timer moveStop = { 1.6f,true };
 	Timer shotTimer = 0.1f;
 	static constexpr int nShotsASide = 5;
 	int curShot = 0;
 	float shotAngle = 0.0f;
-	Vec2 vel = { 0.0f,0.0f };
-	Timer moveRetarget = 0.4f;
+	Timer moveRetarget = { 0.4f,true };
 	static constexpr float speed = 105.24f;
 	static constexpr float bulletSpeed = 200.0f;
-	Vec2 target;
-	Vec2 lastTarget = pos;
+	static constexpr float moveTolerance = 163.4f;
 };

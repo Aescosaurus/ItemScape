@@ -34,14 +34,14 @@ protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );
 
-	void Wander( Vec2& target,Vec2& lastTarget,
-		Vec2& vel,float moveTolerance,float speed,float dt );
-private:
-	void ResetTargeting( Vec2& target,Vec2& lastTarget,
-		Vec2& vel,float moveTolerance,float speed );
+	void Wander( float moveTolerance,float speed,float dt );
+	void ResetTargeting( float moveTolerance,float speed );
 protected:
 	Vec2 pos;
 	Collider coll;
 	int hp;
 	const TileMap* map;
+	Vec2 target = { 0.0f,0.0f };
+	Vec2 lastTarget = pos;
+	Vec2 vel = { 0.0f,0.0f };
 };
