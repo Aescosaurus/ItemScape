@@ -22,29 +22,22 @@ void Skorp::Update( const EnemyUpdateInfo& info,float dt )
 		const auto validMove = coll.GetValidMove( pos,testMove );
 		pos += validMove;
 		coll.MoveTo( pos );
-	}
+
 		walking.Update( dt );
 		moveStateChange.Update( dt );
-		if( moveStateChange.IsDone() )
+
+		if( moveStateChange.IsDone() || validMove.z )
 		{
 			walking.Reset();
 			moveStateChange.Reset();
 			action = State::Wander;
 		}
+	}
 		break;
 	case State::Wander:
 	{
-		const auto testMove = vel * dt;
-		const auto validMove = coll.GetValidMove( pos,testMove );
-		pos += validMove;
-		coll.MoveTo( pos );
-
-		if( map->GetTilePos( target ) ==
-			map->GetTilePos( pos ) ||
-			validMove.z )
-		{
-			ResetTargeting();
-		}
+		EnemyBase::Wander( target,lastTarget,
+			vel,115.4f,speed,dt );
 
 		walking.Update( dt );
 		wanderDuration.Update( dt );
@@ -124,38 +117,6 @@ void Skorp::Attack( int damage,const Vec2& loc )
 		action = State::Explode;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 	}
-}
-
-void Skorp::ResetTargeting()
-{
-	target = FindTarget();
-	lastTarget = target;
-	vel = ( target - pos ).GetNormalized() * speed;
-}
-
-Vec2 Skorp::FindTarget() const
-{
-	auto test = Vec2( pos );
-	const int nTries = 5;
-	int curTries = 0;
-
-	static constexpr float moveTolerance = 115.4f;
-	do
-	{
-		test = Vec2( pos );
-		test.x += Random::RangeF( -moveTolerance,moveTolerance );
-		test.y += Random::RangeF( -moveTolerance,moveTolerance );
-
-		++curTries;
-		if( curTries >= nTries ) // No infinite loops here!
-		{
-			test = lastTarget;
-			break;
-		}
-	} while( !Graphics::GetScreenRect()
-		.ContainsPoint( Vei2( Vec2{ test.x,test.y } ) ) );
-
-	return( test );
 }
 
 Vec2 Skorp::GetCenter() const

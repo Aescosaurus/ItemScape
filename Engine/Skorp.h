@@ -27,9 +27,6 @@ public:
 
 	void Attack( int damage,const Vec2& loc ) override;
 private:
-	void ResetTargeting();
-
-	Vec2 FindTarget() const;
 	Vec2 GetCenter() const;
 private:
 	static constexpr Vei2 size = { 64,64 };

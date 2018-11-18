@@ -34,7 +34,11 @@ protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );
 
-	void TryMovement( const Vec2& testMove );
+	void Wander( Vec2& target,Vec2& lastTarget,
+		Vec2& vel,float moveTolerance,float speed,float dt );
+private:
+	void ResetTargeting( Vec2& target,Vec2& lastTarget,
+		Vec2& vel,float moveTolerance,float speed );
 protected:
 	Vec2 pos;
 	Collider coll;
