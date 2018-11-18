@@ -4,7 +4,7 @@ Player::Player( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bullets )
 	:
 	pos( pos ),
-	coll( map,{ pos,float( size.x ),float( size.y ) } ),
+	coll( map,{ pos,float( size.x ) / 1.5f,float( size.y ) / 1.5f } ),
 	myBullets( bullets ),
 	map( map )
 {
@@ -23,7 +23,7 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	// Move but don't let you walk into walls.
 	moveDir = moveDir.GetNormalized() * speed * dt;
 	pos += coll.GetValidMove( pos,moveDir );
-	coll.MoveTo( GetCenter() );
+	coll.MoveTo( pos - coll.GetSize() / 2.0f );
 
 	shotTimer.Update( dt );
 	if( ms.LeftIsPressed() && shotTimer.IsDone() )

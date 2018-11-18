@@ -30,7 +30,7 @@ public:
 	const Rect& GetRect() const;
 private:
 	Vec2 pos;
-	static constexpr Vei2 size = { 16,16 };
+	static constexpr Vei2 size = { 32,32 };
 	static constexpr float speed = 171.4f;
 	Collider coll;
 	std::vector<std::unique_ptr<Bullet>>& myBullets;

@@ -133,8 +133,8 @@ void Game::ComposeFrame()
 	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
-	guy.Draw( gfx );
 	map.Draw( gfx );
+	guy.Draw( gfx );
 	// Top of drawing order.
 }
 

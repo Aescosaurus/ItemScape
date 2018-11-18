@@ -59,3 +59,9 @@ const Rect& Collider::GetRect() const
 {
 	return( hitbox );
 }
+
+Vec2 Collider::GetSize() const
+{
+	return( Vec2{ float( hitbox.GetWidth() ),
+		float( hitbox.GetHeight() ) } );
+}
