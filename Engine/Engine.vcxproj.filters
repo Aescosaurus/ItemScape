@@ -141,6 +141,9 @@
     <ClInclude Include="SpiderMole.h">
       <Filter>Header Files\BugEnemies</Filter>
     </ClInclude>
+    <ClInclude Include="RynoChaser.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -222,6 +225,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpiderMole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RynoChaser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
