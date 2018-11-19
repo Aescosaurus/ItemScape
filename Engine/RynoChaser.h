@@ -28,7 +28,7 @@ private:
 	Vec2 GetCenter() const;
 private:
 	static constexpr Vei2 size = { 64,64 };
-	static constexpr int health = 17;
+	static constexpr int health = 23;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	State action = State::Wander;
 	static constexpr float moveTolerance = 151.5f;

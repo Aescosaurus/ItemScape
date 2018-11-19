@@ -78,6 +78,8 @@ void RynoChaser::Update( const EnemyUpdateInfo& info,float dt )
 	}
 		break;
 	case State::Explode:
+		if( !exploding.IsFinished() ) exploding.Update( dt );
+		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
 }
@@ -105,7 +107,11 @@ void RynoChaser::Attack( int damage,const Vec2& loc )
 {
 	EnemyBase::Attack( damage,loc );
 
-
+	if( EnemyBase::IsExpl() )
+	{
+		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
+		action = State::Explode;
+	}
 }
 
 Vec2 RynoChaser::GetCenter() const
