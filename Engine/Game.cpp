@@ -171,6 +171,9 @@ void Game::LoadNextLevel()
 			enemies.emplace_back( std::make_unique<SpiderMole>(
 				t.pos,map,enemyBullets ) );
 			break;
+		case char( EnemyType::RynoChaser ) :
+			enemies.emplace_back( std::make_unique<RynoChaser>(
+				t.pos,map,enemyBullets ) );
 		}
 	}
 }

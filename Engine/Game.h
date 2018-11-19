@@ -35,6 +35,7 @@
 #include "FloorLevel.h"
 #include "Door.h"
 #include "SpiderMole.h"
+#include "RynoChaser.h"
 
 class Game
 {

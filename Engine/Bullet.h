@@ -17,6 +17,7 @@ public:
 		Beetle,
 		Firebug,
 		Skorp,
+		RynoChaser,
 		LastOfSmall,
 		BeetleBig,
 		SpiderMole
