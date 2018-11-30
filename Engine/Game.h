@@ -25,17 +25,12 @@
 #include "Graphics.h"
 #include "TileMap.h"
 #include "Player.h"
-#include "Beetle.h"
 #include <vector>
 #include "Bullet.h"
-#include "BeetleBig.h"
-#include "Firebug.h"
 #include <memory>
-#include "Skorp.h"
 #include "FloorLevel.h"
 #include "Door.h"
-#include "SpiderMole.h"
-#include "RynoChaser.h"
+#include "EnemyBase.h"
 
 class Game
 {

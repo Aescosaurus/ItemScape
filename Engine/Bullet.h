@@ -20,7 +20,8 @@ public:
 		RynoChaser,
 		LastOfSmall,
 		BeetleBig,
-		SpiderMole
+		SpiderMole,
+		Slizard
 	};
 	enum class Size
 	{

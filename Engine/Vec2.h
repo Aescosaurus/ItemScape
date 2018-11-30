@@ -78,7 +78,7 @@ public:
 	{
 		return( x == rhs.x && y == rhs.y );
 	}
-
+	
 	constexpr T GetLength() const
 	{
 		return T( std::sqrt( GetLengthSq() ) );

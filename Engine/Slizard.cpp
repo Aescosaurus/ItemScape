@@ -9,4 +9,180 @@ Slizard::Slizard( const Vec2& pos,const TileMap& map,
 	charging( 0,size.y,size.x,size.y,4,*surfSheet,0.2f ),
 	attacking( 0,size.y * 2,size.x,size.y,4,*surfSheet,0.2f ),
 	exploding( 0,size.y * 3,size.x,size.y,4,*surfSheet,0.2f )
-{}
+{
+	ResetTargeting( moveTolerance,speed );
+}
+
+void Slizard::Update( const EnemyUpdateInfo& info,float dt )
+{
+	switch( action )
+	{
+	case State::Wander:
+		Wander( moveTolerance,speed,dt );
+
+		walking.Update( dt );
+		if( walking.IsFinished() )
+		{
+			// This is nested so we only check every time
+			//  the anim is finished.  I know the && does
+			//  that already but I don't trust it...
+			if( !CheckLineOfSight( pos,info.playerPos ) )
+			{
+				walking.Reset(); // Just to make sure.
+				shotTarget = info.playerPos;
+				action = State::Charge;
+			}
+		}
+		break;
+	case State::Charge:
+		charging.Update( dt );
+		if( charging.IsFinished() )
+		{
+			charging.Reset();
+			action = State::Phase1Attack;
+		}
+		break;
+	case State::Phase1Attack:
+		attacking.Update( dt );
+
+		// Oh boy here we go...
+		phase1Refire.Update( dt );
+		if( phase1Refire.IsDone() )
+		{
+			phase1Refire.Reset();
+			++phase1ShotCounter;
+
+			const float startAngle = ( info.playerPos - pos ).GetAngle();
+			const float moveAmount = 3.141592f / 3.5f / float( phase1ShotsPerSide );
+			const float curAngle = moveAmount * float( phase1ShotCounter );
+
+			ShootBullet( startAngle - curAngle );
+			ShootBullet( startAngle + curAngle );
+		}
+
+		if( phase1ShotCounter >= phase1ShotsPerSide )
+		{
+			phase1ShotCounter = 0;
+			phase1Refire.Reset();
+			action = State::Phase2Attack;
+		}
+		break;
+	case State::Phase2Attack:
+		attacking.Update( dt );
+
+		phase2Refire.Update( dt );
+		if( phase2Refire.IsDone() )
+		{
+			phase2Refire.Reset();
+			++phase2ShotCounter;
+
+			const float startAngle = ( info.playerPos - pos ).GetAngle();
+			const float moveAmount = 3.141592f / 3.5f / float( phase2ShotsPerSide );
+			const float curAngle = moveAmount * float( phase2ShotCounter );
+
+			ShootBullet( startAngle - curAngle );
+			ShootBullet( startAngle + curAngle );
+		}
+
+		if( attacking.IsFinished() )
+		{
+			phase2ShotCounter = 0;
+			phase2Refire.Reset();
+			attacking.Reset();
+			ResetTargeting( moveTolerance,speed );
+			action = State::Wander;
+		}
+		break;
+	case State::Explode:
+		break;
+	}
+}
+
+void Slizard::Draw( Graphics& gfx ) const
+{
+	switch( action )
+	{
+	case State::Wander:
+		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		break;
+	case State::Charge:
+		charging.Draw( Vei2( pos ),gfx,shotTarget.x < pos.x );
+		break;
+	case State::Phase1Attack:
+	case State::Phase2Attack:
+		attacking.Draw( Vei2( pos ),gfx,shotTarget.x < pos.x );
+		break;
+	case State::Explode:
+		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		break;
+	}
+}
+
+void Slizard::Attack( int damage,const Vec2& loc )
+{
+	EnemyBase::Attack( damage,loc );
+
+
+}
+
+void Slizard::ShootBullet( float angle )
+{
+	const Vec2 shotDir = Vec2::FromAngle( angle );
+	
+	const auto shotPos = GetCenter();
+	const auto shotTarget = shotPos + shotDir;
+	pBulletVec->emplace_back( std::make_unique<Bullet>(
+		shotPos,shotTarget,*map,Bullet::Team::Slizard,
+		bulletSpeed,Bullet::Size::Medium ) );
+}
+
+bool Slizard::CheckLineOfSight( const Vec2& start,const Vec2& end ) const
+{
+	auto p0 = Vec2( map->GetTilePos( start ) );
+	auto p1 = Vec2( map->GetTilePos( end ) );
+
+	const auto diff = ( end - start ).GetNormalized();
+	const auto m = ( p0.x != p1.x )
+		? ( p1.y - p0.y ) / ( p1.x - p0.x ) : 0.0f;
+
+	if( p0.x != p1.x && abs( m ) <= 1.0f ) // x bias.
+	{
+		if( p0.x > p1.x ) std::swap( p0,p1 );
+
+		const float b = p0.y - m * p0.x;
+
+		for( int x = int( p0.x ); x < int( p1.x ); ++x )
+		{
+			const float y = m * float( x ) + b;
+			if( map->GetTile( x,int( y ) ) ==
+				TileMap::TileType::Wall )
+			{
+				return( true );
+			}
+		}
+	}
+	else // y bias.
+	{
+		if( p0.y > p1.y ) std::swap( p0,p1 );
+
+		const float w = ( p1.x - p0.x ) / ( p1.y - p0.y );
+		const float p = p0.x - w * p0.y;
+
+		for( int y = int( p0.y ); y < int( p1.y ); ++y )
+		{
+			const float x = w * float( y ) + p;
+			if( map->GetTile( int( x ),y ) ==
+				TileMap::TileType::Wall )
+			{
+				return( true );
+			}
+		}
+	}
+
+	return( false );
+}
+
+Vec2 Slizard::GetCenter() const
+{
+	return( pos + Vec2( size ) / 2.0f );
+}

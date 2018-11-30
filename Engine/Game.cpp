@@ -24,6 +24,12 @@
 #include "Utils.h"
 #include <functional>
 #include "EnemyType.h"
+#include "BeetleBig.h"
+#include "Firebug.h"
+#include "Skorp.h"
+#include "SpiderMole.h"
+#include "RynoChaser.h"
+#include "Slizard.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -174,6 +180,11 @@ void Game::LoadNextLevel()
 		case char( EnemyType::RynoChaser ) :
 			enemies.emplace_back( std::make_unique<RynoChaser>(
 				t.pos,map,enemyBullets ) );
+			break;
+		case char( EnemyType::Slizard ) :
+			enemies.emplace_back( std::make_unique<Slizard>(
+				t.pos,map,enemyBullets ) );
+			break;
 		}
 	}
 }

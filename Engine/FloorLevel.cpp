@@ -6,7 +6,7 @@ FloorLevel::FloorLevel()
 {
 	RandomizeLayout();
 	// This is for testing all the rooms out. :)
-	floorLayout[7] = 4;
+	floorLayout[7] = 5;
 }
 
 void FloorLevel::AdvanceFloor()
