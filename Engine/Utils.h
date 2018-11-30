@@ -56,4 +56,27 @@ namespace chili
 		// erase garbage husk element at end
 		container.erase( new_end,container.end() );
 	}
+
+	// This type of sort is scary under the hood but
+	//  supposedly works well if we're mostly sorted and
+	//  only add a new item on the end.
+	template<typename T>
+	void insertion_sort( std::vector<T>& vec )
+	{
+		T value;
+		int j;
+		for( int i = 1; i < int( vec.size() ); ++i )
+		{
+			value = vec[i];
+			j = i - 1;
+
+			while( j >= 0 && arr[j] > value )
+			{
+				arr[j + 1] = arr[j];
+				--j;
+			}
+
+			arr[j + 1] = value;
+		}
+	}
 }

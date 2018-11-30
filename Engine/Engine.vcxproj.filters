@@ -144,6 +144,9 @@
     <ClInclude Include="RynoChaser.h">
       <Filter>Header Files\BugEnemies</Filter>
     </ClInclude>
+    <ClInclude Include="Slizard.h">
+      <Filter>Header Files\BugEnemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -228,6 +231,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RynoChaser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slizard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
