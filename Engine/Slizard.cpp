@@ -50,19 +50,19 @@ void Slizard::Update( const EnemyUpdateInfo& info,float dt )
 		if( phase1Refire.IsDone() )
 		{
 			phase1Refire.Reset();
-			++phase1ShotCounter;
+			++curPhase1Shots;
 
 			const float startAngle = ( info.playerPos - pos ).GetAngle();
-			const float moveAmount = 3.141592f / 3.5f / float( phase1ShotsPerSide );
-			const float curAngle = moveAmount * float( phase1ShotCounter );
+			const float moveAmount = 3.141592f / 3.5f / float( nPhase1Shots );
+			const float curAngle = moveAmount * float( curPhase1Shots );
 
 			ShootBullet( startAngle - curAngle );
 			ShootBullet( startAngle + curAngle );
 		}
 
-		if( phase1ShotCounter >= phase1ShotsPerSide )
+		if( curPhase1Shots >= nPhase1Shots )
 		{
-			phase1ShotCounter = 0;
+			curPhase1Shots = 0;
 			phase1Refire.Reset();
 			action = State::Phase2Attack;
 		}
@@ -74,19 +74,19 @@ void Slizard::Update( const EnemyUpdateInfo& info,float dt )
 		if( phase2Refire.IsDone() )
 		{
 			phase2Refire.Reset();
-			++phase2ShotCounter;
+			++curPhase2Shots;
 
 			const float startAngle = ( info.playerPos - pos ).GetAngle();
-			const float moveAmount = 3.141592f / 3.5f / float( phase2ShotsPerSide );
-			const float curAngle = moveAmount * float( phase2ShotCounter );
+			const float moveAmount = 3.141592f / 3.5f / float( nPhase2Shots );
+			const float curAngle = moveAmount * float( curPhase2Shots );
 
 			ShootBullet( startAngle - curAngle );
 			ShootBullet( startAngle + curAngle );
 		}
 
-		if( attacking.IsFinished() )
+		if( curPhase2Shots >= nPhase2Shots )
 		{
-			phase2ShotCounter = 0;
+			curPhase2Shots = 0;
 			phase2Refire.Reset();
 			attacking.Reset();
 			ResetTargeting( moveTolerance,speed );

@@ -48,11 +48,11 @@ private:
 	//  add up to 0.8(attacking anim duration).
 	//  ( phase1ShotsPerSide * phase1Refire +
 	//    phase2ShotsPerSide * phase2Refire ) = 0.8
-	static constexpr int phase1ShotsPerSide = 2;
+	static constexpr int nPhase1Shots = 2;
 	Timer phase1Refire = 0.2f;
-	int phase1ShotCounter = 0;
-	static constexpr int phase2ShotsPerSide = 5;
+	int curPhase1Shots = 0;
+	static constexpr int nPhase2Shots = 5;
 	Timer phase2Refire = 0.08f;
-	int phase2ShotCounter = 0;
+	int curPhase2Shots = 0;
 	static constexpr float bulletSpeed = 215.5f;
 };
