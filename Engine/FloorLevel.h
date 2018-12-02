@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Vec2.h"
+#include "Graphics.h"
 
 // Floors are 3x3 collections of rooms.
 // Player always spawns in lower middle room.
@@ -20,6 +21,8 @@ public:
 public:
 	FloorLevel();
 
+	void DrawOverlay( Graphics& gfx ) const;
+
 	void AdvanceFloor();
 	void MoveRoom( Dir d );
 
@@ -30,6 +33,7 @@ private:
 	void RandomizeLayout();
 
 	std::string FormLevelName( int pos ) const;
+	Color CheckRoomColor( int x,int y ) const;
 private:
 	static constexpr int width = 3;
 	static constexpr int height = 3;
@@ -56,4 +60,8 @@ private:
 		"Level7.lvl",
 		"BossRoom.lvl"
 	};
+
+	static constexpr Vei2 overlayStart = { 50,50 };
+	static constexpr Vei2 roomSize = { 35 * 2,20 * 2 };
+	static constexpr Vei2 roomPadding = { 5,5 };
 };

@@ -9,6 +9,32 @@ FloorLevel::FloorLevel()
 	floorLayout[7] = 5;
 }
 
+void FloorLevel::DrawOverlay( Graphics& gfx ) const
+{
+	RectI room = { 0,roomSize.x,0,roomSize.y };
+
+	room.MoveTo( overlayStart );
+	gfx.DrawHitbox( room,CheckRoomColor( 0,0 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 1,0 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 2,0 ) );
+
+	room.MoveTo( overlayStart + roomSize.Y() + roomPadding.Y() );
+	gfx.DrawHitbox( room,CheckRoomColor( 0,1 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 1,1 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 2,1 ) );
+
+	room.MoveTo( overlayStart + ( roomSize.Y() + roomPadding.Y() ) * 2 );
+	gfx.DrawHitbox( room,CheckRoomColor( 0,2 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 1,2 ) );
+	room.MoveBy( roomSize.X() + roomPadding.X() );
+	gfx.DrawHitbox( room,CheckRoomColor( 2,2 ) );
+}
+
 void FloorLevel::AdvanceFloor()
 {
 	++curFloor;
@@ -96,4 +122,16 @@ std::string FloorLevel::FormLevelName( int pos ) const
 {
 	return( firstName + std::to_string( curFloor ) + "/" +
 		levelNames[pos] );
+}
+
+Color FloorLevel::CheckRoomColor( int x,int y ) const
+{
+	if( x == curRoom.x && y == curRoom.y )
+	{
+		return( Colors::LightGray );
+	}
+	else
+	{
+		return( Colors::Gray );
+	}
 }

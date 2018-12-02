@@ -141,6 +141,7 @@ void Game::ComposeFrame()
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	map.Draw( gfx );
 	guy.Draw( gfx );
+	floor.DrawOverlay( gfx );
 	// Top of drawing order.
 }
 
