@@ -64,5 +64,15 @@ private:
 		Surface{ { "Images/Wall1Top.bmp" },Vei2{ 4,4 } },
 		Surface{ { "Images/Wall2Top.bmp" },Vei2{ 4,4 } }
 	};
+	Surface floorSprs[nWallTypes] =
+	{
+		Surface{ { "Images/Floor1.bmp" },Vei2{ 4,4 } },
+		Surface{ { "Images/Floor1.bmp" },Vei2{ 4,4 } }
+	};
+	Surface floorCloses[nWallTypes] =
+	{
+		Surface{ { "Images/Floor1Close.bmp" },Vei2{ 4,4 } },
+		Surface{ { "Images/Floor1Close.bmp" },Vei2{ 4,4 } }
+	};
 	int curWallIndex = 0;
 };

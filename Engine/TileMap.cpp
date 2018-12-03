@@ -27,7 +27,27 @@ void TileMap::Draw( Graphics& gfx ) const
 }
 
 void TileMap::DrawFloor( Graphics& gfx ) const
-{}
+{
+#if NDEBUG
+	for( int y = 0; y < height; ++y )
+	{
+		for( int x = 0; x < width; ++x )
+		{
+			const auto tile = GetTile( x,y );
+			const Surface* pDrawSpr = &floorSprs[curWallIndex];
+			if( tile == TileType::Empty )
+			{
+				if( x % 2 == 0 && y % 2 != 0 )
+				{
+					pDrawSpr = &floorCloses[curWallIndex];
+				}
+				gfx.DrawSprite( x * tileDim.x,y * tileDim.y,
+					*pDrawSpr,SpriteEffect::Copy{} );
+			}
+		}
+	}
+#endif
+}
 
 void TileMap::DrawTileAt( int x,int y,Color c,Graphics& gfx ) const
 {
