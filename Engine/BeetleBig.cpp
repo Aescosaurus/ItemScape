@@ -35,7 +35,7 @@ void BeetleBig::Update( const EnemyUpdateInfo& info,float dt )
 		if( moveReset.IsDone() && walking.IsFinished() )
 		{
 			walking.Reset();
-			moveReset.Reset();
+			moveReset.ResetRng();
 			curState = State::WindingUp;
 		}
 		break;

@@ -43,7 +43,7 @@ private:
 	Anim explode;
 	State curState = State::Moving;
 	Vec2 vel = { 0.0f,0.0f };
-	Timer moveReset = 3.54f;
+	Timer moveReset = { 3.54f,true };
 	Timer retarget = { 0.7f,true };
 	static constexpr float speed = 79.24f;
 	static constexpr float bullSpeed = 186.2f;

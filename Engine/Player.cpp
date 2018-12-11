@@ -25,6 +25,27 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	pos += coll.GetValidMove( pos,moveDir );
 	coll.MoveTo( pos - coll.GetSize() / 2.0f );
 
+	// Handle super cool jumping mechanic.
+	if( kbd.KeyIsPressed( VK_SPACE ) && !jumping &&
+		jumpReset.IsDone() )
+	{
+		jumpReset.Reset();
+
+		Jump();
+	}
+
+	if( jumping )
+	{
+		jumpTimer.Update( dt );
+		if( jumpTimer.IsDone() )
+		{
+			jumpTimer.Reset();
+			Land();
+		}
+	}
+	else jumpReset.Update( dt );
+
+	// Deal with shooting.
 	shotTimer.Update( dt );
 	if( ms.LeftIsPressed() && shotTimer.IsDone() )
 	{
@@ -41,7 +62,19 @@ void Player::Draw( Graphics& gfx ) const
 	const auto drawPos = Vei2( GetCenter() );
 	gfx.DrawRect( drawPos.x,drawPos.y,
 		size.x,size.y,Colors::Red );
-	gfx.DrawHitbox( coll.GetRect() );
+
+	if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )
+	{
+		gfx.DrawHitbox( coll.GetRect() );
+	}
+
+	if( jumping )
+	{
+		// TODO: Play jumping animation.
+
+		gfx.DrawRect( drawPos.x,drawPos.y,
+			size.x,size.y,Colors::Blue );
+	}
 }
 
 void Player::MoveTo( const Vec2& updatedPos )
@@ -64,7 +97,26 @@ Vec2 Player::GetCenter() const
 	return( pos - Vec2( size ) / 2.0f );
 }
 
-const Rect& Player::GetRect() const
+Rect Player::GetRect() const
 {
+	if( jumping )
+	{
+		return( RectI{ coll.GetRect() }.MoveTo( { -9999,-9999 } ) );
+	}
+
 	return( coll.GetRect() );
+}
+
+void Player::Jump()
+{
+	jumping = true;
+
+	// coll.MoveTo( { -9999.0f,-9999.0f } );
+}
+
+void Player::Land()
+{
+	jumping = false;
+
+	// coll.MoveTo( pos - coll.GetSize() / 2.0f );
 }

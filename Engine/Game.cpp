@@ -56,7 +56,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 #if !NDEBUG
-	if( wnd.kbd.KeyIsPressed( VK_SPACE ) )
+	if( wnd.kbd.KeyIsPressed( VK_RETURN ) )
 	{
 		for( const auto& e : enemies )
 		{

@@ -45,19 +45,23 @@ public:
 			pos.y > top && pos.y < bottom;
 	}
 
-	constexpr void MoveTo( const Vec2_<T>& point )
+	constexpr Rect_ MoveTo( const Vec2_<T>& point )
 	{
 		right += point.x - left;
 		bottom += point.y - top;
 		left = point.x;
 		top = point.y;
+
+		return( *this );
 	}
-	constexpr void MoveBy( const Vec2_<T>& amount )
+	constexpr Rect_ MoveBy( const Vec2_<T>& amount )
 	{
 		left += amount.x;
 		right += amount.x;
 		top += amount.y;
 		bottom += amount.y;
+
+		return( *this );
 	}
 
 	static constexpr Rect_ FromCenter( const Vec2_<T>& center,

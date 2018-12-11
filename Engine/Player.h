@@ -27,7 +27,10 @@ public:
 	const Vec2& GetPos() const;
 	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
-	const Rect& GetRect() const;
+	Rect GetRect() const;
+private:
+	void Jump();
+	void Land();
 private:
 	Vec2 pos;
 	static constexpr Vei2 size = { 32,32 };
@@ -38,4 +41,7 @@ private:
 	const TileMap& map;
 	static constexpr float bulletSpeed = 324.2f;
 	Vec2 moveDir = { 0.0f,0.0f };
+	bool jumping = false;
+	Timer jumpTimer = 0.61f;
+	Timer jumpReset = 1.0f;
 };
