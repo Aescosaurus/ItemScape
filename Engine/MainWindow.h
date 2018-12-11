@@ -33,10 +33,14 @@ class HWNDKey
 public:
 	HWNDKey( const HWNDKey& ) = delete;
 	HWNDKey& operator=( HWNDKey& ) = delete;
+	void Minimize();
+	void Maximize();
+	bool IsFullscreen() const;
 protected:
 	HWNDKey() = default;
 protected:
 	HWND hWnd = nullptr;
+	bool fullscreen = false;
 };
 
 class MainWindow : public HWNDKey

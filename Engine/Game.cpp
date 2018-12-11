@@ -35,7 +35,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,playerBullets )
+	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,playerBullets ),
+	cursorHand( wnd )
 {
 	LoadNextLevel();
 	doors.emplace_back( Door{ Door::Side::Top,floor } );
@@ -63,6 +64,10 @@ void Game::UpdateModel()
 		}
 	}
 #endif
+
+	if( wnd.kbd.KeyIsPressed( 'F' ) ) wnd.Maximize();
+	if( wnd.kbd.KeyIsPressed( VK_ESCAPE ) ) wnd.Minimize();
+
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
@@ -143,6 +148,8 @@ void Game::ComposeFrame()
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx );
 	// Top of drawing order.
+
+	cursorHand.DrawCursor( wnd.mouse.GetPos(),state,gfx );
 }
 
 void Game::LoadNextLevel()

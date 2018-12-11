@@ -144,11 +144,13 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
+    <ClInclude Include="CursorHandler.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="EnemyType.h" />
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="BeetleBig.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="RynoChaser.h" />
     <ClInclude Include="Skorp.h" />
     <ClInclude Include="Slizard.h" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
+    <ClCompile Include="CursorHandler.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Beetle.cpp" />

@@ -45,9 +45,9 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 	wr.right = Graphics::ScreenWidth + wr.left;
 	wr.top = 100;
 	wr.bottom = Graphics::ScreenHeight + wr.top;
-	AdjustWindowRect( &wr,WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,FALSE );
+	AdjustWindowRect( &wr,WS_OVERLAPPEDWINDOW,FALSE );
 	hWnd = CreateWindow( wndClassName,L"Chili DirectX Framework",
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		WS_OVERLAPPEDWINDOW,
 		wr.left,wr.top,wr.right - wr.left,wr.bottom - wr.top,
 		nullptr,nullptr,hInst,this );
 
@@ -86,6 +86,22 @@ void MainWindow::ShowMessageBox( const std::wstring& title,const std::wstring& m
 
 bool MainWindow::ProcessMessage()
 {
+	if( fullscreen )
+	{
+		// POINT msPos;
+		// GetCursorPos( &msPos );
+		// 
+		// msPos.x = std::max( -10,int( msPos.x ) );
+		// msPos.x = std::min( int( msPos.x ),Graphics::ScreenWidth );
+		// msPos.y = std::max( -10,int( msPos.y ) );
+		// msPos.y = std::min( int( msPos.y ),Graphics::ScreenHeight + 10 );
+		// 
+		// SetCursorPos( int( msPos.x ),int( msPos.y ) );
+
+		while( ShowCursor( false ) >= 0 );
+	}
+	else ShowCursor( true );
+
 	MSG msg;
 	while( PeekMessage( &msg,nullptr,0,0,PM_REMOVE ) )
 	{
@@ -158,6 +174,7 @@ LRESULT MainWindow::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam )
 	case WM_MOUSEMOVE:
 	{
 		POINTS pt = MAKEPOINTS( lParam );
+		mouse.OnMouseMove( pt.x,pt.y );
 		if( pt.x > 0 && pt.x < Graphics::ScreenWidth && pt.y > 0 && pt.y < Graphics::ScreenHeight )
 		{
 			mouse.OnMouseMove( pt.x,pt.y );
@@ -229,4 +246,23 @@ LRESULT MainWindow::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam )
 	}
 
 	return DefWindowProc( hWnd,msg,wParam,lParam );
+}
+
+void HWNDKey::Minimize()
+{
+	ShowWindow( hWnd,SW_SHOWDEFAULT );
+	UpdateWindow( hWnd );
+	fullscreen = false;
+}
+
+void HWNDKey::Maximize()
+{
+	ShowWindow( hWnd,SW_MAXIMIZE );
+	UpdateWindow( hWnd );
+	fullscreen = true;
+}
+
+bool HWNDKey::IsFullscreen() const
+{
+	return( fullscreen );
 }

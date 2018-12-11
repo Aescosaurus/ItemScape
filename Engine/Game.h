@@ -31,6 +31,8 @@
 #include "FloorLevel.h"
 #include "Door.h"
 #include "EnemyBase.h"
+#include "GameState.h"
+#include "CursorHandler.h"
 
 class Game
 {
@@ -59,5 +61,7 @@ private:
 	std::vector<std::unique_ptr<EnemyBase>> enemies;
 	FloorLevel floor;
 	std::vector<Door> doors;
+	CursorHandler cursorHand;
+	GameState state = GameState::Gameplay;
 	/********************************/
 };

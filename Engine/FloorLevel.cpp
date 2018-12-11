@@ -6,7 +6,7 @@ FloorLevel::FloorLevel()
 {
 	RandomizeLayout();
 	// This is for testing all the rooms out. :)
-	floorLayout[7] = 8;
+	// floorLayout[7] = 8;
 }
 
 void FloorLevel::DrawOverlay( Graphics& gfx ) const
