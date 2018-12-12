@@ -18,6 +18,8 @@ SpiderMole::SpiderMole( const Vec2& pos,const TileMap& map,
 
 void SpiderMole::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( action )
 	{
 	case State::Wander:
@@ -101,11 +103,13 @@ void SpiderMole::Draw( Graphics& gfx ) const
 		}
 		else
 		{
-			rising.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			if( !justTookDamage ) rising.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			else rising.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		}
 		break;
 	case State::Sink:
-		sinking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) sinking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else sinking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
@@ -134,6 +138,7 @@ void SpiderMole::Attack( int damage,const Vec2& loc )
 			coll.MoveTo( { -9999.0f,-9999.0f } );
 			action = State::Explode;
 		}
+		break;
 	}
 }
 

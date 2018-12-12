@@ -16,6 +16,8 @@ Skorp::Skorp( const Vec2& pos,const TileMap& map,
 
 void Skorp::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( action )
 	{
 	case State::Walk:
@@ -95,13 +97,16 @@ void Skorp::Draw( Graphics& gfx ) const
 	{
 	case State::Walk:
 	case State::Wander:
-		walking.Draw( Vei2( pos ),gfx,vel.x > 0.0f );
+		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindUp:
-		winding.Draw( Vei2( pos ),gfx,vel.x > 0.0f );
+		if( !justTookDamage ) winding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else winding.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Attack:
-		attacking.Draw( Vei2( pos ),gfx,vel.x > 0.0f );
+		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:
 		exploding.Draw( Vei2( pos ),gfx,vel.x > 0.0f );

@@ -17,6 +17,8 @@ Firebug::Firebug( const Vec2& pos,const TileMap& map,
 
 void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( curAction )
 	{
 	case State::GotoPlayer:
@@ -129,7 +131,8 @@ void Firebug::Draw( Graphics& gfx ) const
 	{
 	case State::GotoPlayer:
 	case State::Wander:
-		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Charge:
 		if( int( charging.GetPercent() ) % 2 == 0 )
@@ -140,14 +143,17 @@ void Firebug::Draw( Graphics& gfx ) const
 		}
 		else
 		{
-			charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			if( !justTookDamage ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			else charging.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		}
 		break;
 	case State::AttackLeft:
-		attacking.Draw( Vei2( pos ),gfx,true );
+		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,true );
+		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),true );
 		break;
 	case State::AttackRight:
-		attacking.Draw( Vei2( pos ),gfx,false );
+		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,false );
+		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),false );
 		break;
 	case State::Explode:
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );

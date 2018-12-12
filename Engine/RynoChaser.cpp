@@ -15,6 +15,8 @@ RynoChaser::RynoChaser( const Vec2& pos,const TileMap& map,
 
 void RynoChaser::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( action )
 	{
 	case State::Wander:
@@ -89,13 +91,16 @@ void RynoChaser::Draw( Graphics& gfx ) const
 	switch( action )
 	{
 	case State::Wander:
-		wandering.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) wandering.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else wandering.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::ChargeUp:
-		chargingUp.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) chargingUp.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else chargingUp.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::ChargePlayer:
-		chargingPlayer.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) chargingPlayer.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else chargingPlayer.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );

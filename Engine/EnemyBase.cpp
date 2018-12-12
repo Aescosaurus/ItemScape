@@ -78,7 +78,7 @@ void EnemyBase::ResetTargeting( float moveTolerance,float speed )
 	vel = ( target - pos ).GetNormalized() * speed;
 }
 
-SpriteEffect::Substitution EnemyBase::FlashWhite() const
+SpriteEffect::Substitution EnemyBase::FlashCol() const
 {
 	return( SpriteEffect::Substitution{ Colors::Magenta,Colors::White } );
 }

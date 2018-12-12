@@ -90,15 +90,15 @@ void BeetleBig::Draw( Graphics& gfx ) const
 	{
 	case State::Moving:
 		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
-		else walking.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindingUp:
 		if( !justTookDamage ) jumping.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
-		else jumping.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
+		else jumping.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindingDown:
 		if( !justTookDamage ) landing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
-		else landing.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
+		else landing.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Exploding:
 		explode.Draw( Vei2( pos ),gfx,vel.x < 0.0f );

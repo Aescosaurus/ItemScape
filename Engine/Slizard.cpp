@@ -15,6 +15,8 @@ Slizard::Slizard( const Vec2& pos,const TileMap& map,
 
 void Slizard::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( action )
 	{
 	case State::Wander:
@@ -105,14 +107,17 @@ void Slizard::Draw( Graphics& gfx ) const
 	switch( action )
 	{
 	case State::Wander:
-		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Charge:
-		charging.Draw( Vei2( pos ),gfx,shotTarget.x < pos.x );
+		if( !justTookDamage ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else charging.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Phase1Attack:
 	case State::Phase2Attack:
-		attacking.Draw( Vei2( pos ),gfx,shotTarget.x < pos.x );
+		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );

@@ -19,6 +19,8 @@ Beetle::Beetle( const Vec2& pos,const TileMap& map,
 
 void Beetle::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( myAction )
 	{
 	case State::Moving:
@@ -88,13 +90,16 @@ void Beetle::Draw( Graphics& gfx ) const
 	switch( myAction )
 	{
 	case State::Moving:
-		walking.Draw( pos,gfx,vel.x < 0.0f );
+		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Firing:
-		firing.Draw( pos,gfx,shotTarget.x < GetCenter().x );
+		if( !justTookDamage ) firing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else firing.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindingDown:
-		windDown.Draw( pos,gfx,shotTarget.x < GetCenter().x );
+		if( !justTookDamage ) windDown.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else windDown.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Exploding:
 		explAnim.Draw( pos,gfx,explDrawDir );

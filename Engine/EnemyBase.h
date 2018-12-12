@@ -40,7 +40,7 @@ protected:
 	void Wander( float moveTolerance,float speed,float dt );
 	void ResetTargeting( float moveTolerance,float speed );
 
-	SpriteEffect::Substitution FlashWhite() const;
+	SpriteEffect::Substitution FlashCol() const;
 protected:
 	Vec2 pos;
 	Collider coll;
