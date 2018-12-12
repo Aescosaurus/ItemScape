@@ -1,9 +1,16 @@
 #include "EnemyBase.h"
 #include "Random.h"
 
+void EnemyBase::Update( const EnemyUpdateInfo& info,float dt )
+{
+	justTookDamage = false;
+}
+
 void EnemyBase::Attack( int damage,const Vec2& loc )
 {
 	hp -= damage;
+
+	justTookDamage = true;
 }
 
 bool EnemyBase::IsExpl() const
@@ -69,4 +76,9 @@ void EnemyBase::ResetTargeting( float moveTolerance,float speed )
 	target = newTarget;
 	lastTarget = target;
 	vel = ( target - pos ).GetNormalized() * speed;
+}
+
+SpriteEffect::Substitution EnemyBase::FlashWhite() const
+{
+	return( SpriteEffect::Substitution{ Colors::Magenta,Colors::White } );
 }

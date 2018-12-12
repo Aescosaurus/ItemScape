@@ -6,9 +6,9 @@ Player::Player( const Vec2& pos,const TileMap& map,
 	pos( pos ),
 	coll( map,{ pos,float( size.x ) / 1.5f,float( size.y ) / 1.5f } ),
 	myBullets( bullets ),
-	map( map )
-{
-}
+	map( map ),
+	walk( 0,0,size.x,size.y,4,surfSheet,0.2f )
+{}
 
 void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	float dt )
@@ -19,6 +19,9 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	if( kbd.KeyIsPressed( 'S' ) ) ++moveDir.y;
 	if( kbd.KeyIsPressed( 'A' ) ) --moveDir.x;
 	if( kbd.KeyIsPressed( 'D' ) ) ++moveDir.x;
+
+	if( moveDir == Vec2{ 0.0f,0.0f } ) walk.Reset();
+	else walk.Update( dt );
 
 	// Move but don't let you walk into walls.
 	moveDir = moveDir.GetNormalized() * speed * dt;
@@ -52,7 +55,7 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 		shotTimer.Reset();
 		myBullets.emplace_back( std::make_unique<Bullet>(
 			pos,Vec2( ms.GetPos() ),map,
-			Bullet::Team::Player,bulletSpeed,
+			Bullet::Team::Player1,bulletSpeed,
 			Bullet::Size::Small ) );
 	}
 }
@@ -60,8 +63,10 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 void Player::Draw( Graphics& gfx ) const
 {
 	const auto drawPos = Vei2( GetCenter() );
-	gfx.DrawRect( drawPos.x,drawPos.y,
-		size.x,size.y,Colors::Red );
+	// gfx.DrawRect( drawPos.x,drawPos.y,
+	// 	size.x,size.y,Colors::Red );
+
+	walk.Draw( drawPos,gfx,moveDir.x < 0.0f );
 
 	if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )
 	{

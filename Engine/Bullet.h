@@ -13,7 +13,10 @@ class Bullet
 public:
 	enum class Team
 	{
-		Player = 0,
+		Player1 = 0,
+		Player2,
+		Player3,
+		Player4,
 		Beetle,
 		Firebug,
 		Skorp,

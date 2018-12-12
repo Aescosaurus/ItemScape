@@ -9,6 +9,7 @@
 #include "Anim.h"
 #include "Graphics.h"
 #include "Surface.h"
+#include "SpriteEffect.h"
 
 class EnemyUpdateInfo
 {
@@ -23,9 +24,11 @@ class EnemyBase
 public:
 	EnemyBase() = delete;
 
-	virtual void Update( const EnemyUpdateInfo& info,float dt ) = 0;
+	// Make sure to call this from Child::Update.
+	virtual void Update( const EnemyUpdateInfo& info,float dt );
 	virtual void Draw( Graphics& gfx ) const = 0;
 
+	// Make sure to call this from Child::Attack.
 	virtual void Attack( int damage,const Vec2& loc );
 
 	bool IsExpl() const;
@@ -36,6 +39,8 @@ protected:
 
 	void Wander( float moveTolerance,float speed,float dt );
 	void ResetTargeting( float moveTolerance,float speed );
+
+	SpriteEffect::Substitution FlashWhite() const;
 protected:
 	Vec2 pos;
 	Collider coll;
@@ -44,4 +49,5 @@ protected:
 	Vec2 target = { 0.0f,0.0f };
 	Vec2 lastTarget = pos;
 	Vec2 vel = { 0.0f,0.0f };
+	bool justTookDamage = false;
 };

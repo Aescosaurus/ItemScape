@@ -15,6 +15,8 @@ BeetleBig::BeetleBig( const Vec2& pos,const TileMap& map,
 
 void BeetleBig::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( curState )
 	{
 	case State::Moving:
@@ -87,13 +89,16 @@ void BeetleBig::Draw( Graphics& gfx ) const
 	switch( curState )
 	{
 	case State::Moving:
-		walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else walking.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
 		break;
 	case State::WindingUp:
-		jumping.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) jumping.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else jumping.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
 		break;
 	case State::WindingDown:
-		landing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !justTookDamage ) landing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		else landing.Draw( Vei2( pos ),gfx,FlashWhite(),vel.x < 0.0f );
 		break;
 	case State::Exploding:
 		explode.Draw( Vei2( pos ),gfx,vel.x < 0.0f );

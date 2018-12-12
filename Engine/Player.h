@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Timer.h"
 #include <memory>
+#include "Anim.h"
 
 // Works like top down now, but can be modified
 //  to use platformer controls.
@@ -44,4 +45,6 @@ private:
 	bool jumping = false;
 	Timer jumpTimer = 0.61f;
 	Timer jumpReset = 1.0f;
+	const Surface surfSheet = { { "Images/Player1Anim.bmp" },Vei2{ 4,4 } };
+	Anim walk;
 };
