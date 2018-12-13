@@ -3,14 +3,14 @@
 
 void EnemyBase::Update( const EnemyUpdateInfo& info,float dt )
 {
-	justTookDamage = false;
+	damageCooldown.Update( dt );
 }
 
 void EnemyBase::Attack( int damage,const Vec2& loc )
 {
 	hp -= damage;
 
-	justTookDamage = true;
+	damageCooldown.Reset();
 }
 
 bool EnemyBase::IsExpl() const
@@ -30,7 +30,9 @@ EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,
 	coll( map,{ pos,size.x,size.y } ),
 	hp( hp ),
 	map( &map )
-{}
+{
+	damageCooldown.Update( damageCooldown.GetDuration() );
+}
 
 void EnemyBase::Wander( float moveTolerance,float speed,float dt )
 {
@@ -81,4 +83,9 @@ void EnemyBase::ResetTargeting( float moveTolerance,float speed )
 SpriteEffect::Substitution EnemyBase::FlashCol() const
 {
 	return( SpriteEffect::Substitution{ Colors::Magenta,Colors::White } );
+}
+
+bool EnemyBase::IsFlashing() const
+{
+	return( !damageCooldown.IsDone() );
 }

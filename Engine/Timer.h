@@ -34,6 +34,10 @@ public:
 	{
 		return( curTime >= maxTime );
 	}
+	float GetDuration() const
+	{
+		return( maxTime );
+	}
 private:
 	float curTime;
 	float maxTime;

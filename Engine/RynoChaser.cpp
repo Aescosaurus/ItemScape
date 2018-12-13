@@ -91,15 +91,15 @@ void RynoChaser::Draw( Graphics& gfx ) const
 	switch( action )
 	{
 	case State::Wander:
-		if( !justTookDamage ) wandering.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) wandering.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else wandering.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::ChargeUp:
-		if( !justTookDamage ) chargingUp.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) chargingUp.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else chargingUp.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::ChargePlayer:
-		if( !justTookDamage ) chargingPlayer.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) chargingPlayer.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else chargingPlayer.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:

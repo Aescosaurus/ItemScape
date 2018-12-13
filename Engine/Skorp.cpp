@@ -97,15 +97,15 @@ void Skorp::Draw( Graphics& gfx ) const
 	{
 	case State::Walk:
 	case State::Wander:
-		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindUp:
-		if( !justTookDamage ) winding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) winding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else winding.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Attack:
-		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:

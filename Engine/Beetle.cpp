@@ -90,15 +90,15 @@ void Beetle::Draw( Graphics& gfx ) const
 	switch( myAction )
 	{
 	case State::Moving:
-		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Firing:
-		if( !justTookDamage ) firing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) firing.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else firing.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::WindingDown:
-		if( !justTookDamage ) windDown.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) windDown.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else windDown.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Exploding:

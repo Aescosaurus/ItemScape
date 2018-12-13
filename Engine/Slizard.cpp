@@ -107,16 +107,16 @@ void Slizard::Draw( Graphics& gfx ) const
 	switch( action )
 	{
 	case State::Wander:
-		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Charge:
-		if( !justTookDamage ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else charging.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Phase1Attack:
 	case State::Phase2Attack:
-		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) attacking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:

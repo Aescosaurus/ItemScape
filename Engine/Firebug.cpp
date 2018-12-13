@@ -131,7 +131,7 @@ void Firebug::Draw( Graphics& gfx ) const
 	{
 	case State::GotoPlayer:
 	case State::Wander:
-		if( !justTookDamage ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) walking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else walking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Charge:
@@ -143,16 +143,16 @@ void Firebug::Draw( Graphics& gfx ) const
 		}
 		else
 		{
-			if( !justTookDamage ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			if( !IsFlashing() ) charging.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 			else charging.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		}
 		break;
 	case State::AttackLeft:
-		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,true );
+		if( !IsFlashing() ) attacking.Draw( Vei2( pos ),gfx,true );
 		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),true );
 		break;
 	case State::AttackRight:
-		if( !justTookDamage ) attacking.Draw( Vei2( pos ),gfx,false );
+		if( !IsFlashing() ) attacking.Draw( Vei2( pos ),gfx,false );
 		else attacking.Draw( Vei2( pos ),gfx,FlashCol(),false );
 		break;
 	case State::Explode:

@@ -10,6 +10,7 @@
 #include "Graphics.h"
 #include "Surface.h"
 #include "SpriteEffect.h"
+#include "Timer.h"
 
 class EnemyUpdateInfo
 {
@@ -41,6 +42,7 @@ protected:
 	void ResetTargeting( float moveTolerance,float speed );
 
 	SpriteEffect::Substitution FlashCol() const;
+	bool IsFlashing() const;
 protected:
 	Vec2 pos;
 	Collider coll;
@@ -49,5 +51,5 @@ protected:
 	Vec2 target = { 0.0f,0.0f };
 	Vec2 lastTarget = pos;
 	Vec2 vel = { 0.0f,0.0f };
-	bool justTookDamage = false;
+	Timer damageCooldown = 3.0f / 60.0f;
 };

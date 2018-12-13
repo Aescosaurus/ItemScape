@@ -103,12 +103,12 @@ void SpiderMole::Draw( Graphics& gfx ) const
 		}
 		else
 		{
-			if( !justTookDamage ) rising.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+			if( !IsFlashing() ) rising.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 			else rising.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		}
 		break;
 	case State::Sink:
-		if( !justTookDamage ) sinking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
+		if( !IsFlashing() ) sinking.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		else sinking.Draw( Vei2( pos ),gfx,FlashCol(),vel.x < 0.0f );
 		break;
 	case State::Explode:
