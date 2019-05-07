@@ -38,6 +38,8 @@ Game::Game( MainWindow& wnd )
 	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,playerBullets ),
 	cursorHand( wnd )
 {
+	wnd.Maximize();
+
 	LoadNextLevel();
 	doors.emplace_back( Door{ Door::Side::Top,floor } );
 	doors.emplace_back( Door{ Door::Side::Bot,floor } );
@@ -65,8 +67,11 @@ void Game::UpdateModel()
 	}
 #endif
 
-	if( wnd.kbd.KeyIsPressed( 'F' ) ) wnd.Maximize();
+	if( wnd.kbd.KeyIsPressed( VK_CONTROL ) &&
+		wnd.kbd.KeyIsPressed( 'F' ) ) wnd.Maximize();
 	if( wnd.kbd.KeyIsPressed( VK_ESCAPE ) ) wnd.Minimize();
+	if( wnd.kbd.KeyIsPressed( VK_CONTROL ) &&
+		wnd.kbd.KeyIsPressed( 'W' ) ) wnd.Kill();
 
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;

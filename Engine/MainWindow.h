@@ -38,6 +38,9 @@ public:
 	bool IsFullscreen() const;
 protected:
 	HWNDKey() = default;
+private:
+	int GetScreenWidth() const;
+	int GetScreenHeight() const;
 protected:
 	HWND hWnd = nullptr;
 	bool fullscreen = false;

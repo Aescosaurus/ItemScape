@@ -46,10 +46,17 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 	wr.top = 100;
 	wr.bottom = Graphics::ScreenHeight + wr.top;
 	AdjustWindowRect( &wr,WS_OVERLAPPEDWINDOW,FALSE );
+	// hWnd = CreateWindow( wndClassName,L"Chili DirectX Framework",
+	// 	WS_OVERLAPPEDWINDOW,
+	// 	wr.left,wr.top,wr.right - wr.left,wr.bottom - wr.top,
+	// 	nullptr,nullptr,hInst,this );
 	hWnd = CreateWindow( wndClassName,L"Chili DirectX Framework",
-		WS_OVERLAPPEDWINDOW,
+		// WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		WS_MAXIMIZE,
 		wr.left,wr.top,wr.right - wr.left,wr.bottom - wr.top,
 		nullptr,nullptr,hInst,this );
+
+	SetWindowLong( hWnd,GWL_STYLE,0 );
 
 	// throw exception if something went terribly wrong
 	if( hWnd == nullptr )
@@ -59,7 +66,7 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 	}
 
 	// show and update
-	ShowWindow( hWnd,SW_SHOWDEFAULT );
+	ShowWindow( hWnd,SW_SHOW );
 	UpdateWindow( hWnd );
 }
 
@@ -250,19 +257,47 @@ LRESULT MainWindow::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam )
 
 void HWNDKey::Minimize()
 {
-	ShowWindow( hWnd,SW_SHOWDEFAULT );
-	UpdateWindow( hWnd );
+	// ShowWindow( hWnd,SW_SHOWDEFAULT );
+	// UpdateWindow( hWnd );
+	// fullscreen = false;
 	fullscreen = false;
+
+	SetWindowLongPtr( hWnd,SW_SHOW,0 );
+	SetWindowPos( hWnd,HWND_TOP,
+		350,100,Graphics::ScreenWidth,Graphics::ScreenHeight,
+		SWP_SHOWWINDOW );
 }
 
 void HWNDKey::Maximize()
 {
-	ShowWindow( hWnd,SW_MAXIMIZE );
-	UpdateWindow( hWnd );
+	// ShowWindow( hWnd,SW_MAXIMIZE );
+	// UpdateWindow( hWnd );
+	// fullscreen = true;
 	fullscreen = true;
+
+	SetWindowLongPtr( hWnd,SW_MAXIMIZE,0 );
+	SetWindowPos( hWnd,HWND_TOP,
+		0,0,GetScreenWidth(),GetScreenHeight(),
+		SWP_SHOWWINDOW );
 }
 
 bool HWNDKey::IsFullscreen() const
 {
 	return( fullscreen );
+}
+
+int HWNDKey::GetScreenWidth() const
+{
+	RECT desktop;
+	const auto hDesk = GetDesktopWindow();
+	GetWindowRect( hDesk,&desktop );
+	return( desktop.right );
+}
+
+int HWNDKey::GetScreenHeight() const
+{
+	RECT desktop;
+	const auto hDesk = GetDesktopWindow();
+	GetWindowRect( hDesk,&desktop );
+	return( desktop.bottom );
 }
