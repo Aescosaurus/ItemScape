@@ -41,6 +41,7 @@ public:
 	void Attack( int damage );
 
 	bool IsExpl() const;
+	const Vec2& GetPos() const;
 	const Rect& GetRect() const;
 private:
 	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );

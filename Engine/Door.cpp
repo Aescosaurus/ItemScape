@@ -39,7 +39,7 @@ void Door::Draw( Graphics& gfx ) const
 			break;
 		}
 	}
-	gfx.DrawHitbox( hitbox );
+	// gfx.DrawHitbox( hitbox );
 }
 
 void Door::UpdateActivated( const FloorLevel& floor )

@@ -12,4 +12,11 @@ public:
 		InventoryItem( "ItemDescriptions/HealthCharge.txt",
 			"Images/Items/HealthCharge.bmp" )
 	{}
+
+	void OnPlayerHit( InventoryEventInfo& evtInfo ) override
+	{
+		evtInfo.enemyBullets.clear();
+
+		remove = true;
+	}
 };

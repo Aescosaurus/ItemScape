@@ -1,7 +1,6 @@
 Health Charge
 Whenever you take
 damage from any source,
-consumes one charge and
-destroys bullets in a
-small radius around
-yourself.
+consumes health charge
+and destroys all enemy
+bullets on screen.

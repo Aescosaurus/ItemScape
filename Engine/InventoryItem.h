@@ -7,6 +7,15 @@
 #include "Mouse.h"
 #include "Rect.h"
 #include "Font.h"
+#include "Player.h"
+#include "Bullet.h"
+
+class InventoryEventInfo
+{
+public:
+	Player& player;
+	std::vector<std::unique_ptr<Bullet>>& enemyBullets;
+};
 
 class InventoryItem
 {
@@ -21,22 +30,24 @@ public:
 	void Draw( Graphics& gfx );
 	
 	void SetPos( const Vei2& pos );
+	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 
 	const Vei2& GetPos() const;
 	bool IsSelected() const;
 	const std::string& GetName() const;
 	const std::string& GetDesc() const;
+	bool WillRemove() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;
 public:
 	static constexpr Vei2 size = { 32,32 };
-private:
+protected:
 	std::string name;
 	std::string description;
 	const Surface surf;
 	Vei2 pos;
 	bool hovering = false;
-	int count = 1;
 	static const Font luckyPixel;
+	bool remove = false;
 };

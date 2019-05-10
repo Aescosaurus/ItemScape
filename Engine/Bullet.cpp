@@ -68,6 +68,11 @@ bool Bullet::IsExpl() const
 	return( dead );
 }
 
+const Vec2& Bullet::GetPos() const
+{
+	return( pos );
+}
+
 const Rect& Bullet::GetRect() const
 {
 	return( coll.GetRect() );

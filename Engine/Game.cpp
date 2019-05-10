@@ -81,7 +81,17 @@ void Game::UpdateModel()
 	playerInv.Update( wnd.kbd,wnd.mouse );
 
 	for( auto& b : playerBullets ) b->Update( dt );
-	for( auto& eb : enemyBullets ) eb->Update( dt );
+	for( int i = 0; i < enemyBullets.size(); ++i )
+	{
+		auto& eb = enemyBullets[i];
+
+		eb->Update( dt );
+
+		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
+		{
+			playerInv.OnPlayerHit( InventoryEventInfo{ guy,enemyBullets } );
+		}
+	}
 
 	// Update all enemies with a regular for loop because
 	//  Enemy::Update might invalidate the iterator.
@@ -95,8 +105,8 @@ void Game::UpdateModel()
 		// Update might add new enemies and invalidate the
 		//  reference, so just init it here.
 		const auto& e = enemies[i];
-
 		const auto enemyRect = e->GetRect();
+
 		for( auto& b : playerBullets )
 		{
 			if( b->GetRect().IsOverlappingWith( enemyRect ) )

@@ -75,6 +75,11 @@ const std::string& InventoryItem::GetDesc() const
 	return( description );
 }
 
+bool InventoryItem::WillRemove() const
+{
+	return( remove );
+}
+
 std::string InventoryItem::GetPruned( const std::string& in ) const
 {
 	return( in );

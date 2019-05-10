@@ -31,6 +31,19 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	{
 		item->Update( mouse );
 	}
+
+	for( auto it = items.begin(); it != items.end(); )
+	{
+		if( ( *it )->WillRemove() )
+		{
+			items.erase( it );
+			it = items.begin();
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void Inventory::Draw( Graphics& gfx ) const
@@ -90,6 +103,39 @@ void Inventory::AddItem( InventoryItem* itemToAdd )
 	}
 }
 
+void Inventory::ConsumeItem( const std::string& name )
+{
+	for( auto it = items.begin(); it != items.end(); ++it )
+	{
+		if( ( *it )->GetName() == name )
+		{
+			items.erase( it );
+			break;
+		}
+	}
+}
+
+void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnPlayerHit( evtInfo );
+	}
+}
+
+InventoryItem* Inventory::FindItem( const std::string& name )
+{
+	for( auto& item : items )
+	{
+		if( item->GetName() == name )
+		{
+			return( item.get() );
+		}
+	}
+
+	return( nullptr );
+}
+
 void Inventory::DrawInvGrid( Graphics& gfx ) const
 {
 	// auto curPos = invStart;
@@ -97,7 +143,7 @@ void Inventory::DrawInvGrid( Graphics& gfx ) const
 	{
 		for( int x = 0; x < size.x; ++x )
 		{
-			if( y * size.x + x > items.size() - 1 ) return;
+			if( y * size.x + x > int( items.size() ) - 1 ) return;
 			items[y * size.x + x]->Draw( gfx );
 			// curPos += itemSize.X();
 			// curPos += itemPadding.X();

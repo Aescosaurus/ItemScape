@@ -19,6 +19,10 @@ public:
 	void AddItem( const std::string& name,
 		const std::string& desc,const std::string& icon );
 	void AddItem( InventoryItem* itemToAdd );
+	void ConsumeItem( const std::string& name );
+	void OnPlayerHit( InventoryEventInfo& evtInfo );
+
+	InventoryItem* FindItem( const std::string& name );
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
 private:
