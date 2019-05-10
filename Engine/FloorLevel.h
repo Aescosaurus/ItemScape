@@ -25,10 +25,12 @@ public:
 
 	void AdvanceFloor();
 	void MoveRoom( Dir d );
+	void ClearCompletedRooms();
 
 	std::string GetLevelName();
 	int GetLevelAt( const Vei2& pos ) const;
 	const Vei2& GetCurRoom() const;
+	bool CurRoomAlreadyCompleted() const;
 private:
 	void RandomizeLayout();
 
@@ -64,6 +66,8 @@ private:
 		"Level7.lvl",
 		"BossRoom.lvl"
 	};
+
+	std::vector<Vei2> completedRooms;
 
 	static constexpr Vei2 overlayStart = { 50,50 };
 	static constexpr Vei2 roomSize = { 35 * 2,20 * 2 };

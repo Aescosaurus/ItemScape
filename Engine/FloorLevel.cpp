@@ -57,11 +57,17 @@ void FloorLevel::AdvanceFloor()
 {
 	++curFloor;
 	RandomizeLayout();
-	curRoom = { 1,2 };
+	// curRoom = { 1,2 };
+	ClearCompletedRooms();
 }
 
 void FloorLevel::MoveRoom( Dir d )
 {
+	if( !CurRoomAlreadyCompleted() )
+	{
+		completedRooms.emplace_back( curRoom );
+	}
+
 	switch( d )
 	{
 	case Dir::Up:
@@ -77,6 +83,11 @@ void FloorLevel::MoveRoom( Dir d )
 		++curRoom.x;
 		break;
 	}
+}
+
+void FloorLevel::ClearCompletedRooms()
+{
+	completedRooms.clear();
 }
 
 std::string FloorLevel::GetLevelName()
@@ -102,6 +113,19 @@ const Vei2& FloorLevel::GetCurRoom() const
 	return( curRoom );
 }
 
+bool FloorLevel::CurRoomAlreadyCompleted() const
+{
+	for( const auto& vec : completedRooms )
+	{
+		if( vec == curRoom )
+		{
+			return( true );
+		}
+	}
+
+	return( false );
+}
+
 void FloorLevel::RandomizeLayout()
 {
 	// Reset all tiles to blank tiles.
@@ -113,7 +137,7 @@ void FloorLevel::RandomizeLayout()
 	// const int nElements = width * height;
 	std::vector<int> layoutNums;
 	layoutNums.reserve( nRoomsPerFloor + 1 );
-	for( int i = 0; i < nRoomsPerFloor; ++i )
+	for( int i = 0; i < nRoomsPerFloor - 1; ++i )
 	{
 		layoutNums.emplace_back( i );
 	}
@@ -123,34 +147,21 @@ void FloorLevel::RandomizeLayout()
 	std::mt19937 rng{ rd() };
 	std::shuffle( layoutNums.begin(),layoutNums.end(),rng );
 
-	// Get boss pos in start of vector.
-	for( int i = 0; i < nRoomsPerFloor; ++i )
-	{
-		if( layoutNums[i] == 8 )
-		{
-			std::swap( layoutNums[0],layoutNums[i] );
-			break;
-		}
-	}
+	layoutNums.insert( layoutNums.begin(),8 );
 
-	// int bossPos;
+	// // Get boss pos in start of vector.
 	// for( int i = 0; i < nRoomsPerFloor; ++i )
 	// {
-	// 	floorLayout[i] = layoutNums[i];
-	// 	if( layoutNums[i] == 8 ) bossPos = i;
+	// 	if( layoutNums[i] == 8 )
+	// 	{
+	// 		std::swap( layoutNums[0],layoutNums[i] );
+	// 		break;
+	// 	}
 	// }
 
-	// // Set boss room at right position.
-	// const int upLeft = 0;
-	// const int upRight = 2;
-	// const int idealBossPos = Random::RangeI( 0,10 ) > 5
-	// 	? upLeft : upRight;
-	// 
-	// // Move boss pos to where it should be.
-	// std::swap( floorLayout[bossPos],
-	// 	floorLayout[idealBossPos] );
-
-	Vei2 start = { 0,Random::RangeI( 0,width - 1 ) };
+	// Place the actual rooms in a random layout.
+	Vei2 start = { Random::RangeI( 0,width - 1 ),
+		Random::RangeI( 0,height - 1 ) };
 	while( layoutNums.size() > 0 )
 	{
 		if( floorLayout[start.y * width + start.x] == -1 )
@@ -166,7 +177,7 @@ void FloorLevel::RandomizeLayout()
 			switch( randMoveDir )
 			{
 			case 0:
-				if( start.y > 0 ) --start.y;
+				if( start.y > 1 ) --start.y;
 				break;
 			case 1:
 				if( start.y < height - 1 ) ++start.y;

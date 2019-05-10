@@ -79,19 +79,20 @@ Door::Side Door::GetSide() const
 
 Vec2 Door::GetPlayerSpawnPos( const Vec2& guyPos ) const
 {
+	const int doorSpawnOffset = 64 + 32;
 	switch( GetSide() )
 	{
 	case Door::Side::Top:
-		return( Vec2{ guyPos.x,float( Graphics::ScreenHeight - 64 ) } );
+		return( Vec2{ guyPos.x,float( Graphics::ScreenHeight - doorSpawnOffset ) } );
 		break;
 	case Door::Side::Bot:
-		return( Vec2{ guyPos.x,float( 0 + 64 ) } );
+		return( Vec2{ guyPos.x,float( 0 + doorSpawnOffset ) } );
 		break;
 	case Door::Side::Left:
-		return( Vec2{ float( Graphics::ScreenWidth - 64 ),guyPos.y } );
+		return( Vec2{ float( Graphics::ScreenWidth - doorSpawnOffset ),guyPos.y } );
 		break;
 	case Door::Side::Right:
-		return( Vec2{ float( 0 + 64 ),guyPos.y } );
+		return( Vec2{ float( 0 + doorSpawnOffset ),guyPos.y } );
 		break;
 	default:
 		assert( false );

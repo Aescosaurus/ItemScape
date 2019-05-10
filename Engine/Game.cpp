@@ -200,6 +200,11 @@ void Game::LoadNextLevel()
 			break;
 		}
 	}
+
+	if( floor.CurRoomAlreadyCompleted() )
+	{
+		enemies.clear();
+	}
 }
 
 bool Game::IsLevelOver() const
