@@ -19,6 +19,9 @@
     <Filter Include="Header Files\BugEnemies">
       <UniqueIdentifier>{df5e0013-1134-4f01-88e1-14809ffcdae9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Inventory">
+      <UniqueIdentifier>{129dc2fe-1024-4e81-87c4-4a8fbca5870e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -153,6 +156,15 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItem.h">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthCharge.h">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -243,6 +255,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CursorHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

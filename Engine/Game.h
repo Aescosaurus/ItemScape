@@ -33,6 +33,7 @@
 #include "EnemyBase.h"
 #include "GameState.h"
 #include "CursorHandler.h"
+#include "Inventory.h"
 
 class Game
 {
@@ -63,5 +64,6 @@ private:
 	std::vector<Door> doors;
 	CursorHandler cursorHand;
 	GameState state = GameState::Gameplay;
+	Inventory playerInv;
 	/********************************/
 };

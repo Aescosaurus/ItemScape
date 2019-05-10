@@ -78,6 +78,8 @@ void Game::UpdateModel()
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
+	playerInv.Update( wnd.kbd,wnd.mouse );
+
 	for( auto& b : playerBullets ) b->Update( dt );
 	for( auto& eb : enemyBullets ) eb->Update( dt );
 
@@ -152,6 +154,7 @@ void Game::ComposeFrame()
 	map.Draw( gfx );
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx );
+	playerInv.Draw( gfx );
 	// Top of drawing order.
 
 	cursorHand.DrawCursor( wnd.mouse.GetPos(),state,gfx );

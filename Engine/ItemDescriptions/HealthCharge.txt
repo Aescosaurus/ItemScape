@@ -1,0 +1,7 @@
+Health Charge
+Whenever you take
+damage from any source,
+consumes one charge and
+destroys bullets in a
+small radius around
+yourself.

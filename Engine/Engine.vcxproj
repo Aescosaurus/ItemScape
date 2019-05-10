@@ -151,6 +151,9 @@
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="BeetleBig.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="HealthCharge.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="RynoChaser.h" />
     <ClInclude Include="Skorp.h" />
     <ClInclude Include="Slizard.h" />
@@ -191,6 +194,8 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="BeetleBig.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="RynoChaser.cpp" />
     <ClCompile Include="Skorp.cpp" />
     <ClCompile Include="Slizard.cpp" />
