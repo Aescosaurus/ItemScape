@@ -8,4 +8,6 @@ enum class EnemyType
 	SpiderMole = int( 'm' ),
 	RynoChaser = int( 'r' ),
 	Slizard = int( 'l' )
+
+
 };

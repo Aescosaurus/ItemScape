@@ -35,14 +35,18 @@ private:
 	std::string FormLevelName( int pos ) const;
 	Color CheckRoomColor( int x,int y ) const;
 private:
-	static constexpr int width = 3;
-	static constexpr int height = 3;
-	int floorLayout[width * height] =
-	{ // This is what it should look like but shuffled.
-		0,1,2, // Oh, and 8 should only be on upper left
-		3,4,5, //  or upper right.
-		6,7,8
-	};
+	// static constexpr int width = 3;
+	// static constexpr int height = 3;
+	// int floorLayout[width * height] =
+	// { // This is what it should look like but shuffled.
+	// 	0,1,2, // Oh, and 8 should only be on upper left
+	// 	3,4,5, //  or upper right.
+	// 	6,7,8
+	// };
+	static constexpr int width = 9;
+	static constexpr int height = 9;
+	static constexpr int nRoomsPerFloor = 9;
+	int floorLayout[width * height];
 
 	int curFloor = 0;
 	static constexpr auto firstName = "Levels/Floor";
