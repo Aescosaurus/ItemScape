@@ -35,15 +35,21 @@ public:
 	Bullet( const Vec2& pos,const Vec2& target,
 		const TileMap& map,Team myTeam,float speed,Size mySize );
 
-	void Update( float dt );
+	virtual void Update( float dt );
 	void Draw( Graphics& gfx ) const;
 
 	void Attack( int damage );
+	void SetSubColor( Color c );
 
 	bool IsExpl() const;
 	const Vec2& GetPos() const;
 	const Rect& GetRect() const;
-private:
+	int& GetDamage();
+protected:
+	// Bullet( const Vec2& pos,const Vec2& vel,Team myTeam,
+	// 	Size mySize,const TileMap* map,Anim anim,
+	// 	Collider coll,)
+protected:
 	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );
 	static constexpr Vei2 size = { 16,16 };
 	Vec2 pos;
@@ -54,6 +60,24 @@ private:
 	Anim myAnim;
 	bool dead = false;
 	Collider coll;
+	Color subColor = Colors::Magenta;
+	int damage = 1;
+};
+
+class BoomerangBullet
+	:
+	public Bullet
+{
+public:
+	BoomerangBullet( const Bullet& src );
+
+	void Update( float dt ) override;
+private:
+	float distTravelled = 0.0f;
+	Vec2 normVel;
+	float speed;
+	float freq = 15.0f;
+	float amplitude = 0.7f;
 };
 
 // Ideas:

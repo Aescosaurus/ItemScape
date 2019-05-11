@@ -20,7 +20,10 @@ public:
 	// 	const std::string& desc,const std::string& icon );
 	void AddItem( InventoryItem* itemToAdd );
 	void ConsumeItem( const std::string& name );
+	/*Event methods*/
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
+	void OnPlayerShoot( InventoryEventInfo& evtInfo );
+	/**/
 
 	InventoryItem* FindItem( const std::string& name );
 private:

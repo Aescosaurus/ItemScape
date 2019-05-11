@@ -57,7 +57,10 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 			pos,Vec2( ms.GetPos() ),map,
 			Bullet::Team::Player1,bulletSpeed,
 			Bullet::Size::Small ) );
+
+		justShot = true;
 	}
+	else justShot = false;
 }
 
 void Player::Draw( Graphics& gfx ) const
@@ -110,6 +113,11 @@ Rect Player::GetRect() const
 	}
 
 	return( coll.GetRect() );
+}
+
+bool Player::JustShot() const
+{
+	return( justShot );
 }
 
 void Player::Jump()

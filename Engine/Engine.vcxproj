@@ -150,6 +150,7 @@
     <ClInclude Include="EnemyType.h" />
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="BeetleBig.h" />
+    <ClInclude Include="FifthShotFlintlock.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HealthCharge.h" />
     <ClInclude Include="Inventory.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TwistyTie.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />

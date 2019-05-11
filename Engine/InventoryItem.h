@@ -14,9 +14,21 @@
 class InventoryEventInfo
 {
 public:
+	InventoryEventInfo( Player& player,
+		std::vector<std::unique_ptr<Bullet>>& enemyBullets,
+		std::vector<VisualEffect>& visualEffects,
+		std::vector<std::unique_ptr<Bullet>>& playerBullets )
+		:
+		player( player ),
+		enemyBullets( enemyBullets ),
+		visualEffects( visualEffects ),
+		playerBullets( playerBullets )
+	{}
+public:
 	Player& player;
 	std::vector<std::unique_ptr<Bullet>>& enemyBullets;
 	std::vector<VisualEffect>& visualEffects;
+	std::vector<std::unique_ptr<Bullet>>& playerBullets;
 };
 
 class InventoryItem
@@ -32,7 +44,10 @@ public:
 	void Draw( Graphics& gfx ) const;
 	
 	void SetPos( const Vei2& pos );
+	/*Event methods*/
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
+	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
+	/**/
 
 	const Vei2& GetPos() const;
 	bool IsSelected() const;

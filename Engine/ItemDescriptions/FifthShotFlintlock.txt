@@ -1,0 +1,3 @@
+Fifth Shot Flintlock
+Every fifth shot fired
+deals double damage.

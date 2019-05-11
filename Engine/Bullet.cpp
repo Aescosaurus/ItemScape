@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "SpriteEffect.h"
 
 Bullet::Bullet( const Vec2& pos,const Vec2& target,
 	const TileMap& map,Team myTeam,float speed,Size mySize )
@@ -53,7 +54,16 @@ void Bullet::Update( float dt )
 
 void Bullet::Draw( Graphics& gfx ) const
 {
-	myAnim.Draw( Vei2( pos - Vec2( size ) / 2.0f ),gfx,false );
+	if( subColor != Colors::Magenta )
+	{
+		myAnim.Draw( Vei2( pos - Vec2( size ) / 2.0f ),
+			gfx,SpriteEffect::SubstituteFade{
+				Colors::Magenta,subColor,0.5f } );
+	}
+	else
+	{
+		myAnim.Draw( Vei2( pos - Vec2( size ) / 2.0f ),gfx,false );
+	}
 	
 	// gfx.DrawHitbox( coll.GetRect() );
 }
@@ -61,6 +71,11 @@ void Bullet::Draw( Graphics& gfx ) const
 void Bullet::Attack( int damage )
 {
 	dead = true;
+}
+
+void Bullet::SetSubColor( Color c )
+{
+	subColor = c;
 }
 
 bool Bullet::IsExpl() const
@@ -76,4 +91,40 @@ const Vec2& Bullet::GetPos() const
 const Rect& Bullet::GetRect() const
 {
 	return( coll.GetRect() );
+}
+
+int& Bullet::GetDamage()
+{
+	return( damage );
+}
+
+BoomerangBullet::BoomerangBullet( const Bullet& src )
+	:
+	Bullet( src ),
+	normVel( vel.GetNormalized() ),
+	speed( vel.GetLength() )
+{}
+
+void BoomerangBullet::Update( float dt )
+{
+	auto testMove = normVel;
+
+	const Vec2 wavyMoveAdd = Vec2( testMove.y,-testMove.x ) *
+		sin( distTravelled * freq ) * amplitude;
+	testMove.x += /*cos*/( wavyMoveAdd.x );
+	testMove.y += /*sin*/( wavyMoveAdd.y );
+
+	testMove *= speed;
+	testMove *= dt;
+
+	const auto validMove = coll.GetValidMove( pos,testMove );
+
+	pos += Vec2( validMove );
+	coll.MoveTo( pos - Vec2( size ) / 2.0f );
+
+	if( validMove.z ) dead = true;
+
+	myAnim.Update( dt );
+
+	distTravelled += dt;
 }

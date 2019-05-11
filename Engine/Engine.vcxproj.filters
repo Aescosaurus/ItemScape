@@ -171,6 +171,12 @@
     <ClInclude Include="PickupManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FifthShotFlintlock.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="TwistyTie.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

@@ -83,6 +83,8 @@ void Game::UpdateModel()
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
+	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo() );
+
 	playerInv.Update( wnd.kbd,wnd.mouse );
 
 	for( auto& b : playerBullets ) b->Update( dt );
@@ -96,8 +98,7 @@ void Game::UpdateModel()
 		{
 			if( playerInv.FindItem( "Health Charge" ) != nullptr )
 			{
-				playerInv.OnPlayerHit( InventoryEventInfo{
-					guy,enemyBullets,visualEffects } );
+				playerInv.OnPlayerHit( GenerateInvEvtInfo() );
 			}
 			else
 			{
@@ -124,7 +125,8 @@ void Game::UpdateModel()
 		{
 			if( b->GetRect().IsOverlappingWith( enemyRect ) )
 			{
-				e->Attack( 1,b->GetRect().GetCenter() );
+				e->Attack( b->GetDamage(),
+					b->GetRect().GetCenter() );
 				b->Attack( 1 );
 
 				if( e->IsExpl() ) enemyExploded = true;
@@ -265,4 +267,10 @@ bool Game::IsLevelOver() const
 		if( !e->IsExpl() ) return( false );
 	}
 	return( true );
+}
+
+InventoryEventInfo Game::GenerateInvEvtInfo()
+{
+	return( InventoryEventInfo{ guy,enemyBullets,
+		visualEffects,playerBullets } );
 }

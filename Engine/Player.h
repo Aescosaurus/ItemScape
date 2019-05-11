@@ -29,6 +29,7 @@ public:
 	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
 	Rect GetRect() const;
+	bool JustShot() const;
 private:
 	void Jump();
 	void Land();
@@ -47,4 +48,5 @@ private:
 	Timer jumpReset = 1.0f;
 	const Surface surfSheet = { { "Images/Player1Anim.bmp" },Vei2{ 4,4 } };
 	Anim walk;
+	bool justShot = false;
 };

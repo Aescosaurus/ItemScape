@@ -124,6 +124,14 @@ void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
 	}
 }
 
+void Inventory::OnPlayerShoot( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnPlayerShoot( evtInfo );
+	}
+}
+
 InventoryItem* Inventory::FindItem( const std::string& name )
 {
 	for( auto& item : items )
