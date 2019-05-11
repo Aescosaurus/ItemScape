@@ -30,7 +30,8 @@ public:
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
 	
-	void ShiftItems();
+	void ShiftItems( std::vector<std::unique_ptr<
+		InventoryItem>>::iterator spot );
 private:
 	std::vector<std::unique_ptr<InventoryItem>> items;
 

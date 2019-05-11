@@ -34,7 +34,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	{
 		if( ( *it )->WillRemove() )
 		{
-			ShiftItems();
+			ShiftItems( it );
 			items.erase( it );
 			it = items.begin();
 		}
@@ -104,6 +104,8 @@ void Inventory::AddItem( InventoryItem* itemToAdd )
 
 void Inventory::ConsumeItem( const std::string& name )
 {
+	assert( false ); // TODO: Fix this if you ever want to use it.
+
 	for( auto it = items.begin(); it != items.end(); ++it )
 	{
 		if( ( *it )->GetName() == name )
@@ -113,7 +115,7 @@ void Inventory::ConsumeItem( const std::string& name )
 		}
 	}
 
-	ShiftItems();
+	// ShiftItems();
 }
 
 void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
@@ -171,11 +173,16 @@ void Inventory::DrawInvGrid( Graphics& gfx ) const
 	}
 }
 
-void Inventory::ShiftItems()
+void Inventory::ShiftItems( std::vector<std::unique_ptr<
+	InventoryItem>>::iterator spot )
 {
 	// Re-order items after removal.
-	for( int i = int( items.size() ) - 1; i > 0; --i )
+	// for( int i = int( items.size() ) - 1; i > 0; --i )
+	// {
+	// 	items[i]->SetPos( items[i - 1]->GetPos() );
+	// }
+	for( auto it = items.end() - 1; it != spot; --it )
 	{
-		items[i]->SetPos( items[i - 1]->GetPos() );
+		( *it )->SetPos( ( *( it - 1 ) )->GetPos() );
 	}
 }
