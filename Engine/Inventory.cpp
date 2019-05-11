@@ -75,11 +75,11 @@ void Inventory::Draw( Graphics& gfx ) const
 	}
 }
 
-void Inventory::AddItem( const std::string& name,
-	const std::string& desc,const std::string& icon )
-{
-	AddItem( new InventoryItem( name,desc,icon ) );
-}
+// void Inventory::AddItem( const std::string& name,
+// 	const std::string& desc,const std::string& icon )
+// {
+// 	AddItem( new InventoryItem( name,desc,icon ) );
+// }
 
 void Inventory::AddItem( InventoryItem* itemToAdd )
 {

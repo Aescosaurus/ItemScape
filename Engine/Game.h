@@ -67,5 +67,6 @@ private:
 	GameState state = GameState::Gameplay;
 	Inventory playerInv;
 	std::vector<VisualEffect> visualEffects;
+	std::vector<InventoryItem*> pickups;
 	/********************************/
 };

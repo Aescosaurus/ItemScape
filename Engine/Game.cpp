@@ -30,7 +30,7 @@
 #include "SpiderMole.h"
 #include "RynoChaser.h"
 #include "Slizard.h"
-#include "HealthCharge.h"
+#include "PickupManager.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -128,6 +128,14 @@ void Game::UpdateModel()
 				b->Attack( 1 );
 
 				if( e->IsExpl() ) enemyExploded = true;
+
+				if( IsLevelOver() )
+				{
+					pickups.emplace_back( PickupManager
+						::RandPickup() );
+					pickups.back()->SetPos( e->GetPos() +
+						e->GetRect().GetSize() / 2.0f );
+				}
 			}
 		}
 	}
@@ -145,6 +153,17 @@ void Game::UpdateModel()
 	}
 
 	for( auto& vEff : visualEffects ) vEff.Update( dt );
+
+	// Pick up pickups.
+	for( auto it = pickups.begin(); it != pickups.end(); ++it )
+	{
+		if( ( *it )->GetRect().IsOverlappingWith( guy.GetRect() ) )
+		{
+			playerInv.AddItem( *it );
+			pickups.erase( it );
+			break;
+		}
+	}
 
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsExpl ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
@@ -178,6 +197,7 @@ void Game::ComposeFrame()
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto& eff : visualEffects ) eff.Draw( gfx );
+	for( const auto* pup : pickups ) pup->Draw( gfx );
 	map.Draw( gfx );
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx );
@@ -193,6 +213,7 @@ void Game::LoadNextLevel()
 	enemies.clear();
 	playerBullets.clear();
 	enemyBullets.clear();
+	visualEffects.clear();
 
 	map.LoadFile( floor.GetLevelName() );
 

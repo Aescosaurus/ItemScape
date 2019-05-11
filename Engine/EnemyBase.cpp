@@ -18,6 +18,11 @@ bool EnemyBase::IsExpl() const
 	return( hp < 1 );
 }
 
+const Vec2& EnemyBase::GetPos() const
+{
+	return( pos );
+}
+
 const Rect& EnemyBase::GetRect() const
 {
 	return( coll.GetRect() );

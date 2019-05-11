@@ -37,7 +37,7 @@ void InventoryItem::Update( const Mouse& mouse )
 		mouse.GetPos() ) );
 }
 
-void InventoryItem::Draw( Graphics& gfx )
+void InventoryItem::Draw( Graphics& gfx ) const
 {
 	// gfx.DrawRect( pos.x,pos.y,size.x,size.y,Colors::Magenta );
 
@@ -78,6 +78,11 @@ const std::string& InventoryItem::GetDesc() const
 bool InventoryItem::WillRemove() const
 {
 	return( remove );
+}
+
+RectI InventoryItem::GetRect() const
+{
+	return( RectI{ pos,size.x,size.y } );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const

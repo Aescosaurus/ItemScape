@@ -87,6 +87,10 @@ public:
 	{
 		return bottom - top;
 	}
+	constexpr Vec2_<T> GetSize() const
+	{
+		return( Vec2_<T>{ GetWidth(),GetHeight() } );
+	}
 public:
 	T left;
 	T right;

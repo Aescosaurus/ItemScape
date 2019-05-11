@@ -29,7 +29,7 @@ public:
 		const std::string& icon );
 
 	void Update( const Mouse& mouse );
-	void Draw( Graphics& gfx );
+	void Draw( Graphics& gfx ) const;
 	
 	void SetPos( const Vei2& pos );
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
@@ -39,6 +39,7 @@ public:
 	const std::string& GetName() const;
 	const std::string& GetDesc() const;
 	bool WillRemove() const;
+	RectI GetRect() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;

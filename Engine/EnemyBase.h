@@ -33,6 +33,7 @@ public:
 	virtual void Attack( int damage,const Vec2& loc );
 
 	bool IsExpl() const;
+	const Vec2& GetPos() const;
 	const Rect& GetRect() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,

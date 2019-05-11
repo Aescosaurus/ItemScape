@@ -16,8 +16,8 @@ public:
 	void Update( const Keyboard& kbd,const Mouse& mouse );
 	void Draw( Graphics& gfx ) const;
 
-	void AddItem( const std::string& name,
-		const std::string& desc,const std::string& icon );
+	// void AddItem( const std::string& name,
+	// 	const std::string& desc,const std::string& icon );
 	void AddItem( InventoryItem* itemToAdd );
 	void ConsumeItem( const std::string& name );
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
