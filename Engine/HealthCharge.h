@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InventoryItem.h"
+#include "VisualEffect.h"
 
 class HealthCharge
 	:
@@ -15,8 +16,15 @@ public:
 
 	void OnPlayerHit( InventoryEventInfo& evtInfo ) override
 	{
-		evtInfo.enemyBullets.clear();
+		for( const auto& enemyBull : evtInfo.enemyBullets )
+		{
+			evtInfo.visualEffects.emplace_back(
+				VisualEffect{ enemyBull->GetPos(),
+				VisualEffect::Type::LightningDissipate } );
 
-		remove = true;
+			remove = true;
+		}
+
+		evtInfo.enemyBullets.clear();
 	}
 };

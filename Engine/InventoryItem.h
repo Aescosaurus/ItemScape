@@ -9,12 +9,14 @@
 #include "Font.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "VisualEffect.h"
 
 class InventoryEventInfo
 {
 public:
 	Player& player;
 	std::vector<std::unique_ptr<Bullet>>& enemyBullets;
+	std::vector<VisualEffect>& visualEffects;
 };
 
 class InventoryItem

@@ -34,6 +34,7 @@
 #include "GameState.h"
 #include "CursorHandler.h"
 #include "Inventory.h"
+#include "VisualEffect.h"
 
 class Game
 {
@@ -65,5 +66,6 @@ private:
 	CursorHandler cursorHand;
 	GameState state = GameState::Gameplay;
 	Inventory playerInv;
+	std::vector<VisualEffect> visualEffects;
 	/********************************/
 };

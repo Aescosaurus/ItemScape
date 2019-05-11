@@ -30,6 +30,7 @@
 #include "SpiderMole.h"
 #include "RynoChaser.h"
 #include "Slizard.h"
+#include "HealthCharge.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -45,6 +46,10 @@ Game::Game( MainWindow& wnd )
 	doors.emplace_back( Door{ Door::Side::Bot,floor } );
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
+
+	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new HealthCharge );
 }
 
 void Game::Go()
@@ -89,7 +94,15 @@ void Game::UpdateModel()
 
 		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
-			playerInv.OnPlayerHit( InventoryEventInfo{ guy,enemyBullets } );
+			if( playerInv.FindItem( "Health Charge" ) != nullptr )
+			{
+				playerInv.OnPlayerHit( InventoryEventInfo{
+					guy,enemyBullets,visualEffects } );
+			}
+			else
+			{
+				// You lose!!
+			}
 		}
 	}
 
@@ -131,8 +144,11 @@ void Game::UpdateModel()
 		} );
 	}
 
+	for( auto& vEff : visualEffects ) vEff.Update( dt );
+
 	chili::remove_erase_if( playerBullets,std::mem_fn( &Bullet::IsExpl ) );
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
+	chili::remove_erase_if( visualEffects,std::mem_fn( &VisualEffect::IsExpl ) );
 
 	// Check if you're touching a door.
 	if( IsLevelOver() )
@@ -161,6 +177,7 @@ void Game::ComposeFrame()
 	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
+	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	map.Draw( gfx );
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx );

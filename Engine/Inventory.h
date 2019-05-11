@@ -25,6 +25,8 @@ public:
 	InventoryItem* FindItem( const std::string& name );
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
+	
+	void ShiftItems();
 private:
 	std::vector<std::unique_ptr<InventoryItem>> items;
 

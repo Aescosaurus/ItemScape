@@ -1,5 +1,4 @@
 #include "Inventory.h"
-#include "HealthCharge.h"
 
 Inventory::Inventory()
 {
@@ -7,7 +6,6 @@ Inventory::Inventory()
 	// {
 	// 	AddItem( "Hi","test desc","Images/Wall2.bmp" );
 	// }
-	AddItem( new HealthCharge() );
 }
 
 void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
@@ -36,6 +34,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	{
 		if( ( *it )->WillRemove() )
 		{
+			ShiftItems();
 			items.erase( it );
 			it = items.begin();
 		}
@@ -113,6 +112,8 @@ void Inventory::ConsumeItem( const std::string& name )
 			break;
 		}
 	}
+
+	ShiftItems();
 }
 
 void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
@@ -151,5 +152,14 @@ void Inventory::DrawInvGrid( Graphics& gfx ) const
 		// curPos += itemSize.Y();
 		// curPos += itemPadding.Y();
 		// curPos.x = invStart.x;
+	}
+}
+
+void Inventory::ShiftItems()
+{
+	// Re-order items after removal.
+	for( int i = int( items.size() ) - 1; i > 0; --i )
+	{
+		items[i]->SetPos( items[i - 1]->GetPos() );
 	}
 }
