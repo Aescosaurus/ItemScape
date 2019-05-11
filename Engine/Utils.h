@@ -4,6 +4,8 @@
 
 namespace chili
 {
+	static constexpr float pi = 3.1415926535f;
+
 	// remove an element from a vector
 	// messes up the order of elements
 	// (faster than erase and doesn't need iter)

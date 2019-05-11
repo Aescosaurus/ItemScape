@@ -6,6 +6,8 @@
 #include "FifthShotFlintlock.h"
 #include "TwistyTie.h"
 #include "ChargeGenerator.h"
+#include "CableSplitter.h"
+#include "TripleBow.h"
 
 class PickupManager
 {
@@ -18,6 +20,8 @@ public:
 		options.emplace_back( new FifthShotFlintlock );
 		options.emplace_back( new TwistyTie );
 		options.emplace_back( new ChargeGenerator );
+		options.emplace_back( new CableSplitter );
+		options.emplace_back( new TripleBow );
 		// TODO: Add more options here.
 
 		std::random_device rd;

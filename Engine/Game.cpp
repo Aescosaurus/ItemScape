@@ -47,15 +47,9 @@ Game::Game( MainWindow& wnd )
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
-	playerInv.AddItem( new ChargeGenerator );
-	playerInv.AddItem( new FifthShotFlintlock );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new ChargeGenerator );
-	playerInv.AddItem( new FifthShotFlintlock );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new ChargeGenerator );
-	playerInv.AddItem( new FifthShotFlintlock );
 }
 
 void Game::Go()

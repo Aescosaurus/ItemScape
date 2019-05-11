@@ -11,7 +11,7 @@ public:
 	ChargeGenerator()
 		:
 		InventoryItem( "ItemDescriptions/ChargeGenerator.txt",
-			"Images/Wall2.bmp" )
+			"Images/Items/ChargeGenerator.bmp" )
 	{}
 
 	void OnEnemyExplode( InventoryEventInfo& invEvtInfo ) override
@@ -30,5 +30,5 @@ public:
 		}
 	}
 private:
-	float chance = 10.0f;
+	static constexpr float chance = 10.0f;
 };

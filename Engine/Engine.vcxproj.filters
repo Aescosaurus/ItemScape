@@ -180,6 +180,12 @@
     <ClInclude Include="ChargeGenerator.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="CableSplitter.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="TripleBow.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

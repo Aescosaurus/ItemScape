@@ -42,9 +42,10 @@ public:
 	void SetSubColor( Color c );
 
 	bool IsExpl() const;
-	const Vec2& GetPos() const;
+	Vec2& GetPos();
 	const Rect& GetRect() const;
 	int& GetDamage();
+	Vec2& GetVel();
 protected:
 	// Bullet( const Vec2& pos,const Vec2& vel,Team myTeam,
 	// 	Size mySize,const TileMap* map,Anim anim,

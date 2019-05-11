@@ -1,0 +1,3 @@
+Triple Bow
+Every 10th shot, fire 3
+shots instead of one.

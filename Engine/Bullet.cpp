@@ -83,7 +83,7 @@ bool Bullet::IsExpl() const
 	return( dead );
 }
 
-const Vec2& Bullet::GetPos() const
+Vec2& Bullet::GetPos()
 {
 	return( pos );
 }
@@ -96,6 +96,11 @@ const Rect& Bullet::GetRect() const
 int& Bullet::GetDamage()
 {
 	return( damage );
+}
+
+Vec2& Bullet::GetVel()
+{
+	return( vel );
 }
 
 BoomerangBullet::BoomerangBullet( const Bullet& src )

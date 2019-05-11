@@ -1,0 +1,5 @@
+Cable Splitter
+Every time you shoot,
+has a 20% chance to
+fire an additional
+bullet.
