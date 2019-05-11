@@ -50,6 +50,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new ChargeGenerator );
 }
 
 void Game::Go()
@@ -129,14 +130,22 @@ void Game::UpdateModel()
 					b->GetRect().GetCenter() );
 				b->Attack( 1 );
 
-				if( e->IsExpl() ) enemyExploded = true;
+				if( e->IsExpl() )
+				{
+					enemyExploded = true;
+					playerInv.OnEnemyExplode( GenerateInvEvtInfo() );
+				}
 
 				if( IsLevelOver() )
 				{
 					pickups.emplace_back( PickupManager
 						::RandPickup() );
-					pickups.back()->SetPos( e->GetPos() +
-						e->GetRect().GetSize() / 2.0f );
+
+					pickups.back()->SetPos( e->GetPos() + Vec2{
+						Random::RangeF( 0.0f,e->GetRect()
+						.GetWidth() / 2.0f ),
+						Random::RangeF( 0.0f,e->GetRect()
+						.GetHeight() / 2.0f ) } );
 				}
 			}
 		}
@@ -198,8 +207,8 @@ void Game::ComposeFrame()
 	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
-	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	for( const auto* pup : pickups ) pup->Draw( gfx );
+	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	map.Draw( gfx );
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx );
@@ -272,5 +281,5 @@ bool Game::IsLevelOver() const
 InventoryEventInfo Game::GenerateInvEvtInfo()
 {
 	return( InventoryEventInfo{ guy,enemyBullets,
-		visualEffects,playerBullets } );
+		visualEffects,playerBullets,enemies,pickups } );
 }

@@ -132,6 +132,14 @@ void Inventory::OnPlayerShoot( InventoryEventInfo& evtInfo )
 	}
 }
 
+void Inventory::OnEnemyExplode( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnEnemyExplode( evtInfo );
+	}
+}
+
 InventoryItem* Inventory::FindItem( const std::string& name )
 {
 	for( auto& item : items )

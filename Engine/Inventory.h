@@ -23,6 +23,7 @@ public:
 	/*Event methods*/
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
 	void OnPlayerShoot( InventoryEventInfo& evtInfo );
+	void OnEnemyExplode( InventoryEventInfo& evtInfo );
 	/**/
 
 	InventoryItem* FindItem( const std::string& name );

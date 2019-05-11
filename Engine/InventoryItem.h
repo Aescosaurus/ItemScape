@@ -10,25 +10,19 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "VisualEffect.h"
+#include "EnemyBase.h"
+
+class InventoryItem;
 
 class InventoryEventInfo
 {
-public:
-	InventoryEventInfo( Player& player,
-		std::vector<std::unique_ptr<Bullet>>& enemyBullets,
-		std::vector<VisualEffect>& visualEffects,
-		std::vector<std::unique_ptr<Bullet>>& playerBullets )
-		:
-		player( player ),
-		enemyBullets( enemyBullets ),
-		visualEffects( visualEffects ),
-		playerBullets( playerBullets )
-	{}
 public:
 	Player& player;
 	std::vector<std::unique_ptr<Bullet>>& enemyBullets;
 	std::vector<VisualEffect>& visualEffects;
 	std::vector<std::unique_ptr<Bullet>>& playerBullets;
+	std::vector<std::unique_ptr<EnemyBase>>& enemies;
+	std::vector<InventoryItem*>& pickups;
 };
 
 class InventoryItem
@@ -42,11 +36,12 @@ public:
 
 	void Update( const Mouse& mouse );
 	void Draw( Graphics& gfx ) const;
-	
+
 	void SetPos( const Vei2& pos );
 	/*Event methods*/
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
+	virtual void OnEnemyExplode( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	const Vei2& GetPos() const;
