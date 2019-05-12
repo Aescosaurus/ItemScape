@@ -44,8 +44,6 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 		items[2]->OnActivate( invEvtInfo );
 	}
 
-	if( !active ) return; // -----------------------------
-
 	for( auto& item : items )
 	{
 		item->Update( mouse );
@@ -62,7 +60,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 		}
 		else
 		{
-			if( mouse.LeftIsPressed() )
+			if( mouse.LeftIsPressed() && active )
 			{
 				if( ( *it )->GetRect().ContainsPoint(
 					mouse.GetPos() ) && !holdingItem )
@@ -72,7 +70,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 				}
 			}
 			else if( ( ( *it )->GetRect().ContainsPoint(
-				mouse.GetPos() ) ) && holdingItem )
+				mouse.GetPos() ) ) && holdingItem && active )
 			{
 				std::iter_swap( it,selectedItem );
 				holdingItem = false;

@@ -2,12 +2,15 @@
 
 #include "InventoryItem.h"
 #include "Random.h"
+
 #include "HealthCharge.h"
 #include "FifthShotFlintlock.h"
 #include "TwistyTie.h"
 #include "ChargeGenerator.h"
 #include "CableSplitter.h"
 #include "TripleBow.h"
+#include "DamagingStake.h"
+
 #include "RustyPistol.h"
 #include "OldRifle.h"
 #include "DebilitatedShotgun.h"
@@ -25,6 +28,7 @@ public:
 		options.emplace_back( new ChargeGenerator );
 		options.emplace_back( new CableSplitter );
 		options.emplace_back( new TripleBow );
+		options.emplace_back( new DamagingStake );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

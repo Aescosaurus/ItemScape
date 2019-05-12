@@ -1,0 +1,6 @@
+Damaging Stake
+A sharp stake.  Equip
+in an activation slot
+to deal 20 damage to
+the nearest enemy and
+destroy this item.
