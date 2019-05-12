@@ -1,0 +1,4 @@
+Bullet Ring Capacitor
+Every 20th shot, fire a
+ring of 8 bullets
+dealing 1 damage each.

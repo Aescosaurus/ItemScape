@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new DamagingStake );
+	playerInv.AddItem( new BulletRingCapacitor );
 }
 
 void Game::Go()

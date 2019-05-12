@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Anim.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletRingCapacitor.h" />
     <ClInclude Include="CableSplitter.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
