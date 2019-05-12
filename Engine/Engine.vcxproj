@@ -157,6 +157,7 @@
     <ClInclude Include="ChargeGenerator.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="RustyPistol.h" />
     <ClInclude Include="RynoChaser.h" />

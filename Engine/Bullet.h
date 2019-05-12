@@ -33,7 +33,8 @@ public:
 	};
 public:
 	Bullet( const Vec2& pos,const Vec2& target,
-		const TileMap& map,Team myTeam,float speed,Size mySize );
+		const TileMap& map,Team myTeam,float speed,
+		Size mySize,int damage = 1 );
 
 	virtual void Update( float dt );
 	void Draw( Graphics& gfx ) const;
@@ -63,7 +64,7 @@ protected:
 	bool dead = false;
 	Collider coll;
 	Color subColor = Colors::Magenta;
-	int damage = 1;
+	int damage;
 };
 
 class BoomerangBullet

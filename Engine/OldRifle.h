@@ -1,23 +1,23 @@
 #pragma once
 
 #include "InventoryItem.h"
-#include "Timer.h"
 
-class RustyPistol
+class OldRifle
 	:
 	public InventoryItem
 {
 public:
-	RustyPistol()
+	OldRifle()
 		:
-		InventoryItem( "ItemDescriptions/Guns/RustyPistol.txt",
-			"Images/Items/Guns/RustyPistol.bmp" )
+		InventoryItem( "ItemDescriptions/Guns/OldRifle.txt",
+			"Images/Items/Guns/OldRifle.bmp" )
 	{}
 
 	InventoryItem* Clone() override
 	{
-		return( new RustyPistol );
+		return( new OldRifle );
 	}
+
 
 	void OnUpdate( InventoryEventInfo& invEvtInfo ) override
 	{
@@ -37,13 +37,13 @@ public:
 
 			invEvtInfo.playerBullets.emplace_back(
 				std::make_unique<Bullet>( player.GetPos(),
-				Vec2( invEvtInfo.mouse.GetPos() ),
-				invEvtInfo.map,Bullet::Team::Player1,
-				bulletSpeed,Bullet::Size::Small,damage ) );
+					Vec2( invEvtInfo.mouse.GetPos() ),
+					invEvtInfo.map,Bullet::Team::Player1,
+					bulletSpeed,Bullet::Size::Small,damage ) );
 		}
 	}
 private:
-	Timer shotTimer = 0.23f;
+	Timer shotTimer = 0.23f * 2.0f;
 	static constexpr float bulletSpeed = 324.2f;
-	static constexpr int damage = 1;
+	static constexpr int damage = 2;
 };

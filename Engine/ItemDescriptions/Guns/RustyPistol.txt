@@ -1,2 +1,4 @@
 Rusty Pistol
 An old rusty pistol.
+Equip in the weapon
+slot to fire bullets.

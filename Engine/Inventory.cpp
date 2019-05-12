@@ -33,7 +33,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 
 	if( mouse.LeftIsPressed() )
 	{
-		items[0]->OnActivate( invEvtInfo );
+		items[0]->OnGunFire( invEvtInfo );
 	}
 	if( kbd.KeyIsPressed( VK_SHIFT ) )
 	{

@@ -1,0 +1,4 @@
+Old Rifle
+An old rifle.  Equip in
+the weapon slot to
+fire bullets.

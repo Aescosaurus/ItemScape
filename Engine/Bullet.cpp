@@ -2,7 +2,8 @@
 #include "SpriteEffect.h"
 
 Bullet::Bullet( const Vec2& pos,const Vec2& target,
-	const TileMap& map,Team myTeam,float speed,Size mySize )
+	const TileMap& map,Team myTeam,float speed,
+	Size mySize,int damage )
 	:
 	pos( pos ),
 	vel( ( target - pos ).GetNormalized() * speed ),
@@ -11,7 +12,8 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 	map( &map ),
 	// This is useless, make it for real in the body.
 	myAnim( 0,0,0,0,0,*pSprSheet,0.2f ),
-	coll( map,{ { 0,0 },0,0 } )
+	coll( map,{ { 0,0 },0,0 } ),
+	damage( damage )
 {
 	Vei2 animStart = { 0,0 };
 	Vei2 frameSize = { 0,0 };

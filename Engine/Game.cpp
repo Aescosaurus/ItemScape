@@ -141,7 +141,7 @@ void Game::UpdateModel()
 				if( IsLevelOver() )
 				{
 					pickups.emplace_back( PickupManager
-						::RandPickup() );
+						::RandT1Pickup() );
 
 					pickups.back()->SetPos( e->GetPos() + Vec2{
 						Random::RangeF( 0.0f,e->GetRect()
