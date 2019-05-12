@@ -12,6 +12,7 @@
 #include "DamagingStake.h"
 #include "BulletRingCapacitor.h"
 #include "GPSTracker.h"
+#include "CactusBranch.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -33,6 +34,7 @@ public:
 		options.emplace_back( new DamagingStake );
 		options.emplace_back( new BulletRingCapacitor );
 		options.emplace_back( new GPSTracker );
+		options.emplace_back( new CactusBranch );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

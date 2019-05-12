@@ -1,0 +1,6 @@
+Cactus Branch
+Every time the player
+takes damage, deals 20
+damage to a random
+enemy.  A health charge
+will still be consumed.

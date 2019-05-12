@@ -140,6 +140,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletRingCapacitor.h" />
     <ClInclude Include="CableSplitter.h" />
+    <ClInclude Include="CactusBranch.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Codex.h" />

@@ -210,6 +210,9 @@
     <ClInclude Include="GPSTracker.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="CactusBranch.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new GPSTracker );
+	playerInv.AddItem( new CactusBranch );
 }
 
 void Game::Go()
