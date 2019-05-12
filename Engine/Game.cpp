@@ -50,6 +50,8 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new TripleBow );
+	playerInv.AddItem( new TwistyTie );
 }
 
 void Game::Go()
@@ -81,11 +83,13 @@ void Game::UpdateModel()
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
+	playerInv.Update( wnd.kbd,wnd.mouse );
+
+	if( playerInv.IsOpen() ) dt = 0.0f;
+
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
 	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo() );
-
-	playerInv.Update( wnd.kbd,wnd.mouse );
 
 	for( auto& b : playerBullets ) b->Update( dt );
 	for( int i = 0; i < enemyBullets.size(); ++i )

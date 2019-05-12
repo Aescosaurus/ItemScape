@@ -14,6 +14,11 @@ public:
 			"Images/Items/TripleBow.bmp" )
 	{}
 
+	InventoryItem* Clone() override
+	{
+		return( new TripleBow );
+	}
+
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo ) override
 	{
 		++curShot;

@@ -13,6 +13,11 @@ public:
 		InventoryItem( "ItemDescriptions/CableSplitter.txt",
 			"Images/Items/CableSplitter.bmp" )
 	{}
+
+	InventoryItem* Clone() override
+	{
+		return( new CableSplitter );
+	}
 	
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo ) override
 	{

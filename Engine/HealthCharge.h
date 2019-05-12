@@ -14,6 +14,11 @@ public:
 			"Images/Items/HealthCharge.bmp" )
 	{}
 
+	InventoryItem* Clone() override
+	{
+		return( new HealthCharge );
+	}
+
 	void OnPlayerHit( InventoryEventInfo& evtInfo ) override
 	{
 		for( const auto& enemyBull : evtInfo.enemyBullets )

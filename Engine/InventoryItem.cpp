@@ -50,6 +50,12 @@ void InventoryItem::Draw( Graphics& gfx ) const
 	// }
 }
 
+void InventoryItem::Draw( const Vei2& pos,Graphics& gfx ) const
+{
+	gfx.DrawSprite( pos.x,pos.y,surf,
+		SpriteEffect::Chroma{ Colors::Magenta } );
+}
+
 void InventoryItem::SetPos( const Vei2& pos )
 {
 	this->pos = pos;

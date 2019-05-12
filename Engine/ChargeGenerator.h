@@ -14,6 +14,11 @@ public:
 			"Images/Items/ChargeGenerator.bmp" )
 	{}
 
+	InventoryItem* Clone() override
+	{
+		return( new ChargeGenerator );
+	}
+
 	void OnEnemyExplode( InventoryEventInfo& invEvtInfo ) override
 	{
 		if( Random::RangeF( 0.0f,100.0f ) <= chance )

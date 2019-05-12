@@ -25,6 +25,8 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	}
 	else canToggle = true;
 
+	if( !active ) return;
+
 	for( auto& item : items )
 	{
 		item->Update( mouse );
@@ -34,15 +36,36 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	{
 		if( ( *it )->WillRemove() )
 		{
-			ShiftItems( it );
+			// ShiftItems( it );
 			items.erase( it );
+			ReorganizeInventory();
 			it = items.begin();
 		}
 		else
 		{
+			if( mouse.LeftIsPressed() )
+			{
+				if( ( *it )->GetRect().ContainsPoint(
+					mouse.GetPos() ) && !holdingItem )
+				{
+					selectedItem = it;
+					holdingItem = true;
+				}
+			}
+			else if( ( ( *it )->GetRect().ContainsPoint(
+				mouse.GetPos() ) ) && holdingItem )
+			{
+				std::iter_swap( it,selectedItem );
+				holdingItem = false;
+				ReorganizeInventory();
+				break;
+			}
+
 			++it;
 		}
 	}
+
+	if( holdingItem ) heldItemPos = mouse.GetPos();
 }
 
 void Inventory::Draw( Graphics& gfx ) const
@@ -71,6 +94,11 @@ void Inventory::Draw( Graphics& gfx ) const
 				luckyPixel.DrawText( item->GetDesc(),
 					descStart,Colors::White,gfx );
 			}
+		}
+
+		if( holdingItem )
+		{
+			( *selectedItem )->Draw( heldItemPos,gfx );
 		}
 	}
 }
@@ -155,6 +183,11 @@ InventoryItem* Inventory::FindItem( const std::string& name )
 	return( nullptr );
 }
 
+bool Inventory::IsOpen() const
+{
+	return( active );
+}
+
 void Inventory::DrawInvGrid( Graphics& gfx ) const
 {
 	// auto curPos = invStart;
@@ -184,5 +217,21 @@ void Inventory::ShiftItems( std::vector<std::unique_ptr<
 	for( auto it = items.end() - 1; it != spot; --it )
 	{
 		( *it )->SetPos( ( *( it - 1 ) )->GetPos() );
+	}
+}
+
+void Inventory::ReorganizeInventory()
+{
+	std::vector<std::unique_ptr<InventoryItem>> oldItems;
+	for( auto& item : items )
+	{
+		oldItems.emplace_back( item->Clone() );
+	}
+
+	items.clear();
+
+	for( auto& item : oldItems )
+	{
+		AddItem( item->Clone() );
 	}
 }

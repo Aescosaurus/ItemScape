@@ -12,6 +12,11 @@ public:
 		InventoryItem( "ItemDescriptions/TwistyTie.txt",
 			"Images/Items/TwistyTie.bmp" )
 	{}
+
+	InventoryItem* Clone() override
+	{
+		return( new TwistyTie );
+	}
 	
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo )
 	{

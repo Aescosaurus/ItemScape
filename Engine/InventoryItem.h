@@ -36,8 +36,10 @@ public:
 
 	void Update( const Mouse& mouse );
 	void Draw( Graphics& gfx ) const;
+	void Draw( const Vei2& pos,Graphics& gfx ) const;
 
 	void SetPos( const Vei2& pos );
+	virtual InventoryItem* Clone() = 0;
 	/*Event methods*/
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}

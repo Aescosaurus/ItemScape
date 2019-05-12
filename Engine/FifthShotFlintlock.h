@@ -13,6 +13,11 @@ public:
 			"Images/Items/FifthShotFlintlock.bmp" )
 	{}
 
+	InventoryItem* Clone() override
+	{
+		return( new FifthShotFlintlock );
+	}
+
 	void OnPlayerShoot( InventoryEventInfo& evtInfo ) override
 	{
 		++curShot;

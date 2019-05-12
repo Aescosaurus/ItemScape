@@ -27,16 +27,22 @@ public:
 	/**/
 
 	InventoryItem* FindItem( const std::string& name );
+	bool IsOpen() const;
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
 	
 	void ShiftItems( std::vector<std::unique_ptr<
 		InventoryItem>>::iterator spot );
+	void ReorganizeInventory();
 private:
 	std::vector<std::unique_ptr<InventoryItem>> items;
 
 	bool active = false;
 	bool canToggle = false;
+
+	std::vector<std::unique_ptr<InventoryItem>>::iterator selectedItem;
+	bool holdingItem = false;
+	Vei2 heldItemPos;
 
 	const Font luckyPixel = "Fonts/LuckyPixel6x9.bmp";
 
