@@ -40,6 +40,7 @@ public:
 
 	void Attack( int damage );
 	void SetSubColor( Color c );
+	virtual Bullet* Clone();
 
 	bool IsExpl() const;
 	Vec2& GetPos();
@@ -73,6 +74,8 @@ public:
 	BoomerangBullet( const Bullet& src );
 
 	void Update( float dt ) override;
+
+	Bullet* Clone() override;
 private:
 	float distTravelled = 0.0f;
 	Vec2 normVel;

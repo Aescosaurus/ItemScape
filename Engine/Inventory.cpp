@@ -8,7 +8,8 @@ Inventory::Inventory()
 	// }
 }
 
-void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
+void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
+	InventoryEventInfo& invEvtInfo )
 {
 	if( kbd.KeyIsPressed( 'I' ) || kbd.KeyIsPressed( VK_TAB ) )
 	{
@@ -25,7 +26,16 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse )
 	}
 	else canToggle = true;
 
-	if( !active ) return;
+	if( kbd.KeyIsPressed( VK_SHIFT ) )
+	{
+		items[0]->OnShiftPress( invEvtInfo );
+	}
+	if( mouse.RightIsPressed() )
+	{
+		items[1]->OnShiftPress( invEvtInfo );
+	}
+
+	if( !active ) return; // -----------------------------
 
 	for( auto& item : items )
 	{
@@ -95,6 +105,11 @@ void Inventory::Draw( Graphics& gfx ) const
 					descStart,Colors::White,gfx );
 			}
 		}
+
+		gfx.DrawSprite( invStart.x,invStart.y -
+			invInstructions.GetHeight(),
+			invInstructions,
+			SpriteEffect::Chroma{ Colors::Magenta } );
 
 		if( holdingItem )
 		{

@@ -30,6 +30,8 @@ public:
 				::make_unique<Bullet>( *plBulls.back() ) );
 			plBulls.emplace_back( std
 				::make_unique<Bullet>( *plBulls.back() ) );
+			// plBulls.emplace_back( plBulls.back()->Clone() );
+			// plBulls.emplace_back( plBulls.back()->Clone() );
 
 			Bullet* bull1 = plBulls[plBulls.size() - 1].get();
 			Bullet* bull2 = plBulls[plBulls.size() - 2].get();

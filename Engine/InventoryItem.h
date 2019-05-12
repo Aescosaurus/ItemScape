@@ -44,6 +44,8 @@ public:
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
 	virtual void OnEnemyExplode( InventoryEventInfo& evtInfo ) {}
+	virtual void OnShiftPress( InventoryEventInfo& evtInfo ) {}
+	virtual void OnRightClick( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	const Vei2& GetPos() const;

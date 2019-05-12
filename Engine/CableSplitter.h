@@ -24,8 +24,9 @@ public:
 		if( Random::RangeF( 0.0f,100.0f ) <= chance )
 		{
 			auto& plBulls = invEvtInfo.playerBullets;
-			plBulls.emplace_back( std
-				::make_unique<Bullet>( *plBulls.back() ) );
+			// plBulls.emplace_back( std
+			// 	::make_unique<Bullet>( *plBulls.back() ) );
+			plBulls.emplace_back( plBulls.back()->Clone() );
 
 			const int last = int( plBulls.size() ) - 1;
 			Vec2 vel1 = plBulls[last]->GetVel();

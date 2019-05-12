@@ -78,6 +78,11 @@ void Bullet::SetSubColor( Color c )
 	subColor = c;
 }
 
+Bullet* Bullet::Clone()
+{
+	return( new Bullet{ *this } );
+}
+
 bool Bullet::IsExpl() const
 {
 	return( dead );
@@ -132,4 +137,9 @@ void BoomerangBullet::Update( float dt )
 	myAnim.Update( dt );
 
 	distTravelled += dt;
+}
+
+Bullet* BoomerangBullet::Clone()
+{
+	return( new BoomerangBullet{ *this } );
 }

@@ -13,7 +13,8 @@ class Inventory
 public:
 	Inventory();
 
-	void Update( const Keyboard& kbd,const Mouse& mouse );
+	void Update( const Keyboard& kbd,const Mouse& mouse,
+		InventoryEventInfo& invEvtInfo );
 	void Draw( Graphics& gfx ) const;
 
 	// void AddItem( const std::string& name,
@@ -60,4 +61,6 @@ private:
 	static constexpr Vei2 nameStart = invStart +
 		itemSize.Y() * size.y + itemPadding.Y() * ( size.y + 1 );
 	static constexpr Vei2 descStart = nameStart + Vei2{ 0,32 + 16 };
+
+	Surface invInstructions = { Surface{ "Images/InventoryInstructions.bmp" },Vei2{ 4,4 } };
 };

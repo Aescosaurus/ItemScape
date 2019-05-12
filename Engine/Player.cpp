@@ -71,10 +71,10 @@ void Player::Draw( Graphics& gfx ) const
 
 	walk.Draw( drawPos,gfx,moveDir.x < 0.0f );
 
-	if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )
-	{
-		gfx.DrawHitbox( coll.GetRect() );
-	}
+	// if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )
+	// {
+	// 	gfx.DrawHitbox( coll.GetRect() );
+	// }
 
 	if( jumping )
 	{
