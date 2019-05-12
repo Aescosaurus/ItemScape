@@ -47,11 +47,10 @@ Game::Game( MainWindow& wnd )
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
+	playerInv.AddItem( new RustyPistol );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new TripleBow );
-	playerInv.AddItem( new TwistyTie );
 }
 
 void Game::Go()
@@ -83,13 +82,13 @@ void Game::UpdateModel()
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
-	playerInv.Update( wnd.kbd,wnd.mouse,GenerateInvEvtInfo() );
+	playerInv.Update( wnd.kbd,wnd.mouse,GenerateInvEvtInfo( dt ) );
 
 	if( playerInv.IsOpen() ) dt = 0.0f;
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 
-	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo() );
+	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo( dt ) );
 
 	for( auto& b : playerBullets ) b->Update( dt );
 	for( int i = 0; i < enemyBullets.size(); ++i )
@@ -102,7 +101,7 @@ void Game::UpdateModel()
 		{
 			if( playerInv.FindItem( "Health Charge" ) != nullptr )
 			{
-				playerInv.OnPlayerHit( GenerateInvEvtInfo() );
+				playerInv.OnPlayerHit( GenerateInvEvtInfo( dt ) );
 			}
 			else
 			{
@@ -136,7 +135,7 @@ void Game::UpdateModel()
 				if( e->IsExpl() )
 				{
 					enemyExploded = true;
-					playerInv.OnEnemyExplode( GenerateInvEvtInfo() );
+					playerInv.OnEnemyExplode( GenerateInvEvtInfo( dt ) );
 				}
 
 				if( IsLevelOver() )
@@ -281,8 +280,9 @@ bool Game::IsLevelOver() const
 	return( true );
 }
 
-InventoryEventInfo Game::GenerateInvEvtInfo()
+InventoryEventInfo Game::GenerateInvEvtInfo( float dt )
 {
 	return( InventoryEventInfo{ guy,enemyBullets,
-		visualEffects,playerBullets,enemies,pickups } );
+		visualEffects,playerBullets,enemies,pickups,dt,
+		wnd.mouse,map } );
 }

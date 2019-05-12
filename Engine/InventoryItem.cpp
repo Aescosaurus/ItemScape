@@ -3,6 +3,7 @@
 #include <fstream>
 
 const Font InventoryItem::luckyPixel = "Fonts/LuckyPixel6x9.bmp";
+const Surface InventoryItem::itemBG = { Surface{ "Images/InventoryItemBackground.bmp" },Vei2{ 4,4 } };
 
 InventoryItem::InventoryItem( const std::string& name,
 	const std::string& desc,const std::string& icon )
@@ -39,19 +40,14 @@ void InventoryItem::Update( const Mouse& mouse )
 
 void InventoryItem::Draw( Graphics& gfx ) const
 {
-	// gfx.DrawRect( pos.x,pos.y,size.x,size.y,Colors::Magenta );
-
-	gfx.DrawSprite( pos.x,pos.y,surf,
-		SpriteEffect::Chroma{ Colors::Magenta } );
-
-	// if( hovering )
-	// {
-	// 	gfx.DrawRect( pos.x,pos.y,size.x,size.y,Colors::White );
-	// }
+	Draw( pos,gfx );
 }
 
 void InventoryItem::Draw( const Vei2& pos,Graphics& gfx ) const
 {
+	// gfx.DrawSprite( pos.x,pos.y,itemBG,
+	// 	SpriteEffect::Chroma{ Colors::Magenta } );
+
 	gfx.DrawSprite( pos.x,pos.y,surf,
 		SpriteEffect::Chroma{ Colors::Magenta } );
 }

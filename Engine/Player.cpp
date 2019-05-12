@@ -29,38 +29,38 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	coll.MoveTo( pos - coll.GetSize() / 2.0f );
 
 	// Handle super cool jumping mechanic.
-	if( kbd.KeyIsPressed( VK_SPACE ) && !jumping &&
-		jumpReset.IsDone() )
-	{
-		jumpReset.Reset();
-
-		Jump();
-	}
-
-	if( jumping )
-	{
-		jumpTimer.Update( dt );
-		if( jumpTimer.IsDone() )
-		{
-			jumpTimer.Reset();
-			Land();
-		}
-	}
-	else jumpReset.Update( dt );
+	// if( kbd.KeyIsPressed( VK_SPACE ) && !jumping &&
+	// 	jumpReset.IsDone() )
+	// {
+	// 	jumpReset.Reset();
+	// 
+	// 	Jump();
+	// }
+	// 
+	// if( jumping )
+	// {
+	// 	jumpTimer.Update( dt );
+	// 	if( jumpTimer.IsDone() )
+	// 	{
+	// 		jumpTimer.Reset();
+	// 		Land();
+	// 	}
+	// }
+	// else jumpReset.Update( dt );
 
 	// Deal with shooting.
-	shotTimer.Update( dt );
-	if( ms.LeftIsPressed() && shotTimer.IsDone() )
-	{
-		shotTimer.Reset();
-		myBullets.emplace_back( std::make_unique<Bullet>(
-			pos,Vec2( ms.GetPos() ),map,
-			Bullet::Team::Player1,bulletSpeed,
-			Bullet::Size::Small ) );
-
-		justShot = true;
-	}
-	else justShot = false;
+	// shotTimer.Update( dt );
+	// if( ms.LeftIsPressed() && shotTimer.IsDone() )
+	// {
+	// 	shotTimer.Reset();
+	// 	myBullets.emplace_back( std::make_unique<Bullet>(
+	// 		pos,Vec2( ms.GetPos() ),map,
+	// 		Bullet::Team::Player1,bulletSpeed,
+	// 		Bullet::Size::Small ) );
+	// 
+	// 	justShot = true;
+	// }
+	// else justShot = false;
 }
 
 void Player::Draw( Graphics& gfx ) const
@@ -76,18 +76,23 @@ void Player::Draw( Graphics& gfx ) const
 	// 	gfx.DrawHitbox( coll.GetRect() );
 	// }
 
-	if( jumping )
-	{
-		// TODO: Play jumping animation.
-
-		gfx.DrawRect( drawPos.x,drawPos.y,
-			size.x,size.y,Colors::Blue );
-	}
+	// if( jumping )
+	// {
+	// 	// TODO: Play jumping animation.
+	// 
+	// 	gfx.DrawRect( drawPos.x,drawPos.y,
+	// 		size.x,size.y,Colors::Blue );
+	// }
 }
 
 void Player::MoveTo( const Vec2& updatedPos )
 {
 	pos = updatedPos;
+}
+
+void Player::SetJustShot( bool val )
+{
+	justShot = val;
 }
 
 const Vec2& Player::GetPos() const

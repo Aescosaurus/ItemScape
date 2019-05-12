@@ -50,7 +50,7 @@ private:
 	/*  User Functions              */
 	void LoadNextLevel();
 	bool IsLevelOver() const;
-	InventoryEventInfo GenerateInvEvtInfo();
+	InventoryEventInfo GenerateInvEvtInfo( float dt );
 	/********************************/
 private:
 	MainWindow& wnd;

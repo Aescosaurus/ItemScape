@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Items">
       <UniqueIdentifier>{129dc2fe-1024-4e81-87c4-4a8fbca5870e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Items\Guns">
+      <UniqueIdentifier>{e5297924-f24b-4965-a4d4-fa3bdd087d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -185,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="TripleBow.h">
       <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RustyPistol.h">
+      <Filter>Header Files\Items\Guns</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

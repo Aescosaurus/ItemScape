@@ -24,6 +24,7 @@ public:
 	void Draw( Graphics& gfx ) const;
 
 	void MoveTo( const Vec2& updatedPos );
+	void SetJustShot( bool val );
 
 	const Vec2& GetPos() const;
 	const Vec2& GetVel() const;

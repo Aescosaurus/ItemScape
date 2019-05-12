@@ -158,6 +158,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="PickupManager.h" />
+    <ClInclude Include="RustyPistol.h" />
     <ClInclude Include="RynoChaser.h" />
     <ClInclude Include="Skorp.h" />
     <ClInclude Include="Slizard.h" />

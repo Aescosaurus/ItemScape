@@ -23,6 +23,9 @@ public:
 	std::vector<std::unique_ptr<Bullet>>& playerBullets;
 	std::vector<std::unique_ptr<EnemyBase>>& enemies;
 	std::vector<InventoryItem*>& pickups;
+	float dt;
+	Mouse& mouse;
+	TileMap& map;
 };
 
 class InventoryItem
@@ -44,8 +47,8 @@ public:
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
 	virtual void OnEnemyExplode( InventoryEventInfo& evtInfo ) {}
-	virtual void OnShiftPress( InventoryEventInfo& evtInfo ) {}
-	virtual void OnRightClick( InventoryEventInfo& evtInfo ) {}
+	virtual void OnActivate( InventoryEventInfo& evtInfo ) {}
+	virtual void OnUpdate( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	const Vei2& GetPos() const;
@@ -67,4 +70,5 @@ protected:
 	bool hovering = false;
 	static const Font luckyPixel;
 	bool remove = false;
+	static const Surface itemBG;
 };

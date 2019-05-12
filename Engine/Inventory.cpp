@@ -26,13 +26,22 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	}
 	else canToggle = true;
 
+	for( auto& item : items )
+	{
+		item->OnUpdate( invEvtInfo );
+	}
+
+	if( mouse.LeftIsPressed() )
+	{
+		items[0]->OnActivate( invEvtInfo );
+	}
 	if( kbd.KeyIsPressed( VK_SHIFT ) )
 	{
-		items[0]->OnShiftPress( invEvtInfo );
+		items[1]->OnActivate( invEvtInfo );
 	}
 	if( mouse.RightIsPressed() )
 	{
-		items[1]->OnShiftPress( invEvtInfo );
+		items[2]->OnActivate( invEvtInfo );
 	}
 
 	if( !active ) return; // -----------------------------

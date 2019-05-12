@@ -8,6 +8,7 @@
 #include "ChargeGenerator.h"
 #include "CableSplitter.h"
 #include "TripleBow.h"
+#include "RustyPistol.h"
 
 class PickupManager
 {
@@ -22,7 +23,8 @@ public:
 		options.emplace_back( new ChargeGenerator );
 		options.emplace_back( new CableSplitter );
 		options.emplace_back( new TripleBow );
-		// TODO: Add more options here.
+
+		options.emplace_back( new RustyPistol );
 
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
