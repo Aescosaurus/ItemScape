@@ -51,6 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new DebilitatedShotgun );
 }
 
 void Game::Go()
@@ -82,9 +83,9 @@ void Game::UpdateModel()
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
-	playerInv.Update( wnd.kbd,wnd.mouse,GenerateInvEvtInfo( dt ) );
-
 	if( playerInv.IsOpen() ) dt = 0.0f;
+
+	playerInv.Update( wnd.kbd,wnd.mouse,GenerateInvEvtInfo( dt ) );
 
 	guy.Update( wnd.kbd,wnd.mouse,dt );
 

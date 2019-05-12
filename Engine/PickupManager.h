@@ -10,6 +10,7 @@
 #include "TripleBow.h"
 #include "RustyPistol.h"
 #include "OldRifle.h"
+#include "DebilitatedShotgun.h"
 
 class PickupManager
 {
@@ -27,6 +28,7 @@ public:
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );
+		options.emplace_back( new DebilitatedShotgun );
 
 		std::random_device rd;
 		std::mt19937 rng{ rd() };

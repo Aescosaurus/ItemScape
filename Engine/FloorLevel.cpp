@@ -160,8 +160,8 @@ void FloorLevel::RandomizeLayout()
 	// }
 
 	// Place the actual rooms in a random layout.
-	Vei2 start = { Random::RangeI( 0,width - 1 ),
-		Random::RangeI( 0,height - 1 ) };
+	Vei2 start = { Random::RangeI( 1,width - 1 ),
+		Random::RangeI( 1,height - 1 ) };
 	while( layoutNums.size() > 0 )
 	{
 		if( floorLayout[start.y * width + start.x] == -1 )

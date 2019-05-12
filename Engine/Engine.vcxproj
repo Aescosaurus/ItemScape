@@ -146,6 +146,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="CursorHandler.h" />
+    <ClInclude Include="DebilitatedShotgun.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="EnemyType.h" />

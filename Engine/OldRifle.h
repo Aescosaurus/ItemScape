@@ -18,7 +18,6 @@ public:
 		return( new OldRifle );
 	}
 
-
 	void OnUpdate( InventoryEventInfo& invEvtInfo ) override
 	{
 		shotTimer.Update( invEvtInfo.dt );
@@ -44,6 +43,6 @@ public:
 	}
 private:
 	Timer shotTimer = 0.23f * 2.0f;
-	static constexpr float bulletSpeed = 324.2f;
+	static constexpr float bulletSpeed = 450.0f;
 	static constexpr int damage = 2;
 };

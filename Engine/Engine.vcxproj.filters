@@ -16,14 +16,17 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\BugEnemies">
-      <UniqueIdentifier>{df5e0013-1134-4f01-88e1-14809ffcdae9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Items">
       <UniqueIdentifier>{129dc2fe-1024-4e81-87c4-4a8fbca5870e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Items\Guns">
       <UniqueIdentifier>{e5297924-f24b-4965-a4d4-fa3bdd087d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enemies">
+      <UniqueIdentifier>{7a6db7ae-13c5-4923-bdde-6b4a0680304c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enemies\BugEnemies">
+      <UniqueIdentifier>{df5e0013-1134-4f01-88e1-14809ffcdae9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,29 +132,26 @@
     <ClInclude Include="Door.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Beetle.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="BeetleBig.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="Firebug.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="Skorp.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="SpiderMole.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="RynoChaser.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="Slizard.h">
-      <Filter>Header Files\BugEnemies</Filter>
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
     <ClInclude Include="CursorHandler.h">
       <Filter>Header Files</Filter>
@@ -166,9 +166,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PickupManager.h">
@@ -194,6 +191,15 @@
     </ClInclude>
     <ClInclude Include="OldRifle.h">
       <Filter>Header Files\Items\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="DebilitatedShotgun.h">
+      <Filter>Header Files\Items\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>Header Files\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItem.h">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
