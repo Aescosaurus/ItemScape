@@ -110,14 +110,14 @@ Vec2& Bullet::GetVel()
 	return( vel );
 }
 
-BoomerangBullet::BoomerangBullet( const Bullet& src )
+WavyBullet::WavyBullet( const Bullet& src )
 	:
 	Bullet( src ),
 	normVel( vel.GetNormalized() ),
 	speed( vel.GetLength() )
 {}
 
-void BoomerangBullet::Update( float dt )
+void WavyBullet::Update( float dt )
 {
 	auto testMove = normVel;
 
@@ -141,7 +141,52 @@ void BoomerangBullet::Update( float dt )
 	distTravelled += dt;
 }
 
-Bullet* BoomerangBullet::Clone()
+Bullet* WavyBullet::Clone()
 {
-	return( new BoomerangBullet{ *this } );
+	return( new WavyBullet{ *this } );
+}
+
+TrackingBullet::TrackingBullet( const Bullet& src )
+	:
+	Bullet( src )
+{}
+
+void TrackingBullet::Update( float dt )
+{
+	const auto diff = ( ( ( *target ) + offset ) - pos )
+		.GetNormalized();
+
+	const auto testMove = diff * speed * dt;
+	const auto validMove = coll.GetValidMove( pos,testMove );
+
+	pos += Vec2( validMove );
+	coll.MoveTo( pos - Vec2( size ) / 2.0f );
+
+	if( validMove.z ||
+		coll.GetRect().ContainsPoint( *target ) )
+	{
+		dead = true;
+	}
+
+	myAnim.Update( dt );
+}
+
+void TrackingBullet::SetTarget( const Vec2& target )
+{
+	this->target = &target;
+}
+
+void TrackingBullet::SetSpeed( float speed )
+{
+	this->speed = speed;
+}
+
+void TrackingBullet::SetOffset( const Vec2& offset )
+{
+	this->offset = offset;
+}
+
+Bullet* TrackingBullet::Clone()
+{
+	return( new TrackingBullet{ *this } );
 }

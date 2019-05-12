@@ -24,7 +24,7 @@ public:
 		const Bullet* lastBullet = invEvtInfo.playerBullets.back().get();
 
 		invEvtInfo.playerBullets.emplace_back(
-			std::make_unique<BoomerangBullet>( *lastBullet ) );
+			std::make_unique<WavyBullet>( *lastBullet ) );
 		invEvtInfo.playerBullets.erase( invEvtInfo
 			.playerBullets.end() - 2 );
 	}

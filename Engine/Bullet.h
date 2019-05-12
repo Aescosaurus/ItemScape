@@ -67,12 +67,12 @@ protected:
 	int damage;
 };
 
-class BoomerangBullet
+class WavyBullet
 	:
 	public Bullet
 {
 public:
-	BoomerangBullet( const Bullet& src );
+	WavyBullet( const Bullet& src );
 
 	void Update( float dt ) override;
 
@@ -83,6 +83,26 @@ private:
 	float speed;
 	float freq = 15.0f;
 	float amplitude = 0.7f;
+};
+
+class TrackingBullet
+	:
+	public Bullet
+{
+public:
+	TrackingBullet( const Bullet& src );
+
+	void Update( float dt ) override;
+
+	void SetTarget( const Vec2& target );
+	void SetSpeed( float speed );
+	void SetOffset( const Vec2& offset );
+
+	Bullet* Clone() override;
+private:
+	const Vec2* target;
+	float speed;
+	Vec2 offset = { 0.0f,0.0f };
 };
 
 // Ideas:

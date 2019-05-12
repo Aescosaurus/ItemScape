@@ -207,6 +207,9 @@
     <ClInclude Include="BulletRingCapacitor.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="GPSTracker.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

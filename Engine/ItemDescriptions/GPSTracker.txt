@@ -1,0 +1,6 @@
+GPS Tracker
+Trigger in an
+activation slot to
+cause the next 30
+bullets to seek towards
+the closest enemy.
