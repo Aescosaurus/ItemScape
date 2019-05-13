@@ -1,0 +1,4 @@
+Single Use Gatling
+Activate to fire 10
+shots towards the mouse
+in rapid succession.
