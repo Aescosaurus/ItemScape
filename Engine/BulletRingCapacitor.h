@@ -26,16 +26,13 @@ public:
 			const auto& player = invEvtInfo.player;
 			for( int i = 0; i < nShots; ++i )
 			{
-				invEvtInfo.playerBullets.emplace_back(
-					std::make_unique<Bullet>( player.GetPos(),
-						Vec2( invEvtInfo.mouse.GetPos() ),
-						invEvtInfo.map,Bullet::Team::Player1,
-						bulletSpeed,Bullet::Size::Small,damage ) );
+				const auto vel = Vec2{ 0.0f,-1.0f }
+					.Deviate( ( chili::pi * 2.0f ) *
+					( float( i ) / float( nShots ) ) );
 
-				auto& vel = invEvtInfo.playerBullets.back()->GetVel();
-				vel = vel.Deviate( ( chili::pi * 2.0f ) *
-					( float( i ) / float( nShots ) ) ) *
-					vel.GetLength();
+				invEvtInfo.items[0]->Shoot( invEvtInfo,
+					Vec2( invEvtInfo.player.GetPos() + vel ) );
+
 			}
 
 			curShot = 0;

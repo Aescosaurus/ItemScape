@@ -57,6 +57,11 @@ void InventoryItem::SetPos( const Vei2& pos )
 	this->pos = pos;
 }
 
+void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
+{
+	assert( false );
+}
+
 const Vei2& InventoryItem::GetPos() const
 {
 	return( pos );
@@ -85,6 +90,11 @@ bool InventoryItem::WillRemove() const
 RectI InventoryItem::GetRect() const
 {
 	return( RectI{ pos,size.x,size.y } );
+}
+
+bool InventoryItem::IsGun() const
+{
+	return( false );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const

@@ -24,22 +24,16 @@ public:
 		++curShot;
 		if( curShot >= shotsToBuff )
 		{
-			auto& plBulls = invEvtInfo.playerBullets;
+			const auto diff = ( Vec2( invEvtInfo.mouse
+				.GetPos() ) - invEvtInfo.player.GetPos() )
+				.GetNormalized();
+			const auto angle1 = diff.GetDeviated( devAmount );
+			const auto angle2 = diff.GetDeviated( -devAmount );
 
-			plBulls.emplace_back( std
-				::make_unique<Bullet>( *plBulls.back() ) );
-			plBulls.emplace_back( std
-				::make_unique<Bullet>( *plBulls.back() ) );
-			// plBulls.emplace_back( plBulls.back()->Clone() );
-			// plBulls.emplace_back( plBulls.back()->Clone() );
-
-			Bullet* bull1 = plBulls[plBulls.size() - 1].get();
-			Bullet* bull2 = plBulls[plBulls.size() - 2].get();
-
-			bull1->GetVel() = bull1->GetVel().GetDeviated(
-				devAmount ) * bull1->GetVel().GetLength();
-			bull2->GetVel() = bull2->GetVel().GetDeviated(
-				-devAmount ) * bull2->GetVel().GetLength();
+			invEvtInfo.items[0]->Shoot( invEvtInfo,
+				invEvtInfo.player.GetPos() + angle1 );
+			invEvtInfo.items[0]->Shoot( invEvtInfo,
+				invEvtInfo.player.GetPos() + angle2 );
 
 			curShot = 0;
 		}

@@ -95,7 +95,7 @@ void Player::SetJustShot( bool val )
 	justShot = val;
 }
 
-const Vec2& Player::GetPos() const
+Vec2& Player::GetPos()
 {
 	return( pos );
 }

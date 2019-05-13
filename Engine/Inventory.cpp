@@ -205,6 +205,11 @@ InventoryItem* Inventory::FindItem( const std::string& name )
 	return( nullptr );
 }
 
+std::vector<std::unique_ptr<InventoryItem>>& Inventory::GetItemVec()
+{
+	return( items );
+}
+
 bool Inventory::IsOpen() const
 {
 	return( active );

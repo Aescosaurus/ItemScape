@@ -19,6 +19,10 @@ public:
 		return( new DebilitatedShotgun );
 	}
 
+	bool IsGun() const override
+	{
+		return( true );
+	}
 
 	void OnUpdate( InventoryEventInfo& invEvtInfo ) override
 	{
@@ -32,30 +36,37 @@ public:
 		if( shotTimer.IsDone() )
 		{
 			auto& player = invEvtInfo.player;
-			auto& plBulls = invEvtInfo.playerBullets;
 
 			player.SetJustShot( true );
 
-			plBulls.emplace_back( std::make_unique<Bullet>(
-				player.GetPos(),Vec2( invEvtInfo.mouse.GetPos() ),
-				invEvtInfo.map,Bullet::Team::Player1,bulletSpeed,
-				Bullet::Size::Small,damage ) );
-			for( int i = 0; i < nPellets - 1; ++i )
-			{
-				plBulls.emplace_back( plBulls.back()->Clone() );
-			}
-
-			for( int i = int( plBulls.size() ) - nPellets;
-				i < int( plBulls.size() ); ++i )
-			{
-				const auto devAmount = Random::RangeF(
-					-devRange,devRange );
-				plBulls[i]->GetVel() = plBulls[i]->GetVel()
-					.GetDeviated( devAmount ) * plBulls[i]
-					->GetVel().GetLength();
-			}
+			Shoot( invEvtInfo,Vec2( invEvtInfo.mouse.GetPos() ) );
 
 			shotTimer.Reset();
+		}
+	}
+
+	void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target ) override
+	{
+		auto& player = invEvtInfo.player;
+		auto& plBulls = invEvtInfo.playerBullets;
+
+		plBulls.emplace_back( std::make_unique<Bullet>(
+			player.GetPos(),target,
+			invEvtInfo.map,Bullet::Team::Player1,bulletSpeed,
+			Bullet::Size::Small,damage ) );
+		for( int i = 0; i < nPellets - 1; ++i )
+		{
+			plBulls.emplace_back( plBulls.back()->Clone() );
+		}
+
+		for( int i = int( plBulls.size() ) - nPellets;
+			i < int( plBulls.size() ); ++i )
+		{
+			const auto devAmount = Random::RangeF(
+				-devRange,devRange );
+			plBulls[i]->GetVel() = plBulls[i]->GetVel()
+				.GetDeviated( devAmount ) * plBulls[i]
+				->GetVel().GetLength();
 		}
 	}
 private:

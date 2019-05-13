@@ -26,6 +26,7 @@ public:
 	float dt;
 	Mouse& mouse;
 	TileMap& map;
+	std::vector<std::unique_ptr<InventoryItem>>& items;
 };
 
 class InventoryItem
@@ -51,6 +52,7 @@ public:
 	virtual void OnActivate( InventoryEventInfo& evtInfo ) {}
 	virtual void OnUpdate( InventoryEventInfo& evtInfo ) {}
 	/**/
+	virtual void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target );
 
 	const Vei2& GetPos() const;
 	bool IsSelected() const;
@@ -58,6 +60,7 @@ public:
 	const std::string& GetDesc() const;
 	bool WillRemove() const;
 	RectI GetRect() const;
+	virtual bool IsGun() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;

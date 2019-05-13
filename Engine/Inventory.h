@@ -28,6 +28,7 @@ public:
 	/**/
 
 	InventoryItem* FindItem( const std::string& name );
+	std::vector<std::unique_ptr<InventoryItem>>& GetItemVec();
 	bool IsOpen() const;
 private:
 	void DrawInvGrid( Graphics& gfx ) const;

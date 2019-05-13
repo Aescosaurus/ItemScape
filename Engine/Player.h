@@ -26,7 +26,7 @@ public:
 	void MoveTo( const Vec2& updatedPos );
 	void SetJustShot( bool val );
 
-	const Vec2& GetPos() const;
+	Vec2& GetPos();
 	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
 	Rect GetRect() const;

@@ -51,7 +51,6 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new CactusBranch );
 }
 
 void Game::Go()
@@ -156,7 +155,7 @@ void Game::UpdateModel()
 
 	// Sort the list so enemies that have exploded get
 	//  drawn behind ones that haven't.
-	if( enemyExploded )
+	// if( enemyExploded )
 	{
 		std::sort( enemies.begin(),enemies.end(),
 			[]( const std::unique_ptr<EnemyBase>& first,
@@ -285,5 +284,5 @@ InventoryEventInfo Game::GenerateInvEvtInfo( float dt )
 {
 	return( InventoryEventInfo{ guy,enemyBullets,
 		visualEffects,playerBullets,enemies,pickups,dt,
-		wnd.mouse,map } );
+		wnd.mouse,map,playerInv.GetItemVec() } );
 }

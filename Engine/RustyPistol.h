@@ -19,6 +19,11 @@ public:
 		return( new RustyPistol );
 	}
 
+	bool IsGun() const override
+	{
+		return( true );
+	}
+
 	void OnUpdate( InventoryEventInfo& invEvtInfo ) override
 	{
 		shotTimer.Update( invEvtInfo.dt );
@@ -35,12 +40,17 @@ public:
 
 			player.SetJustShot( true );
 
-			invEvtInfo.playerBullets.emplace_back(
-				std::make_unique<Bullet>( player.GetPos(),
-				Vec2( invEvtInfo.mouse.GetPos() ),
+			Shoot( invEvtInfo,Vec2( invEvtInfo.mouse.GetPos() ) );
+		}
+	}
+
+	void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target ) override
+	{
+		invEvtInfo.playerBullets.emplace_back(
+			std::make_unique<Bullet>(
+				invEvtInfo.player.GetPos(),target,
 				invEvtInfo.map,Bullet::Team::Player1,
 				bulletSpeed,Bullet::Size::Small,damage ) );
-		}
 	}
 private:
 	Timer shotTimer = 0.23f;
