@@ -35,33 +35,21 @@ public:
 		if( activated )
 		{
 			const auto& playerPos = invEvtInfo.player.GetPos();
-			EnemyBase* closest = nullptr;
-			float closestDist = 9999999.0f;
 
-			for( auto& e : invEvtInfo.enemies )
+			
+
+			if( invEvtInfo.enemies.size() > 0 )
 			{
-				if( !e->IsExpl() )
-				{
-					const auto curDist = ( e->GetPos() -
-						playerPos ).GetLengthSq();
+				auto* targetEnemy = invEvtInfo.enemies[Random::RangeI(
+					0,int( invEvtInfo.enemies.size() ) - 1 )].get();
 
-					if( curDist < closestDist )
-					{
-						closest = e.get();
-						closestDist = curDist;
-					}
-				}
-			}
-
-			if( closest != nullptr )
-			{
 				TrackingBullet* replacement = new TrackingBullet{
 					*invEvtInfo.playerBullets.back() };
 
 				replacement->SetSubColor( Colors::Yellow );
-				replacement->SetTarget( closest->GetPos() );
+				replacement->SetTarget( targetEnemy->GetPos() );
 				replacement->SetSpeed( trackingBulletSpeed );
-				replacement->SetOffset( closest->GetRect()
+				replacement->SetOffset( targetEnemy->GetRect()
 					.GetSize() / 2.0f );
 
 				invEvtInfo.playerBullets.pop_back();

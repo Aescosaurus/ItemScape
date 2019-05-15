@@ -153,22 +153,32 @@ TrackingBullet::TrackingBullet( const Bullet& src )
 
 void TrackingBullet::Update( float dt )
 {
-	const auto diff = ( ( ( *target ) + offset ) - pos )
-		.GetNormalized();
+	targetTime.Update( dt );
 
-	const auto testMove = diff * speed * dt;
-	const auto validMove = coll.GetValidMove( pos,testMove );
-
-	pos += Vec2( validMove );
-	coll.MoveTo( pos - Vec2( size ) / 2.0f );
-
-	if( validMove.z ||
-		coll.GetRect().ContainsPoint( *target ) )
+	if( targetTime.IsDone() )
 	{
-		dead = true;
-	}
+		const auto diff = ( ( ( *target ) + offset ) - pos )
+			.GetNormalized();
 
-	myAnim.Update( dt );
+		const auto testMove = diff * speed * dt;
+		const auto validMove = coll.GetValidMove( pos,testMove );
+
+		pos += Vec2( validMove );
+		coll.MoveTo( pos - Vec2( size ) / 2.0f );
+
+
+		if( validMove.z ||
+			coll.GetRect().ContainsPoint( *target ) )
+		{
+			dead = true;
+		}
+
+		myAnim.Update( dt );
+	}
+	else
+	{
+		Bullet::Update( dt );
+	}
 }
 
 void TrackingBullet::SetTarget( const Vec2& target )

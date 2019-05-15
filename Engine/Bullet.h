@@ -6,6 +6,7 @@
 #include "Anim.h"
 #include "TileMap.h"
 #include "Collider.h"
+#include "Timer.h"
 
 // Moves straight in one direction.
 class Bullet
@@ -103,6 +104,7 @@ private:
 	const Vec2* target;
 	float speed;
 	Vec2 offset = { 0.0f,0.0f };
+	Timer targetTime = 0.5f;
 };
 
 // Ideas:
