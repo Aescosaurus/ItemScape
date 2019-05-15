@@ -1,0 +1,7 @@
+Beard of Invincibility
+On activation, makes
+you invincible for 10
+seconds.  Any damage
+sustained during this
+time will not consume a
+health charge.

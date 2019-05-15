@@ -25,12 +25,15 @@ public:
 
 	void MoveTo( const Vec2& updatedPos );
 	void SetJustShot( bool val );
+	void SetInvulStatus( bool isInvul );
+	void SetSubColor( Color c );
 
 	Vec2& GetPos();
 	const Vec2& GetVel() const;
 	Vec2 GetCenter() const;
 	Rect GetRect() const;
 	bool JustShot() const;
+	bool IsInvul() const;
 private:
 	void Jump();
 	void Land();
@@ -50,4 +53,6 @@ private:
 	const Surface surfSheet = { { "Images/Player1Anim.bmp" },Vei2{ 4,4 } };
 	Anim walk;
 	bool justShot = false;
+	bool invul = false;
+	Color subColor = Colors::Magenta;
 };

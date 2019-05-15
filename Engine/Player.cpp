@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "SpriteEffect.h"
 
 Player::Player( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bullets )
@@ -69,7 +70,15 @@ void Player::Draw( Graphics& gfx ) const
 	// gfx.DrawRect( drawPos.x,drawPos.y,
 	// 	size.x,size.y,Colors::Red );
 
-	walk.Draw( drawPos,gfx,moveDir.x < 0.0f );
+	if( subColor == Colors::Magenta )
+	{
+		walk.Draw( drawPos,gfx,moveDir.x < 0.0f );
+	}
+	else
+	{
+		walk.Draw( drawPos,gfx,SpriteEffect::SubstituteFade{
+			Colors::Magenta,subColor,0.5f } );
+	}
 
 	// if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )
 	// {
@@ -93,6 +102,16 @@ void Player::MoveTo( const Vec2& updatedPos )
 void Player::SetJustShot( bool val )
 {
 	justShot = val;
+}
+
+void Player::SetInvulStatus( bool isInvul )
+{
+	invul = isInvul;
+}
+
+void Player::SetSubColor( Color c )
+{
+	subColor = c;
 }
 
 Vec2& Player::GetPos()
@@ -123,6 +142,11 @@ Rect Player::GetRect() const
 bool Player::JustShot() const
 {
 	return( justShot );
+}
+
+bool Player::IsInvul() const
+{
+	return( invul );
 }
 
 void Player::Jump()

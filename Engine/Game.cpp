@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new GPSTracker );
+	playerInv.AddItem( new BeardOfInvincibility );
 }
 
 void Game::Go()
@@ -100,13 +100,17 @@ void Game::UpdateModel()
 
 		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
-			if( playerInv.FindItem( "Health Charge" ) != nullptr )
+			eb->Attack( 1 );
+			if( !guy.IsInvul() )
 			{
-				playerInv.OnPlayerHit( GenerateInvEvtInfo( dt ) );
-			}
-			else
-			{
-				// You lose!!
+				if( playerInv.FindItem( "Health Charge" ) != nullptr )
+				{
+					playerInv.OnPlayerHit( GenerateInvEvtInfo( dt ) );
+				}
+				else
+				{
+					// You lose!!
+				}
 			}
 		}
 	}
