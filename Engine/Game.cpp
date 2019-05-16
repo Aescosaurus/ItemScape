@@ -47,10 +47,11 @@ Game::Game( MainWindow& wnd )
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
-	playerInv.AddItem( new RustyPistol );
-	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new HealthCharge );
+	playerInv.AddItem( new RustyPistol,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new UggsOfMobility,GenerateInvEvtInfo( 0.0f ) );
 }
 
 void Game::Go()
@@ -176,7 +177,7 @@ void Game::UpdateModel()
 	{
 		if( ( *it )->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
-			playerInv.AddItem( *it );
+			playerInv.AddItem( *it,GenerateInvEvtInfo( dt ) );
 			pickups.erase( it );
 			break;
 		}

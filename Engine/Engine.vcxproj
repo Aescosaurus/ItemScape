@@ -195,6 +195,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TripleBow.h" />
     <ClInclude Include="TwistyTie.h" />
+    <ClInclude Include="UggsOfMobility.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />

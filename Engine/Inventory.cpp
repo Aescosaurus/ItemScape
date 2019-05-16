@@ -53,6 +53,7 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	{
 		if( ( *it )->WillRemove() )
 		{
+			( *it )->OnRemove( invEvtInfo );
 			// ShiftItems( it );
 			items.erase( it );
 			ReorganizeInventory();
@@ -131,25 +132,12 @@ void Inventory::Draw( Graphics& gfx ) const
 // 	AddItem( new InventoryItem( name,desc,icon ) );
 // }
 
-void Inventory::AddItem( InventoryItem* itemToAdd )
+void Inventory::AddItem( InventoryItem* itemToAdd,
+	InventoryEventInfo& evtInfo )
 {
-	items.emplace_back( itemToAdd );
+	AddItem( itemToAdd );
 
-	if( ( items.size() - 1 ) % size.x == 0 &&
-		items.size() > 1 )
-	{
-		items.back()->SetPos( items[items.size() - 2]->GetPos().Y() +
-			itemSize.Y() + itemPadding.Y() + invStart.X() );
-	}
-	else if( items.size() > 1 )
-	{
-		items.back()->SetPos( items[items.size() - 2]->GetPos() +
-			itemSize.X() + itemPadding.X() );
-	}
-	else
-	{
-		items.back()->SetPos( invStart );
-	}
+	items.back()->OnReceive( evtInfo );
 }
 
 void Inventory::ConsumeItem( const std::string& name )
@@ -260,5 +248,26 @@ void Inventory::ReorganizeInventory()
 	for( auto& item : oldItems )
 	{
 		AddItem( item->Clone() );
+	}
+}
+
+void Inventory::AddItem( InventoryItem* itemToAdd )
+{
+	items.emplace_back( itemToAdd );
+
+	if( ( items.size() - 1 ) % size.x == 0 &&
+		items.size() > 1 )
+	{
+		items.back()->SetPos( items[items.size() - 2]->GetPos().Y() +
+			itemSize.Y() + itemPadding.Y() + invStart.X() );
+	}
+	else if( items.size() > 1 )
+	{
+		items.back()->SetPos( items[items.size() - 2]->GetPos() +
+			itemSize.X() + itemPadding.X() );
+	}
+	else
+	{
+		items.back()->SetPos( invStart );
 	}
 }

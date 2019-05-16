@@ -27,6 +27,7 @@ public:
 	void SetJustShot( bool val );
 	void SetInvulStatus( bool isInvul );
 	void SetSubColor( Color c );
+	void MultiplyMoveSpeedFactor( float amount );
 
 	Vec2& GetPos();
 	const Vec2& GetVel() const;
@@ -55,4 +56,5 @@ private:
 	bool justShot = false;
 	bool invul = false;
 	Color subColor = Colors::Magenta;
+	float moveSpeedFactor = 1.0f;
 };

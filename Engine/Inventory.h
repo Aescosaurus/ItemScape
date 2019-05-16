@@ -19,7 +19,8 @@ public:
 
 	// void AddItem( const std::string& name,
 	// 	const std::string& desc,const std::string& icon );
-	void AddItem( InventoryItem* itemToAdd );
+	void AddItem( InventoryItem* itemToAdd,
+		InventoryEventInfo& evtInfo );
 	void ConsumeItem( const std::string& name );
 	/*Event methods*/
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
@@ -36,6 +37,7 @@ private:
 	void ShiftItems( std::vector<std::unique_ptr<
 		InventoryItem>>::iterator spot );
 	void ReorganizeInventory();
+	void AddItem( InventoryItem* itemToAdd );
 private:
 	std::vector<std::unique_ptr<InventoryItem>> items;
 

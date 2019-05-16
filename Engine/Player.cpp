@@ -25,7 +25,8 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	else walk.Update( dt );
 
 	// Move but don't let you walk into walls.
-	moveDir = moveDir.GetNormalized() * speed * dt;
+	moveDir = moveDir.GetNormalized() * speed *
+		moveSpeedFactor * dt;
 	pos += coll.GetValidMove( pos,moveDir );
 	coll.MoveTo( pos - coll.GetSize() / 2.0f );
 
@@ -112,6 +113,11 @@ void Player::SetInvulStatus( bool isInvul )
 void Player::SetSubColor( Color c )
 {
 	subColor = c;
+}
+
+void Player::MultiplyMoveSpeedFactor( float amount )
+{
+	moveSpeedFactor *= amount;
 }
 
 Vec2& Player::GetPos()

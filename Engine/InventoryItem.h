@@ -51,6 +51,8 @@ public:
 	virtual void OnGunFire( InventoryEventInfo& evtInfo ) {}
 	virtual void OnActivate( InventoryEventInfo& evtInfo ) {}
 	virtual void OnUpdate( InventoryEventInfo& evtInfo ) {}
+	virtual void OnReceive( InventoryEventInfo& evtInfo ) {}
+	virtual void OnRemove( InventoryEventInfo& evtInfo ) {}
 	/**/
 	virtual void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target );
 
