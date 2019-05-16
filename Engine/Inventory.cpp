@@ -94,7 +94,7 @@ void Inventory::Draw( Graphics& gfx ) const
 
 		gfx.DrawRect( drawPos.x,drawPos.y,
 			invSize.x,invSize.y,
-			Colors::Gray );
+			Colors::Slate );
 
 		DrawInvGrid( gfx );
 

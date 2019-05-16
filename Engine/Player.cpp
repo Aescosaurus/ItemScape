@@ -78,7 +78,7 @@ void Player::Draw( Graphics& gfx ) const
 	else
 	{
 		walk.Draw( drawPos,gfx,SpriteEffect::SubstituteFade{
-			Colors::Magenta,subColor,0.5f } );
+			Colors::Magenta,subColor,0.5f },moveDir.x < 0.0f );
 	}
 
 	// if( coll.GetRect().IsContainedBy( Graphics::GetScreenRect() ) )

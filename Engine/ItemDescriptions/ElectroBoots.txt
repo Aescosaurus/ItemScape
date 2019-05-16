@@ -1,0 +1,6 @@
+Electro Boots
+Battery powered shoes
+make you run faster.
+On activation increase
+movement speed by 50%
+for 10 seconds.
