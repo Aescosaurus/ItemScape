@@ -51,7 +51,6 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new UggsOfMobility,GenerateInvEvtInfo( 0.0f ) );
 }
 
 void Game::Go()
@@ -60,6 +59,14 @@ void Game::Go()
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
+}
+
+Game::~Game()
+{
+	for( auto* p : pickups )
+	{
+		delete p;
+	}
 }
 
 void Game::UpdateModel()
@@ -145,14 +152,13 @@ void Game::UpdateModel()
 
 				if( IsLevelOver() )
 				{
-					pickups.emplace_back( PickupManager
-						::RandT1Pickup() );
-
-					pickups.back()->SetPos( e->GetPos() + Vec2{
+					pickupPos = e->GetPos() + Vec2{
 						Random::RangeF( 0.0f,e->GetRect()
 						.GetWidth() / 2.0f ),
 						Random::RangeF( 0.0f,e->GetRect()
-						.GetHeight() / 2.0f ) } );
+						.GetHeight() / 2.0f ) };
+
+					// spawnedEndOfLevelItem = false;
 				}
 			}
 		}
@@ -187,9 +193,22 @@ void Game::UpdateModel()
 	chili::remove_erase_if( enemyBullets,std::mem_fn( &Bullet::IsExpl ) );
 	chili::remove_erase_if( visualEffects,std::mem_fn( &VisualEffect::IsExpl ) );
 
-	// Check if you're touching a door.
 	if( IsLevelOver() )
 	{
+		// Spawn item after last enemy explodes.
+		if( !spawnedEndOfLevelItem )
+		{
+			pickups.emplace_back( PickupManager
+				::RandT1Pickup() );
+			pickups.back()->SetPos( pickupPos );
+			visualEffects.emplace_back( VisualEffect{
+				pickupPos,VisualEffect::Type
+				::LightningDissipate } );
+
+			spawnedEndOfLevelItem = true;
+		}
+
+		// Check if you're touching a door.
 		const auto& guyRect = guy.GetRect();
 		for( const auto& d : doors )
 		{
@@ -232,6 +251,9 @@ void Game::LoadNextLevel()
 	playerBullets.clear();
 	enemyBullets.clear();
 	visualEffects.clear();
+
+	pickupPos = Graphics::GetScreenRect().GetCenter();
+	spawnedEndOfLevelItem = false;
 
 	map.LoadFile( floor.GetLevelName() );
 

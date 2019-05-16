@@ -121,7 +121,8 @@ void Inventory::Draw( Graphics& gfx ) const
 
 		if( holdingItem )
 		{
-			( *selectedItem )->Draw( heldItemPos,gfx );
+			( *selectedItem )->Draw( heldItemPos -
+				( *selectedItem )->size / 2,gfx );
 		}
 	}
 }

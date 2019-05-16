@@ -1,4 +1,4 @@
 Uggs of Mobility
 Very comfy.  Passively
-increase movement speed
-by 15%.
+increase player
+movement speed by 15%.

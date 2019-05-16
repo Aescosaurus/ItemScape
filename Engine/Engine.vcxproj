@@ -153,6 +153,7 @@
     <ClInclude Include="DebilitatedShotgun.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="ElectroBoots.h" />
     <ClInclude Include="EnemyType.h" />
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="BeetleBig.h" />

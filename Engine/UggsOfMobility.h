@@ -9,8 +9,8 @@ class UggsOfMobility
 public:
 	UggsOfMobility()
 		:
-		InventoryItem( "ItemDescriptions/UggsOfMobility.h",
-			"Images/Wall2.bmp" )
+		InventoryItem( "ItemDescriptions/UggsOfMobility.txt",
+			"Images/Items/UggsOfMobility.bmp" )
 	{}
 
 	InventoryItem* Clone() override

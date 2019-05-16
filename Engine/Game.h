@@ -43,6 +43,7 @@ public:
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
+	~Game();
 private:
 	void ComposeFrame();
 	void UpdateModel();
@@ -69,5 +70,7 @@ private:
 	Inventory playerInv;
 	std::vector<VisualEffect> visualEffects;
 	std::vector<InventoryItem*> pickups;
+	Vei2 pickupPos = Graphics::GetScreenRect().GetCenter();
+	bool spawnedEndOfLevelItem = false;
 	/********************************/
 };
