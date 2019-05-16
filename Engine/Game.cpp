@@ -51,7 +51,6 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
 	playerInv.AddItem( new HealthCharge );
-	playerInv.AddItem( new BeardOfInvincibility );
 }
 
 void Game::Go()

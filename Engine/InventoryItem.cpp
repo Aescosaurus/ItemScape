@@ -45,11 +45,17 @@ void InventoryItem::Draw( Graphics& gfx ) const
 
 void InventoryItem::Draw( const Vei2& pos,Graphics& gfx ) const
 {
-	// gfx.DrawSprite( pos.x,pos.y,itemBG,
-	// 	SpriteEffect::Chroma{ Colors::Magenta } );
-
-	gfx.DrawSprite( pos.x,pos.y,surf,
-		SpriteEffect::Chroma{ Colors::Magenta } );
+	if( hovering )
+	{
+		gfx.DrawSprite( pos.x,pos.y,surf,
+			SpriteEffect::SubstituteFade{ Colors::Magenta,
+			Colors::White,0.25f } );
+	}
+	else
+	{
+		gfx.DrawSprite( pos.x,pos.y,surf,
+			SpriteEffect::Chroma{ Colors::Magenta } );
+	}
 }
 
 void InventoryItem::SetPos( const Vei2& pos )
