@@ -17,6 +17,7 @@
 #include "BeardOfInvincibility.h"
 #include "UggsOfMobility.h"
 #include "ElectroBoots.h"
+#include "PinkBunny.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -43,6 +44,7 @@ public:
 		options.emplace_back( new BeardOfInvincibility );
 		options.emplace_back( new UggsOfMobility );
 		options.emplace_back( new ElectroBoots );
+		options.emplace_back( new PinkBunny );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

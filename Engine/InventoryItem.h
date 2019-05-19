@@ -59,9 +59,9 @@ public:
 	virtual void Shoot( InventoryEventInfo& invEvtInfo,
 		const Vec2& target );
 	virtual void BoostDamage( InventoryEventInfo& evtInfo,
-		int amountAdded,int nBuffedShots );
+		int amountAdded,int nBuffedShots,float duration );
 	virtual void BoostFireRate( InventoryEventInfo& evtInfo,
-		float amount,int nBuffedShots );
+		float amount,int nBuffedShots,float duration );
 	/**/
 
 	const Vei2& GetPos() const;

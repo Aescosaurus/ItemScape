@@ -228,6 +228,9 @@
     <ClInclude Include="GunBase.h">
       <Filter>Header Files\Items\Guns</Filter>
     </ClInclude>
+    <ClInclude Include="PinkBunny.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

@@ -1,15 +1,51 @@
 #pragma once
 
 #include "InventoryItem.h"
+#include <tuple>
 
 class GunBase
 	:
 	public InventoryItem
 {
 public:
+	// Call this from children!
 	void OnUpdate( InventoryEventInfo& evtInfo ) override
 	{
-		shotTimer.Update( evtInfo.dt * fireRateBoostFactor );
+		float fireRateBuffFactor = 1.0f;
+		for( const auto& buff : fireRateBuffs )
+		{
+			fireRateBuffFactor *= std::get<0>( buff );
+		}
+
+		shotTimer.Update( evtInfo.dt * fireRateBuffFactor );
+
+		for( auto it = damageBuffs.begin();
+			it != damageBuffs.end(); ++it )
+		{
+			std::get<2>( *it ).Update( evtInfo.dt );
+
+			if( std::get<1>( *it ) == 0 &&
+				std::get<2>( *it ).IsDone() )
+			{
+				damageBuffs.erase( it );
+				break;
+			}
+		}
+		for( auto it = fireRateBuffs.begin();
+			it != fireRateBuffs.end(); ++it )
+		{
+			std::get<2>( *it ).Update( evtInfo.dt );
+
+			if( std::get<1>( *it ) == 0 &&
+				std::get<2>( *it ).IsDone() )
+			{
+				fireRateBuffs.erase( it );
+				break;
+			}
+		}
+
+		bulletColor = ( ( damageBuffs.size() != 0 )
+			? Colors::Red : Colors::Magenta );
 
 		evtInfo.player.SetJustShot( false );
 	}
@@ -24,36 +60,37 @@ public:
 
 			Shoot( evtInfo,Vec2( evtInfo.mouse.GetPos() ) );
 
-			--nRemainingDamageAddShots;
-			--nRemainingFireRateBuffShots;
-			if( nRemainingDamageAddShots <= 0 )
+			for( auto& buff : damageBuffs )
 			{
-				nRemainingDamageAddShots = 0;
-				damageAdd = 0;
-				bulletColor = Colors::Magenta;
+				if( std::get<1>( buff ) > 0 )
+				{
+					--std::get<1>( buff );
+				}
 			}
-			if( nRemainingFireRateBuffShots <= 0 )
+			for( auto& buff : fireRateBuffs )
 			{
-				nRemainingFireRateBuffShots = 0;
-				fireRateBoostFactor = 1.0f;
+				if( std::get<1>( buff ) > 0 )
+				{
+					--std::get<1>( buff );
+				}
 			}
 		}
 	}
 
+	// -1 nBuffedShots for infinite
 	void BoostDamage( InventoryEventInfo& evtInfo,
-		int amountAdded,int nBuffedShots ) override
+		int amountAdded,int nBuffedShots,float duration ) override
 	{
-		damageAdd = amountAdded;
-		nRemainingDamageAddShots = nBuffedShots;
-
-		bulletColor = Colors::Red;
+		damageBuffs.emplace_back( std::make_tuple(
+			amountAdded,nBuffedShots,Timer{ duration } ) );
 	}
 
+	// -1 nBuffedShots for infinite
 	void BoostFireRate( InventoryEventInfo& evtInfo,
-		float amount,int nBuffedShots ) override
+		float amount,int nBuffedShots,float duration ) override
 	{
-		fireRateBoostFactor = amount;
-		nRemainingFireRateBuffShots = nBuffedShots;
+		fireRateBuffs.emplace_back( std::make_tuple(
+			amount,nBuffedShots,Timer{ duration } ) );
 	}
 protected:
 	GunBase( const std::string& fileName,const std::string& icon,
@@ -64,15 +101,24 @@ protected:
 		bulletSpeed( bulletSpeed ),
 		damage( damage )
 	{}
+
+	int GetDamage() const
+	{
+		int damage = 1;
+		for( auto& buff : damageBuffs )
+		{
+			damage += std::get<0>( buff );
+		}
+
+		return( damage );
+	}
 protected:
 	Timer shotTimer;
 	const float bulletSpeed;
 	const int damage;
 
-	int damageAdd = 0;
-	int nRemainingDamageAddShots = 0;
-	float fireRateBoostFactor = 1.0f;
-	int nRemainingFireRateBuffShots = 0;
+	std::vector<std::tuple<int,int,Timer>> damageBuffs;
+	std::vector<std::tuple<float,int,Timer>> fireRateBuffs;
 
 	Color bulletColor = Colors::Magenta;
 };

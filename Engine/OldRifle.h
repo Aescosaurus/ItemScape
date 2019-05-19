@@ -26,7 +26,7 @@ public:
 			invEvtInfo.player.GetPos(),target,
 			invEvtInfo.map,Bullet::Team::Player1,
 			bulletSpeed,Bullet::Size::Small,
-			damage + damageAdd ) );
+			GetDamage() ) );
 
 		invEvtInfo.playerBullets.back()->SetSubColor( bulletColor );
 	}

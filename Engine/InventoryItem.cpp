@@ -69,13 +69,13 @@ void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
 }
 
 void InventoryItem::BoostDamage( InventoryEventInfo& evtInfo,
-	int amountAdded,int nBuffedShots )
+	int amountAdded,int nBuffedShots,float duration )
 {
 	assert( false );
 }
 
 void InventoryItem::BoostFireRate( InventoryEventInfo& evtInfo,
-	float amount,int nBuffedShots )
+	float amount,int nBuffedShots,float duration )
 {
 	assert( false );
 }

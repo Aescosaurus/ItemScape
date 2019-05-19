@@ -27,7 +27,7 @@ public:
 			// evtInfo.playerBullets.back()->GetDamage() *= 2;
 			// evtInfo.playerBullets.back()->SetSubColor( Colors::Red );
 
-			evtInfo.items[0]->BoostDamage( evtInfo,1,1 );
+			evtInfo.items[0]->BoostDamage( evtInfo,1,1,0.0f );
 
 			curShot = 0;
 		}

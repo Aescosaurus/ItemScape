@@ -51,6 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new PinkBunny,GenerateInvEvtInfo( 0.0f ) );
 }
 
 void Game::Go()
