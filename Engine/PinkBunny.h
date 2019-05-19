@@ -10,7 +10,7 @@ public:
 	PinkBunny()
 		:
 		InventoryItem( "ItemDescriptions/PinkBunny.txt",
-			"Images/Wall2.bmp" )
+			"Images/Items/PinkBunny.bmp" )
 	{}
 
 	InventoryItem* Clone() override
@@ -46,7 +46,7 @@ public:
 		}
 	}
 private:
-	static constexpr float fireRateBuff = 2.0f;
+	static constexpr float fireRateBuff = 1.5f;
 	Timer shotSpeedupDuration = 10.0f;
 	bool activated = false;
 };
