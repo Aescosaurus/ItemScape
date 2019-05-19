@@ -225,6 +225,9 @@
     <ClInclude Include="ElectroBoots.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GunBase.h">
+      <Filter>Header Files\Items\Guns</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

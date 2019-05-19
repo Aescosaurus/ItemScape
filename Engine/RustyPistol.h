@@ -1,17 +1,17 @@
 #pragma once
 
-#include "InventoryItem.h"
-#include "Timer.h"
+#include "GunBase.h"
 
 class RustyPistol
 	:
-	public InventoryItem
+	public GunBase
 {
 public:
 	RustyPistol()
 		:
-		InventoryItem( "ItemDescriptions/Guns/RustyPistol.txt",
-			"Images/Items/Guns/RustyPistol.bmp" )
+		GunBase( "ItemDescriptions/Guns/RustyPistol.txt",
+			"Images/Items/Guns/RustyPistol.bmp",
+			0.23f,324.2f,1 )
 	{}
 
 	InventoryItem* Clone() override
@@ -19,41 +19,15 @@ public:
 		return( new RustyPistol );
 	}
 
-	bool IsGun() const override
-	{
-		return( true );
-	}
-
-	void OnUpdate( InventoryEventInfo& invEvtInfo ) override
-	{
-		shotTimer.Update( invEvtInfo.dt );
-
-		invEvtInfo.player.SetJustShot( false );
-	}
-
-	void OnGunFire( InventoryEventInfo& invEvtInfo ) override
-	{
-		if( shotTimer.IsDone() )
-		{
-			auto& player = invEvtInfo.player;
-			shotTimer.Reset();
-
-			player.SetJustShot( true );
-
-			Shoot( invEvtInfo,Vec2( invEvtInfo.mouse.GetPos() ) );
-		}
-	}
-
 	void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target ) override
 	{
 		invEvtInfo.playerBullets.emplace_back(
 			std::make_unique<Bullet>(
-				invEvtInfo.player.GetPos(),target,
-				invEvtInfo.map,Bullet::Team::Player1,
-				bulletSpeed,Bullet::Size::Small,damage ) );
+			invEvtInfo.player.GetPos(),target,
+			invEvtInfo.map,Bullet::Team::Player1,
+			bulletSpeed,Bullet::Size::Small,
+			damage + damageAdd ) );
+
+		invEvtInfo.playerBullets.back()->SetSubColor( bulletColor );
 	}
-private:
-	Timer shotTimer = 0.23f;
-	static constexpr float bulletSpeed = 324.2f;
-	static constexpr int damage = 1;
 };

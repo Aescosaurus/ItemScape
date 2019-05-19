@@ -44,7 +44,7 @@ public:
 
 	void SetPos( const Vei2& pos );
 	virtual InventoryItem* Clone() = 0;
-	/*Event methods*/
+	/* Event methods */
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
 	virtual void OnEnemyExplode( InventoryEventInfo& evtInfo ) {}
@@ -54,7 +54,15 @@ public:
 	virtual void OnReceive( InventoryEventInfo& evtInfo ) {}
 	virtual void OnRemove( InventoryEventInfo& evtInfo ) {}
 	/**/
-	virtual void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target );
+
+	/* Gun methods */
+	virtual void Shoot( InventoryEventInfo& invEvtInfo,
+		const Vec2& target );
+	virtual void BoostDamage( InventoryEventInfo& evtInfo,
+		int amountAdded,int nBuffedShots );
+	virtual void BoostFireRate( InventoryEventInfo& evtInfo,
+		float amount,int nBuffedShots );
+	/**/
 
 	const Vei2& GetPos() const;
 	bool IsSelected() const;
@@ -62,7 +70,6 @@ public:
 	const std::string& GetDesc() const;
 	bool WillRemove() const;
 	RectI GetRect() const;
-	virtual bool IsGun() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;

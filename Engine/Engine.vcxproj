@@ -160,6 +160,7 @@
     <ClInclude Include="FifthShotFlintlock.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GPSTracker.h" />
+    <ClInclude Include="GunBase.h" />
     <ClInclude Include="HealthCharge.h" />
     <ClInclude Include="ChargeGenerator.h" />
     <ClInclude Include="Inventory.h" />
