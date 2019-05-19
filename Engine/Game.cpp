@@ -47,11 +47,11 @@ Game::Game( MainWindow& wnd )
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
-	playerInv.AddItem( new RustyPistol,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new GogglesOfDestiny,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new RustyPistol,GenerateInvEvtInfo() );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
+	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
+	playerInv.AddItem( new CreepySpecs,GenerateInvEvtInfo() );
 }
 
 void Game::Go()
@@ -145,7 +145,7 @@ void Game::UpdateModel()
 					b->GetRect().GetCenter() );
 				b->Attack( 1 );
 
-				// OnEnemyHit
+				playerInv.OnEnemyHit( GenerateInvEvtInfo( dt,e.get(),b.get() ) );
 
 				if( e->IsExpl() )
 				{
@@ -311,9 +311,11 @@ bool Game::IsLevelOver() const
 	return( true );
 }
 
-InventoryEventInfo Game::GenerateInvEvtInfo( float dt )
+InventoryEventInfo Game::GenerateInvEvtInfo( float dt,
+	EnemyBase* hitEnemy,Bullet* curBullet )
 {
 	return( InventoryEventInfo{ guy,enemyBullets,
 		visualEffects,playerBullets,enemies,pickups,dt,
-		wnd.mouse,map,playerInv.GetItemVec(),gfx } );
+		wnd.mouse,map,playerInv.GetItemVec(),gfx,
+		hitEnemy,curBullet } );
 }

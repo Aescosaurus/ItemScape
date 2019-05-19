@@ -181,6 +181,14 @@ void Inventory::OnEnemyExplode( InventoryEventInfo& evtInfo )
 	}
 }
 
+void Inventory::OnEnemyHit( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnEnemyHit( evtInfo );
+	}
+}
+
 void Inventory::OnDraw( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )

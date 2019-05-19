@@ -19,6 +19,7 @@
 #include "ElectroBoots.h"
 #include "PinkBunny.h"
 #include "GogglesOfDestiny.h"
+#include "CreepySpecs.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -47,6 +48,7 @@ public:
 		options.emplace_back( new ElectroBoots );
 		options.emplace_back( new PinkBunny );
 		options.emplace_back( new GogglesOfDestiny );
+		options.emplace_back( new CreepySpecs );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

@@ -234,6 +234,9 @@
     <ClInclude Include="GogglesOfDestiny.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="CreepySpecs.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

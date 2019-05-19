@@ -28,6 +28,8 @@ public:
 	TileMap& map;
 	std::vector<std::unique_ptr<InventoryItem>>& items;
 	Graphics& gfx;
+	EnemyBase* hitEnemy;
+	Bullet* curBullet;
 };
 
 class InventoryItem
@@ -55,6 +57,7 @@ public:
 	virtual void OnReceive( InventoryEventInfo& evtInfo ) {}
 	virtual void OnRemove( InventoryEventInfo& evtInfo ) {}
 	virtual void OnDraw( InventoryEventInfo& evtInfo ) {}
+	virtual void OnEnemyHit( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	/* Gun methods */

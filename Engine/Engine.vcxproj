@@ -148,6 +148,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
+    <ClInclude Include="CreepySpecs.h" />
     <ClInclude Include="CursorHandler.h" />
     <ClInclude Include="DamagingStake.h" />
     <ClInclude Include="DebilitatedShotgun.h" />

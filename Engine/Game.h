@@ -51,7 +51,8 @@ private:
 	/*  User Functions              */
 	void LoadNextLevel();
 	bool IsLevelOver() const;
-	InventoryEventInfo GenerateInvEvtInfo( float dt );
+	InventoryEventInfo GenerateInvEvtInfo( float dt = 0.0f,
+		EnemyBase* hitEnemy = nullptr,Bullet* curBullet = nullptr );
 	/********************************/
 private:
 	MainWindow& wnd;
