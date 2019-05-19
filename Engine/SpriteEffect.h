@@ -124,4 +124,35 @@ namespace SpriteEffect
 		Color substitution;
 		float fadeAmount;
 	};
+	// Draws one sub on left other sub on right.
+	class SubstitutePos
+	{
+	public:
+		SubstitutePos( Color chroma,Color sub,Color sub2,int pos )
+			:
+			chroma( chroma ),
+			sub( sub ),
+			sub2( sub2 ),
+			pos( pos )
+		{}
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( cSrc != chroma )
+			{
+				if( xDest > pos )
+				{
+					gfx.PutPixel( xDest,yDest,sub2 );
+				}
+				else
+				{
+					gfx.PutPixel( xDest,yDest,sub );
+				}
+			}
+		}
+	private:
+		Color chroma = Colors::Magenta;
+		Color sub;
+		Color sub2;
+		int pos;
+	};
 }

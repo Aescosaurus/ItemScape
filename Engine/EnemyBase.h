@@ -35,6 +35,8 @@ public:
 	bool IsExpl() const;
 	const Vec2& GetPos() const;
 	const Rect& GetRect() const;
+	// Returns hp percent 0-1.
+	float GetHPPercent() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );
@@ -47,6 +49,7 @@ protected:
 protected:
 	Vec2 pos;
 	Collider coll;
+	int maxHP;
 	int hp;
 	const TileMap* map;
 	Vec2 target = { 0.0f,0.0f };

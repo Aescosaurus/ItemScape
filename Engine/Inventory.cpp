@@ -181,6 +181,14 @@ void Inventory::OnEnemyExplode( InventoryEventInfo& evtInfo )
 	}
 }
 
+void Inventory::OnDraw( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnDraw( evtInfo );
+	}
+}
+
 InventoryItem* Inventory::FindItem( const std::string& name )
 {
 	for( auto& item : items )

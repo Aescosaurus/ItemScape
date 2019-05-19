@@ -1,0 +1,4 @@
+Goggles of Destiny
+See others' destinies.
+Allows you to see
+health bars of enemies.

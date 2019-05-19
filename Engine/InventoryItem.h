@@ -27,6 +27,7 @@ public:
 	Mouse& mouse;
 	TileMap& map;
 	std::vector<std::unique_ptr<InventoryItem>>& items;
+	Graphics& gfx;
 };
 
 class InventoryItem
@@ -53,6 +54,7 @@ public:
 	virtual void OnUpdate( InventoryEventInfo& evtInfo ) {}
 	virtual void OnReceive( InventoryEventInfo& evtInfo ) {}
 	virtual void OnRemove( InventoryEventInfo& evtInfo ) {}
+	virtual void OnDraw( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	/* Gun methods */

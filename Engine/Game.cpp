@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo( 0.0f ) );
-	playerInv.AddItem( new PinkBunny,GenerateInvEvtInfo( 0.0f ) );
+	playerInv.AddItem( new GogglesOfDestiny,GenerateInvEvtInfo( 0.0f ) );
 }
 
 void Game::Go()
@@ -145,6 +145,8 @@ void Game::UpdateModel()
 					b->GetRect().GetCenter() );
 				b->Attack( 1 );
 
+				// OnEnemyHit
+
 				if( e->IsExpl() )
 				{
 					enemyExploded = true;
@@ -237,8 +239,9 @@ void Game::ComposeFrame()
 	for( const auto* pup : pickups ) pup->Draw( gfx );
 	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	map.Draw( gfx );
+	playerInv.OnDraw( GenerateInvEvtInfo( 0.0f ) );
 	guy.Draw( gfx );
-	floor.DrawOverlay( gfx );
+	floor.DrawOverlay( gfx ); // Draw minimap.
 	playerInv.Draw( gfx );
 	// Top of drawing order.
 
@@ -312,5 +315,5 @@ InventoryEventInfo Game::GenerateInvEvtInfo( float dt )
 {
 	return( InventoryEventInfo{ guy,enemyBullets,
 		visualEffects,playerBullets,enemies,pickups,dt,
-		wnd.mouse,map,playerInv.GetItemVec() } );
+		wnd.mouse,map,playerInv.GetItemVec(),gfx } );
 }

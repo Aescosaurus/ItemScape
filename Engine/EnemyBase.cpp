@@ -28,12 +28,18 @@ const Rect& EnemyBase::GetRect() const
 	return( coll.GetRect() );
 }
 
+float EnemyBase::GetHPPercent() const
+{
+	return( float( hp ) / float( maxHP ) );
+}
+
 EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,
 	int hp,const TileMap& map )
 	:
 	pos( pos ),
 	coll( map,{ pos,size.x,size.y } ),
 	hp( hp ),
+	maxHP( hp ),
 	map( &map )
 {
 	damageCooldown.Update( damageCooldown.GetDuration() );
