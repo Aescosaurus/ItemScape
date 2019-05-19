@@ -1,7 +1,6 @@
 #pragma once
 
 #include "InventoryItem.h"
-#include <tuple>
 
 class GunBase
 	:
@@ -14,35 +13,10 @@ public:
 		float fireRateBuffFactor = 1.0f;
 		for( const auto& buff : fireRateBuffs )
 		{
-			fireRateBuffFactor *= std::get<0>( buff );
+			fireRateBuffFactor *= buff;
 		}
 
 		shotTimer.Update( evtInfo.dt * fireRateBuffFactor );
-
-		for( auto it = damageBuffs.begin();
-			it != damageBuffs.end(); ++it )
-		{
-			std::get<2>( *it ).Update( evtInfo.dt );
-
-			if( std::get<1>( *it ) == 0 &&
-				std::get<2>( *it ).IsDone() )
-			{
-				damageBuffs.erase( it );
-				break;
-			}
-		}
-		for( auto it = fireRateBuffs.begin();
-			it != fireRateBuffs.end(); ++it )
-		{
-			std::get<2>( *it ).Update( evtInfo.dt );
-
-			if( std::get<1>( *it ) == 0 &&
-				std::get<2>( *it ).IsDone() )
-			{
-				fireRateBuffs.erase( it );
-				break;
-			}
-		}
 
 		bulletColor = ( ( damageBuffs.size() != 0 )
 			? Colors::Red : Colors::Magenta );
@@ -59,38 +33,52 @@ public:
 			evtInfo.player.SetJustShot( true );
 
 			Shoot( evtInfo,Vec2( evtInfo.mouse.GetPos() ) );
+		}
+	}
 
-			for( auto& buff : damageBuffs )
+	void BoostDamage( InventoryEventInfo& evtInfo,
+		int amountAdded ) override
+	{
+		damageBuffs.emplace_back( amountAdded );
+	}
+
+	void BoostFireRate( InventoryEventInfo& evtInfo,
+		float amount ) override
+	{
+		fireRateBuffs.emplace_back( amount );
+	}
+
+	void RemoveDamageBoost( InventoryEventInfo& evtInfo,
+		int itemToRemove ) override
+	{
+		for( auto it = damageBuffs.begin();
+			it != damageBuffs.end(); ++it )
+		{
+			if( *it == itemToRemove )
 			{
-				if( std::get<1>( buff ) > 0 )
-				{
-					--std::get<1>( buff );
-				}
-			}
-			for( auto& buff : fireRateBuffs )
-			{
-				if( std::get<1>( buff ) > 0 )
-				{
-					--std::get<1>( buff );
-				}
+				damageBuffs.erase( it );
+				break;
 			}
 		}
 	}
 
-	// -1 nBuffedShots for infinite
-	void BoostDamage( InventoryEventInfo& evtInfo,
-		int amountAdded,int nBuffedShots,float duration ) override
+	void RemoveFireRateBoost( InventoryEventInfo& evtInfo,
+		float itemToRemove ) override
 	{
-		damageBuffs.emplace_back( std::make_tuple(
-			amountAdded,nBuffedShots,Timer{ duration } ) );
+		for( auto it = fireRateBuffs.begin();
+			it != fireRateBuffs.end(); ++it )
+		{
+			if( *it == itemToRemove )
+			{
+				fireRateBuffs.erase( it );
+				break;
+			}
+		}
 	}
 
-	// -1 nBuffedShots for infinite
-	void BoostFireRate( InventoryEventInfo& evtInfo,
-		float amount,int nBuffedShots,float duration ) override
+	bool IsGun() const override
 	{
-		fireRateBuffs.emplace_back( std::make_tuple(
-			amount,nBuffedShots,Timer{ duration } ) );
+		return( true );
 	}
 protected:
 	GunBase( const std::string& fileName,const std::string& icon,
@@ -107,7 +95,7 @@ protected:
 		int damage = 1;
 		for( auto& buff : damageBuffs )
 		{
-			damage += std::get<0>( buff );
+			damage += buff;
 		}
 
 		return( damage );
@@ -117,8 +105,10 @@ protected:
 	const float bulletSpeed;
 	const int damage;
 
-	std::vector<std::tuple<int,int,Timer>> damageBuffs;
-	std::vector<std::tuple<float,int,Timer>> fireRateBuffs;
+	// std::vector<std::tuple<int,int,Timer>> damageBuffs;
+	// std::vector<std::tuple<float,int,Timer>> fireRateBuffs;
+	static std::vector<int> damageBuffs;
+	static std::vector<float> fireRateBuffs;
 
 	Color bulletColor = Colors::Magenta;
 };

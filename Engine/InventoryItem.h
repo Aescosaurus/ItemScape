@@ -59,9 +59,13 @@ public:
 	virtual void Shoot( InventoryEventInfo& invEvtInfo,
 		const Vec2& target );
 	virtual void BoostDamage( InventoryEventInfo& evtInfo,
-		int amountAdded,int nBuffedShots,float duration );
+		int amountAdded );
 	virtual void BoostFireRate( InventoryEventInfo& evtInfo,
-		float amount,int nBuffedShots,float duration );
+		float amount );
+	virtual void RemoveDamageBoost( InventoryEventInfo& evtInfo,
+		int itemToRemove );
+	virtual void RemoveFireRateBoost( InventoryEventInfo& evtInfo,
+		float itemToRemove );
 	/**/
 
 	const Vei2& GetPos() const;
@@ -70,6 +74,7 @@ public:
 	const std::string& GetDesc() const;
 	bool WillRemove() const;
 	RectI GetRect() const;
+	virtual bool IsGun() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;

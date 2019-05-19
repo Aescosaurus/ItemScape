@@ -214,6 +214,7 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="BeetleBig.cpp" />
+    <ClCompile Include="GunBase.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="RynoChaser.cpp" />

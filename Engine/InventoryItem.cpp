@@ -69,13 +69,25 @@ void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
 }
 
 void InventoryItem::BoostDamage( InventoryEventInfo& evtInfo,
-	int amountAdded,int nBuffedShots,float duration )
+	int amountAdded )
 {
 	assert( false );
 }
 
 void InventoryItem::BoostFireRate( InventoryEventInfo& evtInfo,
-	float amount,int nBuffedShots,float duration )
+	float amount )
+{
+	assert( false );
+}
+
+void InventoryItem::RemoveDamageBoost( InventoryEventInfo& evtInfo,
+	int itemToRemove )
+{
+	assert( false );
+}
+
+void InventoryItem::RemoveFireRateBoost( InventoryEventInfo& evtInfo,
+	float itemToRemove )
 {
 	assert( false );
 }
@@ -108,6 +120,11 @@ bool InventoryItem::WillRemove() const
 RectI InventoryItem::GetRect() const
 {
 	return( RectI{ pos,size.x,size.y } );
+}
+
+bool InventoryItem::IsGun() const
+{
+	return( false );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const
