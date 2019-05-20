@@ -25,6 +25,7 @@
 #include "RustyPistol.h"
 #include "OldRifle.h"
 #include "DebilitatedShotgun.h"
+#include "KawaiiLemon.h"
 
 class PickupManager
 {
@@ -51,6 +52,7 @@ public:
 		options.emplace_back( new GogglesOfDestiny );
 		options.emplace_back( new CreepySpecs );
 		options.emplace_back( new ChiliTomatoNoodle );
+		options.emplace_back( new KawaiiLemon );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

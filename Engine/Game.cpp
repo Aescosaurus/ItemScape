@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new ChiliTomatoNoodle,GenerateInvEvtInfo() );
+	playerInv.AddItem( new KawaiiLemon,GenerateInvEvtInfo() );
 }
 
 void Game::Go()

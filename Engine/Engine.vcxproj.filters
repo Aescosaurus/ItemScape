@@ -240,6 +240,9 @@
     <ClInclude Include="ChiliTomatoNoodle.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="KawaiiLemon.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -342,6 +345,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GunBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KawaiiLemon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -168,6 +168,7 @@
     <ClInclude Include="ChargeGenerator.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="KawaiiLemon.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="GunBase.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="KawaiiLemon.cpp" />
     <ClCompile Include="RynoChaser.cpp" />
     <ClCompile Include="Skorp.cpp" />
     <ClCompile Include="Slizard.cpp" />
