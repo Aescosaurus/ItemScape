@@ -143,6 +143,7 @@
     <ClInclude Include="CableSplitter.h" />
     <ClInclude Include="CactusBranch.h" />
     <ClInclude Include="ChiliException.h" />
+    <ClInclude Include="ChiliTomatoNoodle.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Codex.h" />
     <ClInclude Include="Collider.h" />

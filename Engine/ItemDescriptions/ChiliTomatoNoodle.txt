@@ -1,0 +1,7 @@
+Chili Tomato Noodle
+After defeating an
+enemy boost fire rate
+by 10% for 10 seconds.
+Destroying another
+enemy within this time
+adds to the boost.

@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new CreepySpecs,GenerateInvEvtInfo() );
+	playerInv.AddItem( new ChiliTomatoNoodle,GenerateInvEvtInfo() );
 }
 
 void Game::Go()
@@ -150,7 +150,7 @@ void Game::UpdateModel()
 				if( e->IsExpl() )
 				{
 					enemyExploded = true;
-					playerInv.OnEnemyExplode( GenerateInvEvtInfo( dt ) );
+					playerInv.OnEnemyExplode( GenerateInvEvtInfo( dt,e.get(),b.get() ) );
 				}
 
 				if( IsLevelOver() )
@@ -239,7 +239,7 @@ void Game::ComposeFrame()
 	for( const auto* pup : pickups ) pup->Draw( gfx );
 	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	map.Draw( gfx );
-	playerInv.OnDraw( GenerateInvEvtInfo( 0.0f ) );
+	playerInv.OnDraw( GenerateInvEvtInfo() );
 	guy.Draw( gfx );
 	floor.DrawOverlay( gfx ); // Draw minimap.
 	playerInv.Draw( gfx );
@@ -255,6 +255,11 @@ void Game::LoadNextLevel()
 	playerBullets.clear();
 	enemyBullets.clear();
 	visualEffects.clear();
+	for( auto* pickup : pickups )
+	{
+		delete pickup;
+	}
+	pickups.clear();
 
 	pickupPos = Graphics::GetScreenRect().GetCenter();
 	spawnedEndOfLevelItem = false;

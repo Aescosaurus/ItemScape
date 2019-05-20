@@ -36,20 +36,20 @@ public:
 		}
 	}
 
-	void BoostDamage( InventoryEventInfo& evtInfo,
-		int amountAdded ) override
+	static void AddDamageBoost( InventoryEventInfo& evtInfo,
+		int amountAdded )
 	{
 		damageBuffs.emplace_back( amountAdded );
 	}
 
-	void BoostFireRate( InventoryEventInfo& evtInfo,
-		float amount ) override
+	static void AddFireRateBoost( InventoryEventInfo& evtInfo,
+		float amount )
 	{
 		fireRateBuffs.emplace_back( amount );
 	}
 
-	void RemoveDamageBoost( InventoryEventInfo& evtInfo,
-		int itemToRemove ) override
+	static void RemoveDamageBoost( InventoryEventInfo& evtInfo,
+		int itemToRemove )
 	{
 		for( auto it = damageBuffs.begin();
 			it != damageBuffs.end(); ++it )
@@ -62,8 +62,8 @@ public:
 		}
 	}
 
-	void RemoveFireRateBoost( InventoryEventInfo& evtInfo,
-		float itemToRemove ) override
+	static void RemoveFireRateBoost( InventoryEventInfo& evtInfo,
+		float itemToRemove )
 	{
 		for( auto it = fireRateBuffs.begin();
 			it != fireRateBuffs.end(); ++it )
@@ -90,7 +90,7 @@ protected:
 		damage( damage )
 	{}
 
-	int GetDamage() const
+	static int GetDamage()
 	{
 		int damage = 1;
 		for( auto& buff : damageBuffs )

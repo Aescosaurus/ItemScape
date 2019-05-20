@@ -18,8 +18,8 @@ private:
 		{}
 		void Update( float dt )
 		{
-			vel.x += xMove;
-			vel.y += gravAcc;
+			vel.x += xMove * dt;
+			vel.y += gravAcc * dt;
 
 			pos += vel * dt;
 
@@ -37,9 +37,9 @@ private:
 	public:
 		Vec2 pos;
 		int number;
-		static constexpr float gravAcc = 50.0f;
-		Vec2 vel = { 0.0f,-gravAcc * 5.0f };
-		static constexpr float xAcc = 10.0f;
+		static constexpr float gravAcc = 50.0f * 50.0f;
+		Vec2 vel = { 0.0f,-gravAcc / 5.0f };
+		static constexpr float xAcc = 10.0f * 60.0f;
 		float xMove = 0.0f;
 		Timer despawnTime = 0.5f;
 	};
@@ -47,7 +47,7 @@ public:
 	CreepySpecs()
 		:
 		InventoryItem( "ItemDescriptions/CreepySpecs.txt",
-			"Images/Wall2.bmp" )
+			"Images/Items/CreepySpecs.bmp" )
 	{}
 
 	InventoryItem* Clone() override

@@ -68,30 +68,6 @@ void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
 	assert( false );
 }
 
-void InventoryItem::BoostDamage( InventoryEventInfo& evtInfo,
-	int amountAdded )
-{
-	assert( false );
-}
-
-void InventoryItem::BoostFireRate( InventoryEventInfo& evtInfo,
-	float amount )
-{
-	assert( false );
-}
-
-void InventoryItem::RemoveDamageBoost( InventoryEventInfo& evtInfo,
-	int itemToRemove )
-{
-	assert( false );
-}
-
-void InventoryItem::RemoveFireRateBoost( InventoryEventInfo& evtInfo,
-	float itemToRemove )
-{
-	assert( false );
-}
-
 const Vei2& InventoryItem::GetPos() const
 {
 	return( pos );

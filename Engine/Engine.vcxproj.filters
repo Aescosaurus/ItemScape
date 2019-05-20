@@ -237,6 +237,9 @@
     <ClInclude Include="CreepySpecs.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="ChiliTomatoNoodle.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

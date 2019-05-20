@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InventoryItem.h"
+#include "GunBase.h"
 
 class PinkBunny
 	:
@@ -22,8 +23,7 @@ public:
 	{
 		if( !activated )
 		{
-			evtInfo.items[0]->BoostFireRate( evtInfo,
-				fireRateBuff );
+			GunBase::AddFireRateBoost( evtInfo,fireRateBuff );
 
 			activated = true;
 		}
@@ -38,7 +38,7 @@ public:
 			if( shotSpeedupDuration.IsDone() &&
 				evtInfo.items[0]->IsGun() )
 			{
-				evtInfo.items[0]->RemoveFireRateBoost( evtInfo,
+				GunBase::RemoveFireRateBoost( evtInfo,
 					fireRateBuff );
 
 				remove = true;
