@@ -21,11 +21,12 @@
 #include "GogglesOfDestiny.h"
 #include "CreepySpecs.h"
 #include "ChiliTomatoNoodle.h"
+#include "KawaiiLemon.h"
+#include "FlamiumOre.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
 #include "DebilitatedShotgun.h"
-#include "KawaiiLemon.h"
 
 class PickupManager
 {
@@ -53,6 +54,7 @@ public:
 		options.emplace_back( new CreepySpecs );
 		options.emplace_back( new ChiliTomatoNoodle );
 		options.emplace_back( new KawaiiLemon );
+		options.emplace_back( new FlamiumOre );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

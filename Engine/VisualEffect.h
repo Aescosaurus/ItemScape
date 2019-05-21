@@ -7,7 +7,8 @@ class VisualEffect
 public:
 	enum class Type
 	{
-		LightningDissipate = 0
+		LightningDissipate = 0,
+		Fire
 	};
 public:
 	VisualEffect( const Vei2& pos,Type t );

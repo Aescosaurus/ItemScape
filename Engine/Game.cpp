@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new KawaiiLemon,GenerateInvEvtInfo() );
+	playerInv.AddItem( new FlamiumOre,GenerateInvEvtInfo() );
 }
 
 void Game::Go()
@@ -237,10 +237,10 @@ void Game::ComposeFrame()
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto* pup : pickups ) pup->Draw( gfx );
-	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	map.Draw( gfx );
-	playerInv.OnDraw( GenerateInvEvtInfo() );
 	guy.Draw( gfx );
+	for( const auto& eff : visualEffects ) eff.Draw( gfx );
+	playerInv.OnDraw( GenerateInvEvtInfo() );
 	floor.DrawOverlay( gfx ); // Draw minimap.
 	playerInv.Draw( gfx );
 	// Top of drawing order.

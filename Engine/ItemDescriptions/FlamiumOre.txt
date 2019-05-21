@@ -1,0 +1,5 @@
+Flamium Ore
+Fresh out of the mine.
+Deal 1 damage to every
+enemy on screen every
+10 seconds.

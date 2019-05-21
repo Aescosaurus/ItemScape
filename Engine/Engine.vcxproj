@@ -160,6 +160,7 @@
     <ClInclude Include="Beetle.h" />
     <ClInclude Include="BeetleBig.h" />
     <ClInclude Include="FifthShotFlintlock.h" />
+    <ClInclude Include="FlamiumOre.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GogglesOfDestiny.h" />
     <ClInclude Include="GPSTracker.h" />

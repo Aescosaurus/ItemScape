@@ -137,10 +137,10 @@ Vec2 Player::GetCenter() const
 
 Rect Player::GetRect() const
 {
-	if( jumping )
-	{
-		return( RectI{ coll.GetRect() }.MoveTo( { -9999,-9999 } ) );
-	}
+	// if( jumping )
+	// {
+	// 	return( RectI{ coll.GetRect() }.MoveTo( { -9999,-9999 } ) );
+	// }
 
 	return( coll.GetRect() );
 }
