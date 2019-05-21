@@ -179,6 +179,7 @@
     <ClInclude Include="SingleUseGatling.h" />
     <ClInclude Include="Skorp.h" />
     <ClInclude Include="Slizard.h" />
+    <ClInclude Include="SpellBombWarp.h" />
     <ClInclude Include="SpiderMole.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="FileIO.h" />

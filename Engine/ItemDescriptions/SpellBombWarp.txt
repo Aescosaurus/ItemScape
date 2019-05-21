@@ -1,0 +1,6 @@
+Spell Bomb Warp
+On activation, teleport
+the player to the mouse
+cursor and spawn a ring
+of bullets at that
+location.

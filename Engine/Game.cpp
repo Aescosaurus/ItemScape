@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new RefinedFlamium,GenerateInvEvtInfo() );
+	playerInv.AddItem( new SpellBombWarp,GenerateInvEvtInfo() );
 }
 
 void Game::Go()
