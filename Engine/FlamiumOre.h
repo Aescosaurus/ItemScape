@@ -37,6 +37,6 @@ public:
 		}
 	}
 private:
-	Timer damageTimer = 10.0f;
+	Timer damageTimer = 5.0f;
 	static constexpr int damage = 1;
 };

@@ -1,0 +1,5 @@
+Refined Flamium
+Fresh out of the mine.
+Deal 5 damage to a
+random enemy every 5
+seconds.

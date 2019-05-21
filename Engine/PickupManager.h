@@ -23,6 +23,7 @@
 #include "ChiliTomatoNoodle.h"
 #include "KawaiiLemon.h"
 #include "FlamiumOre.h"
+#include "RefinedFlamium.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -55,6 +56,7 @@ public:
 		options.emplace_back( new ChiliTomatoNoodle );
 		options.emplace_back( new KawaiiLemon );
 		options.emplace_back( new FlamiumOre );
+		options.emplace_back( new RefinedFlamium );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

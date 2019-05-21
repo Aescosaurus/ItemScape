@@ -246,6 +246,9 @@
     <ClInclude Include="FlamiumOre.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="RefinedFlamium.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
