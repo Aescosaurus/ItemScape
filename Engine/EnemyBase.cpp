@@ -96,6 +96,14 @@ void EnemyBase::ResetTargeting( float moveTolerance,float speed )
 	vel = ( target - pos ).GetNormalized() * speed;
 }
 
+void EnemyBase::AttemptMove( float dt )
+{
+	const auto testMove = vel * dt;
+	const auto validMove = coll.GetValidMove( pos,testMove );
+	pos += validMove;
+	coll.MoveTo( pos );
+}
+
 SpriteEffect::Substitution EnemyBase::FlashCol() const
 {
 	return( SpriteEffect::Substitution{ Colors::Magenta,Colors::White } );

@@ -4,6 +4,7 @@ WingedBugMidboss::WingedBugMidboss( const Vec2& pos,const TileMap& map,
 	std::vector<std::unique_ptr<Bullet>>& bullets )
 	:
 	EnemyBase( pos,size,health,map ),
+	pBulletVec( &bullets ),
 	floating( 0,0,size.x,size.y,4,*surfSheet,0.2f ),
 	buildingUp( 0,size.y,size.x,size.y,4,*surfSheet,0.2f ),
 	charging( 0,size.y * 2,size.x,size.y,4,*surfSheet,0.2f ),
@@ -14,6 +15,8 @@ WingedBugMidboss::WingedBugMidboss( const Vec2& pos,const TileMap& map,
 
 void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	switch( action )
 	{
 	case State::Stay:
@@ -28,7 +31,6 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::Wander:
-		buildingUp.Update( dt );
 		buildingUp.SetFrame( 3 );
 		if( curJumps < nJumps )
 		{
@@ -36,6 +38,22 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 
 			if( reachedTarget )
 			{
+				if( curJumps == nJumps / 2 )
+				{
+					const int nShots = 8;
+					for( int i = 0; i < nShots; ++i )
+					{
+						const auto vel = Vec2{ 0.0f,-1.0f }
+							.Deviate( ( chili::pi * 2.0f ) *
+							( float( i ) / float( nShots ) ) );
+
+						pBulletVec->emplace_back( std::make_unique<
+							Bullet>( GetRect().GetCenter(),
+							GetRect().GetCenter() + vel,*map,
+							Bullet::Team::WingedBug,bulletSpeed,
+							Bullet::Size::Medium ) );
+					}
+				}
 				++curJumps;
 				action = State::Stay;
 			}
@@ -43,6 +61,8 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 		else
 		{
 			EnemyBase::ResetTargeting( jumpRange,jumpSpeed );
+			curJumps = 0;
+			buildingUp.Reset();
 			action = State::BuildUp;
 		}
 		break;
@@ -55,6 +75,30 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::ChargeAttack:
+		target = info.playerPos;
+		vel = ( target - GetRect().GetCenter() )
+			.GetNormalized() * jumpSpeed;
+		AttemptMove( dt );
+
+		if( ( info.playerPos - GetRect().GetCenter() )
+			.GetLengthSq() < shotgunRange * shotgunRange )
+		{
+			const auto bulletVel = info.playerPos - pos;
+			for( int i = -2; i < 3; ++i )
+			{
+				const auto vel = bulletVel.GetDeviated(
+					bulletSpacing * float( i ) / 5.0f );
+
+				pBulletVec->emplace_back( std::make_unique<
+					Bullet>( GetRect().GetCenter(),
+					GetRect().GetCenter() + vel,*map,
+					Bullet::Team::WingedBug,bulletSpeed,
+					Bullet::Size::Medium ) );
+			}
+
+			EnemyBase::ResetTargeting( jumpRange,jumpSpeed );
+			action = State::Wander;
+		}
 		break;
 	case State::Explode:
 		break;
@@ -89,4 +133,5 @@ void WingedBugMidboss::Draw( Graphics& gfx ) const
 
 void WingedBugMidboss::Attack( int damage,const Vec2& loc )
 {
+	EnemyBase::Attack( damage,loc );
 }

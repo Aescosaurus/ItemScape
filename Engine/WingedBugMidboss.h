@@ -27,6 +27,7 @@ public:
 private:
 	static constexpr Vei2 size = { 128,128 };
 	static constexpr int health = 100;
+	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const Surface* surfSheet = Codx::Load( "Images/WingedBugMidboss.bmp",Vei2{ 4,4 } );
 	Anim floating;
 	Anim buildingUp;
@@ -38,4 +39,7 @@ private:
 	int curJumps = 0;
 	static constexpr float jumpSpeed = 300.0f;
 	static constexpr float jumpRange = 180.0f;
+	static constexpr float shotgunRange = 190.0f;
+	static constexpr float bulletSpeed = 250.0f;
+	static constexpr float bulletSpacing = chili::pi / 2.0f;
 };

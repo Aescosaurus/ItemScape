@@ -22,10 +22,11 @@ public:
 		Firebug,
 		Skorp,
 		RynoChaser,
-		LastOfSmall,
+		LastOfSmall, // 
 		BeetleBig,
 		SpiderMole,
-		Slizard
+		Slizard,
+		WingedBug
 	};
 	enum class Size
 	{

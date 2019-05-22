@@ -43,6 +43,7 @@ protected:
 
 	void Wander( float moveTolerance,float speed,float dt );
 	void ResetTargeting( float moveTolerance,float speed );
+	void AttemptMove( float dt );
 
 	SpriteEffect::Substitution FlashCol() const;
 	bool IsFlashing() const;
