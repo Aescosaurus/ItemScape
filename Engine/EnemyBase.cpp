@@ -57,6 +57,11 @@ void EnemyBase::Wander( float moveTolerance,float speed,float dt )
 		validMove.z )
 	{
 		ResetTargeting( moveTolerance,speed );
+		reachedTarget = true;
+	}
+	else
+	{
+		reachedTarget = false;
 	}
 }
 

@@ -7,7 +7,6 @@ enum class EnemyType
 	Skorp = int( 's' ),
 	SpiderMole = int( 'm' ),
 	RynoChaser = int( 'r' ),
-	Slizard = int( 'l' )
-
-
+	Slizard = int( 'l' ),
+	WingedBugMidboss = int( 'w' )
 };

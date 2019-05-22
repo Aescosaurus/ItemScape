@@ -24,7 +24,7 @@ public:
 		for( const auto& e : evtInfo.enemies )
 		{
 			const int pos = int( e->GetPos().x + e->GetHPPercent() *
-				e->GetRect().GetWidth() - 1 );
+				hpBar.GetWidth() - 1 );
 
 			evtInfo.gfx.DrawSprite( int( e->GetPos().x ),
 				int( e->GetPos().y + e->GetRect().GetHeight() ) + 5,hpBar,

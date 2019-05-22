@@ -30,6 +30,7 @@
 #include "SpiderMole.h"
 #include "RynoChaser.h"
 #include "Slizard.h"
+#include "WingedBugMidboss.h"
 #include "PickupManager.h"
 
 Game::Game( MainWindow& wnd )
@@ -75,10 +76,11 @@ void Game::UpdateModel()
 #if !NDEBUG
 	if( wnd.kbd.KeyIsPressed( VK_RETURN ) )
 	{
-		for( const auto& e : enemies )
-		{
-			e->Attack( 9999,{ 0.0f,0.0f } );
-		}
+		// for( const auto& e : enemies )
+		// {
+		// 	e->Attack( 9999,{ 0.0f,0.0f } );
+		// }
+		enemies.clear();
 	}
 #endif
 
@@ -262,7 +264,6 @@ void Game::LoadNextLevel()
 	pickups.clear();
 
 	pickupPos = Graphics::GetScreenRect().GetCenter();
-	spawnedEndOfLevelItem = false;
 
 	map.LoadFile( floor.GetLevelName() );
 
@@ -298,12 +299,21 @@ void Game::LoadNextLevel()
 			enemies.emplace_back( std::make_unique<Slizard>(
 				t.pos,map,enemyBullets ) );
 			break;
+		case char( EnemyType::WingedBugMidboss ) :
+			enemies.emplace_back( std::make_unique<WingedBugMidboss>(
+				t.pos,map,enemyBullets ) );
+			break;
 		}
 	}
 
 	if( floor.CurRoomAlreadyCompleted() )
 	{
 		enemies.clear();
+		spawnedEndOfLevelItem = true;
+	}
+	else
+	{
+		spawnedEndOfLevelItem = false;
 	}
 }
 

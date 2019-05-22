@@ -56,4 +56,5 @@ protected:
 	Vec2 lastTarget = pos;
 	Vec2 vel = { 0.0f,0.0f };
 	Timer damageCooldown = 3.0f / 60.0f;
+	bool reachedTarget = false;
 };
