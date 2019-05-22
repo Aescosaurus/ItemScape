@@ -26,7 +26,7 @@ public:
 	void Attack( int damage,const Vec2& loc ) override;
 private:
 	static constexpr Vei2 size = { 128,128 };
-	static constexpr int health = 100;
+	static constexpr int health = 150;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	const Surface* surfSheet = Codx::Load( "Images/WingedBugMidboss.bmp",Vei2{ 4,4 } );
 	Anim floating;
