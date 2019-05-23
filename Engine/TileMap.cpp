@@ -12,12 +12,12 @@ void TileMap::Draw( Graphics& gfx ) const
 		{
 			const auto tile = GetTile( x,y );
 			const auto tileBelow = GetTile( x,y + 1 );
-			const Surface* pDrawSpr = &wallSprs[curWallIndex];
+			const Surface* pDrawSpr = &wallSprs[curWallIndex / 2];
 			if( tile == TileType::Wall )
 			{
 				if( tileBelow == TileType::Empty )
 				{
-					pDrawSpr = &wallTops[curWallIndex];
+					pDrawSpr = &wallTops[curWallIndex / 2];
 				}
 				gfx.DrawSprite( x * tileDim.x,y * tileDim.y,
 					*pDrawSpr,SpriteEffect::Copy{} );
@@ -34,12 +34,12 @@ void TileMap::DrawFloor( Graphics& gfx ) const
 		for( int x = 0; x < width; ++x )
 		{
 			const auto tile = GetTile( x,y );
-			const Surface* pDrawSpr = &floorSprs[curWallIndex];
+			const Surface* pDrawSpr = &floorSprs[curWallIndex / 2];
 			if( tile == TileType::Empty )
 			{
 				if( x % 2 == 0 && y % 2 != 0 )
 				{
-					pDrawSpr = &floorCloses[curWallIndex];
+					pDrawSpr = &floorCloses[curWallIndex / 2];
 				}
 				gfx.DrawSprite( x * tileDim.x,y * tileDim.y,
 					*pDrawSpr,SpriteEffect::Copy{} );
@@ -93,6 +93,7 @@ void TileMap::LoadFile( const std::string& fileName )
 				break;
 			default:
 				// assert( false );
+				toAdd = TileType::Empty;
 				break;
 			}
 			tiles.emplace_back( toAdd );

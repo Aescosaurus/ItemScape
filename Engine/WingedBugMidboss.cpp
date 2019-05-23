@@ -105,6 +105,13 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
+
+	if( explLastFrame )
+	{
+		explLastFrame = false;
+
+		info.doors.clear();
+	}
 }
 
 void WingedBugMidboss::Draw( Graphics& gfx ) const
@@ -139,6 +146,7 @@ void WingedBugMidboss::Attack( int damage,const Vec2& loc )
 
 	if( IsExpl() )
 	{
+		explLastFrame = true;
 		action = State::Explode;
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 	}

@@ -53,6 +53,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 
+	// GotoNextFloor();
 }
 
 void Game::Go()
@@ -129,7 +130,7 @@ void Game::UpdateModel()
 	//  Enemy::Update might invalidate the iterator.
 	bool enemyExploded = false;
 	const EnemyUpdateInfo euInfo = { guy.GetPos(),
-		guy.GetVel() };
+		guy.GetVel(),doors };
 	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
 		enemies[i]->Update( euInfo,dt );
@@ -223,7 +224,6 @@ void Game::UpdateModel()
 				guy.MoveTo( d.GetPlayerSpawnPos( guy.GetPos() ) );
 				floor.MoveRoom( FloorLevel::Dir( d.GetSide() ) );
 				LoadNextLevel();
-				for( auto& d1 : doors ) d1.UpdateActivated( floor );
 				break;
 			}
 		}
@@ -266,6 +266,7 @@ void Game::LoadNextLevel()
 	pickupPos = Graphics::GetScreenRect().GetCenter();
 
 	map.LoadFile( floor.GetLevelName() );
+	for( auto& d1 : doors ) d1.UpdateActivated( floor );
 
 	// Get everything in the map that isn't a wall or floor.
 	const auto terms = map.FindSpecialTerms( floor.GetLevelName() );
@@ -333,4 +334,11 @@ InventoryEventInfo Game::GenerateInvEvtInfo( float dt,
 		visualEffects,playerBullets,enemies,pickups,dt,
 		wnd.mouse,map,playerInv.GetItemVec(),gfx,
 		hitEnemy,curBullet } );
+}
+
+void Game::GotoNextFloor()
+{
+	floor.AdvanceFloor();
+	map.AdvanceFloor();
+	LoadNextLevel();
 }

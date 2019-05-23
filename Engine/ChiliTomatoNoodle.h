@@ -46,7 +46,7 @@ public:
 		}
 	}
 private:
-	static constexpr float fireRateBoost = 1.1f;
+	static constexpr float fireRateBoost = 1.05f;
 	static constexpr float boostDuration = 10.0f;
 	std::vector<Timer> boostTimers;
 };

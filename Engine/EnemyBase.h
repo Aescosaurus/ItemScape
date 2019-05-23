@@ -11,12 +11,14 @@
 #include "Surface.h"
 #include "SpriteEffect.h"
 #include "Timer.h"
+#include "Door.h"
 
 class EnemyUpdateInfo
 {
 public:
 	const Vec2& playerPos;
 	const Vec2& playerVel;
+	std::vector<Door>& doors;
 };
 
 // TODO: Add a boss base someday maybe.

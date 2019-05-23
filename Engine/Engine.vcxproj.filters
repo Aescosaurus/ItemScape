@@ -222,9 +222,6 @@
     <ClInclude Include="UggsOfMobility.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="ElectroBoots.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GunBase.h">
       <Filter>Header Files\Items\Guns</Filter>
     </ClInclude>
@@ -254,6 +251,12 @@
     </ClInclude>
     <ClInclude Include="WingedBugMidboss.h">
       <Filter>Header Files\Enemies\BugEnemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectroBoots.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelExitDoor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

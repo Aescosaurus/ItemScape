@@ -170,6 +170,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="KawaiiLemon.h" />
+    <ClInclude Include="LevelExitDoor.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />

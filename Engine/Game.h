@@ -53,6 +53,7 @@ private:
 	bool IsLevelOver() const;
 	InventoryEventInfo GenerateInvEvtInfo( float dt = 0.0f,
 		EnemyBase* hitEnemy = nullptr,Bullet* curBullet = nullptr );
+	void GotoNextFloor();
 	/********************************/
 private:
 	MainWindow& wnd;
