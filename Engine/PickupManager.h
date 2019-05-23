@@ -25,6 +25,7 @@
 #include "FlamiumOre.h"
 #include "RefinedFlamium.h"
 #include "SpellBombWarp.h"
+#include "BugSpray.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -59,6 +60,7 @@ public:
 		options.emplace_back( new FlamiumOre );
 		options.emplace_back( new RefinedFlamium );
 		options.emplace_back( new SpellBombWarp );
+		options.emplace_back( new BugSpray );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

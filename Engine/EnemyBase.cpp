@@ -33,6 +33,11 @@ float EnemyBase::GetHPPercent() const
 	return( float( hp ) / float( maxHP ) );
 }
 
+int EnemyBase::GetCurHP() const
+{
+	return( hp );
+}
+
 EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,
 	int hp,const TileMap& map )
 	:

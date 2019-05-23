@@ -1,0 +1,6 @@
+Bug Spray
+Bugs be gone!  Every
+time you hit an enemy
+below 50% health, has a
+5% chance of dealing
+10 extra damage.

@@ -39,6 +39,7 @@ public:
 	const Rect& GetRect() const;
 	// Returns hp percent 0-1.
 	float GetHPPercent() const;
+	int GetCurHP() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );
