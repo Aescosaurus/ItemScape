@@ -1,0 +1,5 @@
+Gelatinous Sphere
+Y...  Yum? 50% chance
+to spawn a ring of
+bullets after defeating
+an enemy.

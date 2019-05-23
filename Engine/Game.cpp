@@ -52,7 +52,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new BugSpray,GenerateInvEvtInfo() );
+	playerInv.AddItem( new GelatinousSphere,GenerateInvEvtInfo() );
 
 	// GotoNextFloor();
 }
@@ -141,8 +141,11 @@ void Game::UpdateModel()
 		const auto& e = enemies[i];
 		const auto enemyRect = e->GetRect();
 
-		for( auto& b : playerBullets )
+		// for( auto& b : playerBullets )
+		for( int i = 0; i < int( playerBullets.size() ); ++i )
 		{
+			auto& b = playerBullets[i];
+
 			if( b->GetRect().IsOverlappingWith( enemyRect ) )
 			{
 				e->Attack( b->GetDamage(),
