@@ -27,6 +27,7 @@
 #include "SpellBombWarp.h"
 #include "BugSpray.h"
 #include "GelatinousSphere.h"
+#include "WatermelonOre.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -63,6 +64,7 @@ public:
 		options.emplace_back( new SpellBombWarp );
 		options.emplace_back( new BugSpray );
 		options.emplace_back( new GelatinousSphere );
+		options.emplace_back( new WatermelonOre );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );

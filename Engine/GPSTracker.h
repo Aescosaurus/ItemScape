@@ -36,12 +36,21 @@ public:
 		{
 			const auto& playerPos = invEvtInfo.player.GetPos();
 
-			
-
 			if( invEvtInfo.enemies.size() > 0 )
 			{
-				auto* targetEnemy = invEvtInfo.enemies[Random::RangeI(
-					0,int( invEvtInfo.enemies.size() ) - 1 )].get();
+				EnemyBase* targetEnemy = nullptr;
+				float dist = 99999999.0f;
+
+				for( auto& e : invEvtInfo.enemies )
+				{
+					const auto curDist = ( e->GetRect().GetCenter() -
+						invEvtInfo.player.GetCenter() ).GetLengthSq();
+					if( !e->IsExpl() && curDist < dist )
+					{
+						dist = curDist;
+						targetEnemy = e.get();
+					}
+				}
 
 				TrackingBullet* replacement = new TrackingBullet{
 					*invEvtInfo.playerBullets.back() };

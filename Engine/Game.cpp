@@ -52,7 +52,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new GelatinousSphere,GenerateInvEvtInfo() );
+	playerInv.AddItem( new WatermelonOre,GenerateInvEvtInfo() );
 
 	// GotoNextFloor();
 }

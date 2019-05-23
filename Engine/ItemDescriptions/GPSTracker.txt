@@ -1,6 +1,4 @@
 GPS Tracker
-Trigger in an
-activation slot to
-cause the next 30
-bullets to seek towards
-a random enemy.
+Activate to turn the
+next 30 bullets shot
+into seeking bullets.
