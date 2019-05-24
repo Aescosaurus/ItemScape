@@ -25,7 +25,7 @@ public:
 		{
 			evtInfo.visualEffects.emplace_back(
 				VisualEffect{ enemyBull->GetPos(),
-				VisualEffect::Type::LightningDissipate } );
+				VisualEffect::Type::Lightning } );
 
 			remove = true;
 		}

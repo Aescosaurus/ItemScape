@@ -1,0 +1,7 @@
+Poison Bottle
+A bottle of potent
+poison.  When you
+defeat an enemy deal
+25% of its health as
+damage to another
+random enemy.

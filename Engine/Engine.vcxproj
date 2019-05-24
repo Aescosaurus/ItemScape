@@ -176,6 +176,7 @@
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />
+    <ClInclude Include="PoisonBottle.h" />
     <ClInclude Include="RefinedFlamium.h" />
     <ClInclude Include="RustyPistol.h" />
     <ClInclude Include="RynoChaser.h" />

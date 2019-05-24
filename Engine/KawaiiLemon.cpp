@@ -13,6 +13,6 @@ void KawaiiLemon::OnEnemyExplode( InventoryEventInfo& evtInfo )
 		evtInfo.pickups.back()->SetPos( pickupPos );
 		evtInfo.visualEffects.emplace_back( VisualEffect{
 			pickupPos,VisualEffect::Type
-			::LightningDissipate } );
+			::Lightning } );
 	}
 }

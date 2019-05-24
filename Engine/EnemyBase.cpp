@@ -38,6 +38,11 @@ int EnemyBase::GetCurHP() const
 	return( hp );
 }
 
+int EnemyBase::GetMaxHP() const
+{
+	return( maxHP );
+}
+
 EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,
 	int hp,const TileMap& map )
 	:

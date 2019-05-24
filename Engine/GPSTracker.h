@@ -26,7 +26,7 @@ public:
 
 			invEvtInfo.visualEffects.emplace_back(
 				VisualEffect{ invEvtInfo.player.GetPos(),
-				VisualEffect::Type::LightningDissipate } );
+				VisualEffect::Type::Lightning } );
 		}
 	}
 

@@ -39,7 +39,7 @@ public:
 		{
 			invEvtInfo.visualEffects.emplace_back(
 				VisualEffect{ closest->GetRect().GetCenter(),
-				VisualEffect::Type::LightningDissipate } );
+				VisualEffect::Type::Lightning } );
 
 			closest->Attack( damage,playerPos );
 

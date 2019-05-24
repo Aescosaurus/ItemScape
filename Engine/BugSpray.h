@@ -25,7 +25,7 @@ public:
 		{
 			evtInfo.visualEffects.emplace_back( VisualEffect{
 				evtInfo.hitEnemy->GetRect().GetCenter(),
-				VisualEffect::Type::LightningDissipate } );
+				VisualEffect::Type::Lightning } );
 
 			evtInfo.hitEnemy->Attack( damage,
 				evtInfo.player.GetPos() );

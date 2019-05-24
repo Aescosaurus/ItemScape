@@ -52,7 +52,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new WatermelonIngot,GenerateInvEvtInfo() );
+	playerInv.AddItem( new PoisonBottle,GenerateInvEvtInfo() );
 
 	// GotoNextFloor();
 }
@@ -213,7 +213,7 @@ void Game::UpdateModel()
 			pickups.back()->SetPos( pickupPos );
 			visualEffects.emplace_back( VisualEffect{
 				pickupPos,VisualEffect::Type
-				::LightningDissipate } );
+				::Lightning } );
 
 			spawnedEndOfLevelItem = true;
 		}

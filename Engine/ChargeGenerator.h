@@ -31,7 +31,7 @@ public:
 			invEvtInfo.pickups.back()->SetPos( itemSpawnPos );
 
 			invEvtInfo.visualEffects.emplace_back( VisualEffect{
-				itemSpawnPos,VisualEffect::Type::LightningDissipate } );
+				itemSpawnPos,VisualEffect::Type::Lightning } );
 		}
 	}
 private:

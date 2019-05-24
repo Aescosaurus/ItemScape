@@ -270,6 +270,9 @@
     <ClInclude Include="WatermelonIngot.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="PoisonBottle.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

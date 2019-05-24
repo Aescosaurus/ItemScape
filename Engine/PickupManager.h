@@ -29,6 +29,7 @@
 #include "GelatinousSphere.h"
 #include "WatermelonOre.h"
 #include "WatermelonIngot.h"
+#include "PoisonBottle.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -67,6 +68,7 @@ public:
 		options.emplace_back( new GelatinousSphere );
 		options.emplace_back( new WatermelonOre );
 		options.emplace_back( new WatermelonIngot );
+		options.emplace_back( new PoisonBottle );
 
 		options.emplace_back( new RustyPistol );
 		options.emplace_back( new OldRifle );
