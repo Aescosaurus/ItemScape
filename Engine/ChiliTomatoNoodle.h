@@ -21,8 +21,11 @@ public:
 
 	void OnEnemyExplode( InventoryEventInfo& evtInfo ) override
 	{
-		GunBase::AddFireRateBoost( evtInfo,fireRateBoost );
-		boostTimers.emplace_back( Timer{ boostDuration } );
+		if( int( boostTimers.size() ) < maxBoosts )
+		{
+			GunBase::AddFireRateBoost( evtInfo,fireRateBoost );
+			boostTimers.emplace_back( Timer{ boostDuration } );
+		}
 
 		for( auto& timer : boostTimers )
 		{
@@ -49,4 +52,5 @@ private:
 	static constexpr float fireRateBoost = 1.05f;
 	static constexpr float boostDuration = 10.0f;
 	std::vector<Timer> boostTimers;
+	static constexpr int maxBoosts = 10;
 };

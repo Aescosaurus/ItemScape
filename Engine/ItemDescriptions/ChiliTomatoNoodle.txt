@@ -4,4 +4,5 @@ enemy boost fire rate
 by 5% for 10 seconds.
 Destroying another
 enemy within this time
-adds to the boost.
+adds to the boost, up
+to 10 times.

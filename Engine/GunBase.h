@@ -90,15 +90,15 @@ protected:
 		damage( damage )
 	{}
 
-	static int GetDamage()
+	int GetDamage()
 	{
-		int damage = 1;
+		int curDamage = damage;
 		for( auto& buff : damageBuffs )
 		{
-			damage += buff;
+			curDamage += buff;
 		}
 
-		return( damage );
+		return( curDamage );
 	}
 protected:
 	Timer shotTimer;
