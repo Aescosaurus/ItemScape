@@ -2,25 +2,27 @@
 
 #include "InventoryItem.h"
 
-class WatermelonOre
+class WatermelonIngot
 	:
 	public InventoryItem
 {
 public:
-	WatermelonOre()
+	WatermelonIngot()
 		:
-		InventoryItem( "ItemDescriptions/WatermelonOre.txt",
-			"Images/Items/WatermelonOre.bmp" )
+		InventoryItem( "ItemDescriptions/WatermelonIngot.txt",
+			"Images/Items/WatermelonIngot.bmp" )
 	{}
 
 	InventoryItem* Clone() override
 	{
-		return( new WatermelonOre );
+		return( new WatermelonIngot );
 	}
 
-	void OnEnemyHit( InventoryEventInfo& evtInfo ) override
+	void OnEnemyExplode( InventoryEventInfo& evtInfo ) override
 	{
-		if( Random::RangeF( 0.0f,100.0f ) < seekerSpawnChance )
+		const int nShots = Random::RangeI( minShots,maxShots );
+
+		for( int i = 0; i < nShots; ++i )
 		{
 			EnemyBase* targetEnemy = nullptr;
 			float dist = 99999999.0f;
@@ -36,20 +38,28 @@ public:
 				}
 			}
 
+			const auto vel = Vec2{ 0.0f,-1.0f }
+				.Deviate( ( chili::pi * 2.0f ) *
+				( float( i ) / float( nShots ) ) );
+
+			evtInfo.items[0]->Shoot( evtInfo,
+				Vec2( evtInfo.player.GetPos() + vel ) );
+
 			TrackingBullet* replacement = new TrackingBullet{
 				*evtInfo.playerBullets.back() };
 
 			replacement->SetSubColor( Colors::Yellow );
-			// replacement->SetTarget( targetEnemy->GetPos() );
 			replacement->SetSpeed( trackingBulletSpeed );
-			replacement->SetOffset( targetEnemy->GetRect()
-				.GetSize() / 2.0f );
+			// replacement->SetTarget( targetEnemy->GetPos() );
+			// replacement->SetOffset( targetEnemy->GetRect()
+			// 	.GetSize() / 2.0f );
 
 			evtInfo.playerBullets.pop_back();
 			evtInfo.playerBullets.emplace_back( replacement );
 		}
 	}
 private:
-	static constexpr float seekerSpawnChance = 5.0f;
 	static constexpr float trackingBulletSpeed = 200.0f;
+	static constexpr int minShots = 3;
+	static constexpr int maxShots = 5;
 };

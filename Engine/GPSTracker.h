@@ -56,7 +56,7 @@ public:
 					*invEvtInfo.playerBullets.back() };
 
 				replacement->SetSubColor( Colors::Yellow );
-				replacement->SetTarget( targetEnemy->GetPos() );
+				// replacement->SetTarget( targetEnemy->GetPos() );
 				replacement->SetSpeed( trackingBulletSpeed );
 				replacement->SetOffset( targetEnemy->GetRect()
 					.GetSize() / 2.0f );

@@ -8,6 +8,14 @@
 #include "Collider.h"
 #include "Timer.h"
 
+class BulletUpdateInfo
+{
+public:
+	std::vector<std::unique_ptr<class EnemyBase>>& enemies;
+	float dt;
+	class Player& player;
+};
+
 // Moves straight in one direction.
 class Bullet
 {
@@ -38,12 +46,13 @@ public:
 		const TileMap& map,Team myTeam,float speed,
 		Size mySize,int damage = 1 );
 
-	virtual void Update( float dt );
+	virtual void Update( BulletUpdateInfo& info );
 	void Draw( Graphics& gfx ) const;
 
 	void Attack( int damage );
 	void SetSubColor( Color c );
 	virtual Bullet* Clone();
+	void SetVel( const Vec2& vel );
 
 	bool IsExpl() const;
 	Vec2& GetPos();
@@ -76,7 +85,7 @@ class WavyBullet
 public:
 	WavyBullet( const Bullet& src );
 
-	void Update( float dt ) override;
+	void Update( BulletUpdateInfo& info ) override;
 
 	Bullet* Clone() override;
 private:
@@ -94,18 +103,17 @@ class TrackingBullet
 public:
 	TrackingBullet( const Bullet& src );
 
-	void Update( float dt ) override;
+	void Update( BulletUpdateInfo& info ) override;
 
-	void SetTarget( const Vec2& target );
+	// void SetTarget( const Vec2& target );
 	void SetSpeed( float speed );
 	void SetOffset( const Vec2& offset );
 
 	Bullet* Clone() override;
 private:
-	const Vec2* target;
 	float speed;
 	Vec2 offset = { 0.0f,0.0f };
-	Timer targetTime = 0.5f;
+	Timer targetTime = 0.3f;
 };
 
 // Ideas:

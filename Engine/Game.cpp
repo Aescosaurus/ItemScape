@@ -52,7 +52,7 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new WatermelonOre,GenerateInvEvtInfo() );
+	playerInv.AddItem( new WatermelonIngot,GenerateInvEvtInfo() );
 
 	// GotoNextFloor();
 }
@@ -103,12 +103,12 @@ void Game::UpdateModel()
 
 	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo( dt ) );
 
-	for( auto& b : playerBullets ) b->Update( dt );
+	for( auto& b : playerBullets ) b->Update( GenerateBulletEvtInfo( dt ) );
 	for( int i = 0; i < enemyBullets.size(); ++i )
 	{
 		auto& eb = enemyBullets[i];
 
-		eb->Update( dt );
+		eb->Update( GenerateBulletEvtInfo( dt ) );
 
 		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
@@ -338,6 +338,11 @@ InventoryEventInfo Game::GenerateInvEvtInfo( float dt,
 		visualEffects,playerBullets,enemies,pickups,dt,
 		wnd.mouse,map,playerInv.GetItemVec(),gfx,
 		hitEnemy,curBullet } );
+}
+
+BulletUpdateInfo Game::GenerateBulletEvtInfo( float dt )
+{
+	return( BulletUpdateInfo{ enemies,dt,guy } );
 }
 
 void Game::GotoNextFloor()

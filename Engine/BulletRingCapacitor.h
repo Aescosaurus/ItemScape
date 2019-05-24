@@ -32,7 +32,6 @@ public:
 
 				invEvtInfo.items[0]->Shoot( invEvtInfo,
 					Vec2( invEvtInfo.player.GetPos() + vel ) );
-
 			}
 
 			curShot = 0;

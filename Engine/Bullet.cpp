@@ -1,5 +1,7 @@
 #include "Bullet.h"
 #include "SpriteEffect.h"
+#include "EnemyBase.h"
+#include "Player.h"
 
 Bullet::Bullet( const Vec2& pos,const Vec2& target,
 	const TileMap& map,Team myTeam,float speed,
@@ -41,9 +43,9 @@ Bullet::Bullet( const Vec2& pos,const Vec2& target,
 		animSpeed };
 }
 
-void Bullet::Update( float dt )
+void Bullet::Update( BulletUpdateInfo& info )
 {
-	const auto testMove = vel * dt;
+	const auto testMove = vel * info.dt;
 	const auto validMove = coll.GetValidMove( pos,testMove );
 
 	pos += Vec2( validMove );
@@ -51,7 +53,7 @@ void Bullet::Update( float dt )
 
 	if( validMove.z ) dead = true;
 
-	myAnim.Update( dt );
+	myAnim.Update( info.dt );
 }
 
 void Bullet::Draw( Graphics& gfx ) const
@@ -83,6 +85,11 @@ void Bullet::SetSubColor( Color c )
 Bullet* Bullet::Clone()
 {
 	return( new Bullet{ *this } );
+}
+
+void Bullet::SetVel( const Vec2& vel )
+{
+	this->vel = vel;
 }
 
 bool Bullet::IsExpl() const
@@ -117,7 +124,7 @@ WavyBullet::WavyBullet( const Bullet& src )
 	speed( vel.GetLength() )
 {}
 
-void WavyBullet::Update( float dt )
+void WavyBullet::Update( BulletUpdateInfo& info )
 {
 	auto testMove = normVel;
 
@@ -127,7 +134,7 @@ void WavyBullet::Update( float dt )
 	testMove.y += /*sin*/( wavyMoveAdd.y );
 
 	testMove *= speed;
-	testMove *= dt;
+	testMove *= info.dt;
 
 	const auto validMove = coll.GetValidMove( pos,testMove );
 
@@ -136,9 +143,9 @@ void WavyBullet::Update( float dt )
 
 	if( validMove.z ) dead = true;
 
-	myAnim.Update( dt );
+	myAnim.Update( info.dt );
 
-	distTravelled += dt;
+	distTravelled += info.dt;
 }
 
 Bullet* WavyBullet::Clone()
@@ -151,40 +158,59 @@ TrackingBullet::TrackingBullet( const Bullet& src )
 	Bullet( src )
 {}
 
-void TrackingBullet::Update( float dt )
+void TrackingBullet::Update( BulletUpdateInfo& info )
 {
-	targetTime.Update( dt );
+	targetTime.Update( info.dt );
 
 	if( targetTime.IsDone() )
 	{
-		const auto diff = ( ( ( *target ) + offset ) - pos )
-			.GetNormalized();
+		const EnemyBase* targetEnemy = nullptr;
+		float dist = 99999999.0f;
 
-		const auto testMove = diff * speed * dt;
-		const auto validMove = coll.GetValidMove( pos,testMove );
-
-		pos += Vec2( validMove );
-		coll.MoveTo( pos - Vec2( size ) / 2.0f );
-
-
-		if( validMove.z ||
-			coll.GetRect().ContainsPoint( *target ) )
+		for( auto& e : info.enemies )
 		{
-			dead = true;
+			const auto curDist = ( e->GetRect().GetCenter() -
+				info.player.GetCenter() ).GetLengthSq();
+			if( !e->IsExpl() && curDist < dist )
+			{
+				dist = curDist;
+				targetEnemy = e.get();
+			}
 		}
 
-		myAnim.Update( dt );
+		if( targetEnemy != nullptr )
+		{
+			const auto target = targetEnemy->GetRect().GetCenter();
+
+			const auto diff = ( ( ( target ) + offset ) - pos )
+				.GetNormalized();
+
+			const auto testMove = diff * speed * info.dt;
+			const auto validMove = coll.GetValidMove( pos,testMove );
+
+			pos += Vec2( validMove );
+			coll.MoveTo( pos - Vec2( size ) / 2.0f );
+
+
+			if( validMove.z ||
+				coll.GetRect().ContainsPoint( target ) )
+			{
+				dead = true;
+			}
+
+			myAnim.Update( info.dt );
+		}
 	}
 	else
 	{
-		Bullet::Update( dt );
+		Bullet::Update( info );
 	}
 }
 
-void TrackingBullet::SetTarget( const Vec2& target )
-{
-	this->target = &target;
-}
+// void TrackingBullet::SetTarget( const Vec2& target )
+// {
+// 	this->target = &target;
+// }
 
 void TrackingBullet::SetSpeed( float speed )
 {
