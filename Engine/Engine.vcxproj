@@ -217,6 +217,7 @@
     <ClInclude Include="WatermelonIngot.h" />
     <ClInclude Include="WatermelonOre.h" />
     <ClInclude Include="WingedBugMidboss.h" />
+    <ClInclude Include="WormBugBoss.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Anim.cpp" />
@@ -263,6 +264,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="VisualEffect.cpp" />
     <ClCompile Include="WingedBugMidboss.cpp" />
+    <ClCompile Include="WormBugBoss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">

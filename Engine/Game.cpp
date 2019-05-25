@@ -24,6 +24,7 @@
 #include "Utils.h"
 #include <functional>
 #include "EnemyType.h"
+
 #include "BeetleBig.h"
 #include "Firebug.h"
 #include "Skorp.h"
@@ -31,6 +32,8 @@
 #include "RynoChaser.h"
 #include "Slizard.h"
 #include "WingedBugMidboss.h"
+#include "WormBugBoss.h"
+
 #include "PickupManager.h"
 
 Game::Game( MainWindow& wnd )
@@ -307,6 +310,10 @@ void Game::LoadNextLevel()
 			enemies.emplace_back( std::make_unique<WingedBugMidboss>(
 				t.pos,map,enemyBullets ) );
 			break;
+			case char( EnemyType::WormBugBoss ) :
+				enemies.emplace_back( std::make_unique<WormBugBoss>(
+					t.pos,map,enemyBullets,enemies ) );
+				break;
 		}
 	}
 

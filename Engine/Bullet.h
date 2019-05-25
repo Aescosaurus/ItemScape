@@ -34,7 +34,8 @@ public:
 		BeetleBig,
 		SpiderMole,
 		Slizard,
-		WingedBug
+		WingedBug,
+		WormBoss
 	};
 	enum class Size
 	{

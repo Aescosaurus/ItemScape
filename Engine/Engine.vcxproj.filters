@@ -273,6 +273,9 @@
     <ClInclude Include="PoisonBottle.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="WormBugBoss.h">
+      <Filter>Header Files\Enemies\BugEnemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -381,6 +384,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WingedBugMidboss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WormBugBoss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
