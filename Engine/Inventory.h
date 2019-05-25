@@ -67,5 +67,5 @@ private:
 		itemSize.Y() * size.y + itemPadding.Y() * ( size.y + 1 );
 	static constexpr Vei2 descStart = nameStart + Vei2{ 0,32 + 16 };
 
-	const Surface invInstructions = { Surface{ "Images/InventoryInstructions.bmp" },Vei2{ 4,4 } };
+	const Surface invInstructions = "Images/InventoryInstructions.bmp";
 };

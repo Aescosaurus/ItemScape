@@ -51,7 +51,7 @@ private:
 	bool jumping = false;
 	Timer jumpTimer = 0.61f;
 	Timer jumpReset = 1.0f;
-	const Surface surfSheet = { { "Images/Player1Anim.bmp" },Vei2{ 4,4 } };
+	const Surface surfSheet = "Images/Player1Anim.bmp";
 	Anim walk;
 	bool justShot = false;
 	bool invul = false;

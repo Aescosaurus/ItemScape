@@ -15,5 +15,5 @@ public:
 		GameState state,Graphics& gfx ) const;
 private:
 	MainWindow& wnd;
-	const Surface crosshair = { { "Images/Crosshair.bmp" },Vei2{ 4,4 } };
+	const Surface crosshair = "Images/Crosshair.bmp";
 };

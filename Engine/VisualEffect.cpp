@@ -1,6 +1,6 @@
 #include "VisualEffect.h"
 
-const Surface VisualEffect::sprSheet( Surface{ "Images/VisualEffects.bmp" },Vei2{ 4,4 } );
+const Surface VisualEffect::sprSheet = "Images/VisualEffects.bmp";
 
 VisualEffect::VisualEffect( const Vei2& pos,Type t )
 	:

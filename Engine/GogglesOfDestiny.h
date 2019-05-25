@@ -33,5 +33,5 @@ public:
 		}
 	}
 private:
-	const Surface hpBar = { Surface{ "Images/HealthBar.bmp" },Vei2{ 4,4 } };
+	const Surface hpBar = "Images/HealthBar.bmp";
 };

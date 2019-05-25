@@ -2,12 +2,12 @@
 #include <cassert>
 #include "SpriteEffect.h"
 
-const Surface Door::topSurf = { { { "Images/DoorAngles.bmp" },
-	RectI{ 0,16,0,8 } },Vei2{ 4,4 } };
-const Surface Door::botSurf = { { { "Images/DoorAngles.bmp" },
-	RectI{ 0,16,8,16 } },Vei2{ 4,4 } };
-const Surface Door::sideSurf = { { { "Images/DoorAngles.bmp" },
-	RectI{ 16,24,0,16 } },Vei2{ 4,4 } };
+const Surface Door::topSurf = { { "Images/DoorAngles.bmp" },
+	RectI{ 0,16 * 4,0,8 * 4 } };
+const Surface Door::botSurf = { { "Images/DoorAngles.bmp" },
+	RectI{ 0,16 * 4,8 * 4,16 * 4 } };
+const Surface Door::sideSurf = { { "Images/DoorAngles.bmp" },
+	RectI{ 16 * 4,24 * 4,0,16 * 4 } };
 
 Door::Door( Side s,const FloorLevel& floor )
 	:

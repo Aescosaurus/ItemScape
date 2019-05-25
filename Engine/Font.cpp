@@ -4,7 +4,7 @@
 
 Font::Font( const std::string& filename,Color chroma )
 	:
-	surf( Surface{ filename },Vei2{ 4,4 } ),
+	surf( Surface{ filename } ),
 	// calculate glyph dimensions from bitmap dimensions
 	glyphWidth( surf.GetWidth() / nColumns ),
 	glyphHeight( surf.GetHeight() / nRows ),

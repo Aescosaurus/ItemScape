@@ -56,23 +56,23 @@ private:
 	static constexpr int nWallTypes = 2;
 	Surface wallSprs[nWallTypes] =
 	{
-		Surface{ { "Images/Wall1.bmp" },Vei2{ 4,4 } },
-		Surface{ { "Images/Wall2.bmp" },Vei2{ 4,4 } }
+		"Images/Wall1.bmp",
+		"Images/Wall2.bmp"
 	};
 	Surface wallTops[nWallTypes] =
 	{
-		Surface{ { "Images/Wall1Top.bmp" },Vei2{ 4,4 } },
-		Surface{ { "Images/Wall2Top.bmp" },Vei2{ 4,4 } }
+		"Images/Wall1Top.bmp",
+		"Images/Wall2Top.bmp"
 	};
 	Surface floorSprs[nWallTypes] =
 	{
-		Surface{ { "Images/Floor1.bmp" },Vei2{ 4,4 } },
-		Surface{ { "Images/Floor1.bmp" },Vei2{ 4,4 } }
+		"Images/Floor1.bmp",
+		"Images/Floor1.bmp"
 	};
 	Surface floorCloses[nWallTypes] =
 	{
-		Surface{ { "Images/Floor1Close.bmp" },Vei2{ 4,4 } },
-		Surface{ { "Images/Floor1Close.bmp" },Vei2{ 4,4 } }
+		"Images/Floor1Close.bmp",
+		"Images/Floor1Close.bmp"
 	};
 	int curWallIndex = 0;
 };
