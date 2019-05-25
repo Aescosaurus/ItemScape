@@ -67,5 +67,11 @@ private:
 		itemSize.Y() * size.y + itemPadding.Y() * ( size.y + 1 );
 	static constexpr Vei2 descStart = nameStart + Vei2{ 0,32 + 16 };
 
+	static constexpr Vei2 overlayStart = { 50,0 };
+
 	const Surface invInstructions = "Images/InventoryInstructions.bmp";
+	const Surface invOverlayInstructions = "Images/InventoryOverlayInstructions.bmp";
+
+	bool rightClickPause = false;
+	bool shiftPause = false;
 };

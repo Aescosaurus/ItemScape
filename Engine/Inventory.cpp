@@ -35,14 +35,20 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	{
 		items[0]->OnGunFire( invEvtInfo );
 	}
+
 	if( kbd.KeyIsPressed( VK_SHIFT ) )
 	{
-		items[1]->OnActivate( invEvtInfo );
+		if( !shiftPause ) items[1]->OnActivate( invEvtInfo );
+		shiftPause = true;
 	}
+
+	else shiftPause = false;
 	if( mouse.RightIsPressed() )
 	{
-		items[2]->OnActivate( invEvtInfo );
+		if( !rightClickPause ) items[2]->OnActivate( invEvtInfo );
+		rightClickPause = true;
 	}
+	else rightClickPause = false;
 
 	for( auto& item : items )
 	{
@@ -124,6 +130,25 @@ void Inventory::Draw( Graphics& gfx ) const
 			( *selectedItem )->Draw( heldItemPos -
 				( *selectedItem )->size / 2,gfx );
 		}
+	}
+	else
+	{
+		// Draw item overlay.
+		gfx.DrawRect( overlayStart.x,overlayStart.y,
+			itemSize.x * 3 + itemPadding.x * 3,
+			itemSize.y + itemPadding.y * 2,
+			Colors::Slate );
+
+		gfx.DrawSprite( overlayStart.x,overlayStart.y + 32 + 5 * 3,
+			invOverlayInstructions,
+			SpriteEffect::Chroma{ Colors::Magenta } );
+
+		if( items.size() > 0 ) items[0]->Draw( overlayStart +
+			itemPadding,gfx );
+		if( items.size() > 1 ) items[1]->Draw( overlayStart +
+			itemPadding + itemPadding.X() + itemSize.X(),gfx );
+		if( items.size() > 2 ) items[2]->Draw( overlayStart +
+			itemPadding + itemPadding.X() * 2 + itemSize.X() * 2,gfx );
 	}
 }
 
