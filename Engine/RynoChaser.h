@@ -35,7 +35,7 @@ private:
 	static constexpr float speed = 43.1f;
 	static constexpr float fastSpeed = 225.6f;
 	Timer wanderPeriod = { 2.4f,true };
-	const Surface* sprSheet = Codx::Load( "Images/RynoChaserAnim.bmp",{ 4,4 } );
+	CSurfPtr sprSheet = SurfCodex::Fetch( "Images/RynoChaserAnim.bmp" );
 	Anim wandering;
 	Anim chargingUp;
 	Anim chargingPlayer;

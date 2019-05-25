@@ -1,4 +1,5 @@
 #include "WormBugBoss.h"
+#include "Utils.h"
 #include "BeetleBig.h"
 #include "Firebug.h"
 #include "RynoChaser.h"

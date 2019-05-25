@@ -36,7 +36,7 @@ private:
 	static constexpr int myHP = 16;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	std::vector<std::unique_ptr<EnemyBase>>* pEnemyVec;
-	const Surface* sprSheet = Codx::Load( "Images/BeetleBigAnim.bmp",{ 4,4 } );
+	CSurfPtr sprSheet = SurfCodex::Fetch( "Images/BeetleBigAnim.bmp" );
 	Anim walking;
 	Anim jumping;
 	Anim landing;

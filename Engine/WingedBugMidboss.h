@@ -2,6 +2,7 @@
 
 #include "EnemyBase.h"
 #include "Bullet.h"
+#include "Utils.h"
 
 class WingedBugMidboss
 	:
@@ -28,7 +29,7 @@ private:
 	static constexpr Vei2 size = { 128,128 };
 	static constexpr int health = 250;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
-	const Surface* surfSheet = Codx::Load( "Images/WingedBugMidboss.bmp",Vei2{ 4,4 } );
+	CSurfPtr surfSheet = SurfCodex::Fetch( "Images/WingedBugMidboss.bmp" );
 	Anim floating;
 	Anim buildingUp;
 	Anim charging;

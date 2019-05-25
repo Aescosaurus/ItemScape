@@ -28,7 +28,7 @@ private:
 	static constexpr int health = 500;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	std::vector<std::unique_ptr<EnemyBase>>* pEnemyVec;
-	const Surface* surfSheet = Codx::Load( "Images/WormBugBoss.bmp",Vei2{ 4,4 } );
+	CSurfPtr surfSheet = SurfCodex::Fetch( "Images/WormBugBoss.bmp" );
 	Anim wandering;
 	Anim diggingDown;
 	Anim diggingUp;

@@ -72,6 +72,8 @@ Surface::Surface( const std::string& filename )
 			file.seekg( padding,std::ios::cur );
 		}
 	}
+
+	*this = GetExpandedBy( Vei2{ 4,4 } );
 }
 
 Surface::Surface( const Surface& other,const RectI& clip )

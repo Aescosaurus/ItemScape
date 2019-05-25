@@ -65,7 +65,7 @@ protected:
 	// 	Size mySize,const TileMap* map,Anim anim,
 	// 	Collider coll,)
 protected:
-	const Surface* pSprSheet = Codx::Load( "Images/BulletAnims.bmp",{ 4,4 } );
+	CSurfPtr pSprSheet = SurfCodex::Fetch( "Images/BulletAnims.bmp" );
 	static constexpr Vei2 size = { 16,16 };
 	Vec2 pos;
 	Vec2 vel;

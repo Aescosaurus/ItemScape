@@ -35,7 +35,7 @@ private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int health = 7;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
-	const Surface* sprSheet = Codx::Load( "Images/SpiderMoleAnim.bmp",{ 4,4 } );
+	CSurfPtr sprSheet = SurfCodex::Fetch( "Images/SpiderMoleAnim.bmp" );
 	Anim walking;
 	Anim rising;
 	Anim sinking;

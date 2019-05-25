@@ -35,7 +35,7 @@ private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 13;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
-	const Surface* sprSheet = Codx::Load( "Images/Firebug.bmp",{ 4,4 } );
+	CSurfPtr sprSheet = SurfCodex::Fetch( "Images/Firebug.bmp" );
 	Anim walking;
 	Anim charging;
 	Anim attacking;
