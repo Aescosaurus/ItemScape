@@ -55,8 +55,6 @@ Game::Game( MainWindow& wnd )
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
 	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new ElectroBoots,GenerateInvEvtInfo() );
-	playerInv.AddItem( new SpellBombWarp,GenerateInvEvtInfo() );
 
 	// GotoNextFloor();
 }
