@@ -2,13 +2,15 @@
 #include "SpriteEffect.h"
 
 Player::Player( const Vec2& pos,const TileMap& map,
-	std::vector<std::unique_ptr<Bullet>>& bullets )
+	std::vector<std::unique_ptr<Bullet>>& bullets,
+	std::vector<VisualEffect>& visualEffects )
 	:
 	pos( pos ),
 	coll( map,{ pos,float( size.x ) / 1.5f,float( size.y ) / 1.5f } ),
 	myBullets( bullets ),
 	map( map ),
-	walk( 0,0,size.x,size.y,4,surfSheet,0.2f )
+	walk( 0,0,size.x,size.y,4,surfSheet,0.2f ),
+	visualEffects( visualEffects )
 {}
 
 void Player::Update( const Keyboard& kbd,const Mouse& ms,
@@ -21,8 +23,23 @@ void Player::Update( const Keyboard& kbd,const Mouse& ms,
 	if( kbd.KeyIsPressed( 'A' ) ) --moveDir.x;
 	if( kbd.KeyIsPressed( 'D' ) ) ++moveDir.x;
 
-	if( moveDir == Vec2{ 0.0f,0.0f } ) walk.Reset();
-	else walk.Update( dt );
+	if( moveDir == Vec2{ 0.0f,0.0f } )
+	{
+		walk.Reset();
+	}
+	else
+	{
+		walk.Update( dt );
+
+		footstepTimer.Update( dt * moveSpeedFactor );
+		if( footstepTimer.IsDone() )
+		{
+			footstepTimer.Reset();
+			visualEffects.emplace_back( VisualEffect{
+				Vei2( pos ) + size.Y() / 2,
+				VisualEffect::Type::Dust } );
+		}
+	}
 
 	// Move but don't let you walk into walls.
 	moveDir = moveDir.GetNormalized() * speed *

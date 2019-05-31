@@ -10,6 +10,7 @@
 #include "Timer.h"
 #include <memory>
 #include "Anim.h"
+#include "VisualEffect.h"
 
 // Works like top down now, but can be modified
 //  to use platformer controls.
@@ -17,7 +18,8 @@ class Player
 {
 public:
 	Player( const Vec2& pos,const TileMap& map,
-		std::vector<std::unique_ptr<Bullet>>& bullets );
+		std::vector<std::unique_ptr<Bullet>>& bullets,
+		std::vector<VisualEffect>& visualEffects );
 
 	void Update( const Keyboard& kbd,const Mouse& ms,
 		float dt );
@@ -44,6 +46,7 @@ private:
 	static constexpr float speed = 171.4f;
 	Collider coll;
 	std::vector<std::unique_ptr<Bullet>>& myBullets;
+	std::vector<VisualEffect>& visualEffects;
 	Timer shotTimer = { 0.23f };
 	const TileMap& map;
 	static constexpr float bulletSpeed = 324.2f;
@@ -57,4 +60,5 @@ private:
 	bool invul = false;
 	Color subColor = Colors::Magenta;
 	float moveSpeedFactor = 1.0f;
+	Timer footstepTimer = 0.12f;
 };

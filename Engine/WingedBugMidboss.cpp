@@ -111,6 +111,9 @@ void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 		explLastFrame = false;
 
 		info.doors.clear();
+
+		// spawn shop/exit door
+		// shop key spawns opposite side of room from player
 	}
 }
 

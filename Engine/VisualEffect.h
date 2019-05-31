@@ -9,7 +9,9 @@ public:
 	{
 		Lightning = 0,
 		Fire,
-		Poison
+		Poison,
+		Dust,
+		Smoke
 	};
 public:
 	VisualEffect( const Vei2& pos,Type t );

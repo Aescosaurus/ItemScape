@@ -29,6 +29,7 @@ Anim& Anim::operator=( const Anim& other )
 	iCurFrame = other.iCurFrame;
 	curFrameTime = other.curFrameTime;
 	frames = other.frames;
+	finished = other.finished;
 	return( *this );
 }
 

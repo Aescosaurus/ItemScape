@@ -40,7 +40,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,playerBullets ),
+	guy( Vec2( Graphics::GetScreenRect().GetCenter() ),map,
+		playerBullets,visualEffects ),
 	cursorHand( wnd )
 {
 	wnd.Maximize();
@@ -114,7 +115,7 @@ void Game::UpdateModel()
 
 		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
-			eb->Attack( 1 );
+			eb->Attack( 1,&visualEffects );
 			if( !guy.IsInvul() )
 			{
 				if( playerInv.FindItem( "Health Charge" ) != nullptr )
@@ -152,7 +153,7 @@ void Game::UpdateModel()
 			{
 				e->Attack( b->GetDamage(),
 					b->GetRect().GetCenter() );
-				b->Attack( 1 );
+				b->Attack( 1,&visualEffects );
 
 				playerInv.OnEnemyHit( GenerateInvEvtInfo( dt,e.get(),b.get() ) );
 
@@ -246,8 +247,8 @@ void Game::ComposeFrame()
 	for( const auto& b : playerBullets ) b->Draw( gfx );
 	for( const auto* pup : pickups ) pup->Draw( gfx );
 	map.Draw( gfx );
-	guy.Draw( gfx );
 	for( const auto& eff : visualEffects ) eff.Draw( gfx );
+	guy.Draw( gfx );
 	playerInv.OnDraw( GenerateInvEvtInfo() );
 	floor.DrawOverlay( gfx ); // Draw minimap.
 	playerInv.Draw( gfx );
@@ -348,7 +349,7 @@ InventoryEventInfo Game::GenerateInvEvtInfo( float dt,
 
 BulletUpdateInfo Game::GenerateBulletEvtInfo( float dt )
 {
-	return( BulletUpdateInfo{ enemies,dt,guy } );
+	return( BulletUpdateInfo{ enemies,dt,guy,visualEffects } );
 }
 
 void Game::GotoNextFloor()

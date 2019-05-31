@@ -4,7 +4,7 @@ const Surface VisualEffect::sprSheet = "Images/VisualEffects.bmp";
 
 VisualEffect::VisualEffect( const Vei2& pos,Type t )
 	:
-	pos( pos ),
+	pos( pos - size / 2 ),
 	anim( 0,int( t ) * size.y,size.x,size.y,4,sprSheet,0.2f )
 {}
 

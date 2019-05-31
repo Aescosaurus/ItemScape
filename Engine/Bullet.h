@@ -7,6 +7,7 @@
 #include "TileMap.h"
 #include "Collider.h"
 #include "Timer.h"
+#include "VisualEffect.h"
 
 class BulletUpdateInfo
 {
@@ -14,6 +15,7 @@ public:
 	std::vector<std::unique_ptr<class EnemyBase>>& enemies;
 	float dt;
 	class Player& player;
+	std::vector<VisualEffect>& visualEffects;
 };
 
 // Moves straight in one direction.
@@ -47,10 +49,12 @@ public:
 		const TileMap& map,Team myTeam,float speed,
 		Size mySize,int damage = 1 );
 
+	// Call update from children pls.
 	virtual void Update( BulletUpdateInfo& info );
 	void Draw( Graphics& gfx ) const;
 
-	void Attack( int damage );
+	void Attack( int damage,
+		std::vector<VisualEffect>* visualEffects = nullptr );
 	void SetSubColor( Color c );
 	virtual Bullet* Clone();
 	void SetVel( const Vec2& vel );
@@ -77,6 +81,8 @@ protected:
 	Collider coll;
 	Color subColor = Colors::Magenta;
 	int damage;
+	// Timer fxSpawner = 0.05f;
+	// bool spawnedFX = false;
 };
 
 class WavyBullet

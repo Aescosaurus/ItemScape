@@ -51,9 +51,17 @@ void Bullet::Update( BulletUpdateInfo& info )
 	pos += Vec2( validMove );
 	coll.MoveTo( pos - Vec2( size ) / 2.0f );
 
-	if( validMove.z ) dead = true;
+	if( validMove.z ) Attack( 1 );
 
 	myAnim.Update( info.dt );
+
+	// fxSpawner.Update( info.dt );
+	// if( !spawnedFX && fxSpawner.IsDone() )
+	// {
+	// 	spawnedFX = true;
+	// 	info.visualEffects.emplace_back( VisualEffect{
+	// 		Vei2( pos ),VisualEffect::Type::Smoke } );
+	// }
 }
 
 void Bullet::Draw( Graphics& gfx ) const
@@ -72,8 +80,15 @@ void Bullet::Draw( Graphics& gfx ) const
 	// gfx.DrawHitbox( coll.GetRect() );
 }
 
-void Bullet::Attack( int damage )
+void Bullet::Attack( int damage,
+	std::vector<VisualEffect>* visualEffects )
 {
+	if( visualEffects != nullptr )
+	{
+		visualEffects->emplace_back( VisualEffect{
+			Vei2( pos ) + size / 2,
+			VisualEffect::Type::Smoke } );
+	}
 	dead = true;
 }
 
@@ -141,7 +156,7 @@ void WavyBullet::Update( BulletUpdateInfo& info )
 	pos += Vec2( validMove );
 	coll.MoveTo( pos - Vec2( size ) / 2.0f );
 
-	if( validMove.z ) dead = true;
+	if( validMove.z ) Attack( 1 );
 
 	myAnim.Update( info.dt );
 
@@ -195,7 +210,7 @@ void TrackingBullet::Update( BulletUpdateInfo& info )
 			if( validMove.z ||
 				coll.GetRect().ContainsPoint( target ) )
 			{
-				dead = true;
+				Attack( 1 );
 			}
 
 			myAnim.Update( info.dt );
