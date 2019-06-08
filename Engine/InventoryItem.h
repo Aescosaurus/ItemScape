@@ -35,8 +35,9 @@ public:
 class InventoryItem
 {
 public:
-	InventoryItem( const std::string& name,
-		const std::string& desc,const std::string& icon );
+	// InventoryItem( const std::string& name,
+	// 	const std::string& desc,const std::string& icon );
+
 	// Names/descriptions must be <23 chars in length.
 	InventoryItem( const std::string& fileName,
 		const std::string& icon );

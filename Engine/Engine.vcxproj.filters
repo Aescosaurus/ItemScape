@@ -276,6 +276,12 @@
     <ClInclude Include="WormBugBoss.h">
       <Filter>Header Files\Enemies\BugEnemies</Filter>
     </ClInclude>
+    <ClInclude Include="SaveLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Campaign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -387,6 +393,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WormBugBoss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PickupManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Campaign.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

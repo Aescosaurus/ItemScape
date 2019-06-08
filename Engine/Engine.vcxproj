@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -143,6 +143,7 @@
     <ClInclude Include="BulletRingCapacitor.h" />
     <ClInclude Include="CableSplitter.h" />
     <ClInclude Include="CactusBranch.h" />
+    <ClInclude Include="Campaign.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliTomatoNoodle.h" />
     <ClInclude Include="ChiliWin.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="RefinedFlamium.h" />
     <ClInclude Include="RustyPistol.h" />
     <ClInclude Include="RynoChaser.h" />
+    <ClInclude Include="SaveLoader.h" />
     <ClInclude Include="SingleUseGatling.h" />
     <ClInclude Include="Skorp.h" />
     <ClInclude Include="Slizard.h" />
@@ -222,6 +224,7 @@
   <ItemGroup>
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Campaign.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="CursorHandler.cpp" />
@@ -233,7 +236,9 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="KawaiiLemon.cpp" />
+    <ClCompile Include="PickupManager.cpp" />
     <ClCompile Include="RynoChaser.cpp" />
+    <ClCompile Include="SaveLoader.cpp" />
     <ClCompile Include="Skorp.cpp" />
     <ClCompile Include="Slizard.cpp" />
     <ClCompile Include="SpiderMole.cpp" />

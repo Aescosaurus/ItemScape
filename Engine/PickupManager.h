@@ -38,72 +38,77 @@
 class PickupManager
 {
 public:
+	static void Initialize()
+	{
+		int id = 0;
+
+		t1Pickups.emplace_back( new HealthCharge,id++ );
+		t1Pickups.emplace_back( new FifthShotFlintlock,id++ );
+		t1Pickups.emplace_back( new TwistyTie,id++ );
+		t1Pickups.emplace_back( new ChargeGenerator,id++ );
+		t1Pickups.emplace_back( new CableSplitter,id++ );
+		t1Pickups.emplace_back( new TripleBow,id++ );
+		t1Pickups.emplace_back( new DamagingStake,id++ );
+		t1Pickups.emplace_back( new BulletRingCapacitor,id++ );
+		t1Pickups.emplace_back( new GPSTracker,id++ );
+		t1Pickups.emplace_back( new CactusBranch,id++ );
+		t1Pickups.emplace_back( new SingleUseGatling,id++ );
+		t1Pickups.emplace_back( new BeardOfInvincibility,id++ );
+		t1Pickups.emplace_back( new UggsOfMobility,id++ );
+		t1Pickups.emplace_back( new ElectroBoots,id++ );
+		t1Pickups.emplace_back( new PinkBunny,id++ );
+		t1Pickups.emplace_back( new GogglesOfDestiny,id++ );
+		t1Pickups.emplace_back( new CreepySpecs,id++ );
+		t1Pickups.emplace_back( new ChiliTomatoNoodle,id++ );
+		t1Pickups.emplace_back( new KawaiiLemon,id++ );
+		t1Pickups.emplace_back( new FlamiumOre,id++ );
+		t1Pickups.emplace_back( new RefinedFlamium,id++ );
+		t1Pickups.emplace_back( new SpellBombWarp,id++ );
+		t1Pickups.emplace_back( new BugSpray,id++ );
+		t1Pickups.emplace_back( new GelatinousSphere,id++ );
+		t1Pickups.emplace_back( new WatermelonOre,id++ );
+		t1Pickups.emplace_back( new WatermelonIngot,id++ );
+		t1Pickups.emplace_back( new PoisonBottle,id++ );
+
+		t1Pickups.emplace_back( new RustyPistol,id++ );
+		t1Pickups.emplace_back( new OldRifle,id++ );
+		t1Pickups.emplace_back( new DebilitatedShotgun,id++ );
+	}
+	static void Free()
+	{
+		for( auto& item : t1Pickups )
+		{
+			delete item.first;
+		}
+		for( auto& item : t2Pickups )
+		{
+			delete item.first;
+		}
+	}
 	static InventoryItem* RandT1Pickup()
 	{
-		std::vector<InventoryItem*> options;
-
-		options.emplace_back( new HealthCharge );
-		options.emplace_back( new FifthShotFlintlock );
-		options.emplace_back( new TwistyTie );
-		options.emplace_back( new ChargeGenerator );
-		options.emplace_back( new CableSplitter );
-		options.emplace_back( new TripleBow );
-		options.emplace_back( new DamagingStake );
-		options.emplace_back( new BulletRingCapacitor );
-		options.emplace_back( new GPSTracker );
-		options.emplace_back( new CactusBranch );
-		options.emplace_back( new SingleUseGatling );
-		options.emplace_back( new BeardOfInvincibility );
-		options.emplace_back( new UggsOfMobility );
-		options.emplace_back( new ElectroBoots );
-		options.emplace_back( new PinkBunny );
-		options.emplace_back( new GogglesOfDestiny );
-		options.emplace_back( new CreepySpecs );
-		options.emplace_back( new ChiliTomatoNoodle );
-		options.emplace_back( new KawaiiLemon );
-		options.emplace_back( new FlamiumOre );
-		options.emplace_back( new RefinedFlamium );
-		options.emplace_back( new SpellBombWarp );
-		options.emplace_back( new BugSpray );
-		options.emplace_back( new GelatinousSphere );
-		options.emplace_back( new WatermelonOre );
-		options.emplace_back( new WatermelonIngot );
-		options.emplace_back( new PoisonBottle );
-
-		options.emplace_back( new RustyPistol );
-		options.emplace_back( new OldRifle );
-		options.emplace_back( new DebilitatedShotgun );
-
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
-		std::shuffle( options.begin(),options.end(),rng );
-
-		while( options.size() > 1 )
-		{
-			delete options.back();
-			// options.erase( options.end() );
-			options.pop_back();
-		}
-
-		return( options.front() );
+		return( t1Pickups[Random::RangeI( 0,
+			int( t1Pickups.size() ) )].first );
 	}
 	static InventoryItem* RandT2Pickup()
 	{
-		std::vector<InventoryItem*> options;
-
-		// TODO: Add items here.
-
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
-		std::shuffle( options.begin(),options.end(),rng );
-
-		while( options.size() > 1 )
-		{
-			delete options.back();
-			// options.erase( options.end() );
-			options.pop_back();
-		}
-
-		return( options.front() );
+		return( t2Pickups[Random::RangeI( 0,
+			int( t2Pickups.size() ) )].first );
 	}
+	static InventoryItem* FindItem( int id )
+	{
+		for( auto& item : t1Pickups )
+		{
+			if( item.second == id ) return( item.first );
+		}
+		for( auto& item : t2Pickups )
+		{
+			if( item.second == id ) return( item.first );
+		}
+		assert( false );
+		return( nullptr );
+	}
+private:
+	static std::vector<std::pair<InventoryItem*,int>> t1Pickups;
+	static std::vector<std::pair<InventoryItem*,int>> t2Pickups;
 };

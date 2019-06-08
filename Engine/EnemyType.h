@@ -1,13 +1,13 @@
 #pragma once
 
-enum class EnemyType
+enum class EnemyType : char
 {
-	BigBeetle = int( 'b' ),
-	Firebug = int( 'f' ),
-	Skorp = int( 's' ),
-	SpiderMole = int( 'm' ),
-	RynoChaser = int( 'r' ),
-	Slizard = int( 'l' ),
-	WingedBugMidboss = int( 'w' ),
-	WormBugBoss = int( 'o' )
+	BigBeetle = 'b',
+	Firebug = 'f',
+	Skorp = 's',
+	SpiderMole = 'm',
+	RynoChaser = 'r',
+	Slizard = 'l',
+	WingedBugMidboss = 'w',
+	WormBugBoss = 'o'
 };

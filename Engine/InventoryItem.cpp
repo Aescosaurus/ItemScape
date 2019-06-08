@@ -5,13 +5,13 @@
 const Font InventoryItem::luckyPixel = "Fonts/LuckyPixel6x9.bmp";
 const Surface InventoryItem::itemBG = "Images/InventoryItemBackground.bmp";
 
-InventoryItem::InventoryItem( const std::string& name,
-	const std::string& desc,const std::string& icon )
-	:
-	name( name ),
-	description( GetPruned( desc ) ),
-	surf( icon )
-{}
+// InventoryItem::InventoryItem( const std::string& name,
+// 	const std::string& desc,const std::string& icon )
+// 	:
+// 	name( name ),
+// 	description( GetPruned( desc ) ),
+// 	surf( icon )
+// {}
 
 InventoryItem::InventoryItem( const std::string& fileName,
 	const std::string& icon )

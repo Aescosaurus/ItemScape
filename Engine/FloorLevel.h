@@ -26,11 +26,13 @@ public:
 	void AdvanceFloor();
 	void MoveRoom( Dir d );
 	void ClearCompletedRooms();
+	void LoadSaveInfo( const std::string& info );
 
 	std::string GetLevelName();
 	int GetLevelAt( const Vei2& pos ) const;
 	const Vei2& GetCurRoom() const;
 	bool CurRoomAlreadyCompleted() const;
+	std::string GenerateSaveInfo() const;
 private:
 	void RandomizeLayout();
 
