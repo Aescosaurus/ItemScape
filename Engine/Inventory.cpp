@@ -1,4 +1,5 @@
 #include "Inventory.h"
+#include "PickupManager.h"
 
 Inventory::Inventory()
 {
@@ -182,6 +183,29 @@ void Inventory::ConsumeItem( const std::string& name )
 	// ShiftItems();
 }
 
+void Inventory::LoadSaveInfo( const std::string& info )
+{
+	std::vector<std::string> lines;
+
+	lines.emplace_back( "" );
+
+	for( char c : info )
+	{
+		if( c == '\n' ) lines.emplace_back( "" );
+		else lines.back() += c;
+	}
+	lines.pop_back(); // 
+
+	for( const auto& line : lines )
+	{
+		InventoryItem* temp = PickupManager::CreateItem( line );
+		if( temp != nullptr )
+		{
+			AddItem( temp );
+		}
+	}
+}
+
 void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
@@ -243,6 +267,18 @@ std::vector<std::unique_ptr<InventoryItem>>& Inventory::GetItemVec()
 bool Inventory::IsOpen() const
 {
 	return( active );
+}
+
+std::string Inventory::GenerateSaveInfo() const
+{
+	std::string temp = "";
+
+	for( const auto& item : items )
+	{
+		temp += item->GetName() + '\n';
+	}
+
+	return( temp );
 }
 
 void Inventory::DrawInvGrid( Graphics& gfx ) const

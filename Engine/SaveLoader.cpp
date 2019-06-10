@@ -7,6 +7,7 @@ void SaveLoader::Save( const SaveLoaderInfo& info,int slot )
 	assert( out.good() );
 
 	out << info.floor.GenerateSaveInfo();
+	out << info.inv.GenerateSaveInfo();
 }
 
 void SaveLoader::Load( SaveLoaderInfo& info,int slot )
@@ -17,14 +18,20 @@ void SaveLoader::Load( SaveLoaderInfo& info,int slot )
 	std::string floorInfo = "";
 
 	int i = 0;
-	for( char c = in.get(); in.good() && i < 4;
-		c = in.get() )
+	for( char c = in.get(); i < 4 && in.good(); )
 	{
 		floorInfo += c;
 		if( c == '\n' ) ++i;
+		if( i < 4 ) c = in.get();
 	}
 
 	info.floor.LoadSaveInfo( floorInfo );
 
-	// inv stuff
+	std::string invInfo = "";
+	for( char c = in.get(); in.good(); c = in.get() )
+	{
+		invInfo += c;
+	}
+
+	info.inv.LoadSaveInfo( invInfo );
 }

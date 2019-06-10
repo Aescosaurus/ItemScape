@@ -95,15 +95,27 @@ public:
 		return( t2Pickups[Random::RangeI( 0,
 			int( t2Pickups.size() ) )].first );
 	}
+	static InventoryItem* CreateItem( const std::string& name )
+	{
+		for( auto& pickup : t1Pickups )
+		{
+			if( pickup.first->GetName() == name )
+			{
+				return( pickup.first->Clone() );
+			}
+		}
+		return( nullptr );
+	}
+	// Returns copy, so don't drop it.
 	static InventoryItem* FindItem( int id )
 	{
 		for( auto& item : t1Pickups )
 		{
-			if( item.second == id ) return( item.first );
+			if( item.second == id ) return( item.first->Clone() );
 		}
 		for( auto& item : t2Pickups )
 		{
-			if( item.second == id ) return( item.first );
+			if( item.second == id ) return( item.first->Clone() );
 		}
 		assert( false );
 		return( nullptr );

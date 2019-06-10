@@ -22,6 +22,7 @@ public:
 	void AddItem( InventoryItem* itemToAdd,
 		InventoryEventInfo& evtInfo );
 	void ConsumeItem( const std::string& name );
+	void LoadSaveInfo( const std::string& info );
 	/*Event methods*/
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
 	void OnPlayerShoot( InventoryEventInfo& evtInfo );
@@ -33,6 +34,7 @@ public:
 	InventoryItem* FindItem( const std::string& name );
 	std::vector<std::unique_ptr<InventoryItem>>& GetItemVec();
 	bool IsOpen() const;
+	std::string GenerateSaveInfo() const;
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
 	
