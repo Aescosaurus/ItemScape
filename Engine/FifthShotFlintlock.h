@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new FifthShotFlintlock );
+		return( new FifthShotFlintlock{ *this } );
 	}
 
 	void OnPlayerShoot( InventoryEventInfo& evtInfo ) override

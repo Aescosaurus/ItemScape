@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new GogglesOfDestiny );
+		return( new GogglesOfDestiny{ *this } );
 	}
 
 	void OnDraw( InventoryEventInfo& evtInfo ) override

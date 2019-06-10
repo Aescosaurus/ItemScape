@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new RefinedFlamium );
+		return( new RefinedFlamium{ *this } );
 	}
 
 	void OnUpdate( InventoryEventInfo& evtInfo ) override

@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new DamagingStake );
+		return( new DamagingStake{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& invEvtInfo ) override

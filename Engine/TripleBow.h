@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new TripleBow );
+		return( new TripleBow{ *this } );
 	}
 
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo ) override

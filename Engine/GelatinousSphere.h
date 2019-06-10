@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new GelatinousSphere );
+		return( new GelatinousSphere{ *this } );
 	}
 
 	void OnEnemyExplode( InventoryEventInfo& evtInfo ) override

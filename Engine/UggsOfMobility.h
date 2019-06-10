@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new UggsOfMobility );
+		return( new UggsOfMobility{ *this } );
 	}
 
 	void OnReceive( InventoryEventInfo& evtInfo ) override

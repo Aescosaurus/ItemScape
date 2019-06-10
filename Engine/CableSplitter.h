@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new CableSplitter );
+		return( new CableSplitter{ *this } );
 	}
 	
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo ) override

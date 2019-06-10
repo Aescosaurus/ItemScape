@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new BugSpray );
+		return( new BugSpray{ *this } );
 	}
 
 	void OnEnemyHit( InventoryEventInfo& evtInfo ) override

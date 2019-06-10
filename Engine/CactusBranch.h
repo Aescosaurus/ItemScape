@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new CactusBranch );
+		return( new CactusBranch{ *this } );
 	}
 
 	void OnPlayerHit( InventoryEventInfo& invEvtInfo ) override

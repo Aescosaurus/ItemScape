@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new TwistyTie );
+		return( new TwistyTie{ *this } );
 	}
 	
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo )

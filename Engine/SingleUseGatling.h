@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new SingleUseGatling );
+		return( new SingleUseGatling{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& invEvtInfo ) override

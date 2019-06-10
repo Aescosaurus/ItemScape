@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new KawaiiLemon );
+		return( new KawaiiLemon{ *this } );
 	}
 
 	void OnEnemyExplode( InventoryEventInfo& evtInfo ) override;

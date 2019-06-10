@@ -52,7 +52,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new CreepySpecs );
+		return( new CreepySpecs{ *this } );
 	}
 
 	void OnEnemyHit( InventoryEventInfo& evtInfo ) override

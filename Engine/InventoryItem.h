@@ -47,6 +47,7 @@ public:
 	void Draw( const Vei2& pos,Graphics& gfx ) const;
 
 	void SetPos( const Vei2& pos );
+	// Make sure to return new obj{ *this }
 	virtual InventoryItem* Clone() = 0;
 	/* Event methods */
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}

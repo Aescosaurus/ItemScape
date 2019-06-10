@@ -15,7 +15,7 @@ public:
 	
 	InventoryItem* Clone() override
 	{
-		return( new GPSTracker );
+		return( new GPSTracker{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& invEvtInfo ) override

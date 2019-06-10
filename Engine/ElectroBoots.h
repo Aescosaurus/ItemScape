@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new ElectroBoots );
+		return( new ElectroBoots{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& evtInfo ) override

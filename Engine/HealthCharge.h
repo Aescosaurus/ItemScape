@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new HealthCharge );
+		return( new HealthCharge{ *this } );
 	}
 
 	void OnPlayerHit( InventoryEventInfo& evtInfo ) override

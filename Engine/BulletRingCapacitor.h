@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new BulletRingCapacitor );
+		return( new BulletRingCapacitor{ *this } );
 	}
 
 	void OnPlayerShoot( InventoryEventInfo& invEvtInfo ) override

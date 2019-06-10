@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new ChargeGenerator );
+		return( new ChargeGenerator{ *this } );
 	}
 
 	void OnEnemyExplode( InventoryEventInfo& invEvtInfo ) override

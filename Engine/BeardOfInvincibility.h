@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new BeardOfInvincibility );
+		return( new BeardOfInvincibility{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& evtInfo ) override

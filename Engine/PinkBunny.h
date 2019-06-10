@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new PinkBunny );
+		return( new PinkBunny{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& evtInfo ) override

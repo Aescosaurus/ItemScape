@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new FlamiumOre );
+		return( new FlamiumOre{ *this } );
 	}
 
 	void OnUpdate( InventoryEventInfo& evtInfo ) override

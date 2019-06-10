@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new WatermelonIngot );
+		return( new WatermelonIngot{ *this } );
 	}
 
 	void OnEnemyExplode( InventoryEventInfo& evtInfo ) override

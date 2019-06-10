@@ -15,7 +15,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new SpellBombWarp );
+		return( new SpellBombWarp{ *this } );
 	}
 
 	void OnActivate( InventoryEventInfo& evtInfo ) override
