@@ -63,7 +63,12 @@ void Game::UpdateModel()
 	switch( state )
 	{
 	case GameState::Menu:
-		menu.Update( wnd.mouse );
+		if( menu.Update( campaign.GenerateInvEvtInfo(),wnd.mouse ) )
+		{
+			state = GameState::Gameplay;
+			campaign.LoadNextLevel();
+			campaign.ClearEnemies();
+		}
 		break;
 	case GameState::Gameplay:
 		campaign.Update();

@@ -32,11 +32,6 @@ Campaign::Campaign( MainWindow& wnd,Graphics& gfx )
 	doors.emplace_back( Door{ Door::Side::Left,floor } );
 	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
-	playerInv.AddItem( new RustyPistol,GenerateInvEvtInfo() );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-	playerInv.AddItem( new HealthCharge,GenerateInvEvtInfo() );
-
 	// GotoNextFloor();
 }
 
@@ -59,7 +54,7 @@ void Campaign::Update()
 		// {
 		// 	e->Attack( 9999,{ 0.0f,0.0f } );
 		// }
-		enemies.clear();
+		ClearEnemies();
 	}
 #endif
 
@@ -303,6 +298,12 @@ void Campaign::LoadNextLevel()
 	{
 		spawnedEndOfLevelItem = false;
 	}
+}
+
+void Campaign::ClearEnemies()
+{
+	enemies.clear();
+	spawnedEndOfLevelItem = true;
 }
 
 bool Campaign::IsLevelOver() const

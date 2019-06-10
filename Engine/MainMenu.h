@@ -20,7 +20,7 @@ public:
 	MainMenu( MainWindow& wnd,FloorLevel& floor,
 		Inventory& inv,GameState& state,int& slot );
 
-	void Update( Mouse& mouse );
+	bool Update( InventoryEventInfo& evtInfo,Mouse& mouse );
 	void Draw( Graphics& gfx ) const;
 private:
 	MainWindow& wnd;

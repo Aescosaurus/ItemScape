@@ -27,8 +27,8 @@ public:
 
 	FloorLevel& GetFloor();
 	Inventory& GetInv();
-private:
 	void LoadNextLevel();
+	void ClearEnemies();
 	bool IsLevelOver() const;
 	InventoryEventInfo GenerateInvEvtInfo( float dt = 0.0f,
 		EnemyBase* hitEnemy = nullptr,Bullet* curBullet = nullptr );

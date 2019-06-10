@@ -1,4 +1,5 @@
 Flamium Ore
+Fresh out of the mines.
 Deal 1 damage to every
 enemy on screen every 5
 seconds.

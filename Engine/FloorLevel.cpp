@@ -95,6 +95,7 @@ void FloorLevel::LoadSaveInfo( const std::string& info )
 	std::vector<std::vector<std::string>> lines;
 
 	lines.emplace_back();
+	lines.back().emplace_back( "" );
 
 	for( char c : info )
 	{
@@ -102,15 +103,18 @@ void FloorLevel::LoadSaveInfo( const std::string& info )
 		{
 		case '\n':
 			lines.emplace_back();
+			lines.back().emplace_back( "" );
 			break;
 		case ' ':
-			lines.back().emplace_back();
+			lines.back().emplace_back( "" );
 			break;
 		default:
 			lines.back().back() += c;
 			break;
 		}
 	}
+
+	lines.pop_back(); // Deal with BS element from \n.
 
 	curFloor = std::stoi( lines[0][0] );
 	curRoom.x = std::stoi( lines[1][0] );
@@ -119,8 +123,8 @@ void FloorLevel::LoadSaveInfo( const std::string& info )
 	for( int i = 1; i < int( lines[2].size() ); i += 2 )
 	{
 		completedRooms.emplace_back( Vei2{
-			std::stoi( lines[2][i] ),
-			std::stoi( lines[2][i - 1] ) } );
+			std::stoi( lines[2][i - 1] ),
+			std::stoi( lines[2][i] ) } );
 	}
 
 	for( int i = 0; i < int( lines[3].size() ); ++i )
@@ -173,20 +177,21 @@ std::string FloorLevel::GenerateSaveInfo() const
 	info += std::to_string( curRoom.x );
 	info += " " + std::to_string( curRoom.y ) + '\n';
 
-	for( auto& room : completedRooms )
+	for( const auto& room : completedRooms )
 	{
 		info += std::to_string( room.x ) + " ";
 		info += std::to_string( room.y ) + " ";
 	}
-	info += '\n';
+	if( completedRooms.size() > 0 ) info.back() = '\n';
+	else info += '\n';
 
 	for( int i = 0; i < width * height; ++i )
 	{
 		info += std::to_string( floorLayout[i] ) + ' ';
 	}
-	info += '\n';
+	info.back() = '\n'; // Turn ' ' into '\n'.
 
-	return( info );
+	return( info ); // Turn ' ' into '\n'.
 }
 
 void FloorLevel::RandomizeLayout()

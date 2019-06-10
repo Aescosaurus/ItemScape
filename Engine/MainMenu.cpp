@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include <fstream>
 #include "SaveLoader.h"
+#include "PickupManager.h"
 
 MainMenu::MainMenu( MainWindow& wnd,FloorLevel& floor,
 	Inventory& inv,GameState& state,int& slot )
@@ -16,7 +17,7 @@ MainMenu::MainMenu( MainWindow& wnd,FloorLevel& floor,
 	save3Exists = std::ifstream{ "Saves/Save3.txt" }.good();
 }
 
-void MainMenu::Update( Mouse& mouse )
+bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 {
 	switch( state )
 	{
@@ -46,16 +47,21 @@ void MainMenu::Update( Mouse& mouse )
 		if( save1.IsDown() || save2.IsDown() ||
 			save3.IsDown() )
 		{
-			gameState = GameState::Gameplay;
+			return( true );
 		}
 
 		if( create1.IsDown() || create2.IsDown() ||
 			create3.IsDown() )
 		{
-			gameState = GameState::Gameplay;
+			inv.AddItem( new RustyPistol,evtInfo );
+			inv.AddItem( new HealthCharge,evtInfo );
+			inv.AddItem( new HealthCharge,evtInfo );
+			return( true );
 		}
 		break;
 	}
+
+	return( false );
 }
 
 void MainMenu::Draw( Graphics& gfx ) const
