@@ -24,6 +24,9 @@ public:
 
 	void Update();
 	void Draw();
+
+	FloorLevel& GetFloor();
+	Inventory& GetInv();
 private:
 	void LoadNextLevel();
 	bool IsLevelOver() const;

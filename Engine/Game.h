@@ -25,8 +25,9 @@
 #include "Graphics.h"
 
 #include "GameState.h"
-#include "Campaign.h"
 #include "CursorHandler.h"
+#include "Campaign.h"
+#include "MainMenu.h"
 
 class Game
 {
@@ -46,8 +47,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	GameState state = GameState::Gameplay;
-	Campaign campaign;
+	GameState state = GameState::Menu;
 	CursorHandler cursorHand;
+	Campaign campaign;
+	MainMenu menu;
+	int saveSlot = -1;
 	/********************************/
 };

@@ -21,12 +21,16 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+#include "SaveLoader.h"
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
+	cursorHand( wnd ),
 	campaign( wnd,gfx ),
-	cursorHand( wnd )
+	menu( wnd,campaign.GetFloor(),campaign.GetInv(),state,
+		saveSlot )
 {
 	wnd.Maximize();
 }
@@ -45,11 +49,21 @@ void Game::UpdateModel()
 		wnd.kbd.KeyIsPressed( 'F' ) ) wnd.Maximize();
 	if( wnd.kbd.KeyIsPressed( VK_ESCAPE ) ) wnd.Minimize();
 	if( wnd.kbd.KeyIsPressed( VK_CONTROL ) &&
-		wnd.kbd.KeyIsPressed( 'W' ) ) wnd.Kill();
+		wnd.kbd.KeyIsPressed( 'W' ) )
+	{
+		if( saveSlot != -1 )
+		{
+			SaveLoader::Save( SaveLoaderInfo{
+				campaign.GetFloor(),campaign.GetInv() },
+				saveSlot );
+		}
+		wnd.Kill();
+	}
 
 	switch( state )
 	{
 	case GameState::Menu:
+		menu.Update( wnd.mouse );
 		break;
 	case GameState::Gameplay:
 		campaign.Update();
@@ -62,6 +76,7 @@ void Game::ComposeFrame()
 	switch( state )
 	{
 	case GameState::Menu:
+		menu.Draw( gfx );
 		break;
 	case GameState::Gameplay:
 		campaign.Draw();

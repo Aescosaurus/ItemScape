@@ -12,6 +12,7 @@ public:
 	Font( const std::string& fileName,Color chroma = Colors::White );
 	
 	void DrawText( const std::string& text,const Vei2& pos,Color color,Graphics& gfx ) const;
+	Vei2 GetGlyphSize() const;
 private:
 	RectI MapGlyphRect( char c ) const;
 private:

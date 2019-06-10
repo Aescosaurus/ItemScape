@@ -141,6 +141,7 @@
     <ClInclude Include="BugSpray.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletRingCapacitor.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CableSplitter.h" />
     <ClInclude Include="CactusBranch.h" />
     <ClInclude Include="Campaign.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="KawaiiLemon.h" />
     <ClInclude Include="LevelExitDoor.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />
@@ -224,6 +226,7 @@
   <ItemGroup>
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Campaign.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="KawaiiLemon.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PickupManager.cpp" />
     <ClCompile Include="RynoChaser.cpp" />
     <ClCompile Include="SaveLoader.cpp" />

@@ -12,6 +12,9 @@ void CursorHandler::DrawCursor( const Vei2& pos,
 	switch( state )
 	{
 	case GameState::Menu:
+		gfx.DrawSprite( pos.x - crosshair.GetWidth() / 2,
+			pos.y - crosshair.GetHeight() / 2,crosshair,
+			SpriteEffect::Chroma{ Colors::Magenta } );
 		break;
 	case GameState::Gameplay:
 		gfx.DrawSprite( pos.x - crosshair.GetWidth() / 2,

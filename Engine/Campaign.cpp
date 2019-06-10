@@ -223,6 +223,16 @@ void Campaign::Draw()
 	// Top of drawing order.
 }
 
+FloorLevel& Campaign::GetFloor()
+{
+	return( floor );
+}
+
+Inventory& Campaign::GetInv()
+{
+	return( playerInv );
+}
+
 void Campaign::LoadNextLevel()
 {
 	// Get rid of exploded enemies and any leftover bullets.
