@@ -36,9 +36,21 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 		if( save3Exists ) save3.Update( mouse );
 		else create3.Update( mouse );
 
-		if( save1.IsDown() ) SaveLoader::Load( SaveLoaderInfo{ floor,inv },1 );
-		if( save2.IsDown() ) SaveLoader::Load( SaveLoaderInfo{ floor,inv },2 );
-		if( save3.IsDown() ) SaveLoader::Load( SaveLoaderInfo{ floor,inv },3 );
+		if( save1.IsDown() )
+		{
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv },1 );
+			saveSlot = 1;
+		}
+		if( save2.IsDown() )
+		{
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv },2 );
+			saveSlot = 2;
+		}
+		if( save3.IsDown() )
+		{
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv },3 );
+			saveSlot = 3;
+		}
 
 		if( create1.IsDown() ) saveSlot = 1;
 		if( create2.IsDown() ) saveSlot = 2;

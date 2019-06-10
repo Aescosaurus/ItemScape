@@ -88,12 +88,12 @@ public:
 	static InventoryItem* RandT1Pickup()
 	{
 		return( t1Pickups[Random::RangeI( 0,
-			int( t1Pickups.size() ) )].first );
+			int( t1Pickups.size() ) )].first->Clone() );
 	}
 	static InventoryItem* RandT2Pickup()
 	{
 		return( t2Pickups[Random::RangeI( 0,
-			int( t2Pickups.size() ) )].first );
+			int( t2Pickups.size() ) )].first->Clone() );
 	}
 	static InventoryItem* CreateItem( const std::string& name )
 	{
