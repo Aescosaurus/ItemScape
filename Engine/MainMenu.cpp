@@ -2,6 +2,7 @@
 #include <fstream>
 #include "SaveLoader.h"
 #include "PickupManager.h"
+#include <cstdio>
 
 MainMenu::MainMenu( MainWindow& wnd,FloorLevel& floor,
 	Inventory& inv,GameState& state,int& slot )
@@ -36,6 +37,10 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 		if( save3Exists ) save3.Update( mouse );
 		else create3.Update( mouse );
 
+		delete1.Update( mouse );
+		delete2.Update( mouse );
+		delete3.Update( mouse );
+
 		if( save1.IsDown() )
 		{
 			SaveLoader::Load( SaveLoaderInfo{ floor,inv },1 );
@@ -55,7 +60,7 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 		if( create1.IsDown() ) saveSlot = 1;
 		if( create2.IsDown() ) saveSlot = 2;
 		if( create3.IsDown() ) saveSlot = 3;
-		
+
 		if( save1.IsDown() || save2.IsDown() ||
 			save3.IsDown() )
 		{
@@ -74,6 +79,22 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 		break;
 	}
 
+	if( delete1.IsDown() )
+	{
+		save1Exists = false;
+		std::remove( "Saves/Save1.txt" );
+	}
+	if( delete2.IsDown() )
+	{
+		save2Exists = false;
+		std::remove( "Saves/Save2.txt" );
+	}
+	if( delete3.IsDown() )
+	{
+		save3Exists = false;
+		std::remove( "Saves/Save3.txt" );
+	}
+
 	return( false );
 }
 
@@ -86,11 +107,23 @@ void MainMenu::Draw( Graphics& gfx ) const
 		quit.Draw( gfx );
 		break;
 	case MenuState::SaveSlots:
-		if( save1Exists ) save1.Draw( gfx );
+		if( save1Exists )
+		{
+			save1.Draw( gfx );
+			delete1.Draw( gfx );
+		}
 		else create1.Draw( gfx );
-		if( save2Exists ) save2.Draw( gfx );
+		if( save2Exists )
+		{
+			save2.Draw( gfx );
+			delete2.Draw( gfx );
+		}
 		else create2.Draw( gfx );
-		if( save3Exists ) save3.Draw( gfx );
+		if( save3Exists )
+		{
+			save3.Draw( gfx );
+			delete3.Draw( gfx );
+		}
 		else create3.Draw( gfx );
 		break;
 	}

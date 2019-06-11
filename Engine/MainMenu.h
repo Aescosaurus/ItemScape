@@ -40,11 +40,15 @@ private:
 
 	// Button create1 = 
 
-	Button save1 = Button{ Vei2{ 150,300 },"Load 1" };
-	Button save2 = Button{ Vei2{ 150,400 },"Load 2" };
-	Button save3 = Button{ Vei2{ 150,500 },"Load 3" };
+	Button save1 = Button{ Vei2{ 150,300 },"Load Game" };
+	Button save2 = Button{ Vei2{ 150,400 },"Load Game" };
+	Button save3 = Button{ Vei2{ 150,500 },"Load Game" };
 
-	Button create1 = Button{ Vei2{ 150,300 },"Create 1" };
-	Button create2 = Button{ Vei2{ 150,400 },"Create 2" };
-	Button create3 = Button{ Vei2{ 150,500 },"Create 3" };
+	Button create1 = Button{ Vei2{ 150,300 },"New Game" };
+	Button create2 = Button{ Vei2{ 150,400 },"New Game" };
+	Button create3 = Button{ Vei2{ 150,500 },"New Game" };
+
+	Button delete1 = Button{ Vei2{ 100,300 },"X" };
+	Button delete2 = Button{ Vei2{ 100,400 },"X" };
+	Button delete3 = Button{ Vei2{ 100,500 },"X" };
 };
