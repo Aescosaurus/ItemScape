@@ -16,6 +16,10 @@ MainMenu::MainMenu( MainWindow& wnd,FloorLevel& floor,
 	save1Exists = std::ifstream{ "Saves/Save1.txt" }.good();
 	save2Exists = std::ifstream{ "Saves/Save2.txt" }.good();
 	save3Exists = std::ifstream{ "Saves/Save3.txt" }.good();
+
+	if( save1Exists ) save1Img = new Surface{ "Saves/Save1Img.bmp" };
+	if( save2Exists ) save2Img = new Surface{ "Saves/Save2Img.bmp" };
+	if( save3Exists ) save3Img = new Surface{ "Saves/Save3Img.bmp" };
 }
 
 bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
@@ -43,17 +47,20 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 
 		if( save1.IsDown() )
 		{
-			SaveLoader::Load( SaveLoaderInfo{ floor,inv },1 );
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
+				evtInfo.gfx },1 );
 			saveSlot = 1;
 		}
 		if( save2.IsDown() )
 		{
-			SaveLoader::Load( SaveLoaderInfo{ floor,inv },2 );
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
+				evtInfo.gfx },2 );
 			saveSlot = 2;
 		}
 		if( save3.IsDown() )
 		{
-			SaveLoader::Load( SaveLoaderInfo{ floor,inv },3 );
+			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
+				evtInfo.gfx },3 );
 			saveSlot = 3;
 		}
 
@@ -82,17 +89,26 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 	if( delete1.IsDown() )
 	{
 		save1Exists = false;
+		delete save1Img;
+		save1Img = nullptr;
 		std::remove( "Saves/Save1.txt" );
+		std::remove( "Saves/Save1Img.bmp" );
 	}
 	if( delete2.IsDown() )
 	{
 		save2Exists = false;
+		delete save1Img;
+		save1Img = nullptr;
 		std::remove( "Saves/Save2.txt" );
+		std::remove( "Saves/Save2Img.bmp" );
 	}
 	if( delete3.IsDown() )
 	{
 		save3Exists = false;
+		delete save1Img;
+		save1Img = nullptr;
 		std::remove( "Saves/Save3.txt" );
+		std::remove( "Saves/Save3Img.bmp" );
 	}
 
 	return( false );
@@ -107,6 +123,22 @@ void MainMenu::Draw( Graphics& gfx ) const
 		quit.Draw( gfx );
 		break;
 	case MenuState::SaveSlots:
+		if( save1.IsHovering() )
+		{
+			assert( save1Img != nullptr );
+			gfx.DrawSprite( 0,0,*save1Img,SpriteEffect::Copy{} );
+		}
+		if( save2.IsHovering() )
+		{
+			assert( save2Img != nullptr );
+			gfx.DrawSprite( 0,0,*save2Img,SpriteEffect::Copy{} );
+		}
+		if( save3.IsHovering() )
+		{
+			assert( save3Img != nullptr );
+			gfx.DrawSprite( 0,0,*save3Img,SpriteEffect::Copy{} );
+		}
+
 		if( save1Exists )
 		{
 			save1.Draw( gfx );

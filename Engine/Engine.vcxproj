@@ -222,6 +222,7 @@
     <ClInclude Include="WatermelonOre.h" />
     <ClInclude Include="WingedBugMidboss.h" />
     <ClInclude Include="WormBugBoss.h" />
+    <ClInclude Include="WriteToBitmap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Anim.cpp" />
@@ -274,6 +275,7 @@
     <ClCompile Include="VisualEffect.cpp" />
     <ClCompile Include="WingedBugMidboss.cpp" />
     <ClCompile Include="WormBugBoss.cpp" />
+    <ClCompile Include="WriteToBitmap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">

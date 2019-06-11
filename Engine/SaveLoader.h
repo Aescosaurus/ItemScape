@@ -8,6 +8,7 @@ class SaveLoaderInfo
 public:
 	FloorLevel& floor;
 	Inventory& inv;
+	Graphics& gfx;
 };
 
 class SaveLoader

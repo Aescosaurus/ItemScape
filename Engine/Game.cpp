@@ -37,8 +37,8 @@ Game::Game( MainWindow& wnd )
 
 void Game::Go()
 {
-	gfx.BeginFrame();
 	UpdateModel();
+	gfx.BeginFrame();
 	ComposeFrame();
 	gfx.EndFrame();
 }
@@ -54,7 +54,7 @@ void Game::UpdateModel()
 		if( saveSlot != -1 )
 		{
 			SaveLoader::Save( SaveLoaderInfo{
-				campaign.GetFloor(),campaign.GetInv() },
+				campaign.GetFloor(),campaign.GetInv(),gfx },
 				saveSlot );
 		}
 		wnd.Kill();

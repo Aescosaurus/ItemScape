@@ -35,3 +35,8 @@ bool Button::IsDown() const
 {
 	return( clicking );
 }
+
+bool Button::IsHovering() const
+{
+	return( hovering );
+}

@@ -250,6 +250,21 @@ void Graphics::JSDrawImage( const Surface& image,int sx,int sy,int sWidth,int sH
 	DrawSprite( dx,dy,clipRect,GetScreenRect(),enlarged,SpriteEffect::Copy(),false );
 }
 
+Surface Graphics::TakeScreenshot() const
+{
+	Surface temp{ ScreenWidth,ScreenHeight };
+
+	for( int y = 0; y < ScreenHeight; ++y )
+	{
+		for( int x = 0; x < ScreenWidth; ++x )
+		{
+			temp.PutPixel( x,y,GetPixel( x,y ) );
+		}
+	}
+
+	return( temp );
+}
+
 Graphics::~Graphics()
 {
 	// free sysbuffer memory (aligned free)

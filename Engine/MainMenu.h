@@ -38,6 +38,10 @@ private:
 	bool save2Exists = false;
 	bool save3Exists = false;
 
+	Surface* save1Img = nullptr;
+	Surface* save2Img = nullptr;
+	Surface* save3Img = nullptr;
+
 	// Button create1 = 
 
 	Button save1 = Button{ Vei2{ 150,300 },"Load Game" };

@@ -15,6 +15,7 @@ public:
 	void Draw( Graphics& gfx ) const;
 
 	bool IsDown() const;
+	bool IsHovering() const;
 private:
 	CFontPtr font = FontCodex::Fetch( "Fonts/LuckyPixel6x9.bmp" );
 	const Vei2 pos;

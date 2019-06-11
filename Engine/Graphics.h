@@ -182,6 +182,7 @@ public:
 			dx,dy,dWidth,dHeight );
 	}
 	void JSDrawImage( const Surface& image,int sx,int sy,int sWidth,int sHeight,int dx,int dy,int dWidth,int dHeight );
+	Surface TakeScreenshot() const;
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

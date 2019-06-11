@@ -1,5 +1,6 @@
 #include "SaveLoader.h"
 #include <fstream>
+#include "WriteToBitmap.h"
 
 void SaveLoader::Save( const SaveLoaderInfo& info,int slot )
 {
@@ -8,6 +9,11 @@ void SaveLoader::Save( const SaveLoaderInfo& info,int slot )
 
 	out << info.floor.GenerateSaveInfo();
 	out << info.inv.GenerateSaveInfo();
+
+	WriteToBitmap::Write( info.gfx.TakeScreenshot()
+		.GetInterpolatedTo( Graphics::ScreenWidth / 4,
+		Graphics::ScreenHeight / 4 ),"Saves/Save" +
+		std::to_string( slot ) + "Img.bmp" );
 }
 
 void SaveLoader::Load( SaveLoaderInfo& info,int slot )
