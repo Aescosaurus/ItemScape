@@ -61,6 +61,7 @@ public:
 	virtual void OnRemove( InventoryEventInfo& evtInfo ) {}
 	virtual void OnDraw( InventoryEventInfo& evtInfo ) {}
 	virtual void OnEnemyHit( InventoryEventInfo& evtInfo ) {}
+	virtual void OnRoomStart( InventoryEventInfo& evtInfo ) {}
 	/**/
 
 	/* Gun methods */

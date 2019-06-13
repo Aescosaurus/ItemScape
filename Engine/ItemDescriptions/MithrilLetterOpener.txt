@@ -1,0 +1,4 @@
+Mithril Letter Opener
+The first shot fired at
+the start of each room
+deals 5 bonus damage.

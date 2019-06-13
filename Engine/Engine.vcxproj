@@ -177,6 +177,7 @@
     <ClInclude Include="KawaiiLemon.h" />
     <ClInclude Include="LevelExitDoor.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MithrilLetterOpener.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />

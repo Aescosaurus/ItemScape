@@ -29,6 +29,7 @@ public:
 	void OnEnemyExplode( InventoryEventInfo& evtInfo );
 	void OnEnemyHit( InventoryEventInfo& evtInfo );
 	void OnDraw( InventoryEventInfo& evtInfo );
+	void OnRoomStart( InventoryEventInfo& evtInfo );
 	/**/
 
 	InventoryItem* FindItem( const std::string& name );

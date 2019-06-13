@@ -297,6 +297,9 @@
     <ClInclude Include="MithrilHammer.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="MithrilLetterOpener.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

@@ -246,6 +246,14 @@ void Inventory::OnDraw( InventoryEventInfo& evtInfo )
 	}
 }
 
+void Inventory::OnRoomStart( InventoryEventInfo& evtInfo )
+{
+	for( auto& item : items )
+	{
+		item->OnRoomStart( evtInfo );
+	}
+}
+
 InventoryItem* Inventory::FindItem( const std::string& name )
 {
 	for( auto& item : items )

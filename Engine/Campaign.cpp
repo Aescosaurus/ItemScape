@@ -302,6 +302,8 @@ void Campaign::LoadNextLevel()
 	{
 		spawnedEndOfLevelItem = false;
 	}
+
+	playerInv.OnRoomStart( GenerateInvEvtInfo() );
 }
 
 void Campaign::ClearEnemies()
