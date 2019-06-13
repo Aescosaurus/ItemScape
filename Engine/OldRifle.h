@@ -16,7 +16,7 @@ public:
 
 	InventoryItem* Clone() override
 	{
-		return( new OldRifle );
+		return( new OldRifle{ *this } );
 	}
 
 	void Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target ) override

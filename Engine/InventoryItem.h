@@ -53,6 +53,7 @@ public:
 	virtual void OnPlayerHit( InventoryEventInfo& evtInfo ) {}
 	virtual void OnPlayerShoot( InventoryEventInfo& evtInfo ) {}
 	virtual void OnEnemyExplode( InventoryEventInfo& evtInfo ) {}
+	// When player left clicks, only works on first item in inv.
 	virtual void OnGunFire( InventoryEventInfo& evtInfo ) {}
 	virtual void OnActivate( InventoryEventInfo& evtInfo ) {}
 	virtual void OnUpdate( InventoryEventInfo& evtInfo ) {}

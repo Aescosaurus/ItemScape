@@ -30,6 +30,7 @@
 #include "WatermelonOre.h"
 #include "WatermelonIngot.h"
 #include "PoisonBottle.h"
+#include "Skateboard.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -69,6 +70,7 @@ public:
 		t1Pickups.emplace_back( new WatermelonOre,id++ );
 		t1Pickups.emplace_back( new WatermelonIngot,id++ );
 		t1Pickups.emplace_back( new PoisonBottle,id++ );
+		t1Pickups.emplace_back( new Skateboard,id++ );
 
 		t1Pickups.emplace_back( new RustyPistol,id++ );
 		t1Pickups.emplace_back( new OldRifle,id++ );

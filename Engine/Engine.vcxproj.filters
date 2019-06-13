@@ -291,6 +291,9 @@
     <ClInclude Include="WriteToBitmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skateboard.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

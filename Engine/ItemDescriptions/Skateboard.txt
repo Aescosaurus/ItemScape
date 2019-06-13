@@ -1,0 +1,4 @@
+Skateboard
+After not shooting for
+0.5 seconds, gain a 25%
+movement speed boost.
