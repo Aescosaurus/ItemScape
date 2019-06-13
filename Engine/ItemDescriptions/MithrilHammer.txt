@@ -1,0 +1,4 @@
+Mithril Hammer
+30% of the time your
+bullets explode into 3
+bullets after 1 second.

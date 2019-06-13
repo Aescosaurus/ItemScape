@@ -9,6 +9,8 @@
 #include "Timer.h"
 #include "VisualEffect.h"
 
+class Bullet;
+
 class BulletUpdateInfo
 {
 public:
@@ -16,6 +18,7 @@ public:
 	float dt;
 	class Player& player;
 	std::vector<VisualEffect>& visualEffects;
+	std::vector<std::unique_ptr<Bullet>>& playerBullets;
 };
 
 // Moves straight in one direction.
@@ -121,6 +124,24 @@ private:
 	float speed;
 	Vec2 offset = { 0.0f,0.0f };
 	Timer targetTime = 0.3f;
+};
+
+class ExplodingBullet
+	:
+	public Bullet
+{
+public:
+	ExplodingBullet( const Bullet& src );
+
+	void Update( BulletUpdateInfo& info ) override;
+
+	void SetExplBulletCount( int count );
+	void SetExplTime( float time );
+
+	Bullet* Clone() override;
+private:
+	int nBulletsToSpawn = 0;
+	Timer explTimer = 0.0f;
 };
 
 // Ideas:

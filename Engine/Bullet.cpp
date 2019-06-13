@@ -2,6 +2,7 @@
 #include "SpriteEffect.h"
 #include "EnemyBase.h"
 #include "Player.h"
+#include "Utils.h"
 
 Bullet::Bullet( const Vec2& pos,const Vec2& target,
 	const TileMap& map,Team myTeam,float speed,
@@ -240,4 +241,46 @@ void TrackingBullet::SetOffset( const Vec2& offset )
 Bullet* TrackingBullet::Clone()
 {
 	return( new TrackingBullet{ *this } );
+}
+
+ExplodingBullet::ExplodingBullet( const Bullet& src )
+	:
+	Bullet( src )
+{}
+
+void ExplodingBullet::Update( BulletUpdateInfo& info )
+{
+	Bullet::Update( info );
+
+	explTimer.Update( info.dt );
+
+	if( explTimer.IsDone() )
+	{
+		explTimer.Reset();
+		for( int i = 0; i < nBulletsToSpawn; ++i )
+		{
+			const auto moveDir = Vec2{ 0.0f,-1.0f }
+				.Deviate( ( chili::pi * 2.0f ) *
+				( float( i ) / float( nBulletsToSpawn ) ) );
+			info.playerBullets.emplace_back( std::make_unique<
+				Bullet>( *this ) );
+			info.playerBullets.back()->SetVel( moveDir * vel.GetLength() );
+		}
+		Attack( 1,&info.visualEffects );
+	}
+}
+
+void ExplodingBullet::SetExplBulletCount( int count )
+{
+	nBulletsToSpawn = count;
+}
+
+void ExplodingBullet::SetExplTime( float time )
+{
+	explTimer.Reset( time );
+}
+
+Bullet* ExplodingBullet::Clone()
+{
+	return( new ExplodingBullet{ *this } );
 }

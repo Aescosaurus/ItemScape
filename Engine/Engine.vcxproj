@@ -169,6 +169,7 @@
     <ClInclude Include="GogglesOfDestiny.h" />
     <ClInclude Include="GPSTracker.h" />
     <ClInclude Include="GunBase.h" />
+    <ClInclude Include="MithrilHammer.h" />
     <ClInclude Include="HealthCharge.h" />
     <ClInclude Include="ChargeGenerator.h" />
     <ClInclude Include="Inventory.h" />

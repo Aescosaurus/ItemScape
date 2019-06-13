@@ -69,7 +69,11 @@ void Campaign::Update()
 
 	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo( dt ) );
 
-	for( auto& b : playerBullets ) b->Update( GenerateBulletEvtInfo( dt ) );
+	for( int i = 0; i < int( playerBullets.size() ); ++i )
+	{
+		auto& b = playerBullets[i];
+		b->Update( GenerateBulletEvtInfo( dt ) );
+	}
 	for( int i = 0; i < int( enemyBullets.size() ); ++i )
 	{
 		auto& eb = enemyBullets[i];
@@ -326,7 +330,8 @@ InventoryEventInfo Campaign::GenerateInvEvtInfo( float dt,
 
 BulletUpdateInfo Campaign::GenerateBulletEvtInfo( float dt )
 {
-	return( BulletUpdateInfo{ enemies,dt,guy,visualEffects } );
+	return( BulletUpdateInfo{ enemies,dt,guy,visualEffects,
+		playerBullets } );
 }
 
 void Campaign::GotoNextFloor()
