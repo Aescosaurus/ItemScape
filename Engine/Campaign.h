@@ -51,4 +51,6 @@ private:
 	std::vector<InventoryItem*> pickups;
 	Vei2 pickupPos = Graphics::GetScreenRect().GetCenter();
 	bool spawnedEndOfLevelItem = false;
+	static constexpr float freezeFrameDuration = 0.015f;
+	float frozenTime = 0.0f;
 };

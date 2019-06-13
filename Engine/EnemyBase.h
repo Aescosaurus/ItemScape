@@ -62,4 +62,5 @@ protected:
 	Vec2 vel = { 0.0f,0.0f };
 	Timer damageCooldown = 3.0f / 60.0f;
 	bool reachedTarget = false;
+	static constexpr float damagePushDist = 11.0f;
 };

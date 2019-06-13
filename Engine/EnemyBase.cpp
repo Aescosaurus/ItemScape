@@ -11,6 +11,8 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 	hp -= damage;
 
 	damageCooldown.Reset();
+
+	pos += ( pos - loc ).GetNormalized() * damagePushDist * damage;
 }
 
 bool EnemyBase::IsExpl() const

@@ -61,6 +61,13 @@ void Campaign::Update()
 	auto dt = FrameTimer::Mark();
 	if( dt > 1.0f / 10.0f ) dt = 0.0f;
 
+	if( frozenTime > 0.0f )
+	{
+		frozenTime -= dt;
+		if( frozenTime < 0.0f ) frozenTime = 0.0f;
+		return;
+	}
+
 	if( playerInv.IsOpen() ) dt = 0.0f;
 
 	playerInv.Update( kbd,mouse,GenerateInvEvtInfo( dt ) );
@@ -82,6 +89,7 @@ void Campaign::Update()
 
 		if( eb->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
+			frozenTime += freezeFrameDuration * 3.0f;
 			eb->Attack( 1,&visualEffects );
 			if( !guy.IsInvul() )
 			{
@@ -118,6 +126,7 @@ void Campaign::Update()
 
 			if( b->GetRect().IsOverlappingWith( enemyRect ) )
 			{
+				frozenTime += freezeFrameDuration * b->GetDamage();
 				e->Attack( b->GetDamage(),
 					b->GetRect().GetCenter() );
 				b->Attack( 1,&visualEffects );
