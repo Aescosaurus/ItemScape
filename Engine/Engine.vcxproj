@@ -178,6 +178,7 @@
     <ClInclude Include="LevelExitDoor.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MithrilLetterOpener.h" />
+    <ClInclude Include="MithrilScrewdriver.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />

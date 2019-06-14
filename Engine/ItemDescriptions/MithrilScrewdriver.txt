@@ -1,0 +1,5 @@
+Mithril Screwdriver
+At the start of each
+room, gain 20% faster
+fire rate for 10
+seconds.

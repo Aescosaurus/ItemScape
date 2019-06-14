@@ -300,6 +300,9 @@
     <ClInclude Include="MithrilLetterOpener.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="MithrilScrewdriver.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
