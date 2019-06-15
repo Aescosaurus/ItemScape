@@ -1,0 +1,7 @@
+Stone Sword
+Heavy but powerful.
+Deals massive damage in
+a small range and
+takes a while to
+recharge.  Equip in the
+weapon slot to use.

@@ -81,7 +81,7 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
-			inv.AddItem( new RapidFireCannon,evtInfo );
+			inv.AddItem( new StoneSword,evtInfo );
 
 			return( true );
 		}

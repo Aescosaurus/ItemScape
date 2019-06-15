@@ -306,6 +306,9 @@
     <ClInclude Include="RapidFireCannon.h">
       <Filter>Header Files\Items\Guns</Filter>
     </ClInclude>
+    <ClInclude Include="StoneSword.h">
+      <Filter>Header Files\Items\Guns</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

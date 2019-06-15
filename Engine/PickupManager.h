@@ -40,6 +40,7 @@
 #include "DebilitatedShotgun.h"
 
 #include "RapidFireCannon.h"
+#include "StoneSword.h"
 
 class PickupManager
 {
@@ -85,6 +86,7 @@ public:
 		t1Pickups.emplace_back( new DebilitatedShotgun,id++ );
 
 		t2Pickups.emplace_back( new RapidFireCannon,id++ );
+		t2Pickups.emplace_back( new StoneSword,id++ );
 	}
 	static void Free()
 	{

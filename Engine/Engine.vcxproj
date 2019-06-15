@@ -212,6 +212,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteEffect.h" />
+    <ClInclude Include="StoneSword.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Timer.h" />

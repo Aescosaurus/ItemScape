@@ -12,11 +12,14 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 
 	damageCooldown.Reset();
 
-	const auto testMove = ( pos - loc ).GetNormalized() *
-		damagePushDist * float( damage );
-	const auto validMove = coll.GetValidMove( pos,testMove );
-	pos += validMove;
-	coll.MoveTo( pos );
+	if( !IsBoss() )
+	{
+		const auto testMove = ( pos - loc ).GetNormalized() *
+			damagePushDist * float( damage );
+		const auto validMove = coll.GetValidMove( pos,testMove );
+		pos += validMove;
+		coll.MoveTo( pos );
+	}
 }
 
 bool EnemyBase::IsExpl() const
