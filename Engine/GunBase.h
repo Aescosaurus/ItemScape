@@ -82,9 +82,10 @@ public:
 	}
 protected:
 	GunBase( const std::string& fileName,const std::string& icon,
-		float shotRefireTime,float bulletSpeed,int damage )
+		float shotRefireTime,float bulletSpeed,int damage,
+		int tier = 1 )
 		:
-		InventoryItem( fileName,icon ),
+		InventoryItem( fileName,icon,tier ),
 		shotTimer( shotRefireTime ),
 		bulletSpeed( bulletSpeed ),
 		damage( damage )

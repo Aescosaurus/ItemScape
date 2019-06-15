@@ -41,6 +41,7 @@ public:
 	float GetHPPercent() const;
 	int GetCurHP() const;
 	int GetMaxHP() const;
+	virtual bool IsBoss() const;
 protected:
 	EnemyBase( const Vec2& pos,const Vec2& size,
 		int hp,const TileMap& map );

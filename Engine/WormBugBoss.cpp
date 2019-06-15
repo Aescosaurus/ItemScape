@@ -116,3 +116,8 @@ void WormBugBoss::Draw( Graphics& gfx ) const
 		break;
 	}
 }
+
+bool WormBugBoss::IsBoss() const
+{
+	return( true );
+}

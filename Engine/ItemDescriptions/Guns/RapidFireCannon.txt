@@ -1,0 +1,4 @@
+Rapid Fire Cannon
+Core item.  Shoots
+really fast, equip in
+the weapon slot to use.

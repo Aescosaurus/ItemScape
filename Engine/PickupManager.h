@@ -39,6 +39,8 @@
 #include "OldRifle.h"
 #include "DebilitatedShotgun.h"
 
+#include "RapidFireCannon.h"
+
 class PickupManager
 {
 public:
@@ -81,6 +83,8 @@ public:
 		t1Pickups.emplace_back( new RustyPistol,id++ );
 		t1Pickups.emplace_back( new OldRifle,id++ );
 		t1Pickups.emplace_back( new DebilitatedShotgun,id++ );
+
+		t2Pickups.emplace_back( new RapidFireCannon,id++ );
 	}
 	static void Free()
 	{
@@ -106,6 +110,13 @@ public:
 	static InventoryItem* CreateItem( const std::string& name )
 	{
 		for( auto& pickup : t1Pickups )
+		{
+			if( pickup.first->GetName() == name )
+			{
+				return( pickup.first->Clone() );
+			}
+		}
+		for( auto& pickup : t2Pickups )
 		{
 			if( pickup.first->GetName() == name )
 			{

@@ -23,6 +23,8 @@ public:
 
 	void Update( const EnemyUpdateInfo& info,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
+
+	bool IsBoss() const override;
 private:
 	static constexpr Vei2 size = { 128,128 };
 	static constexpr int health = 500;

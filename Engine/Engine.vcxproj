@@ -175,7 +175,6 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="KawaiiLemon.h" />
-    <ClInclude Include="LevelExitDoor.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MithrilLetterOpener.h" />
     <ClInclude Include="MithrilScrewdriver.h" />
@@ -183,6 +182,7 @@
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />
     <ClInclude Include="PoisonBottle.h" />
+    <ClInclude Include="RapidFireCannon.h" />
     <ClInclude Include="RefinedFlamium.h" />
     <ClInclude Include="RustyPistol.h" />
     <ClInclude Include="RynoChaser.h" />

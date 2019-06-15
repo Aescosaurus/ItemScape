@@ -40,7 +40,7 @@ public:
 
 	// Names/descriptions must be <23 chars in length.
 	InventoryItem( const std::string& fileName,
-		const std::string& icon );
+		const std::string& icon,int tier = 1 );
 
 	void Update( const Mouse& mouse );
 	void Draw( Graphics& gfx ) const;
@@ -76,6 +76,7 @@ public:
 	bool WillRemove() const;
 	RectI GetRect() const;
 	virtual bool IsGun() const;
+	int GetTier() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;
@@ -90,4 +91,5 @@ protected:
 	static const Font luckyPixel;
 	bool remove = false;
 	static const Surface itemBG;
+	int tier;
 };

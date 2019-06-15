@@ -173,7 +173,12 @@ void Campaign::Update()
 		if( ( *it )->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
 			playerInv.AddItem( *it,GenerateInvEvtInfo( dt ) );
+			const auto tier = ( *it )->GetTier();
 			pickups.erase( it );
+			if( tier == 2 )
+			{
+				GotoNextFloor();
+			}
 			break;
 		}
 	}
@@ -187,8 +192,25 @@ void Campaign::Update()
 		// Spawn item after last enemy explodes.
 		if( !spawnedEndOfLevelItem )
 		{
-			pickups.emplace_back( PickupManager
-				::RandT1Pickup() );
+			bool spawnT2Item = false;
+			for( auto& e : enemies )
+			{
+				if( e->IsBoss() )
+				{
+					spawnT2Item = true;
+					break;
+				}
+			}
+			if( !spawnT2Item )
+			{
+				pickups.emplace_back( PickupManager
+					::RandT1Pickup() );
+			}
+			else
+			{
+				pickups.emplace_back( PickupManager
+					::RandT2Pickup() );
+			}
 			pickups.back()->SetPos( pickupPos );
 			visualEffects.emplace_back( VisualEffect{
 				pickupPos,VisualEffect::Type

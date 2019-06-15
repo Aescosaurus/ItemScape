@@ -154,3 +154,8 @@ void WingedBugMidboss::Attack( int damage,const Vec2& loc )
 		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 	}
 }
+
+bool WingedBugMidboss::IsBoss() const
+{
+	return( true );
+}

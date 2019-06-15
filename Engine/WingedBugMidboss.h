@@ -25,6 +25,8 @@ public:
 	void Draw( Graphics& gfx ) const override;
 
 	void Attack( int damage,const Vec2& loc ) override;
+
+	bool IsBoss() const override;
 private:
 	static constexpr Vei2 size = { 128,128 };
 	static constexpr int health = 250;

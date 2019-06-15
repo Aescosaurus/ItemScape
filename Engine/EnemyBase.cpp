@@ -12,7 +12,11 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 
 	damageCooldown.Reset();
 
-	pos += ( pos - loc ).GetNormalized() * damagePushDist * damage;
+	const auto testMove = ( pos - loc ).GetNormalized() *
+		damagePushDist * float( damage );
+	const auto validMove = coll.GetValidMove( pos,testMove );
+	pos += validMove;
+	coll.MoveTo( pos );
 }
 
 bool EnemyBase::IsExpl() const
@@ -43,6 +47,11 @@ int EnemyBase::GetCurHP() const
 int EnemyBase::GetMaxHP() const
 {
 	return( maxHP );
+}
+
+bool EnemyBase::IsBoss() const
+{
+	return( false );
 }
 
 EnemyBase::EnemyBase( const Vec2& pos,const Vec2& size,

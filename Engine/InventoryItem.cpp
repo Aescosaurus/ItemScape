@@ -14,9 +14,10 @@ const Surface InventoryItem::itemBG = "Images/InventoryItemBackground.bmp";
 // {}
 
 InventoryItem::InventoryItem( const std::string& fileName,
-	const std::string& icon )
+	const std::string& icon,int tier )
 	:
-	surf( icon )
+	surf( icon ),
+	tier( tier )
 {
 	std::ifstream in{ fileName };
 	assert( in.good() );
@@ -101,6 +102,11 @@ RectI InventoryItem::GetRect() const
 bool InventoryItem::IsGun() const
 {
 	return( false );
+}
+
+int InventoryItem::GetTier() const
+{
+	return( tier );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const
