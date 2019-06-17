@@ -42,8 +42,11 @@ public:
 			replacement->SetSubColor( Colors::Yellow );
 			// replacement->SetTarget( targetEnemy->GetPos() );
 			replacement->SetSpeed( trackingBulletSpeed );
-			replacement->SetOffset( targetEnemy->GetRect()
-				.GetSize() / 2.0f );
+			if( targetEnemy != nullptr )
+			{
+				replacement->SetOffset( targetEnemy
+					->GetRect().GetSize() / 2.0f );
+			}
 
 			evtInfo.playerBullets.pop_back();
 			evtInfo.playerBullets.emplace_back( replacement );

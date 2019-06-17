@@ -167,6 +167,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GelatinousSphere.h" />
     <ClInclude Include="GogglesOfDestiny.h" />
+    <ClInclude Include="GoldenSeeker.h" />
     <ClInclude Include="GPSTracker.h" />
     <ClInclude Include="GunBase.h" />
     <ClInclude Include="MithrilHammer.h" />

@@ -23,8 +23,9 @@ public:
 	{
 		if( Random::RangeF( 0.0f,100.0f ) <= chance )
 		{
-			const auto itemSpawnPos = invEvtInfo.player
-				.GetRect().GetCenter() + Vec2::Up() * 64.0f;
+			// const auto itemSpawnPos = invEvtInfo.player
+			// 	.GetRect().GetCenter() + Vec2::Up() * 64.0f;
+			const auto itemSpawnPos = invEvtInfo.hitEnemy->GetPos();
 			invEvtInfo.pickups.emplace_back(
 				new HealthCharge );
 

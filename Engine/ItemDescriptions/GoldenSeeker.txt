@@ -1,0 +1,6 @@
+Golden Seeker
+Gives the team 150
+points.  Also makes
+your bullets seek
+towards the nearest
+enemy.
