@@ -185,8 +185,10 @@ void TrackingBullet::Update( BulletUpdateInfo& info )
 
 		for( auto& e : info.enemies )
 		{
+			// const auto curDist = ( e->GetRect().GetCenter() -
+			// 	info.player.GetCenter() ).GetLengthSq();
 			const auto curDist = ( e->GetRect().GetCenter() -
-				info.player.GetCenter() ).GetLengthSq();
+				GetPos() ).GetLengthSq();
 			if( !e->IsExpl() && curDist < dist )
 			{
 				dist = curDist;

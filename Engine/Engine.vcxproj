@@ -226,6 +226,7 @@
     <ClInclude Include="VisualEffect.h" />
     <ClInclude Include="WatermelonIngot.h" />
     <ClInclude Include="WatermelonOre.h" />
+    <ClInclude Include="WatermelonPop.h" />
     <ClInclude Include="WingedBugMidboss.h" />
     <ClInclude Include="WormBugBoss.h" />
     <ClInclude Include="WriteToBitmap.h" />

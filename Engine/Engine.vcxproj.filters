@@ -315,6 +315,9 @@
     <ClInclude Include="GoldenSeeker.h">
       <Filter>Header Files\Items\T2Items</Filter>
     </ClInclude>
+    <ClInclude Include="WatermelonPop.h">
+      <Filter>Header Files\Items\T2Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
