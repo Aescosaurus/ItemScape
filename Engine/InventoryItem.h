@@ -47,7 +47,8 @@ public:
 	void Draw( const Vei2& pos,Graphics& gfx,const class Inventory* inv = nullptr ) const;
 
 	void SetPos( const Vei2& pos );
-	void AddRemoveIndex( int index );
+	void AddRemoveIndex( const std::string& index );
+	void Deactivate();
 	// Make sure to return new obj{ *this }
 	virtual InventoryItem* Clone() = 0;
 	/* Event methods */
@@ -78,7 +79,8 @@ public:
 	RectI GetRect() const;
 	virtual bool IsGun() const;
 	int GetTier() const;
-	const std::vector<int>& GetRemovalIndexes() const;
+	const std::vector<std::string>& GetRemovalIndexes() const;
+	bool IsDeactivated() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;
@@ -94,5 +96,6 @@ protected:
 	bool remove = false;
 	static const Surface itemBG;
 	int tier;
-	std::vector<int> toRemove;
+	std::vector<std::string> toRemove;
+	bool deactivated = false;
 };

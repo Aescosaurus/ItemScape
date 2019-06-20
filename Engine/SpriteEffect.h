@@ -155,4 +155,26 @@ namespace SpriteEffect
 		Color sub2;
 		int pos;
 	};
+	class Monochrome
+	{
+	public:
+		Monochrome( Color c )
+			:
+			chroma( c )
+		{}
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( cSrc != chroma )
+			{
+				const auto red = int( float( cSrc.GetR() ) * 0.299f );
+				const auto green = int( float( cSrc.GetG() ) * 0.587f );
+				const auto blue = int( float( cSrc.GetB() ) * 0.114f );
+
+				gfx.PutPixel( xDest,yDest,
+					Colors::MakeRGB( red,green,blue ) );
+			}
+		}
+	private:
+		Color chroma;
+	};
 }

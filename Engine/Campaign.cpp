@@ -223,7 +223,9 @@ void Campaign::Update()
 						for( int i = 0; i < randAmount; ++i )
 						{
 							pickups.back()->AddRemoveIndex(
-								Random::RangeI( 1,nItems - 1 ) );
+								playerInv.GetItem( Random
+								::RangeI( 1,nItems - 1 ) )
+								->GetName() );
 						}
 					}
 					pickups.back()->SetPos( Vei2{

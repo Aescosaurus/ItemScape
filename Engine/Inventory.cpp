@@ -33,26 +33,38 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	{
 		for( auto& item : items )
 		{
-			item->OnUpdate( invEvtInfo );
+			if( !item->IsDeactivated() )
+			{
+				item->OnUpdate( invEvtInfo );
+			}
 		}
 	}
 
 	// Deal with activated items.
 	if( mouse.LeftIsPressed() )
 	{
-		items[0]->OnGunFire( invEvtInfo );
+		if( !items[0]->IsDeactivated() )
+		{
+			items[0]->OnGunFire( invEvtInfo );
+		}
 	}
 
 	if( kbd.KeyIsPressed( VK_SHIFT ) )
 	{
-		if( !shiftPause ) items[1]->OnActivate( invEvtInfo );
+		if( !shiftPause && !items[1]->IsDeactivated() )
+		{
+			items[1]->OnActivate( invEvtInfo );
+		}
 		shiftPause = true;
 	}
 	else shiftPause = false;
 
 	if( mouse.RightIsPressed() )
 	{
-		if( !rightClickPause ) items[2]->OnActivate( invEvtInfo );
+		if( !rightClickPause && !items[2]->IsDeactivated() )
+		{
+			items[2]->OnActivate( invEvtInfo );
+		}
 		rightClickPause = true;
 	}
 	else rightClickPause = false;
@@ -66,13 +78,14 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	// Remove/organize items, deal with item swapping.
 	for( auto it = items.begin(); it != items.end(); )
 	{
-		if( ( *it )->WillRemove() )
+		if( ( *it )->WillRemove() &&
+			!( ( *it )->IsDeactivated() ) )
 		{
 			( *it )->OnRemove( invEvtInfo );
-			// ShiftItems( it );
-			items.erase( it );
-			ReorganizeInventory();
-			it = items.begin();
+			( *it )->Deactivate();
+			// items.erase( it );
+			// ReorganizeInventory();
+			// it = items.begin();
 		}
 		else
 		{
@@ -239,7 +252,7 @@ void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnPlayerHit( evtInfo );
+		if( !item->IsDeactivated() ) item->OnPlayerHit( evtInfo );
 	}
 }
 
@@ -247,7 +260,7 @@ void Inventory::OnPlayerShoot( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnPlayerShoot( evtInfo );
+		if( !item->IsDeactivated() ) item->OnPlayerShoot( evtInfo );
 	}
 }
 
@@ -255,7 +268,7 @@ void Inventory::OnEnemyExplode( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnEnemyExplode( evtInfo );
+		if( !item->IsDeactivated() ) item->OnEnemyExplode( evtInfo );
 	}
 }
 
@@ -263,7 +276,7 @@ void Inventory::OnEnemyHit( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnEnemyHit( evtInfo );
+		if( !item->IsDeactivated() ) item->OnEnemyHit( evtInfo );
 	}
 }
 
@@ -271,7 +284,7 @@ void Inventory::OnDraw( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnDraw( evtInfo );
+		if( !item->IsDeactivated() ) item->OnDraw( evtInfo );
 	}
 }
 
@@ -279,11 +292,24 @@ void Inventory::OnRoomStart( InventoryEventInfo& evtInfo )
 {
 	for( auto& item : items )
 	{
-		item->OnRoomStart( evtInfo );
+		if( !item->IsDeactivated() ) item->OnRoomStart( evtInfo );
 	}
 }
 
 InventoryItem* Inventory::FindItem( const std::string& name )
+{
+	for( auto& item : items )
+	{
+		if( item->GetName() == name )
+		{
+			return( item.get() );
+		}
+	}
+
+	return( nullptr );
+}
+
+const InventoryItem* Inventory::CFindItem( const std::string& name ) const
 {
 	for( auto& item : items )
 	{
@@ -392,7 +418,14 @@ void Inventory::AddItem( InventoryItem* itemToAdd )
 	}
 }
 
-void Inventory::RemoveItem( int index )
+void Inventory::RemoveItem( const std::string& index )
 {
-	chili::remove_element( items,index );
+	for( auto it = items.begin(); it != items.end(); ++it )
+	{
+		if( ( *it )->GetName() == index )
+		{
+			items.erase( it );
+			break;
+		}
+	}
 }

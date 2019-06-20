@@ -53,6 +53,12 @@ void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) c
 			SpriteEffect::SubstituteFade{ Colors::Magenta,
 			Colors::White,0.25f } );
 	}
+	else if( deactivated )
+	{
+		// SpriteEffect::Monochrome
+		gfx.DrawSprite( pos.x,pos.y,surf,
+			SpriteEffect::Monochrome{ Colors::Magenta } );
+	}
 	else
 	{
 		gfx.DrawSprite( pos.x,pos.y,surf,
@@ -66,7 +72,7 @@ void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) c
 				padding.X() * int( toRemove.size() / 2 );
 			for( int i = 0; i < int( toRemove.size() ); ++i )
 			{
-				inv->GetItem( toRemove[i] )->Draw( start,gfx );
+				inv->CFindItem( toRemove[i] )->Draw( start,gfx );
 
 				start += size.X() + padding.X();
 			}
@@ -79,14 +85,18 @@ void InventoryItem::SetPos( const Vei2& pos )
 	this->pos = pos;
 }
 
-void InventoryItem::AddRemoveIndex( int index )
+void InventoryItem::AddRemoveIndex( const std::string& index )
 {
-	assert( index > 0 );
 	for( auto item : toRemove )
 	{
 		if( item == index ) return;
 	}
 	toRemove.emplace_back( index );
+}
+
+void InventoryItem::Deactivate()
+{
+	deactivated = true;
 }
 
 void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
@@ -134,9 +144,14 @@ int InventoryItem::GetTier() const
 	return( tier );
 }
 
-const std::vector<int>& InventoryItem::GetRemovalIndexes() const
+const std::vector<std::string>& InventoryItem::GetRemovalIndexes() const
 {
 	return( toRemove );
+}
+
+bool InventoryItem::IsDeactivated() const
+{
+	return( deactivated );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const

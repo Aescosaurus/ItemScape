@@ -1,6 +1,5 @@
 Charge Generator
 Every time you kill an
 enemy, has a 10% chance
-of adding a health
-charge to your
-inventory.
+of spawning a health
+charge.
