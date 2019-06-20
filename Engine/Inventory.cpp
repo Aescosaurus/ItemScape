@@ -165,6 +165,19 @@ void Inventory::AddItem( InventoryItem* itemToAdd,
 	AddItem( itemToAdd );
 
 	items.back()->OnReceive( evtInfo );
+
+	const auto& indexes = itemToAdd->GetRemovalIndexes();
+	if( indexes.size() > 0 )
+	{
+		assert( itemToAdd->GetTier() == 2 );
+		for( auto index : indexes )
+		{
+			RemoveItem( index );
+		}
+
+		ReorganizeInventory();
+	}
+	// itemToAdd->ClearRemovalIndexes();
 }
 
 void Inventory::ConsumeItem( const std::string& name )
@@ -267,6 +280,11 @@ InventoryItem* Inventory::FindItem( const std::string& name )
 	return( nullptr );
 }
 
+const InventoryItem* Inventory::GetItem( int index ) const
+{
+	return( items[index].get() );
+}
+
 std::vector<std::unique_ptr<InventoryItem>>& Inventory::GetItemVec()
 {
 	return( items );
@@ -356,4 +374,9 @@ void Inventory::AddItem( InventoryItem* itemToAdd )
 	{
 		items.back()->SetPos( invStart );
 	}
+}
+
+void Inventory::RemoveItem( int index )
+{
+	chili::remove_element( items,index );
 }

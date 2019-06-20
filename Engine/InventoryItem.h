@@ -43,10 +43,11 @@ public:
 		const std::string& icon,int tier = 1 );
 
 	void Update( const Mouse& mouse );
-	void Draw( Graphics& gfx ) const;
-	void Draw( const Vei2& pos,Graphics& gfx ) const;
+	void Draw( Graphics& gfx,const class Inventory* inv = nullptr ) const;
+	void Draw( const Vei2& pos,Graphics& gfx,const class Inventory* inv = nullptr ) const;
 
 	void SetPos( const Vei2& pos );
+	void AddRemoveIndex( int index );
 	// Make sure to return new obj{ *this }
 	virtual InventoryItem* Clone() = 0;
 	/* Event methods */
@@ -77,6 +78,7 @@ public:
 	RectI GetRect() const;
 	virtual bool IsGun() const;
 	int GetTier() const;
+	const std::vector<int>& GetRemovalIndexes() const;
 private:
 	// Returns string that will fit within inventory.
 	std::string GetPruned( const std::string& in ) const;
@@ -92,4 +94,5 @@ protected:
 	bool remove = false;
 	static const Surface itemBG;
 	int tier;
+	std::vector<int> toRemove;
 };

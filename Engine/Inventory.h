@@ -33,6 +33,7 @@ public:
 	/**/
 
 	InventoryItem* FindItem( const std::string& name );
+	const InventoryItem* GetItem( int index ) const;
 	std::vector<std::unique_ptr<InventoryItem>>& GetItemVec();
 	bool IsOpen() const;
 	std::string GenerateSaveInfo() const;
@@ -43,6 +44,7 @@ private:
 		InventoryItem>>::iterator spot );
 	void ReorganizeInventory();
 	void AddItem( InventoryItem* itemToAdd );
+	void RemoveItem( int index );
 private:
 	std::vector<std::unique_ptr<InventoryItem>> items;
 

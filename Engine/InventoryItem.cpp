@@ -1,6 +1,7 @@
 #include "InventoryItem.h"
 #include "SpriteEffect.h"
 #include <fstream>
+#include "Inventory.h"
 
 const Font InventoryItem::luckyPixel = "Fonts/LuckyPixel6x9.bmp";
 const Surface InventoryItem::itemBG = "Images/InventoryItemBackground.bmp";
@@ -39,12 +40,12 @@ void InventoryItem::Update( const Mouse& mouse )
 		mouse.GetPos() ) );
 }
 
-void InventoryItem::Draw( Graphics& gfx ) const
+void InventoryItem::Draw( Graphics& gfx,const Inventory* inv ) const
 {
-	Draw( pos,gfx );
+	Draw( pos,gfx,inv );
 }
 
-void InventoryItem::Draw( const Vei2& pos,Graphics& gfx ) const
+void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) const
 {
 	if( hovering )
 	{
@@ -56,12 +57,36 @@ void InventoryItem::Draw( const Vei2& pos,Graphics& gfx ) const
 	{
 		gfx.DrawSprite( pos.x,pos.y,surf,
 			SpriteEffect::Chroma{ Colors::Magenta } );
+
+		if( inv != nullptr )
+		{
+			const Vei2 padding = { 5,5 };
+			Vei2 start = pos + size.Y() + padding.Y() -
+				size.X() * int( toRemove.size() / 2 ) -
+				padding.X() * int( toRemove.size() / 2 );
+			for( int i = 0; i < int( toRemove.size() ); ++i )
+			{
+				inv->GetItem( toRemove[i] )->Draw( start,gfx );
+
+				start += size.X() + padding.X();
+			}
+		}
 	}
 }
 
 void InventoryItem::SetPos( const Vei2& pos )
 {
 	this->pos = pos;
+}
+
+void InventoryItem::AddRemoveIndex( int index )
+{
+	assert( index > 0 );
+	for( auto item : toRemove )
+	{
+		if( item == index ) return;
+	}
+	toRemove.emplace_back( index );
 }
 
 void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
@@ -107,6 +132,11 @@ bool InventoryItem::IsGun() const
 int InventoryItem::GetTier() const
 {
 	return( tier );
+}
+
+const std::vector<int>& InventoryItem::GetRemovalIndexes() const
+{
+	return( toRemove );
 }
 
 std::string InventoryItem::GetPruned( const std::string& in ) const

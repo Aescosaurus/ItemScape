@@ -172,12 +172,13 @@ void Campaign::Update()
 	{
 		if( ( *it )->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
-			playerInv.AddItem( *it,GenerateInvEvtInfo( dt ) );
 			const auto tier = ( *it )->GetTier();
+			playerInv.AddItem( *it,GenerateInvEvtInfo( dt ) );
 			pickups.erase( it );
 			if( tier == 2 )
 			{
 				GotoNextFloor();
+				// return;
 			}
 			break;
 		}
@@ -205,13 +206,27 @@ void Campaign::Update()
 			{
 				pickups.emplace_back( PickupManager
 					::RandT1Pickup() );
+				pickups.back()->SetPos( pickupPos );
 			}
-			else
+			else // Spawn a tier 2 item.
 			{
-				pickups.emplace_back( PickupManager
-					::RandT2Pickup() );
+				const int nItems = int( playerInv.GetItemVec().size() );
+				for( int i = 0; i < 3; ++i )
+				{
+					pickups.emplace_back( PickupManager
+						::RandT2Pickup() );
+					const int randAmount = Random::RangeI( 2,
+						std::min( 5,nItems / 2 ) );
+					for( int i = 0; i < randAmount; ++i )
+					{
+						pickups.back()->AddRemoveIndex(
+							Random::RangeI( 1,nItems - 1 ) );
+					}
+					pickups.back()->SetPos( Vei2{
+						Random::RangeI( 64,Graphics::ScreenWidth - 64 ),
+						Random::RangeI( 64,Graphics::ScreenHeight - 96 ) } );
+				}
 			}
-			pickups.back()->SetPos( pickupPos );
 			visualEffects.emplace_back( VisualEffect{
 				pickupPos,VisualEffect::Type
 				::Lightning } );
@@ -243,7 +258,7 @@ void Campaign::Draw()
 	for( const auto& e : enemies ) e->Draw( gfx );
 	for( const auto& eb : enemyBullets ) eb->Draw( gfx );
 	for( const auto& b : playerBullets ) b->Draw( gfx );
-	for( const auto* pup : pickups ) pup->Draw( gfx );
+	for( const auto* pup : pickups ) pup->Draw( gfx,&playerInv );
 	map.Draw( gfx );
 	for( const auto& eff : visualEffects ) eff.Draw( gfx );
 	guy.Draw( gfx );

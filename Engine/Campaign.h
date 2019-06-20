@@ -53,4 +53,5 @@ private:
 	bool spawnedEndOfLevelItem = false;
 	static constexpr float freezeFrameDuration = 0.015f;
 	float frozenTime = 0.0f;
+	bool shopping = false;
 };
