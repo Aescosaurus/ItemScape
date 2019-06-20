@@ -12,6 +12,7 @@ Inventory::Inventory()
 void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	InventoryEventInfo& invEvtInfo )
 {
+	// Handle open/closing inventory.
 	if( kbd.KeyIsPressed( 'I' ) || kbd.KeyIsPressed( VK_TAB ) )
 	{
 		if( active && canToggle )
@@ -27,11 +28,16 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	}
 	else canToggle = true;
 
-	for( auto& item : items )
+	// Update items when inventory is not open.
+	if( !active )
 	{
-		item->OnUpdate( invEvtInfo );
+		for( auto& item : items )
+		{
+			item->OnUpdate( invEvtInfo );
+		}
 	}
 
+	// Deal with activated items.
 	if( mouse.LeftIsPressed() )
 	{
 		items[0]->OnGunFire( invEvtInfo );
@@ -42,8 +48,8 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 		if( !shiftPause ) items[1]->OnActivate( invEvtInfo );
 		shiftPause = true;
 	}
-
 	else shiftPause = false;
+
 	if( mouse.RightIsPressed() )
 	{
 		if( !rightClickPause ) items[2]->OnActivate( invEvtInfo );
@@ -51,11 +57,13 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	}
 	else rightClickPause = false;
 
+	// Update item hovering status.
 	for( auto& item : items )
 	{
 		item->Update( mouse );
 	}
 
+	// Remove/organize items, deal with item swapping.
 	for( auto it = items.begin(); it != items.end(); )
 	{
 		if( ( *it )->WillRemove() )
@@ -68,29 +76,32 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 		}
 		else
 		{
-			if( mouse.LeftIsPressed() && active )
+			if( canSwapItems && active )
 			{
-				if( ( *it )->GetRect().ContainsPoint(
-					mouse.GetPos() ) && !holdingItem )
+				if( mouse.LeftIsPressed() )
 				{
-					selectedItem = it;
-					holdingItem = true;
+					if( ( *it )->GetRect().ContainsPoint(
+						mouse.GetPos() ) && !holdingItem )
+					{
+						selectedItem = it;
+						holdingItem = true;
+					}
 				}
-			}
-			else if( ( ( *it )->GetRect().ContainsPoint(
-				mouse.GetPos() ) ) && holdingItem && active )
-			{
-				std::iter_swap( it,selectedItem );
-				holdingItem = false;
-				ReorganizeInventory();
-				break;
+				else if( ( ( *it )->GetRect().ContainsPoint(
+					mouse.GetPos() ) ) && holdingItem )
+				{
+					std::iter_swap( it,selectedItem );
+					holdingItem = false;
+					ReorganizeInventory();
+					break;
+				}
 			}
 
 			++it;
 		}
 	}
 
-	if( holdingItem ) heldItemPos = mouse.GetPos();
+	if( holdingItem && canSwapItems ) heldItemPos = mouse.GetPos();
 }
 
 void Inventory::Draw( Graphics& gfx ) const
@@ -217,6 +228,11 @@ void Inventory::LoadSaveInfo( const std::string& info )
 			AddItem( temp );
 		}
 	}
+}
+
+void Inventory::ToggleItemSwapping( bool swappable )
+{
+	canSwapItems = swappable;
 }
 
 void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )

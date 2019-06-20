@@ -23,6 +23,7 @@ public:
 		InventoryEventInfo& evtInfo );
 	void ConsumeItem( const std::string& name );
 	void LoadSaveInfo( const std::string& info );
+	void ToggleItemSwapping( bool swappable );
 	/*Event methods*/
 	void OnPlayerHit( InventoryEventInfo& evtInfo );
 	void OnPlayerShoot( InventoryEventInfo& evtInfo );
@@ -79,4 +80,5 @@ private:
 
 	bool rightClickPause = false;
 	bool shiftPause = false;
+	bool canSwapItems = true;
 };

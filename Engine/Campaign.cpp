@@ -215,12 +215,16 @@ void Campaign::Update()
 				{
 					pickups.emplace_back( PickupManager
 						::RandT2Pickup() );
-					const int randAmount = Random::RangeI( 2,
-						std::min( 5,nItems / 2 ) );
-					for( int i = 0; i < randAmount; ++i )
+					// T2 items are free if you have less than 3 items.
+					if( nItems > 2 )
 					{
-						pickups.back()->AddRemoveIndex(
-							Random::RangeI( 1,nItems - 1 ) );
+						const int randAmount = Random::RangeI( 2,
+							std::min( 5,nItems / 2 ) );
+						for( int i = 0; i < randAmount; ++i )
+						{
+							pickups.back()->AddRemoveIndex(
+								Random::RangeI( 1,nItems - 1 ) );
+						}
 					}
 					pickups.back()->SetPos( Vei2{
 						Random::RangeI( 64,Graphics::ScreenWidth - 64 ),
@@ -336,6 +340,15 @@ void Campaign::LoadNextLevel()
 			enemies.emplace_back( std::make_unique<WormBugBoss>(
 				t.pos,map,enemyBullets,enemies ) );
 			break;
+		}
+	}
+
+	playerInv.ToggleItemSwapping( true );
+	for( const auto& enemy : enemies )
+	{
+		if( enemy->IsBoss() )
+		{
+			playerInv.ToggleItemSwapping( false );
 		}
 	}
 
