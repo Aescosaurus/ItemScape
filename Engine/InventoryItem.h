@@ -91,6 +91,8 @@ public:
 protected:
 	std::string name;
 	std::string description;
+	std::string usedName;
+	static const std::string usedItemDesc;
 	const Surface surf;
 	Vei2 pos;
 	bool hovering = false;

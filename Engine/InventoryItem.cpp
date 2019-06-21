@@ -5,6 +5,7 @@
 
 const Font InventoryItem::luckyPixel = "Fonts/LuckyPixel6x9.bmp";
 const Surface InventoryItem::itemBG = "Images/InventoryItemBackground.bmp";
+const std::string InventoryItem::usedItemDesc = "This item has been all\nused up and is no\nlonger useful.";
 
 // InventoryItem::InventoryItem( const std::string& name,
 // 	const std::string& desc,const std::string& icon )
@@ -24,6 +25,7 @@ InventoryItem::InventoryItem( const std::string& fileName,
 	assert( in.good() );
 
 	std::getline( in,name );
+	usedName = "Used " + name;
 
 	description = "";
 	for( char c = in.get(); in.good(); c = in.get() )
@@ -47,16 +49,16 @@ void InventoryItem::Draw( Graphics& gfx,const Inventory* inv ) const
 
 void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) const
 {
-	if( hovering && inv == nullptr )
+	if( deactivated )
+	{
+		gfx.DrawSprite( pos.x,pos.y,surf,
+			SpriteEffect::Monochrome{ Colors::Magenta } );
+	}
+	else if( hovering && inv == nullptr )
 	{
 		gfx.DrawSprite( pos.x,pos.y,surf,
 			SpriteEffect::SubstituteFade{ Colors::Magenta,
 			Colors::White,0.25f } );
-	}
-	else if( deactivated )
-	{
-		gfx.DrawSprite( pos.x,pos.y,surf,
-			SpriteEffect::Monochrome{ Colors::Magenta } );
 	}
 	else
 	{
@@ -132,12 +134,14 @@ bool InventoryItem::IsSelected() const
 
 const std::string& InventoryItem::GetName() const
 {
-	return( name );
+	if( !deactivated ) return( name );
+	else return( usedName );
 }
 
 const std::string& InventoryItem::GetDesc() const
 {
-	return( description );
+	if( !deactivated ) return( description );
+	else return( usedItemDesc );
 }
 
 bool InventoryItem::WillRemove() const

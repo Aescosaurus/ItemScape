@@ -357,7 +357,7 @@ std::string Inventory::GenerateSaveInfo() const
 
 	for( const auto& item : items )
 	{
-		if( item->IsDeactivated() ) temp += "Used ";
+		// if( item->IsDeactivated() ) temp += "Used ";
 		temp += item->GetName() + '\n';
 	}
 
