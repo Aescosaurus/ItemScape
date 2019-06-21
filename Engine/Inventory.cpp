@@ -70,9 +70,12 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 	else rightClickPause = false;
 
 	// Update item hovering status.
-	for( auto& item : items )
+	if( active )
 	{
-		item->Update( mouse );
+		for( auto& item : items )
+		{
+			item->Update( mouse );
+		}
 	}
 
 	// Remove/organize items, deal with item swapping.
@@ -347,6 +350,16 @@ std::string Inventory::GenerateSaveInfo() const
 	}
 
 	return( temp );
+}
+
+const Vei2& Inventory::GetNameStart() const
+{
+	return( nameStart );
+}
+
+const Vei2& Inventory::GetDescStart() const
+{
+	return( descStart );
 }
 
 void Inventory::DrawInvGrid( Graphics& gfx ) const

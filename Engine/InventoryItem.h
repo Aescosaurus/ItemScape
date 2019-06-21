@@ -45,6 +45,7 @@ public:
 	void Update( const Mouse& mouse );
 	void Draw( Graphics& gfx,const class Inventory* inv = nullptr ) const;
 	void Draw( const Vei2& pos,Graphics& gfx,const class Inventory* inv = nullptr ) const;
+	void DrawInfo( Graphics& gfx,const class Inventory* inv ) const;
 
 	void SetPos( const Vei2& pos );
 	void AddRemoveIndex( const std::string& index );

@@ -170,6 +170,7 @@ void Campaign::Update()
 	// Pick up pickups.
 	for( auto it = pickups.begin(); it != pickups.end(); ++it )
 	{
+		( *it )->Update( mouse );
 		if( ( *it )->GetRect().IsOverlappingWith( guy.GetRect() ) )
 		{
 			const auto tier = ( *it )->GetTier();
@@ -271,6 +272,7 @@ void Campaign::Draw()
 	playerInv.OnDraw( GenerateInvEvtInfo() );
 	floor.DrawOverlay( gfx ); // Draw minimap.
 	playerInv.Draw( gfx );
+	for( const auto* pup : pickups ) pup->DrawInfo( gfx,&playerInv );
 	// Top of drawing order.
 }
 

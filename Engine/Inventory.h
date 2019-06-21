@@ -39,6 +39,8 @@ public:
 	std::vector<std::unique_ptr<InventoryItem>>& GetItemVec();
 	bool IsOpen() const;
 	std::string GenerateSaveInfo() const;
+	const Vei2& GetNameStart() const;
+	const Vei2& GetDescStart() const;
 private:
 	void DrawInvGrid( Graphics& gfx ) const;
 	

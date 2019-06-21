@@ -47,7 +47,7 @@ void InventoryItem::Draw( Graphics& gfx,const Inventory* inv ) const
 
 void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) const
 {
-	if( hovering )
+	if( hovering && inv == nullptr )
 	{
 		gfx.DrawSprite( pos.x,pos.y,surf,
 			SpriteEffect::SubstituteFade{ Colors::Magenta,
@@ -55,7 +55,6 @@ void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) c
 	}
 	else if( deactivated )
 	{
-		// SpriteEffect::Monochrome
 		gfx.DrawSprite( pos.x,pos.y,surf,
 			SpriteEffect::Monochrome{ Colors::Magenta } );
 	}
@@ -77,6 +76,18 @@ void InventoryItem::Draw( const Vei2& pos,Graphics& gfx,const Inventory* inv ) c
 				start += size.X() + padding.X();
 			}
 		}
+	}
+}
+
+void InventoryItem::DrawInfo( Graphics& gfx,const Inventory* inv ) const
+{
+	if( hovering )
+	{
+		luckyPixel.DrawText( GetName(),
+			inv->GetNameStart(),Colors::White,gfx );
+
+		luckyPixel.DrawText( GetDesc(),
+			inv->GetDescStart(),Colors::White,gfx );
 	}
 }
 
