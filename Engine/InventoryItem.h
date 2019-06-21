@@ -50,6 +50,7 @@ public:
 	void SetPos( const Vei2& pos );
 	void AddRemoveIndex( const std::string& index );
 	void Deactivate();
+	void UnHover();
 	// Make sure to return new obj{ *this }
 	virtual InventoryItem* Clone() = 0;
 	/* Event methods */

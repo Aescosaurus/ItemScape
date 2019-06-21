@@ -166,12 +166,14 @@ namespace SpriteEffect
 		{
 			if( cSrc != chroma )
 			{
-				const auto red = int( float( cSrc.GetR() ) * 0.299f );
-				const auto green = int( float( cSrc.GetG() ) * 0.587f );
-				const auto blue = int( float( cSrc.GetB() ) * 0.114f );
+				// const auto red = int( float( cSrc.GetR() ) * 0.299f );
+				// const auto green = int( float( cSrc.GetG() ) * 0.587f );
+				// const auto blue = int( float( cSrc.GetB() ) * 0.114f );
+				const auto avg = int( float( cSrc.GetR() +
+					cSrc.GetG() + cSrc.GetB() ) / 3.0f );
 
 				gfx.PutPixel( xDest,yDest,
-					Colors::MakeRGB( red,green,blue ) );
+					Colors::MakeRGB( avg,avg,avg ) );
 			}
 		}
 	private:

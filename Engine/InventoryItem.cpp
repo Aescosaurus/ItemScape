@@ -110,6 +110,11 @@ void InventoryItem::Deactivate()
 	deactivated = true;
 }
 
+void InventoryItem::UnHover()
+{
+	hovering = false;
+}
+
 void InventoryItem::Shoot( InventoryEventInfo& invEvtInfo,const Vec2& target )
 {
 	assert( false );

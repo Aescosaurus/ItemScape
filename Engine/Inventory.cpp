@@ -77,6 +77,13 @@ void Inventory::Update( const Keyboard& kbd,const Mouse& mouse,
 			item->Update( mouse );
 		}
 	}
+	else
+	{
+		for( auto& item : items )
+		{
+			item->UnHover();
+		}
+	}
 
 	// Remove/organize items, deal with item swapping.
 	for( auto it = items.begin(); it != items.end(); )
@@ -236,11 +243,15 @@ void Inventory::LoadSaveInfo( const std::string& info )
 	}
 	lines.pop_back(); // 
 
-	for( const auto& line : lines )
+	for( auto& line : lines )
 	{
+		const bool itemIsUsed = ( line.substr( 0,4 ) == "Used" );
+		if( itemIsUsed ) line = line.substr( 4 + 1,std::string::npos );
 		InventoryItem* temp = PickupManager::CreateItem( line );
+
 		if( temp != nullptr )
 		{
+			if( itemIsUsed ) temp->Deactivate();
 			AddItem( temp );
 		}
 	}
@@ -346,6 +357,7 @@ std::string Inventory::GenerateSaveInfo() const
 
 	for( const auto& item : items )
 	{
+		if( item->IsDeactivated() ) temp += "Used ";
 		temp += item->GetName() + '\n';
 	}
 
