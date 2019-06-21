@@ -27,10 +27,6 @@ Campaign::Campaign( MainWindow& wnd,Graphics& gfx )
 	PickupManager::Initialize();
 
 	LoadNextLevel();
-	doors.emplace_back( Door{ Door::Side::Top,floor } );
-	doors.emplace_back( Door{ Door::Side::Bot,floor } );
-	doors.emplace_back( Door{ Door::Side::Left,floor } );
-	doors.emplace_back( Door{ Door::Side::Right,floor } );
 
 	// GotoNextFloor();
 }
@@ -75,6 +71,7 @@ void Campaign::Update()
 	guy.Update( kbd,mouse,dt );
 
 	if( guy.JustShot() ) playerInv.OnPlayerShoot( GenerateInvEvtInfo( dt ) );
+	guy.SetJustShot( false );
 
 	for( int i = 0; i < int( playerBullets.size() ); ++i )
 	{
@@ -133,7 +130,9 @@ void Campaign::Update()
 
 				playerInv.OnEnemyHit( GenerateInvEvtInfo( dt,e.get(),b.get() ) );
 
-				if( e->IsExpl() )
+				// If enemy has exploded, only call with
+				//  the bullet that made it explode.
+				if( e->IsExpl() && !enemyExploded )
 				{
 					enemyExploded = true;
 					playerInv.OnEnemyExplode( GenerateInvEvtInfo( dt,e.get(),b.get() ) );
@@ -179,7 +178,7 @@ void Campaign::Update()
 			if( tier == 2 )
 			{
 				GotoNextFloor();
-				// return;
+				return;
 			}
 			break;
 		}
@@ -302,6 +301,11 @@ void Campaign::LoadNextLevel()
 	pickupPos = Graphics::GetScreenRect().GetCenter();
 
 	map.LoadFile( floor.GetLevelName() );
+	doors.clear();
+	doors.emplace_back( Door{ Door::Side::Top,floor } );
+	doors.emplace_back( Door{ Door::Side::Bot,floor } );
+	doors.emplace_back( Door{ Door::Side::Left,floor } );
+	doors.emplace_back( Door{ Door::Side::Right,floor } );
 	for( auto& d1 : doors ) d1.UpdateActivated( floor );
 
 	// Get everything in the map that isn't a wall or floor.

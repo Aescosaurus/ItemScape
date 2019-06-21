@@ -259,7 +259,7 @@ void Inventory::LoadSaveInfo( const std::string& info )
 
 void Inventory::ToggleItemSwapping( bool swappable )
 {
-	canSwapItems = swappable;
+	// canSwapItems = swappable;
 }
 
 void Inventory::OnPlayerHit( InventoryEventInfo& evtInfo )

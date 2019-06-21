@@ -20,6 +20,8 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 		pos += validMove;
 		coll.MoveTo( pos );
 	}
+
+	if( IsExpl() ) coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 }
 
 bool EnemyBase::IsExpl() const

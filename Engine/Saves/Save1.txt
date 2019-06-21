@@ -1,8 +1,14 @@
-0
-8 4
-7 3 7 4
--1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 8 -1 -1 -1 -1 -1 -1 0 6 5 -1 -1 -1 -1 -1 -1 3 4 2 -1 -1 -1 -1 -1 -1 -1 -1 1 -1 -1 -1 -1 -1 -1 -1 -1 7 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-Rusty Pistol
+1
+8 8
+
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 1 5 -1 -1 -1 -1 -1 -1 0 3 8 -1 -1 -1 -1 -1 -1 6 2 7 -1 -1 -1 -1 -1 -1 -1 -1 4
+Debilitated Shotgun
 Used Health Charge
 Used Health Charge
-Health Charge
+Fifth Shot Flintlock
+Cable Splitter
+Mithril Hammer
+Watermelon Ore
+Triple Bow
+Golden Seeker
+Old Rifle
