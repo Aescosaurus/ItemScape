@@ -12,6 +12,7 @@
 #include "SpriteEffect.h"
 #include "Timer.h"
 #include "Door.h"
+#include "Bullet.h"
 
 class EnemyUpdateInfo
 {
@@ -19,6 +20,7 @@ public:
 	const Vec2& playerPos;
 	const Vec2& playerVel;
 	std::vector<Door>& doors;
+	std::vector<std::unique_ptr<Bullet>>& enemyBullets;
 };
 
 // TODO: Add a boss base someday maybe.
@@ -27,7 +29,10 @@ class EnemyBase
 public:
 	enum class Effect
 	{
-		Frozen // Can't move, shoot, or do anything.
+		Frozen, // Can't move, shoot, or do anything.
+		Stunned, // No shooting.
+		Stuck, // No moving.
+		Confused // Bullets go in random directions.
 	};
 public:
 	EnemyBase() = delete;
@@ -59,6 +64,7 @@ protected:
 
 	SpriteEffect::Substitution FlashCol() const;
 	bool IsFlashing() const;
+	bool HasEffect( Effect eff ) const;
 protected:
 	Vec2 pos;
 	Collider coll;

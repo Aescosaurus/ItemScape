@@ -177,6 +177,7 @@
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="KawaiiLemon.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MithrilHoe.h" />
     <ClInclude Include="MithrilLetterOpener.h" />
     <ClInclude Include="MithrilScrewdriver.h" />
     <ClInclude Include="OldRifle.h" />

@@ -3,7 +3,34 @@
 
 void EnemyBase::UpdateBase( const EnemyUpdateInfo& info,float dt )
 {
-	Update( info,dt );
+	const auto nBullets = int( info.enemyBullets.size() );
+	const Vec2 stuckPos = pos;
+
+	if( !HasEffect( Effect::Frozen ) )
+	{
+		Update( info,dt ); // Calls child update.
+	}
+
+	while( HasEffect( Effect::Stunned ) &&
+		int( info.enemyBullets.size() ) > nBullets )
+	{
+		info.enemyBullets.pop_back();
+	}
+	if( HasEffect( Effect::Stuck ) ) pos = stuckPos;
+	if( HasEffect( Effect::Confused ) )
+	{
+		for( int i = nBullets;
+			i < int( info.enemyBullets.size() );
+			++i )
+		{
+			const auto curVel = info.enemyBullets[i]
+				->GetVel().GetLength();
+			info.enemyBullets[i]->SetVel( Vec2{
+				Random::RangeF( -1.0f,1.0f ),
+				Random::RangeF( -1.0f,1.0f ) }
+				.GetNormalized() * curVel );
+		}
+	}
 
 	for( auto it = effects.begin(); it != effects.end(); ++it )
 	{
@@ -158,4 +185,16 @@ SpriteEffect::Substitution EnemyBase::FlashCol() const
 bool EnemyBase::IsFlashing() const
 {
 	return( !damageCooldown.IsDone() );
+}
+
+bool EnemyBase::HasEffect( Effect eff ) const
+{
+	for( const auto& e : effects )
+	{
+		if( e.first == eff )
+		{
+			return( true );
+		}
+	}
+	return( false );
 }

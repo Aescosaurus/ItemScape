@@ -46,11 +46,17 @@ void Campaign::Update()
 #if !NDEBUG
 	if( kbd.KeyIsPressed( VK_RETURN ) )
 	{
-		// for( const auto& e : enemies )
+		// for( auto& e : enemies )
 		// {
 		// 	e->Attack( 9999,{ 0.0f,0.0f } );
 		// }
-		ClearEnemies();
+		
+		// ClearEnemies();
+
+		for( auto& e : enemies )
+		{
+			e->ApplyEffect( EnemyBase::Effect::Confused,10.0f );
+		}
 	}
 #endif
 
@@ -106,7 +112,7 @@ void Campaign::Update()
 	//  Enemy::Update might invalidate the iterator.
 	bool enemyExploded = false;
 	const EnemyUpdateInfo euInfo = { guy.GetPos(),
-		guy.GetVel(),doors };
+		guy.GetVel(),doors,enemyBullets };
 	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
 		enemies[i]->UpdateBase( euInfo,dt );
