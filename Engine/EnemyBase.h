@@ -31,7 +31,7 @@ public:
 	{
 		Frozen, // Can't move, shoot, or do anything.
 		Stunned, // No shooting.
-		Stuck, // No moving.
+		Rooted, // No moving.
 		Confused // Bullets go in random directions.
 	};
 public:

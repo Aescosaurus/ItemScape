@@ -35,6 +35,7 @@
 #include "MithrilLetterOpener.h"
 #include "MithrilScrewdriver.h"
 #include "PhoenixFeather.h"
+#include "MithrilHoe.h"
 
 #include "RustyPistol.h"
 #include "OldRifle.h"
@@ -85,6 +86,7 @@ public:
 		t1Pickups.emplace_back( new MithrilLetterOpener,id++ );
 		t1Pickups.emplace_back( new MithrilScrewdriver,id++ );
 		t1Pickups.emplace_back( new PhoenixFeather,id++ );
+		t1Pickups.emplace_back( new MithrilHoe,id++ );
 
 		t1Pickups.emplace_back( new RustyPistol,id++ );
 		t1Pickups.emplace_back( new OldRifle,id++ );

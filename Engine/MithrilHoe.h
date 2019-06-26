@@ -18,6 +18,15 @@ public:
 		return( new MithrilHoe{ *this } );
 	}
 
-	// TODO: Add txt and bmp.
-	// TODO: %chance to stick enemies.
+	void OnEnemyHit( InventoryEventInfo& evtInfo ) override
+	{
+		if( Random::RangeI( 0,100 ) < rootChance )
+		{
+			evtInfo.hitEnemy->ApplyEffect(
+				EnemyBase::Effect::Rooted,rootTime );
+		}
+	}
+private:
+	static constexpr int rootChance = 15;
+	static constexpr float rootTime = 5.0f;
 };

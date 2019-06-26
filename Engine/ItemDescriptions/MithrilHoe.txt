@@ -1,0 +1,6 @@
+Mithril Hoe
+Who you calling a hoe!?
+Upon hitting an enemy,
+15% chance to root the
+enemy hit for 5
+seconds.

@@ -4,7 +4,7 @@
 void EnemyBase::UpdateBase( const EnemyUpdateInfo& info,float dt )
 {
 	const auto nBullets = int( info.enemyBullets.size() );
-	const Vec2 stuckPos = pos;
+	const Vec2 rootPos = pos;
 
 	if( !HasEffect( Effect::Frozen ) )
 	{
@@ -16,7 +16,7 @@ void EnemyBase::UpdateBase( const EnemyUpdateInfo& info,float dt )
 	{
 		info.enemyBullets.pop_back();
 	}
-	if( HasEffect( Effect::Stuck ) ) pos = stuckPos;
+	if( HasEffect( Effect::Rooted ) ) pos = rootPos;
 	if( HasEffect( Effect::Confused ) )
 	{
 		for( int i = nBullets;
