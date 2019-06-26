@@ -318,6 +318,9 @@
     <ClInclude Include="WatermelonPop.h">
       <Filter>Header Files\Items\T2Items</Filter>
     </ClInclude>
+    <ClInclude Include="PhoenixFeather.h">
+      <Filter>Header Files\Items\T1Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

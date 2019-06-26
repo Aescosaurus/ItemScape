@@ -1,0 +1,5 @@
+Phoenix Feather
+It's warm to the touch.
+Every time you are hit,
+has a 35% chance to
+spawn a health charge.
