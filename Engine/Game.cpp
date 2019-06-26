@@ -67,7 +67,7 @@ void Game::UpdateModel()
 		{
 			state = GameState::Gameplay;
 			campaign.LoadNextLevel();
-			campaign.ClearEnemies();
+			campaign.SetUpLevelStart();
 		}
 		break;
 	case GameState::Gameplay:

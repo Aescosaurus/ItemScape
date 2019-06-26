@@ -24,6 +24,8 @@ public:
 	void Update( const EnemyUpdateInfo& info,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
 
+	void Attack( int damage,const Vec2& loc ) override;
+
 	bool IsBoss() const override;
 private:
 	static constexpr Vei2 size = { 128,128 };
@@ -36,8 +38,10 @@ private:
 	Anim diggingUp;
 	Anim exploding;
 	State action = State::Wander;
-	static constexpr float moveRange = 200.0f;
+	static constexpr float moveRange = 400.0f;
 	static constexpr float moveSpeed = 210.0f;
 	static constexpr float bulletSpeed = 300.0f;
 	Timer wanderTimer = 10.0f;
+	static constexpr float tunnelSpeed = 500.0f;
+	static constexpr int bugSpawnChance = 15;
 };

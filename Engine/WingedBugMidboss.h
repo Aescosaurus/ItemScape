@@ -29,7 +29,7 @@ public:
 	bool IsBoss() const override;
 private:
 	static constexpr Vei2 size = { 128,128 };
-	static constexpr int health = 250;
+	static constexpr int health = 200;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	CSurfPtr surfSheet = SurfCodex::Fetch( "Images/WingedBugMidboss.bmp" );
 	Anim floating;

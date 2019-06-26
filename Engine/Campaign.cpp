@@ -26,7 +26,7 @@ Campaign::Campaign( MainWindow& wnd,Graphics& gfx )
 {
 	PickupManager::Initialize();
 
-	LoadNextLevel();
+	// LoadNextLevel();
 
 	// GotoNextFloor();
 }
@@ -377,6 +377,19 @@ void Campaign::ClearEnemies()
 {
 	enemies.clear();
 	spawnedEndOfLevelItem = true;
+}
+
+void Campaign::SetUpLevelStart()
+{
+	bool isBossRoom = false;
+
+	for( const auto& e : enemies )
+	{
+		if( e->IsBoss() ) isBossRoom = true;
+	}
+
+	if( isBossRoom ) doors.clear();
+	else ClearEnemies();
 }
 
 bool Campaign::IsLevelOver() const

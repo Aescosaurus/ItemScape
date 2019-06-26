@@ -29,6 +29,7 @@ public:
 	Inventory& GetInv();
 	void LoadNextLevel();
 	void ClearEnemies();
+	void SetUpLevelStart();
 	bool IsLevelOver() const;
 	InventoryEventInfo GenerateInvEvtInfo( float dt = 0.0f,
 		EnemyBase* hitEnemy = nullptr,Bullet* curBullet = nullptr );
