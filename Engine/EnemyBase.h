@@ -25,14 +25,21 @@ public:
 class EnemyBase
 {
 public:
+	enum class Effect
+	{
+		Frozen // Can't move, shoot, or do anything.
+	};
+public:
 	EnemyBase() = delete;
 
+	void UpdateBase( const EnemyUpdateInfo& info,float dt );
 	// Make sure to call this from Child::Update.
 	virtual void Update( const EnemyUpdateInfo& info,float dt );
 	virtual void Draw( Graphics& gfx ) const = 0;
 
 	// Make sure to call this from Child::Attack.
 	virtual void Attack( int damage,const Vec2& loc );
+	void ApplyEffect( Effect eff,float duration );
 
 	bool IsExpl() const;
 	const Vec2& GetPos() const;
@@ -64,4 +71,5 @@ protected:
 	Timer damageCooldown = 3.0f / 60.0f;
 	bool reachedTarget = false;
 	static constexpr float damagePushDist = 11.0f;
+	std::vector<std::pair<Effect,Timer>> effects;
 };

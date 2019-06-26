@@ -109,7 +109,7 @@ void Campaign::Update()
 		guy.GetVel(),doors };
 	for( int i = 0; i < int( enemies.size() ); ++i )
 	{
-		enemies[i]->Update( euInfo,dt );
+		enemies[i]->UpdateBase( euInfo,dt );
 
 		// Update might add new enemies and invalidate the
 		//  reference, so just init it here.

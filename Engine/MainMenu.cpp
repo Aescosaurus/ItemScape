@@ -81,7 +81,6 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
-			inv.AddItem( new PhoenixFeather,evtInfo );
 
 			return( true );
 		}

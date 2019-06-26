@@ -1,6 +1,21 @@
 #include "EnemyBase.h"
 #include "Random.h"
 
+void EnemyBase::UpdateBase( const EnemyUpdateInfo& info,float dt )
+{
+	Update( info,dt );
+
+	for( auto it = effects.begin(); it != effects.end(); ++it )
+	{
+		it->second.Update( dt );
+		if( it->second.IsDone() )
+		{
+			it = effects.erase( it );
+			if( it == effects.end() ) break;
+		}
+	}
+}
+
 void EnemyBase::Update( const EnemyUpdateInfo& info,float dt )
 {
 	damageCooldown.Update( dt );
@@ -22,6 +37,11 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 	}
 
 	if( IsExpl() ) coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
+}
+
+void EnemyBase::ApplyEffect( Effect eff,float duration )
+{
+	effects.emplace_back( std::make_pair( eff,Timer{ duration } ) );
 }
 
 bool EnemyBase::IsExpl() const
