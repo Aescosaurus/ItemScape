@@ -29,7 +29,7 @@ public:
 	bool IsBoss() const override;
 private:
 	static constexpr Vei2 size = { 128,128 };
-	static constexpr int health = 500;
+	static constexpr int health = 350;
 	std::vector<std::unique_ptr<Bullet>>* pBulletVec;
 	std::vector<std::unique_ptr<EnemyBase>>* pEnemyVec;
 	CSurfPtr surfSheet = SurfCodex::Fetch( "Images/WormBugBoss.bmp" );

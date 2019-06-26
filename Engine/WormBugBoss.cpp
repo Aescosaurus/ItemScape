@@ -108,13 +108,15 @@ void WormBugBoss::Update( const EnemyUpdateInfo& info,float dt )
 		break;
 	case State::Tunnel:
 	{
+		coll.MoveTo( pos );
 		const auto testMove = vel * dt;
 		const auto validMove = coll.GetValidMove( pos,testMove );
 		pos += validMove;
-		coll.MoveTo( pos );
+		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 		if( coll.GetRect().ContainsPoint( target ) ||
 			validMove.z )
 		{
+			coll.MoveTo( pos );
 			action = State::DigUp;
 		}
 		break;
