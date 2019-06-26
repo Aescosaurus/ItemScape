@@ -30,6 +30,10 @@ public:
 		Reset();
 		maxTime = newMaxTime;
 	}
+	void SetMaxTime( float time )
+	{
+		maxTime = time;
+	}
 	bool IsDone() const
 	{
 		return( curTime >= maxTime );

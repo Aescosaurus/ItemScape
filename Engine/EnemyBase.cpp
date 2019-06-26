@@ -68,7 +68,21 @@ void EnemyBase::Attack( int damage,const Vec2& loc )
 
 void EnemyBase::ApplyEffect( Effect eff,float duration )
 {
-	effects.emplace_back( std::make_pair( eff,Timer{ duration } ) );
+	if( !HasEffect( eff ) )
+	{
+		effects.emplace_back( std::make_pair( eff,
+			Timer{ duration } ) );
+	}
+	else // Stack existing effect.
+	{
+		for( auto& e : effects )
+		{
+			if( e.first == eff )
+			{
+				e.second.SetMaxTime( e.second.GetDuration() + duration );
+			}
+		}
+	}
 }
 
 bool EnemyBase::IsExpl() const
