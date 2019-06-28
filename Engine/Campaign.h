@@ -27,6 +27,7 @@ public:
 
 	FloorLevel& GetFloor();
 	Inventory& GetInv();
+	TileMap& GetMap();
 	void LoadNextLevel();
 	void ClearEnemies();
 	void SetUpLevelStart();

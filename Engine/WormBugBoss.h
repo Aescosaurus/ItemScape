@@ -43,5 +43,5 @@ private:
 	static constexpr float bulletSpeed = 300.0f;
 	Timer wanderTimer = 10.0f;
 	static constexpr float tunnelSpeed = 500.0f;
-	static constexpr int bugSpawnChance = 15;
+	static constexpr int bugSpawnChance = 25;
 };

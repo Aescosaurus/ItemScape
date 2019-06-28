@@ -143,6 +143,20 @@ void TileMap::AdvanceFloor()
 	++curWallIndex;
 }
 
+void TileMap::LoadSave( const std::string& info )
+{
+	std::string temp = "";
+	for( char c : info )
+	{
+		if( c != '\n' ) temp += c;
+		else break;
+	}
+	for( int i = 0; i < std::stoi( temp ); ++i )
+	{
+		AdvanceFloor();
+	}
+}
+
 TileMap::TileType TileMap::GetTile( int x,int y ) const
 {
 	if( x < 0 || x >= width || y < 0 || y >= height )

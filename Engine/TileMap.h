@@ -42,6 +42,7 @@ public:
 	std::vector<Vec2> FindAllInstances( char searchTerm,
 		const std::string& fileName );
 	void AdvanceFloor();
+	void LoadSave( const std::string& info );
 
 	TileType GetTile( int x,int y ) const;
 	Vei2 GetTilePos( const Vec2& screenPos ) const;
@@ -67,12 +68,12 @@ private:
 	Surface floorSprs[nWallTypes] =
 	{
 		"Images/Floor1.bmp",
-		"Images/Floor1.bmp"
+		"Images/Floor2.bmp"
 	};
 	Surface floorCloses[nWallTypes] =
 	{
 		"Images/Floor1Close.bmp",
-		"Images/Floor1Close.bmp"
+		"Images/Floor2Close.bmp"
 	};
 	int curWallIndex = 0;
 };

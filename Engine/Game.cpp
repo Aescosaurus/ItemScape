@@ -54,7 +54,7 @@ void Game::UpdateModel()
 		if( saveSlot != -1 )
 		{
 			SaveLoader::Save( SaveLoaderInfo{
-				campaign.GetFloor(),campaign.GetInv(),gfx },
+				campaign.GetFloor(),campaign.GetInv(),gfx,campaign.GetMap() },
 				saveSlot );
 		}
 		wnd.Kill();

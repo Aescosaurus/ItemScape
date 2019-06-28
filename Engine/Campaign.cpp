@@ -291,6 +291,11 @@ Inventory& Campaign::GetInv()
 	return( playerInv );
 }
 
+TileMap& Campaign::GetMap()
+{
+	return( map );
+}
+
 void Campaign::LoadNextLevel()
 {
 	// Get rid of exploded enemies and any leftover bullets.

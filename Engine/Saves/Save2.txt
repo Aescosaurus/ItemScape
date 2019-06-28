@@ -1,0 +1,13 @@
+2
+6 7
+7 7
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 2 -1 -1 -1 -1 -1 -1 -1 7 8 1 4 -1 -1 -1 -1 -1 -1 5 6 3 0
+Stone Sword
+Single Use Gatling
+Single Use Gatling
+Used Health Charge
+Used Health Charge
+Used Health Charge
+Chili Tomato Noodle
+Rusty Pistol
+Bullet Ring Capacitor

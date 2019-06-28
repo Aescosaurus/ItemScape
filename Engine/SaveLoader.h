@@ -9,6 +9,7 @@ public:
 	FloorLevel& floor;
 	Inventory& inv;
 	Graphics& gfx;
+	TileMap& map;
 };
 
 class SaveLoader

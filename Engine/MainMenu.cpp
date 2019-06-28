@@ -48,19 +48,19 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 		if( save1.IsDown() )
 		{
 			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
-				evtInfo.gfx },1 );
+				evtInfo.gfx,evtInfo.map },1 );
 			saveSlot = 1;
 		}
 		if( save2.IsDown() )
 		{
 			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
-				evtInfo.gfx },2 );
+				evtInfo.gfx,evtInfo.map },2 );
 			saveSlot = 2;
 		}
 		if( save3.IsDown() )
 		{
 			SaveLoader::Load( SaveLoaderInfo{ floor,inv,
-				evtInfo.gfx },3 );
+				evtInfo.gfx,evtInfo.map },3 );
 			saveSlot = 3;
 		}
 

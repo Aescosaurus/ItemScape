@@ -31,6 +31,8 @@ void SaveLoader::Load( SaveLoaderInfo& info,int slot )
 		if( i < 4 ) c = in.get();
 	}
 
+	info.map.LoadSave( floorInfo );
+
 	info.floor.LoadSaveInfo( floorInfo );
 
 	std::string invInfo = "";
