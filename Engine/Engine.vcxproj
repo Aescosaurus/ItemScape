@@ -170,6 +170,7 @@
     <ClInclude Include="GoldenSeeker.h" />
     <ClInclude Include="GPSTracker.h" />
     <ClInclude Include="GunBase.h" />
+    <ClInclude Include="HolyCrab.h" />
     <ClInclude Include="MithrilHammer.h" />
     <ClInclude Include="HealthCharge.h" />
     <ClInclude Include="ChargeGenerator.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Beetle.cpp" />
     <ClCompile Include="BeetleBig.cpp" />
     <ClCompile Include="GunBase.cpp" />
+    <ClCompile Include="HolyCrab.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="KawaiiLemon.cpp" />
