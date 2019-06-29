@@ -180,6 +180,7 @@
     <ClInclude Include="MithrilHoe.h" />
     <ClInclude Include="MithrilLetterOpener.h" />
     <ClInclude Include="MithrilScrewdriver.h" />
+    <ClInclude Include="NinjaBeam.h" />
     <ClInclude Include="OldRifle.h" />
     <ClInclude Include="PhoenixFeather.h" />
     <ClInclude Include="PickupManager.h" />

@@ -1,0 +1,7 @@
+Ninja Beam
+Don't call me
+unfortunate!  Fires a
+beam of 1 damage
+bullets quickly, then
+recharges.  Equip in
+the weapon slot to use.

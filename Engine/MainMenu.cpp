@@ -81,7 +81,7 @@ bool MainMenu::Update( InventoryEventInfo& evtInfo,Mouse& mouse )
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
 			inv.AddItem( new HealthCharge,evtInfo );
-			inv.AddItem( new MithrilHoe,evtInfo );
+			inv.AddItem( new NinjaBeam,evtInfo );
 
 			return( true );
 		}

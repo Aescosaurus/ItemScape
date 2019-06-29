@@ -46,6 +46,7 @@
 
 #include "RapidFireCannon.h"
 #include "StoneSword.h"
+#include "NinjaBeam.h"
 
 class PickupManager
 {
@@ -97,6 +98,7 @@ public:
 
 		t2Pickups.emplace_back( new RapidFireCannon,id++ );
 		t2Pickups.emplace_back( new StoneSword,id++ );
+		t2Pickups.emplace_back( new NinjaBeam,id++ );
 	}
 	static void Free()
 	{

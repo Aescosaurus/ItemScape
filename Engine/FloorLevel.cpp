@@ -271,6 +271,11 @@ std::string FloorLevel::FormLevelName( int pos ) const
 
 Color FloorLevel::CheckRoomColor( int x,int y ) const
 {
+	bool isCompletedRoom = false;
+	for( const auto& room : completedRooms )
+	{
+		if( room.x == x && room.y == y ) isCompletedRoom = true;
+	}
 	if( x == curRoom.x && y == curRoom.y )
 	{
 		return( Colors::LightGray );
@@ -278,6 +283,10 @@ Color FloorLevel::CheckRoomColor( int x,int y ) const
 	else if( floorLayout[y * width + x] == 8 )
 	{
 		return( Colors::Red );
+	}
+	else if( isCompletedRoom )
+	{
+		return( Colors::Blue2 );
 	}
 	else if( floorLayout[y * width + x] == -1 )
 	{
