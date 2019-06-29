@@ -34,6 +34,9 @@
     <Filter Include="Header Files\Items\T1Items">
       <UniqueIdentifier>{13a930f9-5d13-4456-9f5d-5b5b6696ea16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enemies\FishEnemies">
+      <UniqueIdentifier>{53e27217-4b86-4e6e-af93-b4b16766983e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -326,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="NinjaBeam.h">
       <Filter>Header Files\Items\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="BlasphemousOreo.h">
+      <Filter>Header Files\Items\T2Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,7 @@
 
 #include "GoldenSeeker.h"
 #include "WatermelonPop.h"
+#include "BlasphemousOreo.h"
 
 #include "RapidFireCannon.h"
 #include "StoneSword.h"
@@ -95,6 +96,7 @@ public:
 
 		t2Pickups.emplace_back( new GoldenSeeker,id++ );
 		t2Pickups.emplace_back( new WatermelonPop,id++ );
+		t2Pickups.emplace_back( new BlasphemousOreo,id++ );
 
 		t2Pickups.emplace_back( new RapidFireCannon,id++ );
 		t2Pickups.emplace_back( new StoneSword,id++ );

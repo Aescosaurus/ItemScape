@@ -1,0 +1,5 @@
+Blasphemous Oreo
+Upon activation, deal 5
+bonus damage and become
+invincible for 15
+seconds.

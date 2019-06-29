@@ -182,6 +182,7 @@
     <ClInclude Include="MithrilScrewdriver.h" />
     <ClInclude Include="NinjaBeam.h" />
     <ClInclude Include="OldRifle.h" />
+    <ClInclude Include="BlasphemousOreo.h" />
     <ClInclude Include="PhoenixFeather.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="PinkBunny.h" />
