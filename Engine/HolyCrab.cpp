@@ -12,6 +12,8 @@ HolyCrab::HolyCrab( const Vec2& pos,const TileMap& map,
 	exploding( 0,size.y * 3,size.x,size.y,4,*sprSheet,0.2f )
 {
 	EnemyBase::ResetTargeting( moveRange,wanderSpeed );
+	wanderTimer.Update( Random::RangeF( 0.0f,
+		wanderTimer.GetDuration() / 2.0f ) );
 }
 
 void HolyCrab::Update( const EnemyUpdateInfo& info,float dt )
@@ -52,6 +54,10 @@ void HolyCrab::Update( const EnemyUpdateInfo& info,float dt )
 
 			pBulletVec->emplace_back( std::make_unique<Bullet>(
 				bulletSpawnPos,bulletSpawnPos + vel,*map,
+				Bullet::Team::HolyCrab,bulletSpeed,
+				Bullet::Size::Small ) );
+			pBulletVec->emplace_back( std::make_unique<Bullet>(
+				bulletSpawnPos,bulletSpawnPos - vel,*map,
 				Bullet::Team::HolyCrab,bulletSpeed,
 				Bullet::Size::Small ) );
 

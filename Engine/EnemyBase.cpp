@@ -3,6 +3,8 @@
 
 void EnemyBase::UpdateBase( const EnemyUpdateInfo& info,float dt )
 {
+	EnemyBase::Update( info,dt );
+
 	const auto nBullets = int( info.enemyBullets.size() );
 	const Vec2 rootPos = pos;
 

@@ -34,9 +34,9 @@ private:
 	State action = State::Wander;
 	static constexpr float moveRange = 100.0f;
 	static constexpr float wanderSpeed = 60.0f;
-	Timer wanderTimer = 2.0f;
+	Timer wanderTimer = 3.5f;
 	static constexpr int shotsPerVolley = 8;
 	int curShot = 0;
-	Timer shotTimer = 0.4f;
+	Timer shotTimer = 0.3f;
 	static constexpr float bulletSpeed = 210.0f;
 };
