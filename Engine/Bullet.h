@@ -35,6 +35,7 @@ public:
 		Firebug,
 		Skorp,
 		RynoChaser,
+		HolyCrab,
 		LastOfSmall, // 
 		BeetleBig,
 		SpiderMole,

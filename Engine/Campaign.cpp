@@ -14,6 +14,8 @@
 #include "WingedBugMidboss.h"
 #include "WormBugBoss.h"
 
+#include "HolyCrab.h"
+
 #include "PickupManager.h"
 
 Campaign::Campaign( MainWindow& wnd,Graphics& gfx )
@@ -358,6 +360,10 @@ void Campaign::LoadNextLevel()
 		case ( char )EnemyType::WormBugBoss:
 			enemies.emplace_back( std::make_unique<WormBugBoss>(
 				t.pos,map,enemyBullets,enemies ) );
+			break;
+		case ( char )EnemyType::HolyCrab:
+			enemies.emplace_back( std::make_unique<HolyCrab>(
+				t.pos,map,enemyBullets ) );
 			break;
 		}
 	}

@@ -1,7 +1,10 @@
 #pragma once
 
+// Available letters: acdegijknpqtuvxyz
+
 enum class EnemyType : char
 {
+	// Bug enemies.
 	BigBeetle = 'b',
 	Firebug = 'f',
 	Skorp = 's',
@@ -9,5 +12,7 @@ enum class EnemyType : char
 	RynoChaser = 'r',
 	Slizard = 'l',
 	WingedBugMidboss = 'w',
-	WormBugBoss = 'o'
+	WormBugBoss = 'o',
+	// Ocean enemies.
+	HolyCrab = 'h'
 };
