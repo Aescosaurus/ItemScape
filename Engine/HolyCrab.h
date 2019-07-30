@@ -21,7 +21,7 @@ public:
 	void Update( const EnemyUpdateInfo& info,float dt ) override;
 	void Draw( Graphics& gfx ) const override;
 
-	// void Attack( int damage,const Vec2& loc ) override;
+	void Attack( int damage,const Vec2& loc ) override;
 private:
 	static constexpr Vei2 size = { 64,64 };
 	static constexpr int myHP = 35;

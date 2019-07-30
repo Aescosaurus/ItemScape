@@ -70,6 +70,8 @@ void HolyCrab::Update( const EnemyUpdateInfo& info,float dt )
 		}
 		break;
 	case State::Exploding:
+		if( !exploding.IsFinished() ) exploding.Update( dt );
+		if( exploding.IsFinished() ) exploding.SetFrame( 3 );
 		break;
 	}
 }
@@ -93,5 +95,16 @@ void HolyCrab::Draw( Graphics& gfx ) const
 	case State::Exploding:
 		exploding.Draw( Vei2( pos ),gfx,vel.x < 0.0f );
 		break;
+	}
+}
+
+void HolyCrab::Attack( int damage,const Vec2& loc )
+{
+	EnemyBase::Attack( damage,loc );
+
+	if( IsExpl() )
+	{
+		action = State::Exploding;
+		coll.MoveTo( Vec2{ -9999.0f,-9999.0f } );
 	}
 }
