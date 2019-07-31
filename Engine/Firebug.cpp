@@ -17,7 +17,7 @@ Firebug::Firebug( const Vec2& pos,const TileMap& map,
 
 void Firebug::Update( const EnemyUpdateInfo& info,float dt )
 {
-	EnemyBase::Update( info,dt );
+	// EnemyBase::Update( info,dt );
 
 	switch( curAction )
 	{

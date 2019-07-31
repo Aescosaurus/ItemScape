@@ -15,7 +15,7 @@ WingedBugMidboss::WingedBugMidboss( const Vec2& pos,const TileMap& map,
 
 void WingedBugMidboss::Update( const EnemyUpdateInfo& info,float dt )
 {
-	EnemyBase::Update( info,dt );
+	// EnemyBase::Update( info,dt );
 
 	switch( action )
 	{

@@ -19,7 +19,7 @@ Beetle::Beetle( const Vec2& pos,const TileMap& map,
 
 void Beetle::Update( const EnemyUpdateInfo& info,float dt )
 {
-	EnemyBase::Update( info,dt );
+	// EnemyBase::Update( info,dt );
 
 	switch( myAction )
 	{
